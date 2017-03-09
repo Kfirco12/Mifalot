@@ -1,4 +1,4 @@
-# Mifalot - Education and social project
+# Mifalot - Education and social projec
 
 We are developing a web app for members and coaches, so they can share their trainings' expirences.
 
