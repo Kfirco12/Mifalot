@@ -2,9 +2,9 @@
 
 We are developing a web app for members and coaches, so they can share their trainings' expirences.
 
-(See also:Recommended [checklist](https://github.com/ddbeck/readme-checklist/blob/master/checklist.md) for a README) 
+(See also: Recommended [checklist](https://github.com/ddbeck/readme-checklist/blob/master/checklist.md) for a README) 
 
-![project logo (this one for is taken from basecamp - a project management service)](http://mifalot.co.il/Images/logo.png)
+![project logo (this one for is taken from basecamp - a project management service)](http://mifalot.co.il/images/home_banner.jpg)
 
 ## Tools & Practices
 We're trying to use the best tools and practices in order to produce a quality enginneered product.
