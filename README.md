@@ -38,7 +38,7 @@ Please visit our wiki for furthur project info:
 
 ### [User Manual](../../wiki/user-manual) (empty for now)
 
-### [Team Page](../../wiki/team)
+### [Team Page](https://github.com/benhuri/Mifalot/wiki/Team-page)
 
 ### Project Documents
 - [Project Idea](docs/idea.pdf) ([Presentation](docs/idea-slides.pdf))
