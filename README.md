@@ -3,7 +3,8 @@
 We develope a web app for Mifalot's managment.</br>
 The main goal - Increasing the documentation and the communication between the coaches and the managment.
 
-The app suppose to enable the managment track the attendance of Mifalot's students, send push notifications about activities, and share trainings' experience.<br/>
+The app suppose to enable the managment track the attendance of Mifalot's students, send push notifications about activities, and share trainings' experience.
+
 This app suppose to be first of kind in the world of education through sport, and we would make it work perfectly.
 
 (See also: Recommended [checklist](https://github.com/ddbeck/readme-checklist/blob/master/checklist.md) for a README) 
