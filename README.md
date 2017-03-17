@@ -7,8 +7,6 @@ The app suppose to enable the managment track the attendance of Mifalot's studen
 
 This app suppose to be first of kind in the world of education through sport, and we would make it work perfectly.
 
-(See also: Recommended [checklist](https://github.com/ddbeck/readme-checklist/blob/master/checklist.md) for a README) 
-
 ![project logo (this one for is taken from basecamp - a project management service)](http://mifalot.co.il/images/home_banner.jpg)
 
 ## Tools & Practices
