@@ -1,16 +1,16 @@
 # Mifalot - Education and social project
 
-We develope a web app for Mifalot's managment.</br>
+We develope a web application for Mifalot's managment.</br>
 The main goal - Increasing the documentation and the communication between the coaches and the managment.
 
-The app suppose to enable the managment track the attendance of Mifalot's students, send push notifications about activities, and share trainings' experience.
+The application suppose to enable the managment track the attendance of Mifalot's students, send push notifications about activities, and share trainings experiences.
 
-This app suppose to be first of kind in the world of education through sport, and we would make it work perfectly.
+This application suppose to be first of kind in the world of education through sport, and we would make it work perfectly.
 
 ![project logo (this one for is taken from basecamp - a project management service)](http://mifalot.co.il/images/home_banner.jpg)
 
 ## Tools & Practices
-We're trying to use the best tools and practices in order to produce a quality enginneered product.
+We are trying to use the best tools and practices in order to produce a quality engineered product.
 
 |Category|Status|
 |---|---|
