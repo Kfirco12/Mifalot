@@ -1,4 +1,4 @@
-# Mifalot - Education and social project
+# Mifalot Education and Society Enterprises Project
 
 We develope a web application for Mifalot's managment.</br>
 The main goal - Increasing the documentation and the communication between the coaches and the managment.
