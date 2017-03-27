@@ -1,4 +1,8 @@
 # Mifalot Education and Society Enterprises Project
+ 
+Mifalot  is the largest organization in the Middle East that uses sports as a platform for social change. Our educational programs are designed to stimulate individual sports self-actualization and community outreach by teaching social values ​​and life skills. We attune each program to the specific needs of the program's members.
+ 
+Mifalot was founded in 1997 by the former owners of Hapoel Tel Aviv FC. Mifalot runs activities all around the globe with a large direct impact in Israel. In Israel, we operate Hundreds of social projects throughout 250 towns and villages across the country. Mifalot annually touches the lives of over 30,000 children and Adolescents. So far some 250,000 participants have graduated from our programs.
 
 We develope a web application for Mifalot's managment.</br>
 The main goal - Increasing the documentation and the communication between the coaches and the managment.
