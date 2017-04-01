@@ -53,6 +53,7 @@ Please visit our wiki for furthur project info:
 - [Project Inception](../../wiki/Project-inception)
 - [Software Requirements Specification](../../wiki/srs)
 - [Software Design Specification](../../wiki/sds)
+- [Organization Website](http://mifalot.co.il/)
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)
