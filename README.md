@@ -54,6 +54,7 @@ Please visit our wiki for furthur project info:
 - [Software Requirements Specification](../../wiki/srs)
 - [Software Design Specification](../../wiki/sds)
 - [Organization Website](http://mifalot.co.il/)
+- [Organization Facebook Page](https://www.facebook.com/%D7%9E%D7%A4%D7%A2%D7%9C%D7%95%D7%AA-%D7%97%D7%99%D7%A0%D7%95%D7%9A-%D7%95%D7%97%D7%91%D7%A8%D7%94-Mifalot-Sport-for-Education-Development-and-Peace-108879682613861/?fref=ts)
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)
