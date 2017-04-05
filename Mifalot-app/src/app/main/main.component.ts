@@ -6,28 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-myList = [
-  {
-    id:1,
-    txt:'נוכחות'
-  },
-  {
-    id:2,
-    txt:'דו"חות'
-  },
-  {
-    id:3,
-    txt:'הודעות'
-  },
-  {
-    id:4,
-    txt:'פרופיל'
-  },
-  {
-    id:5,
-    txt: 'התנתקות'
-  }
-];
+
+  private main_btns;
   constructor() { }
 
   ngOnInit() {
