@@ -1,0 +1,27 @@
+<main class = "login">
+
+ <h2> מסך התחברות </h2>
+ 
+ <p></p>
+
+  <div class = "row">
+    <label>
+      <input type = 'number' [(ngModel)] = 'userID' required min = "0" > :שם משתמש
+    </label>
+  </div>
+
+    <P></P>
+
+  <div class = "row">
+    <label>
+      <input type = 'password' [(ngModel)] = "password" required> :סיסמה
+    </label>
+  </div>
+
+    <P></P>
+
+  <div class = "row">
+    <button (click) = "login(userID, password)"> התחבר </button>
+  </div>
+
+</main>

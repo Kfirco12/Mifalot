@@ -1,0 +1,43 @@
+.login
+{
+    margin-left: 43%;
+}
+
+label
+{
+    display: inline;
+    font-weight: bold;
+    background-color: #fff;
+	border-radius: 0px 0px 0px 0px;
+	color: #000;
+}
+
+input
+{
+    text-align: right;
+}
+
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button 
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+button
+{
+    border-radius: 6px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    background-color: #000000;
+    color: #eee;
+    font-weight: bold;
+    padding: 5px 10px;
+    height: 30px;
+    cursor: pointer; 
+    outline: none;
+}
+
+button:hover
+{
+    	background-color: royalblue;
+}

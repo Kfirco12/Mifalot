@@ -1,0 +1,31 @@
+<!--
+<div class = "row">
+    <app-button  class = "col-md-2 col-xs-3" (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>
+</div>
+
+-->
+<div class = "home">
+
+    <div class = "row">
+        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[0].id)" [item] = "buttons[0]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[1].id)" [item] = "buttons[1]"> </app-button>
+    </div>
+
+    <div class = "row">
+        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[2].id)" [item] = "buttons[2]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[3].id)" [item] = "buttons[3]"> </app-button>
+    </div>
+
+    <div class = "row">
+        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[4].id)" [item] = "buttons[4]"> </app-button>
+    </div>
+
+</div>
+<!--
+<ng-container *ngIf="show">
+  <div *ngFor="let thing of stuff">
+    {{log(thing)}}
+    <span>{{thing.name}}</span>
+  </div>
+</ng-container>
+-->
