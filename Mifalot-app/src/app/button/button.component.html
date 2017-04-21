@@ -1,4 +1,6 @@
 <button [ngStyle] = " {'background': item.background, 'border-bottom': '3px solid' + item.lineColor, 
                       '-webkit-box-shadow': 'inset 0 -3px' + item.lineColor, 'box-shadow': 'inset 0 -3px' + item.lineColor }" > 
+  <i class = {{item.sign}} > </i> 
+  <br/> 
   {{ item.txt }}
 </button>

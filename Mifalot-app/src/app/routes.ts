@@ -15,5 +15,5 @@ export const appRoutes: Routes = [
     { path: 'Reports', component: ReportsComponent },
     { path: 'Messages', component: MessagesComponent },
     { path: 'Personal-Info', component: PersonalInfoComponent },
-    { path: 'Signout', component: SignoutComponent }
+    { path: 'Signout', component: SignoutComponent, redirectTo: ''}
 ]
