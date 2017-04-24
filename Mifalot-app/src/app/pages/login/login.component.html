@@ -21,7 +21,7 @@
     <P></P>
 
   <div class = "row">
-    <button (click) = "login(userID, password)"> התחבר </button>
+    <button type = "submit" (click) = "userID && password && login(userID, password)" (keyup.enter) = "userID && password && login(userID, password)"> התחבר </button>
   </div>
 
 </main>
