@@ -31,12 +31,11 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/benhuri/Mifalot/issues) |
 | Project Management Board| [here](https://github.com/benhuri/Mifalot/projects/1) |
 | Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/jce-il/project-template.svg)](https://github.com/jce-il/project-template/graphs/contributors)
-| Deployment | [![Firebase](https://application-d2061.firebaseapp.com/] |
+| Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
 | Project Course Status | ... |
 
-## Please visit our [live application](https://demo.reactstarterkit.com/)
-- Currently, The page is not available...
+## Please visit our [live application](https://application-d2061.firebaseapp.com/)
 
 
 ## Disclaimer
@@ -60,10 +59,10 @@ Please visit our wiki for furthur project info:
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](../../wiki/iter0-zfr)
-- [Iteration 1 - MVP](https://github.com/benhuri/Mifalot/wiki/iter1---MVP)
-- [Iteration 2 - Feature X]()
-- [Iteration 3 - Feature Y]()
-- [Iteration 4 - Feature Z]()
+- [Iteration 1 - Checklist](https://github.com/benhuri/Mifalot/wiki/Iter1-Checklist)
+- [Iteration 2 - Report](https://github.com/benhuri/Mifalot/wiki/Iter2-Report)
+- [Iteration 3 - Messages](https://github.com/benhuri/Mifalot/wiki/Iter3-Messages)
+- [Iteration 4 - Login](https://github.com/benhuri/Mifalot/wiki/Iter4-Login)
 
 
 
