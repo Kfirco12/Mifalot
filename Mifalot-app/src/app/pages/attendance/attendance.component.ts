@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AttendanceComponent implements OnInit {
 
   constructor() { }
-
+ date =  new Date().toLocaleString()
   ngOnInit() {
   }
 

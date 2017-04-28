@@ -19,6 +19,7 @@ import { PersonalInfoComponent } from './pages/personal-info/personal-info.compo
 import { SignoutComponent } from './pages/signout/signout.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { SignoutComponent } from './pages/signout/signout.component';
     AttendanceComponent,
     ReportsComponent,
     PersonalInfoComponent,
-    SignoutComponent
+    SignoutComponent,
+ 
   ],
   imports: [
     BrowserModule,
