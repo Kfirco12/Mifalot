@@ -58,11 +58,10 @@ Please visit our wiki for furthur project info:
 - [Organization Facebook Page](https://www.facebook.com/%D7%9E%D7%A4%D7%A2%D7%9C%D7%95%D7%AA-%D7%97%D7%99%D7%A0%D7%95%D7%9A-%D7%95%D7%97%D7%91%D7%A8%D7%94-Mifalot-Sport-for-Education-Development-and-Peace-108879682613861/?fref=ts)
 
 ### Iteration Pages
-- [Iteration 0 - ZFR](https://github.com/benhuri/Mifalot/wiki/Iter0-ZFR)
-- [Iteration 1 - Checklist and Login](https://github.com/benhuri/Mifalot/wiki/Iter1-Checklist-&-Login)
-- [Iteration 2 - Report and Management](https://github.com/benhuri/Mifalot/wiki/Iter2-Report-&-Management)
-- [Iteration 3 - Experiances](https://github.com/benhuri/Mifalot/wiki/Iter3-Experiences)
-- [Iteration 4 - Testing](https://github.com/benhuri/Mifalot/wiki/Iter4-Testing)
-
+- [Iteration 0 - ZFR](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR)
+- [Iteration 1 - Checklist & Login template](https://github.com/benhuri/Mifalot/wiki/Iter1:-Checklist-&-Login-template)
+- [Iteration 2 - Report & Management](https://github.com/benhuri/Mifalot/wiki/Iter2:-Report-&-Management)
+- [Iteration 3 - Experiances](https://github.com/benhuri/Mifalot/wiki/Iter3:-Experiences)
+- [Iteration 4 - Testing & Login logic](https://github.com/benhuri/Mifalot/wiki/Iter4:-Testing-&-Login-logic)
 
 
