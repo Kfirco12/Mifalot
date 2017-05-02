@@ -1,6 +1,37 @@
+
 .login
 {
-    margin-left: 43%;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+span.fa 
+{
+	background-color: #fff;
+	border-radius: 0px 0px 0px 0px;
+	color: #000;
+	display: block;
+	float: right;
+	height: 50px;
+    width: 20%;
+    font-size: 24px;
+	line-height: 50px;
+	text-align: center;
+	
+}
+
+input[type = "number"], input[type = "password"] 
+{
+	background-color: #fff;
+	border-radius: 0px 0px 0px 0px;
+	color: #000;
+	margin-bottom: 1em;
+	padding: 0 16px;
+	width: 80%;
+	text-align: right;
 }
 
 label
@@ -12,9 +43,15 @@ label
 	color: #000;
 }
 
-input
+input 
 {
-    text-align: right;
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+    height: 50px;
+	line-height: 1.5em;
+	padding: 5;
+	-webkit-appearance: none;
 }
 
 input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button 
@@ -40,4 +77,29 @@ button
 button:hover
 {
     	background-color: royalblue;
+}
+
+.forgot-pass
+{
+	margin-left: 30%;
+	text-align: right;  
+	color: white;
+	cursor: pointer;
+}
+
+.forgot-pass-span
+{
+	width:100%;
+}
+
+.logo
+{
+	    text-align: center;
+}
+
+.logo img
+{
+	margin: 5%;
+	width: calc(50vmin);
+
 }

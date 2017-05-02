@@ -2,4 +2,16 @@
 {
     float: none;
     margin: 0 auto;
+    width: 20%;
+}
+
+.logo
+{
+	    text-align: center;
+}
+
+.logo img
+{
+	margin: 5%;
+	width: calc(50vmin);
 }

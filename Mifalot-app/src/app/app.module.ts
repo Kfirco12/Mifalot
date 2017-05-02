@@ -18,7 +18,24 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
 import { SignoutComponent } from './pages/signout/signout.component';
 
+import { AngularFireModule } from 'angularfire2';
 
+// ======================================================
+
+  // Initialize Firebase  ----- export? -----
+  export const config = 
+  {
+    apiKey: "AIzaSyALUkgtATRDcoX5c3AeLvLX_JLkrTXJS4c",
+    authDomain: "application-d2061.firebaseapp.com",
+    databaseURL: "https://application-d2061.firebaseio.com",
+    projectId: "application-d2061",
+    storageBucket: "application-d2061.appspot.com",
+    messagingSenderId: "1005060683377"
+  };
+
+
+
+// ======================================================
 
 @NgModule({
   declarations: [
@@ -30,14 +47,14 @@ import { SignoutComponent } from './pages/signout/signout.component';
     AttendanceComponent,
     ReportsComponent,
     PersonalInfoComponent,
-    SignoutComponent,
- 
+    SignoutComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

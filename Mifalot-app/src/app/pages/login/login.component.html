@@ -1,27 +1,41 @@
+
+
+  <div class = "logo">
+			<img src = " https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
+  </div>
+  
 <main class = "login">
 
- <h2> מסך התחברות </h2>
- 
+
  <p></p>
 
-  <div class = "row">
-    <label>
-      <input type = 'number' [(ngModel)] = 'userID' required min = "0" > :שם משתמש
-    </label>
-  </div>
+  <form>
 
-    <P></P>
+    <div class = "row">
+      <label>
+      <span class = "fa fa-user"></span>  
+      <input type = 'number' [(ngModel)] = 'userID' min = "0" name = "<id></id>" Placeholder = "שם משתמש" required>
+      </label>
+    </div>
 
-  <div class = "row">
-    <label>
-      <input type = 'password' [(ngModel)] = "password" required> :סיסמה
-    </label>
-  </div>
+      <P></P>
 
-    <P></P>
+    <div class = "row">
+      <label>
+        <span class = "fa fa-lock"> </span>
+        <input type = 'password' [(ngModel)] = "password" name = "pass" Placeholder = "סיסמה" required>
+      </label>
+    </div>
 
-  <div class = "row">
-    <button type = "submit" (click) = "userID && password && login(userID, password)" (keyup.enter) = "userID && password && login(userID, password)"> התחבר </button>
-  </div>
+      <P></P>
+
+    <div class = "row" *ngFor = "let item of items | async">
+      <button type = "submit" (click) = "userID && password && item.id == userID && item.password == password && login(userID, password)"> התחבר </button>
+      <span class = "forgot-pass-span"><a class = "forgot-pass"> ?שכחת סיסמה </a></span>
+    </div>
+    
+  </form>
 
 </main>
+
+

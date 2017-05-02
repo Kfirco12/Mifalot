@@ -5,24 +5,72 @@
 
 -->
 
+  <div class = "logo">
+			<img src = " https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
+  </div>
 
-<div class = "home">
+<div class = "container">
+  <div class = "btn-group btn-group-justified">
+       <app-button (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>  
+  </div>
+</div>
 
+
+<div class="container">
+  <h3>Large Buttons:</h3>
+  <div class = "btn-group-justified">
+    <button type="button" class="btn btn-primary">Apple</button>
+    <button type="button" class="btn btn-primary">Samsung</button>
+    <button type="button" class="btn btn-primary">Sony</button>
+  </div>
+  <h3>Default Buttons:</h3>
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary">Apple</button>
+    <button type="button" class="btn btn-primary">Samsung</button>
+    <button type="button" class="btn btn-primary">Sony</button>
+  </div>
+  <h3>Small Buttons:</h3>
+  <div class="btn-group btn-group-sm">
+    <button type="button" class="btn btn-primary">Apple</button>
+    <button type="button" class="btn btn-primary">Samsung</button>
+    <button type="button" class="btn btn-primary">Sony</button>
+  </div>
+  <h3>Extra Small Buttons:</h3>
+  <div class="btn-group btn-group-xs">
+    <button type="button" class="btn btn-primary">Apple</button>
+    <button type="button" class="btn btn-primary">Samsung</button>
+    <button type="button" class="btn btn-primary">Sony</button>
+  </div>
+</div>
+<!--
     <div class = "row">
-        <app-button  class = "col-md-2 col-xs-3 col-centered " (click) = "navigate(buttons[0].id)" [item] = "buttons[0]"> </app-button>
-        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[1].id)" [item] = "buttons[1]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-1 col-centered " (click) = "navigate(buttons[0].id)" [item] = "buttons[0]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[1].id)" [item] = "buttons[1]"> </app-button>
     </div>
 
     <div class = "row">
-        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[2].id)" [item] = "buttons[2]"> </app-button>
-        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[3].id)" [item] = "buttons[3]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[2].id)" [item] = "buttons[2]"> </app-button>
+        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[3].id)" [item] = "buttons[3]"> </app-button>
     </div>
 
     <div class = "row">                     <!-- TODO: navigate to disconnect function for signout -->
-        <app-button  class = "col-md-2 col-xs-3 col-centered" (click) = "navigate(buttons[4].id)" [item] = "buttons[4]"> </app-button>
+<!--        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[4].id)" [item] = "buttons[4]"> </app-button>
     </div>
 
 </div>
+
+-->
+
+
+<!--
+<nav class = "navbar navbar-light bg-faded">
+  <form class = "form-inline">
+<div class = "row">
+    <app-button class = " col-centered btn btn-lg" (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>
+</div>
+  </form>
+</nav>
+ -->
 <!--
 <ng-container *ngIf="show">
   <div *ngFor="let thing of stuff">
