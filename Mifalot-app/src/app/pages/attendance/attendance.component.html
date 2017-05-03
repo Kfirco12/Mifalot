@@ -1,21 +1,3 @@
-<!--
-    <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
-
-<p></p>
-
-    <section class = "jumbotron text-center">
-      <div class = "container">
-        <h1 class = "jumbotron-heading"> הודעות </h1>
-        <p class = "lead text-muted"> {{date}} </p>
-      </div>
-    </section>
--->
 
 <p></p>
 
@@ -28,10 +10,10 @@
 </section>
 
 <!--picking team-->
-<div class="container">
-  <h2>בחר את הקבוצה אותה את\ה מאמן\נת:</h2>
-
-  <div class="dropdown">
+ <h1>
+<div class="container ">
+ 
+  <div class="dropdown col-sm-1" >
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">לחץ כדי לבחור
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
@@ -40,11 +22,12 @@
       <li><a href="#">c</a></li>
     </ul>
   </div>
+  <div class="pick" class="text-right col-sm-10">:בחר את הקבוצה אותה את\ה מאמן\נת</div>
 </div>
-
+</h1>
 <!--form of checklist and notes-->
 <div class="container">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2" >
     <div class="form-area">
       <form role="form">
         <br style="clear:both">
@@ -56,8 +39,7 @@
 
           <div class="[ col-xs-12 col-sm-6 ]">
 
-
-            <div class="[ form-group ]">
+            <div class="[ form-group ] col-xs-6">
               <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
               <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
@@ -69,8 +51,8 @@
                 </label>
               </div>
             </div>
-<!--
-            <div class="[ form-group ]">
+
+            <div class="[ form-group ] col-xs-6">
               <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
               <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
@@ -83,7 +65,7 @@
               </div>
             </div>
 
-            <div class="[ form-group ]">
+            <div class="[ form-group ] col-xs-6">
               <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
               <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
@@ -96,7 +78,7 @@
               </div>
             </div>
 
-            <div class="[ form-group ]">
+            <div class="[ form-group ] col-xs-6">
               <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
               <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
@@ -108,7 +90,7 @@
                 </label>
               </div>
             </div>
--->
+
 
           </div>
 
@@ -117,9 +99,9 @@
 
         <!--Notes-->
         <div class="form-group">
-          <textarea class="form-control" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140" rows="7"></textarea>
+          <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140" rows="7"></textarea>
           <!--Submit-->
-          <span class="help-block"><p id="characterLeft" class="help-block ">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
+          <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
         </div>
 
         <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">שלח טופס</button>
@@ -138,8 +120,8 @@
 <footer class="text-muted">
   <div class="container">
     <p class="float-right">
-      <a href="Attendance" class="btn btn-primary"> חזור למעלה </a>
-      <a href="Home" class="btn btn-primary"> חזור אחורה </a>
+      <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>
+      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2" > חזור אחורה </a>
     </p>
   </div>
 </footer>
