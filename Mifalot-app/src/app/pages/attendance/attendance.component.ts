@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AttendanceComponent implements OnInit {
 
+ pupils = [
+  {
+    name: 'כפיר כהן'
+  },
+  {
+    name: 'דודי חקקיאן'
+  },
+  {
+    name:'מתן אנקונה'
+  },
+  {
+    name:'בנימין חורי'
+  }
+];
+
   constructor() { }
  date =  new Date().toLocaleString()
   ngOnInit() {
