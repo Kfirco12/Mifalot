@@ -10,107 +10,58 @@
 </section>
 
 <!--picking team-->
-<h1>
-  <div class="container ">
 
-    <div class="dropdown col-sm-1">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">לחץ כדי לבחור
-    <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#">a</a></li>
-        <li><a href="#">b</a></li>
-        <li><a href="#">c</a></li>
-      </ul>
-    </div>
-    <div class="pick" class="text-right col-sm-10">:בחר את הקבוצה אותה את\ה מאמן\נת</div>
-  </div>
-</h1>
+
 <!--form of checklist and notes-->
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="form-area">
       <form role="form">
         <br style="clear:both">
-        <h3 style="margin-bottom: 25px; text-align: center;">מילוי טופס</h3>
+
+        <!--Injection of html-->
+        <div [innerHtml]="htmlVariable" class="pull-right"></div>
+        
+         <!--Team selection-->
+        <div *ngFor="let teams_names of teams_names">
+          <button type="button" class="btn btn-danger" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</button>
+          <p></p>
+        </div>
 
         <!--checklist-->
-
         <div class="col-md-8 col-md-offset-2">
-        <div class="funkyradio">
-        
-        <div class="funkyradio-success" *ngFor="let pupils of pupils">
-           <input type="checkbox" name="checkbox" id="{{pupils.name}}" />
-              <label for="{{pupils.name}}">{{pupils.name}}</label>
-        </div>
-
-        
-        </div>
-        </div>
-
-<!--
-        <div class="col-md-8 col-md-offset-2">
-
           <div class="funkyradio">
-            <div class="funkyradio-info">
-              <input type="checkbox" name="checkbox" id="checkbox1" />
-              <label for="checkbox1">כפיר כהן</label>
-            </div>
-            <div class="funkyradio-primary">
-              <input type="checkbox" name="checkbox" id="checkbox2" />
-              <label for="checkbox2">דודי חקקיאן</label>
-            </div>
-            <div class="funkyradio-success">
-              <input type="checkbox" name="checkbox" id="checkbox3" />
-              <label for="checkbox3">מתן אנקונה</label>
-            </div>
-            <div class="funkyradio-danger">
-              <input type="checkbox" name="checkbox" id="checkbox4" />
-              <label for="checkbox4">בן חורי</label>
-            </div>
-            <div class="funkyradio-warning">
-              <input type="checkbox" name="checkbox" id="checkbox5" />
-              <label for="checkbox5">יעקובי</label>
+            <div class="funkyradio-success" *ngFor="let pupils of pupils">
+              <input type="checkbox" name="checkbox"  [value] = "pupils.name" (change)="updateChecked(option, $event)" id="{{pupils.name}}" />
+              <label for="{{pupils.name}}">{{pupils.name}}</label>
             </div>
           </div>
-
         </div>
--->
 
         <!--Notes-->
         <div class="form-group">
-          <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140"
-            rows="7"></textarea>
+          <textarea class="form-control text-right" type="textarea" id="message"  placeholder="הערות לגבי נוכחות החניכים" maxlength="140" rows="7" #titleInput ></textarea>
+
           <!--Submit-->
           <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
         </div>
 
-<<<<<<< HEAD
-    <section class = "jumbotron text-center">
-      <div class = "container">
-        <h1 class = "jumbotron-heading"> נוכחות </h1>
-        <p class = "lead text-muted"> {{date}} </p>
-      </div>
-    </section>
-=======
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">שלח טופס</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
+
       </form>
+
     </div>
   </div>
 </div>
 
-<div class="album text-muted">
-  <div class="container">
->>>>>>> 9b09801d4d1058328eb2730149088ce36190fc54
-
-  </div>
-</div>
 
 <!--Footer contains go back and return to the head of the page buttons-->
 <footer class="text-muted">
   <div class="container">
     <p class="float-right">
-      <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>
-      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור אחורה </a>
+     <!-- <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>-->
+      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור לדף הבית </a>
     </p>
   </div>
 </footer>
