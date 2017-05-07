@@ -1,81 +1,39 @@
-<!--
-<div class = "row">
-    <app-button  class = "col-md-2 col-xs-3" (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>
-</div>
 
--->
 
   <div class = "logo">
 			<img src = " https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
   </div>
 
-<div class = "container">
-  <div class = "btn-group btn-group-justified">
+<!--
+<div class = "row">
+  <div class = "col-xs-12 col-md-12 col-md-offset-0 btn-group">
        <app-button (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>  
   </div>
 </div>
-
-
-<div class="container">
-  <h3>Large Buttons:</h3>
-  <div class = "btn-group-justified">
-    <button type="button" class="btn btn-primary">Apple</button>
-    <button type="button" class="btn btn-primary">Samsung</button>
-    <button type="button" class="btn btn-primary">Sony</button>
-  </div>
-  <h3>Default Buttons:</h3>
-  <div class="btn-group">
-    <button type="button" class="btn btn-primary">Apple</button>
-    <button type="button" class="btn btn-primary">Samsung</button>
-    <button type="button" class="btn btn-primary">Sony</button>
-  </div>
-  <h3>Small Buttons:</h3>
-  <div class="btn-group btn-group-sm">
-    <button type="button" class="btn btn-primary">Apple</button>
-    <button type="button" class="btn btn-primary">Samsung</button>
-    <button type="button" class="btn btn-primary">Sony</button>
-  </div>
-  <h3>Extra Small Buttons:</h3>
-  <div class="btn-group btn-group-xs">
-    <button type="button" class="btn btn-primary">Apple</button>
-    <button type="button" class="btn btn-primary">Samsung</button>
-    <button type="button" class="btn btn-primary">Sony</button>
-  </div>
-</div>
-<!--
-    <div class = "row">
-        <app-button  class = "col-md-2 col-xs-1 col-centered " (click) = "navigate(buttons[0].id)" [item] = "buttons[0]"> </app-button>
-        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[1].id)" [item] = "buttons[1]"> </app-button>
-    </div>
-
-    <div class = "row">
-        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[2].id)" [item] = "buttons[2]"> </app-button>
-        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[3].id)" [item] = "buttons[3]"> </app-button>
-    </div>
-
-    <div class = "row">                     <!-- TODO: navigate to disconnect function for signout -->
-<!--        <app-button  class = "col-md-2 col-xs-1 col-centered" (click) = "navigate(buttons[4].id)" [item] = "buttons[4]"> </app-button>
-    </div>
-
-</div>
-
 -->
 
-
 <!--
-<nav class = "navbar navbar-light bg-faded">
-  <form class = "form-inline">
+
 <div class = "row">
-    <app-button class = " col-centered btn btn-lg" (click) = "navigate(i.id)" *ngFor = "let i of buttons" [item] = "i"> </app-button>
-</div>
-  </form>
-</nav>
- -->
-<!--
-<ng-container *ngIf="show">
-  <div *ngFor="let thing of stuff">
-    {{log(thing)}}
-    <span>{{thing.name}}</span>
+  <div class = "btn-group btn-group-lg btn-group-justified">
+    <a type = "button" class = "btn btn-primary" (click) = "navigate(buttons[0].id)"> <i class = {{buttons[0].sign}} > </i> <br/> {{ buttons[0].txt }} </a>
+    <a type = "button" class = "btn btn-primary" (click) = "navigate(buttons[1].id)"> <i class = {{buttons[1].sign}} > </i> <br/> {{ buttons[1].txt }}</a>
+    <a type = "button" class = "btn btn-primary" (click) = "navigate(buttons[2].id)"> <i class = {{buttons[2].sign}} > </i> <br/> {{ buttons[2].txt }}</a>
+    <a type = "button" class = "btn btn-primary" (click) = "navigate(buttons[3].id)"> <i class = {{buttons[3].sign}} > </i> <br/> {{ buttons[3].txt }}</a>
+    <a type = "button" class = "btn btn-primary" (click) = "navigate(buttons[4].id)"> <i class = {{buttons[4].sign}} > </i> <br/> {{ buttons[4].txt }}</a>
   </div>
-</ng-container>
+
 -->
+
+<div class = "container">
+
+    <div class = "col-xs-12 btn-group btn-group-lg">
+      <a (click) = "navigate(buttons[0].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[0].sign}} > </i> <br/> {{ buttons[0].txt }} </button></a>
+      <a (click) = "navigate(buttons[1].id)"> <button class = "btn btn-primary col-xs-6 col-md-3 btn-size" > <i class = {{buttons[1].sign}} > </i> <br/> {{ buttons[1].txt }} </button> </a>
+      <a (click) = "navigate(buttons[2].id)"> <button class = "btn btn-primary col-xs-6 col-md-3 btn-size" > <i class = {{buttons[2].sign}} > </i> <br/> {{ buttons[2].txt }} </button> </a>
+      <a (click) = "navigate(buttons[3].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[3].sign}} > </i> <br/> {{ buttons[3].txt }} </button> </a>
+      <a (click) = "navigate(buttons[4].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[4].sign}} > </i> <br/> {{ buttons[4].txt }} </button> </a>
+  </div>
+
+</div>
+

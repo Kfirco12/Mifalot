@@ -1,17 +1,23 @@
-.col-centered
-{
-    float: none;
-    margin: 0 auto;
-    width: 20%;
-}
-
 .logo
 {
-	    text-align: center;
+	text-align: center;
 }
 
 .logo img
 {
 	margin: 5%;
 	width: calc(50vmin);
+}
+
+.btn-size
+{
+    font-size: 20px;
+    height: 100px;
+}
+.about
+{
+    color:white;
+    font-size: 140%;
+    text-align: right;
+    margin-top: 12%;
 }

@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from "@angular/router";
 
-import { appRoutes} from './routes'
+import { appRoutes } from './routes'
 
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './button/button.component';
@@ -20,10 +20,11 @@ import { SignoutComponent } from './pages/signout/signout.component';
 
 import { AngularFireModule } from 'angularfire2';
 
+
 // ======================================================
 
-  // Initialize Firebase  ----- export? -----
-  export const config = 
+  // Initialize Firebase 
+  export const firebaseConfig = 
   {
     apiKey: "AIzaSyALUkgtATRDcoX5c3AeLvLX_JLkrTXJS4c",
     authDomain: "application-d2061.firebaseapp.com",
@@ -32,8 +33,6 @@ import { AngularFireModule } from 'angularfire2';
     storageBucket: "application-d2061.appspot.com",
     messagingSenderId: "1005060683377"
   };
-
-
 
 // ======================================================
 
@@ -54,10 +53,10 @@ import { AngularFireModule } from 'angularfire2';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(config)
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ ],
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

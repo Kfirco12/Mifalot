@@ -1,31 +1,92 @@
-<p></p>
+<div class = "container">
 
-    <section class = "jumbotron text-center">
-      <div class = "container">
-        <h1 class = "jumbotron-heading"> הודעות </h1>
-        <p class = "lead text-muted"> מוצגות כאן כל ההודעות של המשתמש </p>
-      </div>
-    </section>
+  <p></p>
 
-    <div class="album text-muted">
-      <div class="container">
-
-        <div class="row">
-          <div class="card">
-            <img data-src = "holder.js/100px280/thumb" alt = "Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-
+      <section class = "jumbotron text-center">
+        <div class = "container">
+          <h1 class = "jumbotron-heading"> הודעות <i class = "fa fa-envelope-open fa-1x" > </i> </h1> 
         </div>
+      </section>
 
+
+  <body>
+  <!-- <div class = "text-center"> askjdnsakjlndasndnasn </div> -->
+
+   <div #scrollMe class = "container vertical-menu" >
+    <div *ngFor = "let message of messages | async">
+ <!--     <div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')"> -->
+        <p class = "date-stamp"> {{ message.timestamp | date: "MM/dd/yy" }} </p> 
+    <!--  </div> -->
+      <div class = "bubble yellow" >
+        <p id = "msg-name"> {{ message.displayName }}</p>
+        <p id = "msg-context"> {{ message.message }} </p>
+        <div class = "author">
+          <span> {{ message.timestamp | date: "MM/dd/yy hh:mm a" }} </span>
+        </div>
       </div>
     </div>
+  </div>
+  <div class = "input-group">
+    <span class = "input-group-btn"> 
+      <button class = "btn btn-primary" type = "submit" (click) = "chatSend(msgVal)"> <i class = "fa fa-arrow-up"></i> שלח </button>
+    </span>
+    <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "chatSend($event.target.value)" [(ngModel)] = "msgVal">
+  </div>
+      
+  </body>
 
-    <footer class = "text-muted">
-      <div class = "container">
-        <p class = "float-right">
-          <a href = "Messages" class = "btn btn-primary"> חזור למעלה </a>
-        </p>
+</div>
+
+<!--
+
+
+   <div *ngIf = "needToPrint(item.date)">
+        <p class = "date-stamp"> {{ item.date }} </p>
       </div>
-    </footer>
 
+
+  <div class = "container">
+
+  <p></p>
+
+      <section class = "jumbotron text-center">
+        <div class = "container">
+          <h1 class = "jumbotron-heading"> הודעות <i class = "fa fa-envelope-open fa-1x" > </i> </h1> 
+        </div>
+      </section>
+
+
+  <body>
+    <div class = "text-center"> askjdnsakjlndasndnasn
+      </div>
+
+    <div #scrollMe class = "container vertical-menu">
+       <p class = "date-stamp"> May 20, 2014, 4:16 PM </p>
+        <div class = "row">
+          <div class = "col-lg-12 col-md-offset-0">
+              <div *ngFor = "let item of items | async">
+            <div class = "bubble bubble-alt yellow">
+              <p id = "msg-name"> {{ item.name }}</p>
+                    <p id = "msg-context"> {{ item.message }} </p>
+                    <div class = "author">
+                      <span> {{ item.date }} </span>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+
+
+        <div class = "input-group">
+            <span class = "input-group-btn"> 
+            <button class = "btn btn-primary" type = "submit" (click) = "chatSend(msgVal)"> <i class = "fa fa-arrow-up"></i> שלח </button>
+          </span>
+          <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "chatSend($event.target.value)" [(ngModel)] = "msgVal">
+        </div>
+      
+  </body>
+
+</div>
+
+-->
