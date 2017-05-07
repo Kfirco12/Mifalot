@@ -19,15 +19,8 @@
       <form role="form">
         <br style="clear:both">
 
-        <!--Team selection
-        <h3 style="margin-bottom: 25px; text-align: center;">בחר/י את הקבוצה אותה את/ה מאמן/ת כעת</h3>
-        <div *ngFor="let teams of teams">
-          <button type="button" class="btn btn-danger" (click)="getPupils(elem.id)" id="{{teams.name}}" #elem>{{teams.name}}</button>
-          <p></p>
-        </div>-->
-
         <!--Injection of html-->
-        <div [innerHtml]="htmlVariable"></div>
+        <div [innerHtml]="htmlVariable" class="pull-right"></div>
         
          <!--Team selection-->
         <div *ngFor="let teams_names of teams_names">
@@ -47,14 +40,14 @@
 
         <!--Notes-->
         <div class="form-group">
-          <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140"
-            rows="7"></textarea>
+          <textarea class="form-control text-right" type="textarea" id="message"  placeholder="הערות לגבי נוכחות החניכים" maxlength="140" rows="7" #titleInput ></textarea>
 
           <!--Submit-->
           <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
         </div>
 
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" [value]="x" (click)="saveAttendance()">שלח טופס</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
 
       </form>
 
@@ -67,8 +60,8 @@
 <footer class="text-muted">
   <div class="container">
     <p class="float-right">
-      <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>
-      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור אחורה </a>
+     <!-- <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>-->
+      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור לדף הבית </a>
     </p>
   </div>
 </footer>

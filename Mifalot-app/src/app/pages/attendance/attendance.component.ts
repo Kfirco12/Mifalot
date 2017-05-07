@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 @Component({
   selector: 'app-attendance',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AttendanceComponent implements OnInit {
 
 
-  //teams from DB.*********************************************************S
+  //teams from DB.*********************************************************
   teams = [
     {
       name: 'בית"ר',
@@ -44,20 +45,22 @@ export class AttendanceComponent implements OnInit {
   ];
 
 
+  //teams: FirebaseListObservable<any[]> //get the teams and their members of the User.
+  note : String; //coach's note/
   htmlVariable: string; //injection hml variable.
   date = new Date().toLocaleString()  //date variable.
-  checked: string[] = []; //help array. check the checked pupils.
   presence = [];  //true/false array. mark attendance by the index of the pupils list.
   pupils = [];  //contain the pupils name of the chosen team.
   teams_names = []; //get the coach's teams names.
-
+  toStore = {team:'', members:[], attend:[]};
 
   //============================
   //============================
-  constructor() {
+  constructor( private af: AngularFire) {
 
-    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת</h3>";
+    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת</h3>";
     //get the teams names from the DB array.
+    //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
       var name = this.teams[_i];
       this.teams_names.push(name)
@@ -92,7 +95,9 @@ export class AttendanceComponent implements OnInit {
   //---------------------------
   //get the pupils name from the wanted team.
   getPupils(id) {
-    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">לחץ\\י על שמות החניכים הנוכחים באימון</h3>";
+    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:לחץ\\י על שמות החניכים הנוכחים באימון</h3>";
+    this.toStore.team = id; //save the chosen team.
+
     for (var _i = 0; _i < this.teams.length; _i++) {
       if (id === this.teams[_i].name) {
         this.pupils = this.teams[_i].members;
@@ -106,11 +111,45 @@ export class AttendanceComponent implements OnInit {
   }
 
   //---------------------------
-  //save the checked attendance.
-  saveAttendance() {
+  //reset the checked attendance and pick new team.
+  startOver() {
+    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת</h3>";
+
+    //reset variables.
+    this.toStore.team = '';
+    this.toStore.members = [];
+    this.toStore.attend = [];
+    this.presence = [];  
+    this.pupils = [];  
+    this.teams_names = []; 
+    this.note=""
+    //get the teams names from the DB array.
+    for (var _i = 0; _i < this.teams.length; _i++) {
+      var name = this.teams[_i];
+      this.teams_names.push(name)
+    }
 
   }
+
+//temporary help method.
+  printPupils(list){
+    var str="";
+    for(var _i=0; _i<list.length; _i++){
+      str+=list[_i].name+" "
+    }
+    return str;
+  }
+  //---------------------------
+  //save the checked attendance and the written note.
+  saveAttendance(data) {
+    this.note = data;
+    this.toStore.members = this.pupils;
+    this.toStore.attend = this.presence;
+    alert("The chosen team is: "+this.toStore.team+"\n"+"The team's pupils are: "+this.printPupils(this.toStore.members)+"\n"+"the presence list is: "+this.toStore.attend+"\nThe note is: "+ this.note)
+        
     
+  }
+
 }
 
 
