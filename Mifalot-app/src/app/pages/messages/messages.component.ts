@@ -11,6 +11,13 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 export class MessagesComponent implements OnInit, AfterViewChecked
 {
 
+  header = 
+  { 
+     title: "הודעות", 
+     subTitle: "באפשרותך לשלוח הודעה לשאר המשתמשים",
+     icon: "fa-comments" 
+  }
+
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   messages: FirebaseListObservable<any>;

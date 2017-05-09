@@ -5,7 +5,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.css']
 })
-export class PersonalInfoComponent implements OnInit {
+export class PersonalInfoComponent implements OnInit 
+{
+  header = 
+  { 
+    title: "מידע אישי", 
+    subTitle: "פרטים אודות כל משתמש",
+    icon: "fa-info-circle" 
+  }
 
   constructor() { }
 

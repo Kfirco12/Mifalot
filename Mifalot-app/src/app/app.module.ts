@@ -19,6 +19,7 @@ import { PersonalInfoComponent } from './pages/personal-info/personal-info.compo
 import { SignoutComponent } from './pages/signout/signout.component';
 
 import { AngularFireModule } from 'angularfire2';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 
 // ======================================================
@@ -46,7 +47,8 @@ import { AngularFireModule } from 'angularfire2';
     AttendanceComponent,
     ReportsComponent,
     PersonalInfoComponent,
-    SignoutComponent
+    SignoutComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,
