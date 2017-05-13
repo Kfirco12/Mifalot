@@ -59,7 +59,7 @@ Please visit our wiki for furthur project info:
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR)
-- [Iteration 1 - Checklist & Login template](https://github.com/benhuri/Mifalot/wiki/Iter1:-Checklist-&-Login-template)
+- [Iteration 1 - MVP](https://github.com/benhuri/Mifalot/wiki/Iter1:-Checklist-&-Login-template)
 - [Iteration 2 - Report & Management](https://github.com/benhuri/Mifalot/wiki/Iter2:-Report-&-Management)
 - [Iteration 3 - Experiances](https://github.com/benhuri/Mifalot/wiki/Iter3:-Experiences)
 - [Iteration 4 - Testing & Login logic](https://github.com/benhuri/Mifalot/wiki/Iter4:-Testing-&-Login-logic)
