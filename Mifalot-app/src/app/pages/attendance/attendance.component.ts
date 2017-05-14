@@ -6,8 +6,16 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
-export class AttendanceComponent implements OnInit {
+export class AttendanceComponent implements OnInit 
+{
 
+  header = 
+  {  
+    title: "רשימת נוכחות", 
+    subTitle: "בחר את קבוצת האימון ומלא את רשימת הנוכחות", 
+    icon: "fa-pencil-square-o" 
+  }
+   
 
   //teams from DB.*********************************************************
   teams = [
@@ -47,7 +55,7 @@ export class AttendanceComponent implements OnInit {
 
   //teams: FirebaseListObservable<any[]> //get the teams and their members of the User.
   note : String; //coach's note/
-  htmlVariable: string; //injection hml variable.
+  instructions: string; //injection hml variable.
   date = new Date().toLocaleString()  //date variable.
   presence = [];  //true/false array. mark attendance by the index of the pupils list.
   pupils = [];  //contain the pupils name of the chosen team.
@@ -56,9 +64,10 @@ export class AttendanceComponent implements OnInit {
 
   //============================
   //============================
-  constructor( private af: AngularFire) {
+  constructor( private af: AngularFire) 
+  {
 
-    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת</h3>";
+    this.instructions = "";
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -94,14 +103,15 @@ export class AttendanceComponent implements OnInit {
 
   //---------------------------
   //get the pupils name from the wanted team.
-  getPupils(id) {
-    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:לחץ\\י על שמות החניכים הנוכחים באימון</h3>";
+  getPupils(id) 
+  {
+    this.instructions = ":לחץ על שמות החניכים הנוכחים באימון";
     this.toStore.team = id; //save the chosen team.
 
     for (var _i = 0; _i < this.teams.length; _i++) {
       if (id === this.teams[_i].name) {
         this.pupils = this.teams[_i].members;
-        this.teams_names = [];
+        //this.teams_names = [];
         for (var _j = 0; _j < this.pupils.length; _j++) {
           this.presence.push(false);
         }
@@ -113,7 +123,7 @@ export class AttendanceComponent implements OnInit {
   //---------------------------
   //reset the checked attendance and pick new team.
   startOver() {
-    this.htmlVariable = "<h3 style=" + "margin-bottom: 25px; text-align: center;" + ">:בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת</h3>";
+    this.instructions = ":בחרי את הקבוצה אותה את\\ה מאמן\\ת כעת";
 
     //reset variables.
     this.toStore.team = '';

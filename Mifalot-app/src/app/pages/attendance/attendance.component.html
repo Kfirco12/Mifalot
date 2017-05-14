@@ -1,13 +1,4 @@
-<p>
-</p>
-
-<section class="jumbotron text-center">
-  <div class="container">
-    <h1 class="jumbotron-heading"> דו"ח נוכחות </h1>
-    <p class="lead text-muted"> מילוי דו"ח נוכחות יומי של החניכים </p>
-    <p>{{date}}</p>
-  </div>
-</section>
+<app-page-header [item] = "header"> </app-page-header>
 
 <!--picking team-->
 
@@ -20,13 +11,27 @@
         <br style="clear:both">
 
         <!--Injection of html-->
-        <div [innerHtml]="htmlVariable" class="pull-right"></div>
-        
+        <div class = "pull-right"> <h3 class = "instructions"> {{ instructions }} </h3>
+        <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">:בחר\י את הקבוצה אותה את\ה מאמן\ת כעת
+
+    
+
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+       <div *ngFor="let teams_names of teams_names">
+      <li class = "teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
+      </div>
+    </ul>
+  </div>
+</div>
+
+
+
          <!--Team selection-->
-        <div *ngFor="let teams_names of teams_names">
-          <button type="button" class="btn btn-danger" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</button>
+       
+         
           <p></p>
-        </div>
+        
 
         <!--checklist-->
         <div class="col-md-8 col-md-offset-2">

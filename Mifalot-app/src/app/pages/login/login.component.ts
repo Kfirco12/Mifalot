@@ -1,34 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
-        
+import { Component } from '@angular/core';
+import { AF } from "../../providers/af";
+import { Router } from "@angular/router";
+
 @Component({
+  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 
 
-export class LoginComponent implements OnInit 
+export class LoginComponent 
 {
-  private userID: string;
-  private password: string;
-  items: FirebaseListObservable<any[]>;
+  public error: any;
 
-  constructor(private router: Router, private af: AngularFire) 
-  { 
-    this.items = af.database.list('/Users');
-  }
+  constructor(public afService: AF, private router: Router) {}
+  
+  // ===================================
 
+  // loginWithGoogle() 
+  // {
+  //   this.afService.loginWithGoogle().then((data) => {
+  //     // Send them to the homepage if they are logged in
+  //     this.router.navigate(['']);
+  //   })
+  // }
 
-  login(userID: string, password: string)
+    // ===================================
+
+  loginWithEmail(event, email, password)
   {
-    console.log("userID: " + userID + "\n" + "Password: " + password);
-    // GOTO: home page
-    
-    this.router.navigateByUrl('/Home');
+    event.preventDefault();
+    this.afService.loginWithEmail(email, password).then(() => {
+      this.router.navigate(['']);
+    })
+      .catch((error: any) => {
+        if (error) 
+        {
+          this.error = error;
+          console.log(this.error);
+        }
+      });
   }
-  ngOnInit() {
-  }
+
+  // ===================================
 
 }
+
+
+

@@ -1,0 +1,34 @@
+
+.titlePage
+{
+  text-align: center;
+  display: inline-block;
+  color: white;
+  font-size: 90%;
+}
+
+.page-header
+{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin-top: 1%;
+}
+
+.subTitle
+{
+  color: white;
+  text-align: center;
+  font-size: 110%;
+}
+
+.fa
+{
+  color: white;
+}
+
+.instructions
+{
+  margin-bottom: 25px; 
+  text-align: center;
+}

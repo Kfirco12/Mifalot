@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AF } from "../../providers/af";
 
 @Component({
   templateUrl: './home.component.html',
@@ -7,22 +8,34 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit 
 {
- buttons = [
-              { id: "Attendance", txt: 'נוכחות', background: '#009933' , lineColor: '#006622', sign: 'fa fa-check-square fa-2x'}, 
-              { id: "Reports", txt: 'דוחו"ת חניכים', background: '#006699' , lineColor: '#003366', sign: 'fa fa-bar-chart fa-2x'  },    
-              { id: "Messages", txt: 'הודעות', background: '#FF9900' , lineColor: '#CC7A00', sign: 'fa fa-envelope-open fa-2x'  }, 
-              { id: "Personal-Info", txt: 'מידע אישי', background: '#990073' , lineColor: '#66004D', sign: 'fa fa-info-circle fa-2x'  },
-              { id: "Signout", txt: 'התנתקות', background: '#800000' , lineColor: '#4D0000', sign: 'fa fa-sign-out fa-2x'  }
+  buttons = [
+              { id: "messages", txt: 'הודעות', icon: 'fa fa-comments fa-2x'  }, 
+              { id: "attendance", txt: 'רשימת נוכחות', icon: 'fa fa-pencil-square-o fa-2x'}, 
+              { id: "personal-info", txt: 'מידע אישי', icon: 'fa fa-info-circle fa-2x'  },
+              { id: "reports", txt: 'דוחו"ת נוכחות', icon: 'fa fa-bar-chart fa-2x'  }, 
+              { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x'  }
             ]
 
-  constructor(private router: Router) { }
+   permission = 1;
+
+  constructor(private afService: AF, private router: Router) 
+  {
+      this.afService.getUserPermission();
+  }
 
   // ======================
   // Uses routes.ts
   
   navigate(page: string)
   {
-    this.router.navigateByUrl('/' + page);
+    this.router.navigate([page]);
+  }
+
+  // ======================
+
+  getPermission()
+  {
+    return this.permission;
   }
 
   // ======================

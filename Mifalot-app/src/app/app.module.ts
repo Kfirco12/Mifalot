@@ -4,10 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from "@angular/router";
 
-import { appRoutes } from './routes'
-
 import { AppComponent } from './app.component';
-import { ButtonComponent } from './button/button.component';
 
 
 import { LoginComponent } from './pages/login/login.component';
@@ -16,14 +13,18 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
-import { SignoutComponent } from './pages/signout/signout.component';
 
 import { AngularFireModule } from 'angularfire2';
 
 
-// ======================================================
+import { AF } from "./providers/af";
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
 
-  // Initialize Firebase 
+// ======================================================
+// Initialize Firebase 
+
   export const firebaseConfig = 
   {
     apiKey: "AIzaSyALUkgtATRDcoX5c3AeLvLX_JLkrTXJS4c",
@@ -36,26 +37,40 @@ import { AngularFireModule } from 'angularfire2';
 
 // ======================================================
 
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'attendance', component: AttendanceComponent },
+  { path: 'reports', component: ReportsComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'personal-info', component: PersonalInfoComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'users-confirm', component: UsersConfirmComponent }
+];
+
+// ======================================================
+
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonComponent,
     LoginComponent,
     HomeComponent,
     MessagesComponent,
     AttendanceComponent,
     ReportsComponent,
     PersonalInfoComponent,
-    SignoutComponent
+    RegistrationComponent,
+    PageHeaderComponent,
+    UsersConfirmComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ ],
+  providers: [ AF, HomeComponent ],
   bootstrap: [ AppComponent ]
 })
 

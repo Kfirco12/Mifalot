@@ -10,6 +10,7 @@
 
 /*checklist*/
 
+
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -101,26 +102,49 @@ footer{
     margin-bottom: 5%;
 }
 
+.titlePage
+{
+  text-align: center;
+  display: inline-block;
+  color: white;
+  font-size: 90%;
+}
 
+.page-header
 
+{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin-top: 1%;
+}
 
+.date
+{
+  color: white;
+  font-size: 60%;
+}
 
+.subTitle
+{
+  color: white;
+  text-align: center;
+  font-size: 110%;
+}
 
+.fa-pencil-square-o
+{
+  color: white;
+}
 
+.instructions
+{
+  margin-bottom: 25px; 
+  text-align: center;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.teams_list
+{
+  text-align: right;
+  cursor: pointer;
+}

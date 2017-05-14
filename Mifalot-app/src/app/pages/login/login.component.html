@@ -1,41 +1,40 @@
+ 
+ 
+<div *ngIf = "error" class = "alert alert-warning" role = "alert">
+  <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
+  <span class = "sr-only"> Error: </span>
+  {{ error }}
+</div>
 
-
-  <div class = "logo">
+<div class = "modal-dialog">
+  <div class = "loginmodal-container">
+     <div class = "logo">
 			<img src = " https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
   </div>
-  
-<main class = "login">
+    <br><br>
 
+    <form class = "form-signin" (submit) = "loginWithEmail($event, email.value, password.value)">
+      <label for = "email" class = "sr-only"> כתובת מייל </label>
+      <div class = "input-group">
+        <input #email type = "email" id = "email" class = "form-control" placeholder = 'כתובת דוא״ל'>
+        <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
+      </div>
 
- <p></p>
+      <br>
 
-  <form>
+      <label for = "password" class = "sr-only"> סיסמה </label>
+      <div class = "input-group">
+        <input #password type = "password" id = "password" class = "form-control" placeholder = "סיסמה" required = "">
+        <span class = "input-group-addon"><i class = "fa fa-lock"> </i> </span>
+      </div>
 
-    <div class = "row">
-      <label>
-      <span class = "fa fa-user"></span>  
-      <input type = 'number' [(ngModel)] = 'userID' min = "0" name = "<id></id>" Placeholder = "שם משתמש" required>
-      </label>
-    </div>
+      <br>
 
-      <P></P>
-
-    <div class = "row">
-      <label>
-        <span class = "fa fa-lock"> </span>
-        <input type = 'password' [(ngModel)] = "password" name = "pass" Placeholder = "סיסמה" required>
-      </label>
-    </div>
-
-      <P></P>
-
-    <div class = "row" *ngFor = "let item of items | async">
-      <button type = "submit" (click) = "userID && password && item.id == userID && item.password == password && login(userID, password)"> התחבר </button>
-      <span class = "forgot-pass-span"><a class = "forgot-pass"> ?שכחת סיסמה </a></span>
-    </div>
-    
-  </form>
-
-</main>
-
-
+      <button class = "btn btn-md btn-primary btn-block" type = "submit"> התחבר </button>
+    </form>
+    <!--<hr>
+    <button class = "login loginmodal-submit" (click) = "loginWithGoogle()"> <i class = "fa fa-google"></i>oogle כניסה דרך  </button>-->
+    <hr>
+    <a [routerLink] = "['/register']" style = "cursor: pointer;"> הירשם כעת </a>
+  </div>
+</div>
