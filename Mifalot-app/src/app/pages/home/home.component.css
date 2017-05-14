@@ -5,19 +5,25 @@
 
 .logo img
 {
-	margin: 5%;
-	width: calc(50vmin);
+    margin: 2%;
+    width: 80%;
+    margin-top: 0;
 }
 
-.btn-size
+.page-header
 {
-    font-size: 20px;
-    height: 100px;
+    margin-top:0;
 }
-.about
+
+button
 {
-    color:white;
-    font-size: 140%;
-    text-align: right;
-    margin-top: 12%;
+    white-space: normal;
+    height: 100%;
 }
+
+.thumbnail
+{
+    height: 120px;
+    background-color: transparent;
+}
+

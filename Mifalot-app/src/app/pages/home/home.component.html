@@ -1,18 +1,54 @@
 
+ <!-- Page Content -->
+<div *ngIf = "permission != 4" class = "container" >
 
-  <div class = "logo">
-			<img src = " https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
+    <div class = "row" >
+
+        <div class = "col-lg-12">
+          <div class = "page-header logo">
+            <img src = "https://firebasestorage.googleapis.com/v0/b/application-d2061.appspot.com/o/logo.jpg?alt=media&token=a0294e5b-4622-4971-8065-38330bc8b12b " />
+          </div>
+        </div>
+
+        <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "thumbnail" (click) = "navigate(buttons[0].id)"> 
+            <button type = "button" class = "btn btn-warning btn-block" > <i class = "{{ buttons[0].icon }}" > </i> <br/> {{ buttons[0].txt }} </button>
+          </a>
+        </div>
+       
+        <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "thumbnail" (click) = "navigate(buttons[1].id)"> 
+            <button type = "button" class = "btn btn-success btn-block" > <i class = "{{ buttons[1].icon }}" > </i> <br/> {{ buttons[1].txt }} </button> 
+          </a>
+        </div>
+
+        <div class = "col-lg-6 ol-md-6 col-xs-6 thumb">
+          <a class = "thumbnail" (click) = "navigate(buttons[2].id)"> 
+            <button type = "button" class = "btn btn-info btn-block" > <i class = "{{ buttons[2].icon }}" > </i> <br/> {{ buttons[2].txt }} </button> 
+          </a> 
+        </div>
+
+        <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "thumbnail" (click) = "navigate(buttons[3].id)"> 
+            <button type = "button" class = "btn btn-primary btn-block" > <i class = "{{ buttons[3].icon }}" > </i> <br/> {{ buttons[3].txt }} </button> 
+          </a>
+        </div>
+
+
+        <div *ngIf = "permission == 1" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+          <a class = "thumbnail" (click) = "navigate(buttons[4].id)"> 
+            <button type = "button" class = "btn btn-danger btn-block" > <i class = "{{ buttons[4].icon }}" > </i> <br/>  {{ buttons[4].txt }}</button> 
+          </a>
+        </div>
+
+
+    </div>
+
   </div>
 
-<div class = "container">
 
-    <div class = "col-xs-12 btn-group btn-group-lg">
-      <a (click) = "navigate(buttons[0].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[0].sign}} > </i> <br/> {{ buttons[0].txt }} </button></a>
-      <a (click) = "navigate(buttons[1].id)"> <button class = "btn btn-primary col-xs-6 col-md-3 btn-size" > <i class = {{buttons[1].sign}} > </i> <br/> {{ buttons[1].txt }} </button> </a>
-      <a (click) = "navigate(buttons[2].id)"> <button class = "btn btn-primary col-xs-6 col-md-3 btn-size" > <i class = {{buttons[2].sign}} > </i> <br/> {{ buttons[2].txt }} </button> </a>
-      <a (click) = "navigate(buttons[3].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[3].sign}} > </i> <br/> {{ buttons[3].txt }} </button> </a>
-      <a (click) = "navigate(buttons[4].id)"> <button class = "btn btn-primary col-xs-6 col-md-2 btn-size" > <i class = {{buttons[4].sign}} > </i> <br/> {{ buttons[4].txt }} </button> </a>
-  </div>
+   
 
-</div>
+
+<!--<span class="counter">22</span>-->
 

@@ -1,5 +1,7 @@
 import { AfterViewChecked, ElementRef, ViewChild, Component, OnInit } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2';
+import { AF } from "../../providers/af";
+import { ChangeDetectorRef } from "@angular/core";
 
 
 @Component({
@@ -8,8 +10,12 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
   styleUrls: ['./messages.component.css']
 })
 
+
 export class MessagesComponent implements OnInit, AfterViewChecked
 {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+  savedDate: string = '';
 
   header = 
   { 
@@ -17,77 +23,67 @@ export class MessagesComponent implements OnInit, AfterViewChecked
      subTitle: "באפשרותך לשלוח הודעה לשאר המשתמשים",
      icon: "fa-comments" 
   }
-
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-  messages: FirebaseListObservable<any>;
-  name: any;
-  msgVal: string = '';
-  savedDate: string = '';
+  
+  public newMessage: string;
+  public messages: FirebaseListObservable<any>;
 
   // ==================================================
 
-  constructor(private af: AngularFire) 
+  constructor(public afService: AF, private ref: ChangeDetectorRef) 
   {
-    this.messages = af.database.list('messages', {
-      // only 5 last messages will popup
-      query: {
-        limitToLast: 30
-      }
-    });
+      this.messages = this.afService.messages;
+  }
 
-    // If user success to connect, save his name for the chat
-    this.af.auth.subscribe(auth => {
-      if (!auth)
-      {
-        this.name = "auth";
-      }
-    });
+  // ==================================================
+  isMe(email) 
+  {
+    if (email == this.afService.email)
+      return true;
+    
+    return false;
   }
 
   // ==================================================
   // If need to print the date ahead
-  needToPrint(itemDate)
-  {
-    var date = itemDate;
 
-    if (date != this.savedDate)
+  needToPrint(date)
+  {
+    if (this.savedDate != date)
     {
       this.savedDate = date;
+      //this.ref.detectChanges();
+
       return true;
     }
-
-    return false;
+    //this.ref.detectChanges();
+     return false;
   }
-  // ==================================================
 
-/*
-  // Login using email and password
-  login ()
-  {
-    this.af.auth.login({
-      provider: AuthProviders.Password,
-      method: AuthMethods.Popup
-    })
-  }
-*/
 
 // ==================================================
-
+/*
   chatSend(theirMessage: string)
   {
     if (theirMessage == null || theirMessage == '')
       return;
 
-    this.messages.push({message: theirMessage, name: this.name, date: new Date().toLocaleString()});
+    this.items.push({message: theirMessage, name: this.name, date: new Date().toLocaleString()});
     this.msgVal = '';
+  }
+*/
+  // ==================================================
+
+  sendMessage()
+  {
+    this.afService.sendMessage(this.newMessage);
+    this.newMessage = '';
   }
 
   // ==================================================
 
  ngAfterViewChecked() 
  {
-   // this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   scrollToBottom(): void 

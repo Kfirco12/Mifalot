@@ -1,0 +1,11 @@
+.thumbnail
+{
+    height: 120px;
+    background-color: transparent;
+}
+
+button
+{
+    white-space: normal;
+    height: 100%;
+}
