@@ -67,7 +67,7 @@ export class AttendanceComponent implements OnInit
   constructor( private af: AngularFire) 
   {
 
-    this.instructions = ":בחר את הקבוצה אותה אתה מאמן כעת";
+    this.instructions = "";
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -111,7 +111,7 @@ export class AttendanceComponent implements OnInit
     for (var _i = 0; _i < this.teams.length; _i++) {
       if (id === this.teams[_i].name) {
         this.pupils = this.teams[_i].members;
-        this.teams_names = [];
+        //this.teams_names = [];
         for (var _j = 0; _j < this.pupils.length; _j++) {
           this.presence.push(false);
         }

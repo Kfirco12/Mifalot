@@ -11,17 +11,16 @@
         <br style="clear:both">
 
         <!--Injection of html-->
-        <div class = "pull-right"> <h3 class = "instructions"> {{ instructions }} </h3></div>
-        
+        <div class = "pull-right"> <h3 class = "instructions"> {{ instructions }} </h3>
+        <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">:בחר\י את הקבוצה אותה את\ה מאמן\ת כעת
 
-<div class="container">                                       
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+    
+
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
-      <li><a href="#">JavaScript</a></li>
+       <div *ngFor="let teams_names of teams_names">
+      <li class = "teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
+      </div>
     </ul>
   </div>
 </div>
@@ -29,10 +28,10 @@
 
 
          <!--Team selection-->
-        <div *ngFor="let teams_names of teams_names">
-          <button type="button" class="btn btn-danger" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</button>
+       
+         
           <p></p>
-        </div>
+        
 
         <!--checklist-->
         <div class="col-md-8 col-md-offset-2">
@@ -67,7 +66,7 @@
   <div class="container">
     <p class="float-right">
      <!-- <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>-->
-      <a [routerLink] = "['']" class="btn btn-primary col-md-3 col-md-offset-2"> חזור לדף הבית </a>
+      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור לדף הבית </a>
     </p>
   </div>
 </footer>

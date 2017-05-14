@@ -10,6 +10,7 @@
 
 /*checklist*/
 
+
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -140,4 +141,10 @@ footer{
 {
   margin-bottom: 25px; 
   text-align: center;
+}
+
+.teams_list
+{
+  text-align: right;
+  cursor: pointer;
 }
