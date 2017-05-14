@@ -1,0 +1,15 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\cohenkfi\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] CLI Version:  3.7.0
+[debug] Platform:     win32
+[debug] Node Version: v6.10.0
+[debug] Time:         Sun May 07 2017 11:31:01 GMT+0300 (Jerusalem Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/application-d2061  
+ Sun May 07 2017 11:31:01 GMT+0300 (Jerusalem Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/application-d2061/tokens  
+ Sun May 07 2017 11:31:03 GMT+0300 (Jerusalem Daylight Time)
+[debug] <<< HTTP RESPONSE 200
