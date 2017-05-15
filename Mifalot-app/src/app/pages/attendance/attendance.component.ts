@@ -67,6 +67,7 @@ export class AttendanceComponent implements OnInit
   pupils = [];  //contain the pupils name of the chosen team.
   teams_names = []; //get the coach's teams names.
   toStore = {team:'', members:[], attend:[]};
+  private started = false;
 
   //============================
   //============================
@@ -77,7 +78,7 @@ export class AttendanceComponent implements OnInit
     // alert(this.uid);
     // alert(this.relative);
 
-    this.instructions = "";
+    this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -115,7 +116,8 @@ export class AttendanceComponent implements OnInit
   //get the pupils name from the wanted team.
   getPupils(id) 
   {
-    this.instructions = ":לחץ על שמות החניכים הנוכחים באימון";
+    this.started = true;
+    this.instructions = "לבחירת קבוצה חדשה אפסו את הטופס";
     this.toStore.team = id; //save the chosen team.
 
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -133,9 +135,12 @@ export class AttendanceComponent implements OnInit
   //---------------------------
   //reset the checked attendance and pick new team.
   startOver() {
-    this.instructions = ":בחרי את הקבוצה אותה את\\ה מאמן\\ת כעת";
-
+    this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
+    if(this.started){
+      alert("שים לב, הנתונים שהזנת לא נשמרו!");
+    }
     //reset variables.
+    this.started = false;
     this.toStore.team = '';
     this.toStore.members = [];
     this.toStore.attend = [];
@@ -166,7 +171,8 @@ export class AttendanceComponent implements OnInit
     this.toStore.members = this.pupils;
     this.toStore.attend = this.presence;
     alert("The chosen team is: "+this.toStore.team+"\n"+"The team's pupils are: "+this.printPupils(this.toStore.members)+"\n"+"the presence list is: "+this.toStore.attend+"\nThe note is: "+ this.note)
-        
+    this.started = false;
+    this.startOver();
     
   }
 

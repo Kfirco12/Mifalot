@@ -148,3 +148,7 @@ footer{
   text-align: right;
   cursor: pointer;
 }
+
+.confirm_butt{
+  margin-top: 10px;
+}

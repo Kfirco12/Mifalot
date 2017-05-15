@@ -12,12 +12,7 @@
 
         <!--Injection of html-->
         <div class="pull-right">
-          <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">:בחר\י את הקבוצה אותה את\ה מאמן\ת כעת
-<br/>
-    
-
-    <span class="caret"></span></button>
-         
+          <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{instructions}}<span class="caret"></span></button>
               <ul class="dropdown-menu">
                 <div *ngFor="let teams_names of teams_names">
                   <li class="teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
@@ -50,6 +45,7 @@
 
         <!--Notes-->
         <div class="form-group">
+          <br/>
           <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140"
             rows="7" #titleInput></textarea>
 <p></p>
@@ -57,15 +53,13 @@
           <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
         </div>
 
-
- 
-        <button  type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
-        <p></p>
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
- 
-
       </form>
 
+
     </div>
+    <div class="confrim_butt">
+        <button  type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
+ </div>
   </div>
 </div>
