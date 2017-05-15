@@ -7,18 +7,17 @@ import * as firebase from "firebase";
 
 @Injectable()
 
-export class AF 
-{
+export class AF {
   public messages: FirebaseListObservable<any>;
   public users: FirebaseListObservable<any>;
   public displayName: string;
   public email: string;
-  
+  private uid: String;
   // ================================
 
-  constructor (public af: AngularFire) 
-  {
+  constructor(public af: AngularFire) {
     this.messages = this.af.database.list('messages');
+    this.setID();
   }
 
   // ================================
@@ -41,8 +40,7 @@ export class AF
   /**
    * Logs out the current user
    */
-  logout() 
-  {
+  logout() {
     return this.af.auth.logout();
   }
 
@@ -52,16 +50,15 @@ export class AF
    * @param text
    */
 
-  sendMessage(text) 
-  {
-    var message = 
-    {
-      message: text,
-      displayName: this.displayName,
-      email: this.email,
-      timestamp: Date.now()
-    };
-    
+  sendMessage(text) {
+    var message =
+      {
+        message: text,
+        displayName: this.displayName,
+        email: this.email,
+        timestamp: Date.now()
+      };
+
     this.messages.push(message);
   }
 
@@ -71,8 +68,7 @@ export class AF
    * @param model
    * @returns {firebase.Promise<void>}
    */
-  registerUser(email, password) 
-  {
+  registerUser(email, password) {
     console.log(email)
     return this.af.auth.createUser({
       email: email,
@@ -90,15 +86,14 @@ export class AF
 
   // ================================
 
-  saveUserInfoFromForm(uid, name, email) 
-  {
+  saveUserInfoFromForm(uid, name, email) {
     return this.af.database.object('registeredUsers/' + uid).set({
       name: name,
       email: email,
       permission: 3
     });
   }
-      
+
   // ================================
   /**
    * Logs the user in using their Email/Password combo
@@ -109,12 +104,11 @@ export class AF
 
   // ================================
 
-  loginWithEmail(email, password) 
-  {
+  loginWithEmail(email, password) {
     return this.af.auth.login({
-        email: email,
-        password: password
-      },
+      email: email,
+      password: password
+    },
       {
         provider: AuthProviders.Password,
         method: AuthMethods.Password,
@@ -123,39 +117,64 @@ export class AF
 
   // ================================
 
-//  name = user.displayName;
-//  email = user.email;
-//  photoUrl = user.photoURL;
-//  emailVerified = user.emailVerified;
-//  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-//                    // this value to authenticate with your backend server, if
-//                    // you have one. Use User.getToken() instead.
+  //  name = user.displayName;
+  //  email = user.email;
+  //  photoUrl = user.photoURL;
+  //  emailVerified = user.emailVerified;
+  //  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+  //                    // this value to authenticate with your backend server, if
+  //                    // you have one. Use User.getToken() instead.
 
-  getUserPermission()
-  {
+  getUserPermission() {
     var uid;
     var registeredUsers = [];
 
-    firebase.auth().onAuthStateChanged(function(user) 
-    {
+    firebase.auth().onAuthStateChanged(function (user) {
       // User is signed in.
-      if (user) 
-      { 
+      if (user) {
         // The user's ID, unique to the Firebase project.
         uid = user.uid;
 
-          //this.users = this.af.database.list('registeredUsers');
+        //this.users = this.af.database.list('registeredUsers');
 
-      } 
-       // No user is signed in.
-      else 
-      {
+      }
+      // No user is signed in.
+      else {
         // No user is signed in.
       }
-  });
-   this.users = this.af.database.list('registeredUsers');
-  
+    });
+    this.users = this.af.database.list('registeredUsers');
+
   }
+
+
+
+getUid(){
+  return this.uid;
+}
+
+  setID() 
+  {
+    firebase.auth().onAuthStateChanged(function (user) {
+      // User is signed in.
+      if (user) 
+      {
+        // The user's ID, unique to the Firebase project.
+        this.uid = user.uid;
+
+        //this.users = this.af.database.list('registeredUsers');
+
+      }
+      // No user is signed in.
+      else 
+      {
+        this.uid = -1;
+        // No user is signed in.
+      }
+    });
+
+  }
+
 
 }
 

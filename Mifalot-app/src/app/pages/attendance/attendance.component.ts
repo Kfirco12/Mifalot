@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AF } from "../../providers/af";
 
 @Component({
   selector: 'app-attendance',
@@ -53,6 +55,10 @@ export class AttendanceComponent implements OnInit
   ];
 
 
+
+  private relative;
+  private uid;
+
   //teams: FirebaseListObservable<any[]> //get the teams and their members of the User.
   note : String; //coach's note/
   instructions: string; //injection hml variable.
@@ -64,8 +70,12 @@ export class AttendanceComponent implements OnInit
 
   //============================
   //============================
-  constructor( private af: AngularFire) 
+  constructor(af: AF,db: AngularFireDatabase) 
   {
+    this.uid = af.getUid();
+    this.relative = db.list('/registeredUsers/'+this.uid);
+    // alert(this.uid);
+    // alert(this.relative);
 
     this.instructions = "";
     //get the teams names from the DB array.

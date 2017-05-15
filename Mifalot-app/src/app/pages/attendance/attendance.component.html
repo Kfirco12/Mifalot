@@ -1,4 +1,4 @@
-<app-page-header [item] = "header"> </app-page-header>
+<app-page-header [item]="header"> </app-page-header>
 
 <!--picking team-->
 
@@ -11,62 +11,61 @@
         <br style="clear:both">
 
         <!--Injection of html-->
-        <div class = "pull-right"> <h3 class = "instructions"> {{ instructions }} </h3>
-        <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">:בחר\י את הקבוצה אותה את\ה מאמן\ת כעת
-
+        <div class="pull-right">
+          <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">:בחר\י את הקבוצה אותה את\ה מאמן\ת כעת
+<br/>
     
 
     <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-       <div *ngFor="let teams_names of teams_names">
-      <li class = "teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
-      </div>
-    </ul>
-  </div>
-</div>
-
-
-
-         <!--Team selection-->
-       
          
-          <p></p>
-        
+              <ul class="dropdown-menu">
+                <div *ngFor="let teams_names of teams_names">
+                  <li class="teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
+                </div>
+              </ul>
 
-        <!--checklist-->
-        <div class="col-md-8 col-md-offset-2">
-          <div class="funkyradio">
-            <div class="funkyradio-success" *ngFor="let pupils of pupils">
-              <input type="checkbox" name="checkbox"  [value] = "pupils.name" (change)="updateChecked(option, $event)" id="{{pupils.name}}" />
-              <label for="{{pupils.name}}">{{pupils.name}}</label>
             </div>
           </div>
-        </div>
+      
+
+
+
+        <!--Team selection-->
+
+
+        <p></p>
+
+  
+          <!--checklist-->
+          <div class="col-md-8 col-md-offset-2">
+            <div class="funkyradio">
+              <div class="funkyradio-success" *ngFor="let pupils of pupils">
+                <input type="checkbox" name="checkbox" [value]="pupils.name" (change)="updateChecked(option, $event)" id="{{pupils.name}}"
+                />
+                <label for="{{pupils.name}}">{{pupils.name}}</label>
+              </div>
+            </div>
+          </div>
+ 
 
         <!--Notes-->
         <div class="form-group">
-          <textarea class="form-control text-right" type="textarea" id="message"  placeholder="הערות לגבי נוכחות החניכים" maxlength="140" rows="7" #titleInput ></textarea>
-
+          <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140"
+            rows="7" #titleInput></textarea>
+<p></p>
           <!--Submit-->
           <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
         </div>
 
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
+
+ 
+        <button  type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
+        <p></p>
         <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
+ 
 
       </form>
 
     </div>
   </div>
 </div>
-
-
-<!--Footer contains go back and return to the head of the page buttons-->
-<footer class="text-muted">
-  <div class="container">
-    <p class="float-right">
-     <!-- <a href="Attendance" class="btn btn-primary col-md-3 col-md-offset-2"> חזור למעלה </a>-->
-      <a href="Home" class="btn btn-primary col-md-3 col-md-offset-2"> חזור לדף הבית </a>
-    </p>
-  </div>
-</footer>
