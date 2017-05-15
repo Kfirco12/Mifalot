@@ -63,10 +63,10 @@ export class AppComponent
   logout() 
   {
     this.afService.logout();
+  //  this.isLoggedIn = false;
   }
 
 }
-
 
 
 /*
