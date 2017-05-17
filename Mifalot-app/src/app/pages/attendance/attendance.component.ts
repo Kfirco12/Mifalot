@@ -73,7 +73,7 @@ export class AttendanceComponent implements OnInit
   //============================
   constructor(af: AF,db: AngularFireDatabase) 
   {
-    this.uid = af.getUid();
+   // this.uid = af.getUid();
     this.relative = db.list('/registeredUsers/'+this.uid);
     // alert(this.uid);
     // alert(this.relative);

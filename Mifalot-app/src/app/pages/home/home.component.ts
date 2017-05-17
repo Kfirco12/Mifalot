@@ -16,11 +16,12 @@ export class HomeComponent implements OnInit
               { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x'  }
             ]
 
-   permission = 1;
+   permission: string = '1';
 
   constructor(private afService: AF, private router: Router) 
   {
-      this.afService.getUserPermission();
+      this.permission = this.afService.getUid();
+     // console.log(this.permission);
   }
 
   // ======================
