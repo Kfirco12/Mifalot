@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit
               { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x'  }
             ]
 
-   permission = 1;
+   permission = 3;
 
   constructor(private afService: AF, private router: Router) 
   {

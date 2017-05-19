@@ -10,6 +10,7 @@ import { AF } from "../../providers/af";
 })
 export class AttendanceComponent implements OnInit 
 {
+  private noTeamSelected: boolean;
 
   header = 
   {  
@@ -35,6 +36,30 @@ export class AttendanceComponent implements OnInit
         },
         {
           name: 'בנימין חורי',
+        },
+                {
+          name: 'כפיר כן',
+        },
+        {
+          name: 'דודי חקקין',
+        },
+        {
+          name: 'מתן אנונה',
+        },
+        {
+          name: 'בנימין ורי',
+        },
+                {
+          name: 'כפ כהן',
+        },
+        {
+          name: 'דודי קיאן',
+        },
+        {
+          name: 'מתן אקונה',
+        },
+        {
+          name: 'בני חורי',
         }
       ]
     },
@@ -42,7 +67,7 @@ export class AttendanceComponent implements OnInit
       name: 'מכבי',
       members: [
         {
-          name: 'יעקובי',
+          name: 'תומר',
         },
         {
           name: 'ראובן',
@@ -73,12 +98,13 @@ export class AttendanceComponent implements OnInit
   //============================
   constructor(af: AF,db: AngularFireDatabase) 
   {
+    this.noTeamSelected = true;
     this.uid = af.getUid();
     this.relative = db.list('/registeredUsers/'+this.uid);
     // alert(this.uid);
     // alert(this.relative);
 
-    this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
+    this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -116,6 +142,8 @@ export class AttendanceComponent implements OnInit
   //get the pupils name from the wanted team.
   getPupils(id) 
   {
+    this.noTeamSelected = false;
+
     this.started = true;
     this.instructions = "לבחירת קבוצה חדשה אפסו את הטופס";
     this.toStore.team = id; //save the chosen team.
@@ -134,12 +162,15 @@ export class AttendanceComponent implements OnInit
 
   //---------------------------
   //reset the checked attendance and pick new team.
-  startOver() {
-    this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
-    if(this.started){
+  startOver() 
+  {
+    if(this.started)
+    {
       alert("שים לב, הנתונים שהזנת לא נשמרו!");
     }
-    //reset variables.
+    
+    // reset variables.
+    this.noTeamSelected = true;
     this.started = false;
     this.toStore.team = '';
     this.toStore.members = [];
@@ -147,9 +178,11 @@ export class AttendanceComponent implements OnInit
     this.presence = [];  
     this.pupils = [];  
     this.teams_names = []; 
-    this.note=""
+    this.note="";
+
     //get the teams names from the DB array.
-    for (var _i = 0; _i < this.teams.length; _i++) {
+    for (var _i = 0; _i < this.teams.length; _i++) 
+    {
       var name = this.teams[_i];
       this.teams_names.push(name)
     }

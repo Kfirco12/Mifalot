@@ -1,65 +1,95 @@
-<app-page-header [item]="header"> </app-page-header>
+<app-page-header [item] = "header"> </app-page-header>
 
-<!--picking team-->
+ <!-- Page Content -->
+<div class = "container" >
 
+    <div class = "row" >
 
-<!--form of checklist and notes-->
-<div class="container">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="form-area">
-      <form role="form">
-        <br style="clear:both">
+<div *ngIf = "noTeamSelected" >
+  <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
+        <div *ngFor = "let team of teams" class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "thumbnail" (click) = "getPupils(team.name)"> 
+            <button type = "button" class = "btn btn-default btn-block btn-team" > <i class = "fa fa-soccer-ball-o fa-2x" > </i> <br/> {{ team.name }} </button>
+          </a>
+        </div>
+       
+</div>
+    </div>
 
-        <!--Injection of html-->
-        <div class="pull-right">
-          <div class="dropdown pull-right"> <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{instructions}}<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <div *ngFor="let teams_names of teams_names">
-                  <li class="teams_list" (click)="getPupils(elem.id)" id="{{teams_names.name}}" #elem>{{teams_names.name}}</li>
+ <!--checklist-->
+
+ <div *ngIf = "!noTeamSelected" >
+   <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
+          <div class = "vertical-menu">
+              <div *ngFor = "let pupils of pupils">
+                <div class = "checkbox">
+                 <label class = "pupil-name" for = "{{pupils.name}}">  {{pupils.name}}  
+                  <input type = "checkbox" value = ""  name = "checkbox" [value] = "pupils.name" (change) = "updateChecked(option, $event)" id = "{{ pupils.name }}" unchecked/>
+                  <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
+              </label>
+              <hr>
                 </div>
-              </ul>
-
             </div>
-          </div>
-      
+   </div>
 
 
 
-        <!--Team selection-->
-
-
-        <p></p>
-
-  
-          <!--checklist-->
-          <div class="col-md-8 col-md-offset-2">
-            <div class="funkyradio">
-              <div class="funkyradio-success" *ngFor="let pupils of pupils">
-                <input type="checkbox" name="checkbox" [value]="pupils.name" (change)="updateChecked(option, $event)" id="{{pupils.name}}"
-                />
-                <label for="{{pupils.name}}">{{pupils.name}}</label>
-              </div>
-            </div>
-          </div>
+   <!-- buttons -->
  
-
-        <!--Notes-->
-        <div class="form-group">
-          <br/>
-          <textarea class="form-control text-right" type="textarea" id="message" placeholder="הערות לגבי נוכחות החניכים" maxlength="140"
-            rows="7" #titleInput></textarea>
-<p></p>
-          <!--Submit-->
-          <span class="help-block"><p id="characterLeft" class="help-block text-right">"לאחר מילוי הנוכחות וההערות, לחץ על "שלח טופס</p></span>
+ <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "btn-bottom" (click) = "saveAttendance(titleInput.value)"> 
+            <button type = "button" class = "btn btn-primary btn-block btn-confirm" > שליחת טופס </button>
+          </a>
         </div>
 
-      </form>
+ <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+          <a class = "btn-bottom" (click) = "startOver()"> 
+            <button type = "button" class = "btn btn-danger btn-block btn-confirm" > איפוס טופס ובחירת קבוצה מחדש </button>
+          </a>
+        </div>
 
 
-    </div>
-    <div class="confrim_butt">
-        <button  type="button" id="submit" name="submit" class="btn btn-primary pull-left" (click)="startOver()">איפוס טופס ובחירת קבוצה מחדש</button>
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="saveAttendance(titleInput.value)">שליחת טופס</button>
- </div>
   </div>
 </div>
+
+<!--<span class="counter">22</span>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
