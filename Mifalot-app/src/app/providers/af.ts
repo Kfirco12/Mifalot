@@ -1,23 +1,30 @@
 
 import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 
-export class AF 
-{
+export class AF {
   public messages: FirebaseListObservable<any>;
   public users: FirebaseListObservable<any>;
   public displayName: string;
   public email: string;
   private uid: string;
-
+  public name: String;
+  private _stream$ = new BehaviorSubject("")
+  public stream$ = this._stream$.asObservable();
   // ================================
 
-  constructor(public af: AngularFire) 
-  {
+  constructor(public af: AngularFire) {
     this.messages = this.af.database.list('messages');
   }
+
+//sharing data between two components.
+  send(msg: string) {
+    this._stream$.next(msg);
+  }
+
 
   // ================================
   /**
@@ -49,8 +56,7 @@ export class AF
    * @param text
    */
 
-  sendMessage(text) 
-  {
+  sendMessage(text) {
     var message =
       {
         message: text,
@@ -68,8 +74,7 @@ export class AF
    * @param model
    * @returns {firebase.Promise<void>}
    */
-  registerUser(email, password) 
-  {
+  registerUser(email, password) {
     console.log(email)
     return this.af.auth.createUser({
       email: email,
@@ -87,14 +92,13 @@ export class AF
 
   // ================================
 
-  saveUserInfoFromForm(uid, name, email) 
-  {
+  saveUserInfoFromForm(uid, name, email) {
     return this.af.database.object('registeredUsers/' + uid).set(
-    {
-      name: name,
-      email: email,
-      permission: 3
-    });
+      {
+        name: name,
+        email: email,
+        permission: 3
+      });
   }
 
   // ================================
@@ -107,23 +111,21 @@ export class AF
 
   // ================================
 
-  loginWithEmail(email, password) 
-  {
+  loginWithEmail(email, password) {
     // Resolving scope problems in TypeScript
     let that = this;
 
     return this.af.auth.login(
-    {
-      email: email,
-      password: password
-    },
-    {
-      provider: AuthProviders.Password,
-      method: AuthMethods.Password,
-    }).then((user) => 
       {
+        email: email,
+        password: password
+      },
+      {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password,
+      }).then((user) => {
         that.uid = user.uid;
-       // console.log(that.uid);
+        // console.log(that.uid);
       })
   }
 
@@ -138,15 +140,13 @@ export class AF
   //                    // this value to authenticate with your backend server, if
   //                    // you have one. Use User.getToken() instead.
 
-  getUserPermission() 
-  {
+  getUserPermission() {
   }
 
 
   // ================================
 
-  getUid()
-  {
+  getUid() {
     console.log(this.uid);
     return this.uid;
   }

@@ -8,6 +8,7 @@ import { AF } from "../../providers/af";
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
+
 export class AttendanceComponent implements OnInit 
 {
 
@@ -55,11 +56,6 @@ export class AttendanceComponent implements OnInit
   ];
 
 
-
-  private relative;
-  private uid;
-
-  //teams: FirebaseListObservable<any[]> //get the teams and their members of the User.
   note : String; //coach's note/
   instructions: string; //injection hml variable.
   date = new Date().toLocaleString()  //date variable.
@@ -68,16 +64,13 @@ export class AttendanceComponent implements OnInit
   teams_names = []; //get the coach's teams names.
   toStore = {team:'', members:[], attend:[]};
   private started = false;
+  private usr: String;
 
   //============================
   //============================
-  constructor(af: AF,db: AngularFireDatabase) 
+  constructor(private af: AF, db: AngularFireDatabase) 
   {
-   // this.uid = af.getUid();
-    this.relative = db.list('/registeredUsers/'+this.uid);
-    // alert(this.uid);
-    // alert(this.relative);
-
+    this.af.stream$.subscribe(this.receiveMessage.bind(this));
     this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
@@ -92,6 +85,10 @@ export class AttendanceComponent implements OnInit
   ngOnInit() {
   }
 
+
+    receiveMessage(msg : string) {
+       this.usr = msg;
+    }
   //---------------------------
   //update the checked buttons at run time.
   updateChecked(option, event) {
@@ -173,7 +170,7 @@ export class AttendanceComponent implements OnInit
     alert("The chosen team is: "+this.toStore.team+"\n"+"The team's pupils are: "+this.printPupils(this.toStore.members)+"\n"+"the presence list is: "+this.toStore.attend+"\nThe note is: "+ this.note)
     this.started = false;
     this.startOver();
-    
+    alert(this.usr);
   }
 
 }
