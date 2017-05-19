@@ -8,7 +8,6 @@ import { AF } from "../../providers/af";
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
-
 export class AttendanceComponent implements OnInit 
 {
   private noTeamSelected: boolean;
@@ -81,6 +80,11 @@ export class AttendanceComponent implements OnInit
   ];
 
 
+
+  private relative;
+  private uid;
+
+  //teams: FirebaseListObservable<any[]> //get the teams and their members of the User.
   note : String; //coach's note/
   instructions: string; //injection hml variable.
   date = new Date().toLocaleString()  //date variable.
@@ -89,13 +93,11 @@ export class AttendanceComponent implements OnInit
   teams_names = []; //get the coach's teams names.
   toStore = {team:'', members:[], attend:[]};
   private started = false;
-  private usr: String;
 
   //============================
   //============================
-  constructor(private af: AF, db: AngularFireDatabase) 
+  constructor(af: AF,db: AngularFireDatabase) 
   {
-<<<<<<< HEAD
     this.noTeamSelected = true;
     this.uid = af.getUid();
     this.relative = db.list('/registeredUsers/'+this.uid);
@@ -103,10 +105,6 @@ export class AttendanceComponent implements OnInit
     // alert(this.relative);
 
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
-=======
-    this.af.stream$.subscribe(this.receiveMessage.bind(this));
-    this.instructions = ":בחר\\י את הקבוצה אותה את\\ה מאמן\\ת כעת";
->>>>>>> 9dcb9dbc523882640dabb15cfbbac2a13211a050
     //get the teams names from the DB array.
     //this.teams = af.database.list('/Users/Teams');
     for (var _i = 0; _i < this.teams.length; _i++) {
@@ -120,10 +118,6 @@ export class AttendanceComponent implements OnInit
   ngOnInit() {
   }
 
-
-    receiveMessage(msg : string) {
-       this.usr = msg;
-    }
   //---------------------------
   //update the checked buttons at run time.
   updateChecked(option, event) {
@@ -212,7 +206,7 @@ export class AttendanceComponent implements OnInit
     alert("The chosen team is: "+this.toStore.team+"\n"+"The team's pupils are: "+this.printPupils(this.toStore.members)+"\n"+"the presence list is: "+this.toStore.attend+"\nThe note is: "+ this.note)
     this.started = false;
     this.startOver();
-    alert(this.usr);
+    
   }
 
 }
