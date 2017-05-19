@@ -1,9 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
-
-// For 'firebase.auth()'
-import * as firebase from "firebase";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 
@@ -12,13 +10,21 @@ export class AF {
   public users: FirebaseListObservable<any>;
   public displayName: string;
   public email: string;
-  private uid: String;
+  private uid: string;
+  public name: String;
+  private _stream$ = new BehaviorSubject("")
+  public stream$ = this._stream$.asObservable();
   // ================================
 
   constructor(public af: AngularFire) {
     this.messages = this.af.database.list('messages');
-    this.setID();
   }
+
+//sharing data between two components.
+  send(msg: string) {
+    this._stream$.next(msg);
+  }
+
 
   // ================================
   /**
@@ -87,11 +93,12 @@ export class AF {
   // ================================
 
   saveUserInfoFromForm(uid, name, email) {
-    return this.af.database.object('registeredUsers/' + uid).set({
-      name: name,
-      email: email,
-      permission: 3
-    });
+    return this.af.database.object('registeredUsers/' + uid).set(
+      {
+        name: name,
+        email: email,
+        permission: 3
+      });
   }
 
   // ================================
@@ -105,15 +112,23 @@ export class AF {
   // ================================
 
   loginWithEmail(email, password) {
-    return this.af.auth.login({
-      email: email,
-      password: password
-    },
+    // Resolving scope problems in TypeScript
+    let that = this;
+
+    return this.af.auth.login(
+      {
+        email: email,
+        password: password
+      },
       {
         provider: AuthProviders.Password,
         method: AuthMethods.Password,
-      });
+      }).then((user) => {
+        that.uid = user.uid;
+        // console.log(that.uid);
+      })
   }
+
 
   // ================================
 
@@ -126,55 +141,17 @@ export class AF {
   //                    // you have one. Use User.getToken() instead.
 
   getUserPermission() {
-    var uid;
-    var registeredUsers = [];
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      // User is signed in.
-      if (user) {
-        // The user's ID, unique to the Firebase project.
-        uid = user.uid;
-
-        //this.users = this.af.database.list('registeredUsers');
-
-      }
-      // No user is signed in.
-      else {
-        // No user is signed in.
-      }
-    });
-    this.users = this.af.database.list('registeredUsers');
-
   }
 
 
+  // ================================
 
-getUid(){
-  return this.uid;
-}
-
-  setID() 
-  {
-    firebase.auth().onAuthStateChanged(function (user) {
-      // User is signed in.
-      if (user) 
-      {
-        // The user's ID, unique to the Firebase project.
-        this.uid = user.uid;
-
-        //this.users = this.af.database.list('registeredUsers');
-
-      }
-      // No user is signed in.
-      else 
-      {
-        this.uid = -1;
-        // No user is signed in.
-      }
-    });
-
+  getUid() {
+    console.log(this.uid);
+    return this.uid;
   }
 
+  // ================================
 
 }
 
