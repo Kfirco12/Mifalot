@@ -110,6 +110,31 @@
 /* info End */
 
 
+.clickable{
+	cursor: pointer;   
+}
+
+.panel-heading div {
+	margin-top: -18px;
+	font-size: 15px;
+}
+.panel-heading div span{
+	margin-left:5px;
+}
+.panel-body{
+	display: none;
+}
+h3 {
+    text-align: right;
+}
+th {
+    text-align: right;
+}
+#dev-table
+{
+    text-align: right;
+}
+
 
 
 
