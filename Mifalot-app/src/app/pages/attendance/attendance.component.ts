@@ -18,68 +18,9 @@ export class AttendanceComponent implements OnInit {
     icon: "fa-pencil-square-o"
   }
 
-
-  //teams from DB.*********************************************************
-  /* teams = [
-     {
-       name: 'בית"ר',
-       members: [
-         {
-           name: 'כפיר כהן',
-         },
-         {
-           name: 'דודי חקקיאן',
-         },
-         {
-           name: 'מתן אנקונה',
-         },
-         {
-           name: 'בנימין חורי',
-         },
-                 {
-           name: 'כפיר כן',
-         },
-         {
-           name: 'דודי חקקין',
-         },
-         {
-           name: 'מתן אנונה',
-         },
-         {
-           name: 'בנימין ורי',
-         },
-                 {
-           name: 'כפ כהן',
-         },
-         {
-           name: 'דודי קיאן',
-         },
-         {
-           name: 'מתן אקונה',
-         },
-         {
-           name: 'בני חורי',
-         }
-       ]
-     },
-     {
-       name: 'מכבי',
-       members: [
-         {
-           name: 'תומר',
-         },
-         {
-           name: 'ראובן',
-         },
-         {
-           name: 'הדס',
-         }
-       ]
-     }
-   ];*/
-
-
-
+ //============================
+  //============================
+  //-------------VARIABLES-------------
   private uid; //connected uid.
   private instructions: string; //injection hml variable.
   private started = false;
@@ -90,6 +31,7 @@ export class AttendanceComponent implements OnInit {
 
   //============================
   //============================
+  //-------------METHODS-------------
   constructor(private afService: AF, public db: AngularFire) {
 
     //bind data sharing.
@@ -178,27 +120,17 @@ export class AttendanceComponent implements OnInit {
     if (this.started) {
       alert("שים לב, הנתונים שהזנת לא נשמרו!");
     }
-    /* 
+    
      // reset variables.
      this.noTeamSelected = true;
      this.started = false;
-     this.toStore.team = '';
-     this.toStore.members = [];
-     this.toStore.attend = [];
-     this.presence = [];  
+     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
      this.pupils = [];  
-     this.teams_names = []; 
-     this.note="";
+     this.chosenTeam = '';
  
-     //get the teams names from the DB array.
-     for (var _i = 0; _i < this.teams.length; _i++) 
-     {
-       var name = this.teams[_i];
-       this.teams_names.push(name)
-     }*/
-
   }
 
+//----------------------------
   //help method.
   printPupils(list,names) {
 
