@@ -23,8 +23,8 @@
           <div class = "vertical-menu">
               <div *ngFor = "let pupils of pupils">
                 <div class = "checkbox">
-                 <label class = "pupil-name" for = "{{pupils.name}}">  {{pupils.name}}  
-                  <input type = "checkbox" value = ""  name = "checkbox" [value] = "pupils.name" (change) = "updateChecked(option, $event)" id = "{{ pupils.name }}" unchecked/>
+                 <label class = "pupil-name" for = "{{ pupils.name }}">  {{ pupils.name }}  
+                  <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.name " (change) = "updateChecked(option, $event)" id = "{{ pupils.name }}" unchecked/>
                   <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
               </label>
               <hr>
@@ -37,7 +37,7 @@
    <!-- buttons -->
  
  <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
-          <a class = "btn-bottom" (click) = "saveAttendance(titleInput.value)"> 
+          <a class = "btn-bottom" (click) = "saveAttendance()"> 
             <button type = "button" class = "btn btn-primary btn-block btn-confirm" > שליחת טופס </button>
           </a>
         </div>
