@@ -13,12 +13,12 @@ import { Router } from "@angular/router";
 export class LoginComponent 
 {
   public error: any;
-  private usrArr = {
-    id: String,
-    name: String,
-    email: String,
-    permissions: Number
-  };
+ /* private usrArr = {
+    id: '',
+    teams: [],
+    pupils:[]
+  };*/
+  private usrArr = [];
 
   constructor(public afService: AF, private router: Router) {}
   
@@ -35,7 +35,7 @@ export class LoginComponent
     // ===================================
 
 //send data to different components.
-sendMessage(msg : string) {
+    sendMessage(msg : string) {
        this.afService.send(msg);
     }
 
@@ -44,10 +44,8 @@ sendMessage(msg : string) {
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => {
       this.router.navigate(['']);
-      this.usrArr[0] = this.afService.getUid();
-      //this.usrArr[1] = this.afService.displayName;
 
-      this.sendMessage(this.usrArr[0]);
+      this.sendMessage(this.afService.getUid());
     })
       .catch((error: any) => {
         if (error) 

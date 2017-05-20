@@ -21,9 +21,9 @@ export class AF {
   }
 
 //sharing data between two components.
-  send(msg: string) {
-    this._stream$.next(msg);
-  }
+  send(msg : string) {
+      this._stream$.next(msg);
+    }
 
 
   // ================================
