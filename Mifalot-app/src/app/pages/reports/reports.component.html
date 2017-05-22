@@ -9,7 +9,7 @@
   <span class="caret"></span>בחר תאריך</button>
   <ul class="dropdown-menu">
     <li *ngFor = "let date of dates; let i = index" [attr.data-index]="i">
-		<a (click) = "getPupils(dates[i].date)">{{date.date | date:'dd/MM/yy'}}</a></li>
+		<a (click) = "getPupils(dates[i].date, dates[i].team)">{{date.date | date:'dd/MM/yy'}}</a></li>
   </ul>
 </div>
 </div>

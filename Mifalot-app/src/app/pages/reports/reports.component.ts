@@ -76,34 +76,31 @@ export class ReportsComponent implements OnInit
          dates.subscribe(snap2 => {
            snap2.forEach(snap => {
            var dateDB = {
-          date: snap.date
+          date: snap.date,
+          team: teamId
         }
         this.dates.push(dateDB);
            })
          })
        }
-
-     
       })
     })
   }
   //---------------------------
   //get the pupils name from the wanted team.
-  getPupils(dateId) 
+  getPupils(dateId, teamId) 
   {
     //reset teams represent.
 
     this.started = true;
     this.chosenDate = dateId;
     this.dateSelected = true;
-  
     //get teame's pupil from DB.
-     var info = this.afService.af.database.list('מכבי',  { preserveSnapshot: true });
+     var info = this.afService.af.database.list('teams/'+teamId+'/attendance',  { preserveSnapshot: true });
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        alert(snapshot.val().date);
        if(snapshot.val().date == dateId){
-         this.pupilsPath = this.afService.af.database.list('teams/'+snapshot.key+'/attendance'+snapshot.key+'/presence');
+         this.pupilsPath = this.afService.af.database.list('teams/'+teamId+'/attendance/'+snapshot.key+"/presence");
          this.teamKey = snapshot.key;
          this.pupilsPath.subscribe(snap2 => {
            snap2.forEach(snap => {
