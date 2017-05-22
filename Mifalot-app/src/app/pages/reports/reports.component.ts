@@ -19,103 +19,137 @@ export class ReportsComponent implements OnInit
   }
   
   private pupilsPath;
-  private teamSelected: boolean;
-  private dateSelected: boolean;
   private uid;
-  private teams = [];
-  private started = false;
   private chosenTeam = '';
   private teamKey;
   private chosenDate;
-  private dates = [];  //contain the trainings' dates of the chosen team.
-  private pupils = new Array;  //contain the pupils name of the chosen team.
+
+  private pupilPresence: string;
+
+  // Arrays
+  private teams;    // Contain the teams' of the user.
+  private dates;    // Contain the trainings' dates of the chosen team.
+  private pupils;   // Contain the pupils name of the chosen team.
+  
+  // Flags
+  private started: boolean;
+  private teamSelected: boolean;
+  private dateSelected: boolean;
+
+  // ============================================================
 
   constructor(private afService: AF) 
   { 
-    this.teamSelected = false;
-    this.dateSelected = false;
+    this.pupils = this.dates = this.teams = [];
+
+    this.started = false;
+    this.teamSelected = this.dateSelected = false;
+
     this.uid = afService.getUid();
     this.getTeamsByUid();
   }
 
+  // ============================================================
+
   ngOnInit() {
   }
 
-   //Connect to the DB and get the team names of the connected user.
+  // ============================================================
+  // Connect to the DB and get the teams' names of the connected user.
+  
   getTeamsByUid() 
   {
     var info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
 
-    info.subscribe(snapshots => {
+   info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        if (snapshot.val().coachId == this.uid) {
+        if (snapshot.val().coachId == this.uid) 
           this.teams.push(snapshot.val().name);
-        }
       })
     })
   }
 
-   //---------------------------
+  // ============================================================
   //get the dates from the wanted team.
+
   getDates(teamId) 
   {
-    //reset teams represent.
-    this.dates = [];
-    this.teamSelected = true;
+    // Reset teams represent.
+    this.pupils = this.dates = [];
+
     this.dateSelected = false;
-    this.started = true;
+    this.teamSelected = this.started = true;
+
     this.chosenTeam = teamId;
-    //get teame's pupil from DB.
-    //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
-    var info = this.afService.af.database.list('teams',  { preserveSnapshot: true });
+
+    // get teame's pupil from DB.
+    var info = this.afService.af.database.list('teams/' + teamId + '/attendance', { preserveSnapshot: true });
+    
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-       if(snapshot.val().name == teamId){
-         var dates = this.afService.af.database.list('teams/'+snapshot.key+'/attendance');
-         this.teamKey = snapshot.key;
-         dates.subscribe(snap2 => {
-           snap2.forEach(snap => {
-           var dateDB = {
-          date: snap.date,
+        var dateDB = 
+        {
+          date: snapshot.val().date,
           team: teamId
         }
+
         this.dates.push(dateDB);
-           })
-         })
-       }
       })
     })
   }
-  //---------------------------
-  //get the pupils name from the wanted team.
+  
+  // ============================================================
+  // Get the pupils name from the wanted team.
+  
   getPupils(dateId, teamId) 
   {
-    //reset teams represent.
-
-    this.started = true;
+    // Reset teams represent
+    this.started = this.dateSelected = true;
     this.chosenDate = dateId;
-    this.dateSelected = true;
-    //get teame's pupil from DB.
-     var info = this.afService.af.database.list('teams/'+teamId+'/attendance',  { preserveSnapshot: true });
+
+    // Reset pupils' array
+    this.pupils = [];
+
+    // Get teame's pupil from DB.
+    var info = this.afService.af.database.list('teams/' + teamId + '/attendance',  { preserveSnapshot: true });
+
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-       if(snapshot.val().date == dateId){
-         this.pupilsPath = this.afService.af.database.list('teams/'+teamId+'/attendance/'+snapshot.key+"/presence");
-         this.teamKey = snapshot.key;
-         this.pupilsPath.subscribe(snap2 => {
-           snap2.forEach(snap => {
-           var pupil = {
-          name: snap.name,
-          presence: snap.presence
-        }
-        this.pupils.push(pupil);
-           })
-         })
-       }
+        if(snapshot.val().date == dateId)
+        {
+          this.pupilsPath = this.afService.af.database.list('teams/' + teamId + '/attendance/' + snapshot.key + "/presence");
+          this.teamKey = snapshot.key;
 
-     
+          this.pupilsPath.subscribe(snap2 => {
+            snap2.forEach(snap => {
+              var pupil = 
+              {
+                name: snap.name,
+                presence: snap.presence
+              }
+              this.pupils.push(pupil);
+            })
+          })
+        }
+
       })
     })
   }
+
+  // ============================================================
+  // Change 'pupilPresence' to 'כן' or 'לא' according to database value
+
+  isPupilPresence(presence)
+  {
+    if (presence == true)
+      this.pupilPresence = "כן";
+    else
+      this.pupilPresence = "לא";
+
+      return true;
+  }
+
+  // ============================================================
+
 
 }

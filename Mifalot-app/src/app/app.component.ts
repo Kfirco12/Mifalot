@@ -54,7 +54,6 @@ export class AppComponent
               {
                 if (snapshot.key == "permission")
                  {
-                   console.log("here");
                     this.permission = snapshot.val();
                     this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.displayName, auth.auth.email);
 
