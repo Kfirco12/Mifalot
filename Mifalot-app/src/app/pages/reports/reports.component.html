@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row"> 
 		<div class ="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-	<div class="dropdown">
+	<div *ngIf = "teamSelected" class="dropdown">
   <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
   <span class="caret"></span>בחר תאריך</button>
   <ul class="dropdown-menu">
     <li *ngFor = "let date of dates; let i = index" [attr.data-index]="i">
-		<a (click) = "getPupils(dates[i].date)">{{date.date}}</a></li>
+		<a (click) = "getPupils(dates[i].date, dates[i].team)">{{date.date | date:'dd/MM/yy'}}</a></li>
   </ul>
 </div>
 </div>
@@ -27,7 +27,7 @@
 <p>
 <div class="row">
         	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-primary">
+				<div *ngIf = "dateSelected" class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">רשימת נוכחות</h3>
 						

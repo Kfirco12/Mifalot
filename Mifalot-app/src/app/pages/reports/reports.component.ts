@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AF } from "../.././providers/af";
 
@@ -16,20 +17,23 @@ export class ReportsComponent implements OnInit
      subTitle: "צפייה בהיסטוריית נוכחות החניכים",
      icon: "fa-bar-chart" 
   }
-
-  private noTeamSelected: boolean;
+  
+  private pupilsPath;
+  private teamSelected: boolean;
+  private dateSelected: boolean;
   private uid;
   private teams = [];
   private started = false;
   private chosenTeam = '';
   private teamKey;
   private chosenDate;
-  private dates = [{date: "אנא בחר קבוצה"}];  //contain the trainings' dates of the chosen team.
+  private dates = [];  //contain the trainings' dates of the chosen team.
   private pupils = new Array;  //contain the pupils name of the chosen team.
 
   constructor(private afService: AF) 
   { 
-    this.noTeamSelected = true;
+    this.teamSelected = false;
+    this.dateSelected = false;
     this.uid = afService.getUid();
     this.getTeamsByUid();
   }
@@ -57,10 +61,10 @@ export class ReportsComponent implements OnInit
   {
     //reset teams represent.
     this.dates = [];
-    this.noTeamSelected = false;
+    this.teamSelected = true;
+    this.dateSelected = false;
     this.started = true;
     this.chosenTeam = teamId;
-
     //get teame's pupil from DB.
     //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
     var info = this.afService.af.database.list('teams',  { preserveSnapshot: true });
@@ -72,41 +76,37 @@ export class ReportsComponent implements OnInit
          dates.subscribe(snap2 => {
            snap2.forEach(snap => {
            var dateDB = {
-          date: snap.date
+          date: snap.date,
+          team: teamId
         }
         this.dates.push(dateDB);
            })
          })
        }
-
-     
       })
     })
   }
-
   //---------------------------
   //get the pupils name from the wanted team.
-  getPupils(dateID) 
+  getPupils(dateId, teamId) 
   {
     //reset teams represent.
-    this.noTeamSelected = false;
-    this.started = true;
-    this.chosenDate = dateID;
 
+    this.started = true;
+    this.chosenDate = dateId;
+    this.dateSelected = true;
     //get teame's pupil from DB.
-    //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
-    var info = this.afService.af.database.list('teams',  { preserveSnapshot: true });
+     var info = this.afService.af.database.list('teams/'+teamId+'/attendance',  { preserveSnapshot: true });
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-       if(snapshot.val().date == dateID){
-         var pupils = this.afService.af.database.list('teams/'+snapshot.key+'/attendance'+snapshot.key+'/presence'+snapshot.key+'/1');
+       if(snapshot.val().date == dateId){
+         this.pupilsPath = this.afService.af.database.list('teams/'+teamId+'/attendance/'+snapshot.key+"/presence");
          this.teamKey = snapshot.key;
-         pupils.subscribe(snap2 => {
+         this.pupilsPath.subscribe(snap2 => {
            snap2.forEach(snap => {
            var pupil = {
-          name: "dd",
-          presence: true,
-          number: 1
+          name: snap.name,
+          presence: snap.presence
         }
         this.pupils.push(pupil);
            })
