@@ -1,84 +1,83 @@
 
+<!-- Error message -->
+<div *ngIf = "error" class = "alert alert-warning" role = "alert">
+  <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
+  <span class = "sr-only"> Error: </span>
+  {{ error }}
+</div>
+
+<!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
 
 <div class = "container" >
 
-  <!-- <div class = "text-center"> askjdnsakjlndasndnasn </div> -->
-  <div #scrollMe class = "vertical-menu" >
-    <div *ngFor = "let message of messages | async" > 
-      <div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')">
-        <p class = "date-stamp"> {{ message.timestamp | date: "dd/MM/yy" }} </p> 
-      </div> 
-      <div class = "bubble" [class.bubble-alt] = "isMe(message.email)"  [class.yellow] = "!isMe(message.email)">
-        <p id = "msg-name"> {{ message.displayName }}</p>
-        <p id = "msg-context"> {{ message.message }} </p>
-        <div class = "author">
-          <span> {{ message.timestamp | date: "hh:mm a" }} </span>
-        </div>
+<!-- Selecting chat room or adding a new one -->
+  <div *ngIf = "noChatRoomSelected && !createNewChatRoom" >
+    <div class = "row" >
+
+    <div class = "container">
+          <button (click) = "newChatRoom()" type = "button" class = "btn btn-success btn-block" > <i class = "fa fa-plus" > </i> יצירת חדר צ׳אט חדש </button>
+    </div>
+  
+    <p>
+  
+    <div class = "vertical-menu" >
+      <div *ngFor = "let chatRoom of chatRooms | async" class = "col-lg-6 col-md-6 col-xs-6 thumb">
+        <a class = "thumbnail" (click) = "enterChatRoom(chatRoom)"> 
+          <button type = "button" class = "btn-chat btn btn-default btn-block" > <i class = "fa fa-commenting-o" > </i> <br/> {{ chatRoom.name }} </button>
+        </a>
       </div>
     </div>
   </div>
+</div>
 
+<!-- Create a new chat room -->
+<div *ngIf = "createNewChatRoom">
+  <h4 class = "create-chat text-center"> אנא בחר את נושא הצ׳אט ולחץ על <br> ״יצירת צ׳אט״ </h4>
 
+<br>
 
-  <div class = "input-group">
-    <span class = "input-group-btn"> 
-      <button class = "btn btn-primary" type = "submit" (click) = "sendMessage()"> <i class = "fa fa-arrow-up"></i> שלח </button>
-    </span>  
-    <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "sendMessage()" [(ngModel)] = "newMessage">
-  </div>
-</div>     
-
-<!--
-
-
-   <div *ngIf = "needToPrint(item.date)">
-        <p class = "date-stamp"> {{ item.date }} </p>
+  <form class = "form-signin">
+      <label for = "name" class = "sr-only"> נושא הצ׳אט </label>
+      <div class = "input-group">
+        <input #name type = "text" id = "name" class = "form-control" placeholder = "נושא הצ׳אט" required>
+          <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
       </div>
 
+      <br>
 
-  <div class = "container">
+      <button (click) = "name.value && createsNewChatRoom(name.value) " class = "btn btn-md btn-success btn-block" type = "submit"> יצירת צ׳אט </button>
+      <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לעמוד הקודם </button>
 
-  <p></p>
+    </form>
 
-      <section class = "jumbotron text-center">
-        <div class = "container">
-          <h1 class = "jumbotron-heading"> הודעות <i class = "fa fa-envelope-open fa-1x" > </i> </h1> 
-        </div>
-      </section>
-
-
-  <body>
-    <div class = "text-center"> askjdnsakjlndasndnasn
-      </div>
-
-    <div #scrollMe class = "container vertical-menu">
-       <p class = "date-stamp"> May 20, 2014, 4:16 PM </p>
-        <div class = "row">
-          <div class = "col-lg-12 col-md-offset-0">
-              <div *ngFor = "let item of items | async">
-            <div class = "bubble bubble-alt yellow">
-              <p id = "msg-name"> {{ item.name }}</p>
-                    <p id = "msg-context"> {{ item.message }} </p>
-                    <div class = "author">
-                      <span> {{ item.date }} </span>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </div>
-    </div>
-
-
-        <div class = "input-group">
-            <span class = "input-group-btn"> 
-            <button class = "btn btn-primary" type = "submit" (click) = "chatSend(msgVal)"> <i class = "fa fa-arrow-up"></i> שלח </button>
-          </span>
-          <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "chatSend($event.target.value)" [(ngModel)] = "msgVal">
-        </div>
-      
-  </body>
 
 </div>
 
--->
+<!-- Chat messages -->
+  <div *ngIf = "!noChatRoomSelected && !createNewChatRoom">
+    <div #scrollMe class = "vertical-menu" >
+      <div *ngFor = "let message of currentChat | async" > 
+        <!--<div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')">
+          <p class = "date-stamp"> {{ message.timestamp | date: "dd/MM/yy" }} </p> 
+        </div> -->
+        <div class = "bubble" [class.bubble-alt] = "isMe(message.email)"  [class.yellow] = "!isMe(message.email)">
+          <p id = "msg-name"> {{ message.displayName }}</p>
+          <p id = "msg-context"> {{ message.message }} </p>
+          <div class = "author">
+            <span> {{ message.timestamp | date: "hh:mm a" }} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class = "input-group">
+      <span class = "input-group-btn"> 
+        <button class = "btn btn-primary" type = "submit" (click) = "sendMessage()"> <i class = "fa fa-arrow-up"></i> שלח </button>
+      </span>  
+      <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "sendMessage()" [(ngModel)] = "newMessage">
+    </div>
+  </div>     
+</div>

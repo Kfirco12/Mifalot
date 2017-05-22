@@ -21,6 +21,7 @@ import { AF } from "./providers/af";
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
+import { LoadingComponent } from './pages/loading/loading.component';
 
 // ======================================================
 // Initialize Firebase 
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'personal-info', component: PersonalInfoComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'users-confirm', component: UsersConfirmComponent }
+  { path: 'users-confirm', component: UsersConfirmComponent },
+  { path: 'loading', component: LoadingComponent }
 ];
 
 // ======================================================
@@ -62,6 +64,7 @@ const routes: Routes = [
     RegistrationComponent,
     PageHeaderComponent,
     UsersConfirmComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ AF, HomeComponent ],
+  providers: [ AF ],
   bootstrap: [ AppComponent ]
 })
 

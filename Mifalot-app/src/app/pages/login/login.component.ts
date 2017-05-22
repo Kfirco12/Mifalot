@@ -16,23 +16,13 @@ export class LoginComponent
 
   constructor(public afService: AF, private router: Router) {}
   
-  // ===================================
-
-  // loginWithGoogle() 
-  // {
-  //   this.afService.loginWithGoogle().then((data) => {
-  //     // Send them to the homepage if they are logged in
-  //     this.router.navigate(['']);
-  //   })
-  // }
-
     // ===================================
 
   loginWithEmail(event, email, password)
   {
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['loading']);
     })
       .catch((error: any) => {
         if (error) 
@@ -41,6 +31,7 @@ export class LoginComponent
           console.log(this.error);
         }
       });
+
   }
 
   // ===================================

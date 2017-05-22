@@ -6,17 +6,20 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 
 export class AF 
 {
-  public messages: FirebaseListObservable<any>;
+  public chatRooms: FirebaseListObservable<any>;
   public users: FirebaseListObservable<any>;
   public displayName: string;
   public email: string;
-  private uid: string;
 
+  private uid: string;
+  private permission: number = 1;
+  
   // ================================
 
   constructor(public af: AngularFire) 
   {
-    this.messages = this.af.database.list('messages');
+    //this.saveUserDetails();
+    this.chatRooms = this.af.database.list('chatRooms');
   }
 
   // ================================
@@ -26,20 +29,11 @@ export class AF
    */
 
   // ================================
-
-  // loginWithGoogle() 
-  // {
-  //   return this.af.auth.login({
-  //     provider: AuthProviders.Google,
-  //     method: AuthMethods.Popup,
-  //   });
-  // }
-
-  // ================================
   /**
    * Logs out the current user
    */
-  logout() {
+  logout() 
+  {
     return this.af.auth.logout();
   }
 
@@ -49,7 +43,7 @@ export class AF
    * @param text
    */
 
-  sendMessage(text) 
+  sendMessage(text, chatRoom) 
   {
     var message =
       {
@@ -59,7 +53,7 @@ export class AF
         timestamp: Date.now()
       };
 
-    this.messages.push(message);
+    chatRoom.push(message);
   }
 
   // ================================
@@ -88,12 +82,15 @@ export class AF
   // ================================
 
   saveUserInfoFromForm(uid, name, email) 
-  {
+  {  
+    this.uid = uid;
+    this.permission = 4;
+    
     return this.af.database.object('registeredUsers/' + uid).set(
     {
       name: name,
       email: email,
-      permission: 3
+      permission: 4
     });
   }
 
@@ -109,8 +106,9 @@ export class AF
 
   loginWithEmail(email, password) 
   {
+   
     // Resolving scope problems in TypeScript
-    let that = this;
+   // let that = this;
 
     return this.af.auth.login(
     {
@@ -122,11 +120,54 @@ export class AF
       method: AuthMethods.Password,
     }).then((user) => 
       {
-        that.uid = user.uid;
-       // console.log(that.uid);
+        this.uid = user.uid;
+
+        var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true });
+
+        userInfo.subscribe(snapshot => 
+        {
+          this.permission = snapshot.val().permission;
+        })
       })
+
+
+
+/*   
+  chatRooms.subscribe(snapshots => {
+    snapshots.forEach(snapshot => {
+      if (chatName == snapshot.val().name)
+        this.error = "שם זה כבר קיים, בחר שם אחר";
+    })
+  })
+
+  if (this.error == "שם זה כבר קיים, בחר שם אחר")
+    return;
+*/
+
+    // Create a new chat room
+
+
+    
   }
 
+ 
+  saveUserDetails()
+  {
+     var userInfo = this.af.database.list('registeredUsers/', { preserveSnapshot: true });
+
+        userInfo.subscribe(snapshots => 
+        {
+          snapshots.forEach(snapshot => 
+          {
+            if (snapshot.val().email == this.email)
+            {
+              this.uid = snapshot.key;
+              this.permission = snapshot.val().permission;
+              //console.log(snapshot.val());
+            }
+          })
+        })
+  }
 
   // ================================
 
@@ -140,6 +181,7 @@ export class AF
 
   getUserPermission() 
   {
+    return this.permission;
   }
 
 
@@ -147,7 +189,7 @@ export class AF
 
   getUid()
   {
-    console.log(this.uid);
+    //console.log(this.uid);
     return this.uid;
   }
 

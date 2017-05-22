@@ -9,3 +9,36 @@ button
     white-space: normal;
     height: 100%;
 }
+
+/*********************/
+/***** User info *****/
+/*********************/
+
+
+.profile-head ul 
+{ 
+    list-style: none;
+    padding: 0;
+}
+
+.profile-head ul li { display:block; color:#ffffff;padding:5px;font-weight: 400;font-size: 120%;}
+/*.profile-head ul li span { color:#ffffff;padding-right: 10px;}*/
+
+
+@media all and (max-width:430px){
+.profile-head ul li {font-size: 1.2em !important;}
+}
+
+.profile-head h4
+{
+    color: white;
+}
+
+/******************/
+
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}

@@ -19,17 +19,66 @@ export class UsersConfirmComponent implements OnInit
      icon: "fa-users" 
   }
 
-  private permission;
+  private permission: number;
+  private userSelected: boolean;
+
+  private userName: string;
+  private userEmail: string;
+
   users: FirebaseListObservable<any[]>;
 
-  constructor(private afService: AF, private hc: HomeComponent) 
+// =====================
+
+  constructor(private afService: AF) 
   {
-    this.permission = hc.getPermission();
-    this.users = afService.af.database.list('registeredUsers');
+    this.userSelected = false;
+    this.permission = this.afService.getUserPermission();
+    this.users = this.afService.af.database.list('registeredUsers');
+
+    
+    //console.log(this.user.id)
   }
 
+// =====================
 
-  ngOnInit() {
-  }
+showUserDetails(user)
+{
+  this.userSelected = true;
+  this.userEmail = user.email;
+  this.userName = user.name;
+  
+  console.log(user);
+}
+
+// =====================
+
+  ngOnInit() { }
+
+// =====================
 
 }
+
+
+
+// var chatRooms = this.afService.af.database.list('chatRooms/', { preserveSnapshot: true });
+// /*   
+//   chatRooms.subscribe(snapshots => {
+//     snapshots.forEach(snapshot => {
+//       if (chatName == snapshot.val().name)
+//         this.error = "שם זה כבר קיים, בחר שם אחר";
+//     })
+//   })
+
+//   if (this.error == "שם זה כבר קיים, בחר שם אחר")
+//     return;
+// */
+
+//     // Create a new chat room
+//     chatRooms.push(newChat);
+
+//     chatRooms.subscribe(snapshots => {
+//     snapshots.forEach(snapshot => {
+//       if (snapshot.val().name == chatName)
+//         this.currentChat = this.afService.af.database.list('chatRooms/' + snapshot.key + '/messages');
+//     });
+//   })

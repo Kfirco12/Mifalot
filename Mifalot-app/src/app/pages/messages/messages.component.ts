@@ -17,24 +17,93 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   savedDate: string = '';
 
-  header = 
+  private header = 
   { 
      title: "הודעות", 
      subTitle: "באפשרותך לשלוח הודעה לשאר המשתמשים",
      icon: "fa-comments" 
   }
   
-  public newMessage: string;
-  public messages: FirebaseListObservable<any>;
+  private newMessage: string;
+  private chatRooms: FirebaseListObservable<any>;
+  private currentChat: FirebaseListObservable<any>;
+
+  private noChatRoomSelected: boolean;
+  private createNewChatRoom: boolean;
+
+  private error: any;
 
   // ==================================================
 
-  constructor(public afService: AF, private ref: ChangeDetectorRef) 
+  constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
-      this.messages = this.afService.messages;
+      this.chatRooms = this.afService.chatRooms;
+      this.noChatRoomSelected = true;
+      this.createNewChatRoom = false;
   }
 
   // ==================================================
+
+  createsNewChatRoom(chatName)
+  {
+    var newChat =
+      {
+        name: chatName
+      };
+
+    var chatRooms = this.afService.af.database.list('chatRooms/', { preserveSnapshot: true });
+/*   
+  chatRooms.subscribe(snapshots => {
+    snapshots.forEach(snapshot => {
+      if (chatName == snapshot.val().name)
+        this.error = "שם זה כבר קיים, בחר שם אחר";
+    })
+  })
+
+  if (this.error == "שם זה כבר קיים, בחר שם אחר")
+    return;
+*/
+
+    // Create a new chat room
+    chatRooms.push(newChat);
+
+    chatRooms.subscribe(snapshots => {
+    snapshots.forEach(snapshot => {
+      if (snapshot.val().name == chatName)
+        this.currentChat = this.afService.af.database.list('chatRooms/' + snapshot.key + '/messages');
+    });
+  })
+
+    // Updating flags
+    this.noChatRoomSelected = false;
+    this.createNewChatRoom = false;
+  }
+
+
+  // ==================================================
+  
+  chooseChatRoom()
+  {
+    this.noChatRoomSelected = true;
+    this.createNewChatRoom = false;
+  }
+
+  // ==================================================
+
+  newChatRoom()
+  {
+    this.createNewChatRoom = true;
+  }
+
+  //===================================================
+  enterChatRoom(chatRoom)
+  {
+    this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
+    this.noChatRoomSelected = false;
+  }
+
+  //===================================================
+  
   isMe(email) 
   {
     if (email == this.afService.email)
@@ -75,7 +144,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   sendMessage()
   {
-    this.afService.sendMessage(this.newMessage);
+    this.afService.sendMessage(this.newMessage, this.currentChat);
     this.newMessage = '';
   }
 
