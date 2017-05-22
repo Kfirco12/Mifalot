@@ -213,7 +213,7 @@ missChecking(arr){
   if(arr.length == 0)
     return;
   for(var i = 0; i<arr.length; i++)
-    alert(arr[i] + "is missing more then twice!! notice and handle it as soon as you can.");
+    alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
 }
 
   //helping method to reset the missings.
