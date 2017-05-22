@@ -146,21 +146,12 @@ button
     width: 180px;
 }
 
-.loading
+.btn-primary
 {
-    color: white;
-    font-size: 120%;
+    background: #9669FE;
 }
 
-@keyframes load {
-100% {
-    opacity: 0;
-    transform: scale(1);
-}
-}
-@keyframes load {
-100% {
-    opacity: 0;
-    transform: scale(1);
-}
+.btn-warning
+{
+    background: #FF8429;
 }
