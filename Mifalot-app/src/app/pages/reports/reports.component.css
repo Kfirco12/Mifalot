@@ -135,6 +135,12 @@ th {
     text-align: right;
 }
 
-
-
-
+.vertical-menu 
+{
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: 35vh;
+    padding-right: 3%;
+    overflow-y: scroll;
+}

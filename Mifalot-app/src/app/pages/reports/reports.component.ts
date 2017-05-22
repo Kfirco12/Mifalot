@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AF } from "../.././providers/af";
 
 @Component({
   selector: 'app-reports',
@@ -16,7 +17,10 @@ export class ReportsComponent implements OnInit
      icon: "fa-bar-chart" 
   }
 
-  constructor() { }
+  constructor(private afService: AF) 
+  { 
+    
+  }
 
   ngOnInit() {
   }
