@@ -30,6 +30,7 @@ export class AttendanceComponent implements OnInit
   private teams = new Array;
   private chosenTeam = '';
   private pupils = new Array;  //contain the pupils name of the chosen team.
+  private teamKey;
 
   //============================
   //============================
@@ -65,7 +66,7 @@ export class AttendanceComponent implements OnInit
   //Connect to the DB and get the team names of the connected user.
   getTeamsByUid() 
   {
-    var info = this.db.database.list('teams/', { preserveSnapshot: true });
+    var info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
 
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
@@ -87,14 +88,25 @@ export class AttendanceComponent implements OnInit
     this.chosenTeam = teamId;
 
     //get teame's pupil from DB.
-    var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
+    //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
+    var info = this.afService.af.database.list('teams',  { preserveSnapshot: true });
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        var pupil = {
-          name: snapshot.val().name,
+       if(snapshot.val().name == teamId){
+         var pupils = this.afService.af.database.list('teams/'+snapshot.key+'/pupils');
+         this.teamKey = snapshot.key;
+         pupils.subscribe(snap2 => {
+           snap2.forEach(snap => {
+           var pupil = {
+          name: snap.name,
           presence: false
         }
         this.pupils.push(pupil);
+           })
+         })
+       }
+
+     
       })
     })
   }
@@ -141,6 +153,8 @@ export class AttendanceComponent implements OnInit
      this.started = false;
      this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
      this.pupils = [];  
+     this.teams = [];
+     this.getTeamsByUid();
      this.chosenTeam = '';
  
   }
@@ -172,6 +186,12 @@ export class AttendanceComponent implements OnInit
     alert("The chosen team is: " + this.chosenTeam
           + "\n\nThe pupils of the team are: " + this.printPupils(this.pupils,true) 
           + "\n\nthe presence list is: " + this.printPupils(this.pupils,false));
+
+    var info = this.afService.af.database.list('teams/'+this.teamKey+'/attendance');
+    var toPush = {date: this.date,
+                  presence: this.pupils};
+    info.push(toPush);
+
     this.started = false;
     this.startOver();
 
