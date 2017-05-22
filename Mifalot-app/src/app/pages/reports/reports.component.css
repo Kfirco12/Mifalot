@@ -37,3 +37,8 @@ th {
     padding-right: 3%;
     overflow-y: scroll;
 }
+
+.dropdown-menu
+{
+    text-align: right;
+}
