@@ -17,8 +17,13 @@ export class ReportsComponent implements OnInit
      icon: "fa-bar-chart" 
   }
 
+  private uid;
+  private team;
+  private date;
+
   constructor(private afService: AF) 
   { 
+    this.uid = afService.getUid();
     
   }
 
