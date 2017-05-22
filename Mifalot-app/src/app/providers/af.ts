@@ -124,10 +124,13 @@ export class AF
 
         var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true });
 
-        userInfo.subscribe(snapshot => 
+       var usersSubscription = userInfo.subscribe(snapshot => 
         {
           this.permission = snapshot.val().permission;
         })
+
+          //Later, somewhere
+      usersSubscription.unsubscribe();
       })
 
 
@@ -203,7 +206,7 @@ export class AF
   {
     return this.permission;
   }
-  
+
   // ================================
 
   getUid()
