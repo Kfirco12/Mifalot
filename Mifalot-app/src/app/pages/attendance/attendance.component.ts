@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -26,18 +27,19 @@ export class AttendanceComponent implements OnInit
   private uid; //connected uid.
   private instructions: string; //injection hml variable.
   private started = false;
-  private date = new Date().toLocaleString()  //date variable.
+  private date =  Date.now(); //date variable.
   private teams = new Array;
   private chosenTeam = '';
   private pupils = new Array;  //contain the pupils name of the chosen team.
   private teamKey;
+  private pupilsPath;
+  private attnend = [];
 
   //============================
   //============================
   //-------------METHODS-------------
-  constructor(private afService: AF, public db: AngularFire) 
+  constructor(private afService: AF) 
   {
-
     //bind data sharing.
    // this.afService.stream$.subscribe(this.receiveMessage.bind(this));
 
@@ -57,11 +59,6 @@ export class AttendanceComponent implements OnInit
   }
 
   //----------------------------
-  //recive uid from login page.
-  receiveMessage(msg: String) {
-    this.uid = msg;
-  }
-
 
   //Connect to the DB and get the team names of the connected user.
   getTeamsByUid() 
@@ -93,9 +90,9 @@ export class AttendanceComponent implements OnInit
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
        if(snapshot.val().name == teamId){
-         var pupils = this.afService.af.database.list('teams/'+snapshot.key+'/pupils');
+         this.pupilsPath = this.afService.af.database.list('teams/'+snapshot.key+'/pupils');
          this.teamKey = snapshot.key;
-         pupils.subscribe(snap2 => {
+         this.pupilsPath.subscribe(snap2 => {
            snap2.forEach(snap => {
            var pupil = {
           name: snap.name,
@@ -152,6 +149,7 @@ export class AttendanceComponent implements OnInit
      this.noTeamSelected = true;
      this.started = false;
      this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
+     this.attnend = [];
      this.pupils = [];  
      this.teams = [];
      this.getTeamsByUid();
@@ -179,6 +177,34 @@ export class AttendanceComponent implements OnInit
     
      return str;
   }
+
+  //----------------------------
+  //Missing from 2 or more trainings.
+  missingUpdate()
+  {
+    var datePipe = new DatePipe('en-us');
+    var setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
+
+
+
+
+/*
+    var secondTime = false;
+        path.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+       if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy')) {
+          
+          this.pupilsPath.subscribe(snap2 =>{
+            snap2.forEach( snap =>{
+              if()
+            })
+          })
+       }
+      })
+    })
+    */
+
+  }
   //---------------------------
   //save the checked attendance and the written note.
   saveAttendance() {
@@ -190,7 +216,8 @@ export class AttendanceComponent implements OnInit
     var info = this.afService.af.database.list('teams/'+this.teamKey+'/attendance');
     var toPush = {date: this.date,
                   presence: this.pupils};
-    info.push(toPush);
+   info.push(toPush);
+   this.missingUpdate();
 
     this.started = false;
     this.startOver();
