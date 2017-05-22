@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit
 
   // ======================
 
+
   constructor(private afService: AF, private router: Router) 
   { 
       this.permission = this.afService.getUserPermission();

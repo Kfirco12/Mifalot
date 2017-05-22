@@ -1,1 +1,77 @@
 <app-page-header [item] = "header"> </app-page-header>
+
+
+<div class="container">
+    <div class="row">                   
+        <div class="dropdown col-lg-6"> 
+            <button class="btn btn-info btn-select" type="button" data-toggle="dropdown">
+                <input type="hidden" class="btn-select-input" id="" name="" value="" />
+                <span class="btn-select-value">בחר תאריך</span>
+                <span class='btn-select-arrow glyphicon glyphicon-chevron-down'></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>Option 1</li>
+                    <li class="selected">Option 2</li>
+                    <li>Option 3</li>
+                    <li>Option 4</li>
+                </ul>
+            </div>
+        
+        <div class="dropdown col-lg-6"> 
+            <button class="btn btn-primary btn-select" type="button" data-toggle="dropdown">
+                <input type="hidden" class="btn-select-input" id="" name="" value="" />
+                <span class="btn-select-value">בחר קבוצה</span>
+                <span class='btn-select-arrow glyphicon glyphicon-chevron-down'></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>Option 1</li>
+                    <li class="selected">Option 2</li>
+                    <li>Option 3</li>
+                    <li>Option 4</li>
+                </ul>
+        </div>
+
+        	<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">רשימת נוכחות</h3>
+						
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+					</div>
+					<table class="table table-hover" id="dev-table">
+						<thead>
+							<tr>
+								<th>נכח באימון</th>
+								<th>שם משפחה</th>
+                                <th>שם פרטי</th>
+                                <th>#</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>לא</td>
+								<td>חקקיאן</td>
+								<td>דודי</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>כן</td>
+								<td>אנקונה</td>
+								<td>יוסי</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>כן</td>
+								<td>הפועל</td>
+								<td>רק</td>
+								<td>3</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+    </div>
+</div>
