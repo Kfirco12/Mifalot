@@ -40,7 +40,11 @@ th {
 .dropdown-menu
 {
     text-align: right;
+    min-height: 60px;
+    max-height: 100px;
+    overflow-y: scroll;
 }
+
 
 /****************************************/
 /********** Scrollbar Height  ***********/
