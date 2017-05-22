@@ -33,13 +33,12 @@ export class AttendanceComponent implements OnInit {
   private teamKey;
   private pupilsPath;
   private attnend = [];
+  temp;
 
   //============================
   //============================
   //-------------METHODS-------------
   constructor(private afService: AF) {
-    //bind data sharing.
-    // this.afService.stream$.subscribe(this.receiveMessage.bind(this));
 
     this.uid = afService.getUid();
 
@@ -87,6 +86,7 @@ export class AttendanceComponent implements OnInit {
       snapshots.forEach(snapshot => {
         if (snapshot.val().name == teamId) {
           this.pupilsPath = this.afService.af.database.list('teams/' + snapshot.key + '/pupils');
+          this.temp = 'teams/' + snapshot.key + '/pupils';
           this.teamKey = snapshot.key;
           this.pupilsPath.subscribe(snap2 => {
             snap2.forEach(snap => {
@@ -179,46 +179,37 @@ export class AttendanceComponent implements OnInit {
         }
       })
     })
-    path_subscribe.unsubscribe();
+   path_subscribe.unsubscribe();
 
+//check if there is more than one today's date.
     if(dates>1){
       changed = true;
     }
 
- path_subscribe = this.pupilsPath.subscribe(snapshots => {
-      var i = 0;
-      snapshots.forEach(snapshot => {
-        var missing = snapshot.missed;
-        snapshot.update(snapshot.$key,{missed : 8});
-        
-        i++;
-      })
-    })
-path_subscribe.unsubscribe();
-
-/*
+//update if needed.
     path_subscribe = this.pupilsPath.subscribe(snapshots => {
       var i = 0;
       snapshots.forEach(snapshot => {
         var missing = snapshot.missed;
-        alert(typeof(missing));
         if (this.pupils[i].presence == false) {
-          alert(this.pupils[i].name);
-          console.log("pupils: "+changed + " ms: "+missing);
           if (!changed) {
             missing++;
-            snapshot.update(snapshot.$key,{missed:missing});
-            
-            alert("finished1");
+        this.afService.af.database.list(this.temp).update( snapshot.$key, {missed : missing} );
           }
         }
         else
-          snapshot.update(snapshot.$key,{missed:8});
+          this.afService.af.database.list(this.temp).update( snapshot.$key, {missed : 0} );
+          i++;
       })
     })
-path_subscribe.unsubscribe();
-*/
+    path_subscribe.unsubscribe();
   }
+
+//helping method to reset the missings.
+  resetMiss(){
+
+  }
+
   //---------------------------
   //save the checked attendance and the written note.
   saveAttendance() {
