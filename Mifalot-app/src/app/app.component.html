@@ -1,23 +1,16 @@
 
-<!-- Nav bar -->
+
 <div class = "app-content">
 
-<nav class ="navbar navbar-default navbar-default" role="navigation">
-<<<<<<< HEAD
-   <div class = "container-fluid" id="navfluid">
-       <div *ngIf = "isLoggedIn" class = "navbar-header">
-          <a class = "navbar-brand fa fa-home" [routerLink] = "['']"> דף הבית </a>
-           <a class = "align-right navbar-brand fa fa-sign-out" (click) = "logout()"> התנתק </a>
-=======
-   <div class = "container-fluid" id = "navfluid">
-       <div *ngIf = "isLoggedIn" class = "navbar-header">
-          <a class = "navbar-brand fa fa-home" [routerLink] = "['']"> דף הבית </a>
-           <a  class = "align-right navbar-brand fa fa-sign-out" (click) = "logout()"> התנתק </a>
->>>>>>> c595dabca63df93f30a9abd9cabb4fc5e757ff67
-
-       </div>
-   </div>
-</nav>
+    <!-- Nav bar -->
+    <nav class ="navbar navbar-default navbar-default" role = "navigation">
+    <div class = "container-fluid" id = "navfluid">
+        <div *ngIf = "isLoggedIn" class = "navbar-header">
+            <a class = "navbar-brand fa fa-home" [routerLink] = "['']"> דף הבית </a>
+            <a class = "align-right navbar-brand fa fa-sign-out" (click) = "logout()"> התנתק </a>
+        </div>
+    </div>
+    </nav>
 
 
   <!-- Routing pages -->
