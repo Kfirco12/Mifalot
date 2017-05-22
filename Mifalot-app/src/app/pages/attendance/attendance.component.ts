@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 
 @Component({
@@ -37,9 +38,7 @@ export class AttendanceComponent implements OnInit {
   //============================
   //============================
   //-------------METHODS-------------
-  constructor(private afService: AF) {
-    //bind data sharing.
-    // this.afService.stream$.subscribe(this.receiveMessage.bind(this));
+  constructor(private afService: AF,private router: Router) {
 
     this.uid = afService.getUid();
 
@@ -83,7 +82,7 @@ export class AttendanceComponent implements OnInit {
     //get teame's pupil from DB.
     //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
     var info = this.afService.af.database.list('teams', { preserveSnapshot: true });
-    info.subscribe(snapshots => {
+    var path_subscribe = info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if (snapshot.val().name == teamId) {
           this.pupilsPath = this.afService.af.database.list('teams/' + snapshot.key + '/pupils');
@@ -98,10 +97,9 @@ export class AttendanceComponent implements OnInit {
             })
           })
         }
-
-
       })
     })
+    path_subscribe.unsubscribe();
   }
 
   //---------------------------
@@ -170,6 +168,7 @@ export class AttendanceComponent implements OnInit {
     var setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
     var changed = false;
     var dates = 0;
+    var missed_twiced = [];
 
     //check if an attendance was checked at the same date of 'date'.
     var path_subscribe = path.subscribe(snapshots => {
@@ -181,44 +180,52 @@ export class AttendanceComponent implements OnInit {
     })
     path_subscribe.unsubscribe();
 
-    if(dates>1){
+    //check if there is more than one today's date.
+    if (dates > 1) {
       changed = true;
     }
 
- path_subscribe = this.pupilsPath.subscribe(snapshots => {
-      var i = 0;
-      snapshots.forEach(snapshot => {
-        var missing = snapshot.missed;
-        snapshot.update(snapshot.$key,{missed : 8});
-        
-        i++;
-      })
-    })
-path_subscribe.unsubscribe();
-
-/*
+    //update if needed.
     path_subscribe = this.pupilsPath.subscribe(snapshots => {
       var i = 0;
       snapshots.forEach(snapshot => {
         var missing = snapshot.missed;
-        alert(typeof(missing));
-        if (this.pupils[i].presence == false) {
-          alert(this.pupils[i].name);
-          console.log("pupils: "+changed + " ms: "+missing);
-          if (!changed) {
-            missing++;
-            snapshot.update(snapshot.$key,{missed:missing});
-            
-            alert("finished1");
-          }
+        if (this.pupils[i].presence == false && !changed) {
+          missing++;
+          this.pupilsPath.update(snapshot.$key, { missed: missing });
+          if(missing >=2)
+           missed_twiced.push(this.pupils[i].name);
         }
-        else
-          snapshot.update(snapshot.$key,{missed:8});
+        else if(this.pupils[i].presence == true)
+          this.pupilsPath.update(snapshot.$key, { missed: 0 });
+        
+        i++;
       })
     })
-path_subscribe.unsubscribe();
-*/
+    path_subscribe.unsubscribe();
+    this.missChecking(missed_twiced);
+    this.router.navigate(['']);
   }
+
+
+//check if a pupil missed more than two trainings and alert if needed.
+missChecking(arr){
+  if(arr.length == 0)
+    return;
+  for(var i = 0; i<arr.length; i++)
+    alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
+}
+
+  //helping method to reset the missings.
+  resetMiss() {
+    var path_subscribe = this.pupilsPath.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        this.pupilsPath.update(snapshot.$key, { missed: 0 });
+      })
+    })
+    path_subscribe.unsubscribe();
+  }
+
   //---------------------------
   //save the checked attendance and the written note.
   saveAttendance() {
@@ -234,7 +241,6 @@ path_subscribe.unsubscribe();
     };
     info.push(toPush);
     this.missingUpdate(info);
-    alert("finished");
     this.started = false;
     this.startOver();
 
