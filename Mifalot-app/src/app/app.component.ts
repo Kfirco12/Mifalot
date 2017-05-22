@@ -65,7 +65,7 @@ export class AppComponent
               })
             })
 
-          this.isLoggedIn = true;
+          this.isLoggedIn = true; 
           this.router.navigate(['']);
         }
       }

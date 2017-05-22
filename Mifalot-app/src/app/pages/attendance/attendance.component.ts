@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 
 @Component({
@@ -33,12 +34,11 @@ export class AttendanceComponent implements OnInit {
   private teamKey;
   private pupilsPath;
   private attnend = [];
-  temp;
 
   //============================
   //============================
   //-------------METHODS-------------
-  constructor(private afService: AF) {
+  constructor(private afService: AF,private router: Router) {
 
     this.uid = afService.getUid();
 
@@ -82,11 +82,10 @@ export class AttendanceComponent implements OnInit {
     //get teame's pupil from DB.
     //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
     var info = this.afService.af.database.list('teams', { preserveSnapshot: true });
-    info.subscribe(snapshots => {
+    var path_subscribe = info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if (snapshot.val().name == teamId) {
           this.pupilsPath = this.afService.af.database.list('teams/' + snapshot.key + '/pupils');
-          this.temp = 'teams/' + snapshot.key + '/pupils';
           this.teamKey = snapshot.key;
           this.pupilsPath.subscribe(snap2 => {
             snap2.forEach(snap => {
@@ -98,10 +97,9 @@ export class AttendanceComponent implements OnInit {
             })
           })
         }
-
-
       })
     })
+    path_subscribe.unsubscribe();
   }
 
   //---------------------------
@@ -170,6 +168,7 @@ export class AttendanceComponent implements OnInit {
     var setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
     var changed = false;
     var dates = 0;
+    var missed_twiced = [];
 
     //check if an attendance was checked at the same date of 'date'.
     var path_subscribe = path.subscribe(snapshots => {
@@ -179,35 +178,52 @@ export class AttendanceComponent implements OnInit {
         }
       })
     })
-   path_subscribe.unsubscribe();
+    path_subscribe.unsubscribe();
 
-//check if there is more than one today's date.
-    if(dates>1){
+    //check if there is more than one today's date.
+    if (dates > 1) {
       changed = true;
     }
 
-//update if needed.
+    //update if needed.
     path_subscribe = this.pupilsPath.subscribe(snapshots => {
       var i = 0;
       snapshots.forEach(snapshot => {
         var missing = snapshot.missed;
-        if (this.pupils[i].presence == false) {
-          if (!changed) {
-            missing++;
-        this.afService.af.database.list(this.temp).update( snapshot.$key, {missed : missing} );
-          }
+        if (this.pupils[i].presence == false && !changed) {
+          missing++;
+          this.pupilsPath.update(snapshot.$key, { missed: missing });
+          if(missing >=2)
+           missed_twiced.push(this.pupils[i].name);
         }
-        else
-          this.afService.af.database.list(this.temp).update( snapshot.$key, {missed : 0} );
-          i++;
+        else if(this.pupils[i].presence == true)
+          this.pupilsPath.update(snapshot.$key, { missed: 0 });
+        
+        i++;
       })
     })
     path_subscribe.unsubscribe();
+    this.missChecking(missed_twiced);
+    this.router.navigate(['']);
   }
 
-//helping method to reset the missings.
-  resetMiss(){
 
+//check if a pupil missed more than two trainings and alert if needed.
+missChecking(arr){
+  if(arr.length == 0)
+    return;
+  for(var i = 0; i<arr.length; i++)
+    alert(arr[i] + "is missing more then twice!! notice and handle it as soon as you can.");
+}
+
+  //helping method to reset the missings.
+  resetMiss() {
+    var path_subscribe = this.pupilsPath.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        this.pupilsPath.update(snapshot.$key, { missed: 0 });
+      })
+    })
+    path_subscribe.unsubscribe();
   }
 
   //---------------------------
@@ -225,7 +241,6 @@ export class AttendanceComponent implements OnInit {
     };
     info.push(toPush);
     this.missingUpdate(info);
-    alert("finished");
     this.started = false;
     this.startOver();
 
