@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Router } from "@angular/router";
 import { AF } from "./providers/af";
-import { Location } from '@angular/common';
 
 
 @Component({
@@ -13,13 +12,20 @@ import { Location } from '@angular/common';
 
 export class AppComponent 
 {
-  public isLoggedIn: boolean;
+  private isLoggedIn: boolean;
+
+  private displayName: string;
+  private email: string;
+  private uid: string;
+  private permission: number;
+
   items: FirebaseListObservable<any[]>;
 
   // ====================================
 
-  constructor(public afService: AF, private router: Router ,private location: Location) 
+  constructor(private afService: AF, private router: Router) 
   {
+
     // This asynchronously checks if our user is logged it and will automatically
     // redirect them to the Login page when the status changes.
     this.afService.af.auth.subscribe(
@@ -33,18 +39,32 @@ export class AppComponent
         else 
         {
           console.log("Successfully Logged in.");
-          // Set the Display Name and Email so we can attribute messages to them
-          // if (auth.google) 
-          // {
-          //   this.afService.displayName = auth.google.displayName;
-          //   this.afService.email = auth.google.email;
-          // }
-          // else 
-          // {
-            this.afService.displayName = auth.auth.email;
-            this.afService.email = auth.auth.email;
-          // }
-          this.isLoggedIn = true;
+
+          // this.afService.saveUserDetails(auth.uid, permission, name, auth.auth.email);
+
+            // this.displayName = auth.auth.email;
+            // this.email = auth.auth.email;
+
+
+          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true });
+           
+            userInfo.subscribe(snapshots => 
+            {
+              snapshots.forEach(snapshot => 
+              {
+                if (snapshot.key == "permission")
+                 {
+                    this.permission = snapshot.val();
+                    this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.displayName, auth.auth.email);
+
+                    // // Updating values
+                    // this.isLoggedIn = true;
+                    // this.router.navigate(['']);
+                 }
+              })
+            })
+
+          this.isLoggedIn = true; 
           this.router.navigate(['']);
         }
       }
@@ -52,33 +72,14 @@ export class AppComponent
   }
 
   // ====================================
-
-  backClicked() 
-  {
-        this.location.back();
-  }
-
-  // ====================================
   
   logout() 
   {
     this.afService.logout();
-  //  this.isLoggedIn = false;
   }
 
 }
 
-
-/*
-  items: FirebaseListObservable<any[]>;
-
-  constructor(private af: AngularFire) 
-  {
-    this.items = af.database.list('/Users');
-  }
-
-}
-*/
 
 
 

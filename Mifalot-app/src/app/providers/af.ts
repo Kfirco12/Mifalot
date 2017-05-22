@@ -1,6 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 
@@ -12,7 +13,7 @@ export class AF
   public email: string;
 
   private uid: string;
-  private permission: number = 1;
+  private permission: number;
   
   // ================================
 
@@ -82,10 +83,7 @@ export class AF
   // ================================
 
   saveUserInfoFromForm(uid, name, email) 
-  {  
-    this.uid = uid;
-    this.permission = 4;
-    
+  {      
     return this.af.database.object('registeredUsers/' + uid).set(
     {
       name: name,
@@ -106,10 +104,6 @@ export class AF
 
   loginWithEmail(email, password) 
   {
-   
-    // Resolving scope problems in TypeScript
-   // let that = this;
-
     return this.af.auth.login(
     {
       email: email,
@@ -123,13 +117,13 @@ export class AF
         this.uid = user.uid;
 
         var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true });
-
+        
        var usersSubscription = userInfo.subscribe(snapshot => 
         {
           this.permission = snapshot.val().permission;
         })
 
-          //Later, somewhere
+      // Unsubscribe
       usersSubscription.unsubscribe();
       })
 
@@ -154,22 +148,36 @@ export class AF
   }
 
  
-  saveUserDetails()
+  saveUserDetails(uid, permission, name, email)
   {
-     var userInfo = this.af.database.list('registeredUsers/', { preserveSnapshot: true });
+    this.uid = uid;
+    this.permission = permission;
+    this.displayName = name;
+    this.email = email;
 
-        userInfo.subscribe(snapshots => 
-        {
-          snapshots.forEach(snapshot => 
-          {
-            if (snapshot.val().email == this.email)
-            {
-              this.uid = snapshot.key;
-              this.permission = snapshot.val().permission;
-              //console.log(snapshot.val());
-            }
-          })
-        })
+    // var userInfo = this.af.database.list('registeredUsers/' + userID, { preserveSnapshot: true });
+
+    // userInfo.subscribe(snapshots => 
+    // {
+    //   snapshots.forEach(snapshot => 
+    //   {
+    //     if (snapshot.key == "permission")
+    //       this.permission = snapshot.val();
+    //   })
+    // })
+
+        // userInfo.subscribe(snapshots => 
+        // {
+        //   snapshots.forEach(snapshot => 
+        //   {
+        //     if (snapshot.val().email == this.email)
+        //     {
+        //       this.uid = snapshot.key;
+        //       this.permission = snapshot.val().permission;
+        //       //console.log(snapshot.val());
+        //     }
+        //   })
+        // })
   }
 
   // ================================
@@ -181,6 +189,11 @@ export class AF
   //  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
   //                    // this value to authenticate with your backend server, if
   //                    // you have one. Use User.getToken() instead.
+
+setUserID(userID)
+{
+  this.uid = userID;
+}
 
   getUserPermission() 
   {
