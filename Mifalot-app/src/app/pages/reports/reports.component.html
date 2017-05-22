@@ -8,9 +8,8 @@
   <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
   <span class="caret"></span>בחר תאריך</button>
   <ul class="dropdown-menu">
-    <li><a href="#">HTML</a></li>
-    <li><a href="#">CSS</a></li>
-    <li><a href="#">JavaScript</a></li>
+    <li *ngFor = "let date of dates; let i = index" [attr.data-index]="i">
+		<a (click) = "getPupils(dates[i].date)">{{date.date}}</a></li>
   </ul>
 </div>
 </div>
@@ -19,9 +18,8 @@
   <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">בחר קבוצה
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
-    <li><a href="#">HTML</a></li>
-    <li><a href="#">CSS</a></li>
-    <li><a href="#">JavaScript</a></li>
+    <li *ngFor = "let team of teams; let i = index" [attr.data-index]="i">
+		<a (click) = "getDates(teams[i])">{{team}}</a></li>
   </ul>
 </div>
 </div>
@@ -42,65 +40,15 @@
 						<thead>
 							<tr>
 								<th>נכח באימון</th>
-								<th>שם משפחה</th>
-                                <th>שם פרטי</th>
+                                <th>שם החניך</th>
                                 <th>#</th>
 							</tr>
 						</thead>
-						<tbody >
-							<tr>
-								<td>לא</td>
-								<td>חקקיאן</td>
-								<td>דודי</td>
-								<td>1</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>אנקונה</td>
-								<td>יוסי</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>הפועל</td>
-								<td>רק</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>לא</td>
-								<td>חקקיאן</td>
-								<td>דודי</td>
-								<td>1</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>אנקונה</td>
-								<td>יוסי</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>הפועל</td>
-								<td>רק</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>לא</td>
-								<td>חקקיאן</td>
-								<td>דודי</td>
-								<td>1</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>אנקונה</td>
-								<td>יוסי</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>כן</td>
-								<td>הפועל</td>
-								<td>רק</td>
-								<td>3</td>
+						<tbody>
+							<tr *ngFor = "let pupil of pupils; let i = index" [attr.data-index]="i">
+								<td>{{pupil.presence}}</td>
+								<td>{{pupil.name}}</td>
+								<td>{{pupil.number}}</td>
 							</tr>
 						</tbody>
 					</table>
