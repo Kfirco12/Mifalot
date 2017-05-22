@@ -9,9 +9,10 @@ export class AF
 {
   public chatRooms: FirebaseListObservable<any>;
   public users: FirebaseListObservable<any>;
-  public displayName: string;
-  public email: string;
 
+  // User info
+  private displayName: string;
+  private email: string;
   private uid: string;
   private permission: number;
   
@@ -154,30 +155,6 @@ export class AF
     this.permission = permission;
     this.displayName = name;
     this.email = email;
-
-    // var userInfo = this.af.database.list('registeredUsers/' + userID, { preserveSnapshot: true });
-
-    // userInfo.subscribe(snapshots => 
-    // {
-    //   snapshots.forEach(snapshot => 
-    //   {
-    //     if (snapshot.key == "permission")
-    //       this.permission = snapshot.val();
-    //   })
-    // })
-
-        // userInfo.subscribe(snapshots => 
-        // {
-        //   snapshots.forEach(snapshot => 
-        //   {
-        //     if (snapshot.val().email == this.email)
-        //     {
-        //       this.uid = snapshot.key;
-        //       this.permission = snapshot.val().permission;
-        //       //console.log(snapshot.val());
-        //     }
-        //   })
-        // })
   }
 
   // ================================

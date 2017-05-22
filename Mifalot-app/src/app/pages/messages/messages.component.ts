@@ -25,6 +25,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   }
   
   private newMessage: string;
+  private userEmail: string;
+
   private chatRooms: FirebaseListObservable<any>;
   private currentChat: FirebaseListObservable<any>;
 
@@ -38,6 +40,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
       this.chatRooms = this.afService.chatRooms;
+      this.userEmail = this.afService.getUserEmail();
       this.noChatRoomSelected = true;
       this.createNewChatRoom = false;
   }
@@ -106,7 +109,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   
   isMe(email) 
   {
-    if (email == this.afService.email)
+    if (email == this.userEmail)
       return true;
     
     return false;

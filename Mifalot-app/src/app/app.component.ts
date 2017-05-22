@@ -40,15 +40,9 @@ export class AppComponent
         {
           console.log("Successfully Logged in.");
 
-          // this.afService.saveUserDetails(auth.uid, permission, name, auth.auth.email);
-
-            // this.displayName = auth.auth.email;
-            // this.email = auth.auth.email;
-
-
           var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true });
            
-            userInfo.subscribe(snapshots => 
+           var userInfoSubs =  userInfo.subscribe(snapshots => 
             {
               snapshots.forEach(snapshot => 
               {
@@ -58,14 +52,17 @@ export class AppComponent
                     this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.displayName, auth.auth.email);
 
                     // // Updating values
-                    // this.isLoggedIn = true;
-                    // this.router.navigate(['']);
+                     this.isLoggedIn = true;
+                     this.router.navigate(['loading']);
                  }
               })
             })
 
-          this.isLoggedIn = true; 
-          this.router.navigate(['']);
+          
+          // this.isLoggedIn = true; 
+          // this.router.navigate(['']);
+
+         // userInfoSubs.unsubscribe();
         }
       }
     );
