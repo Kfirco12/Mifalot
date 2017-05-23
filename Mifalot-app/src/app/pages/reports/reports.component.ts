@@ -20,11 +20,12 @@ export class ReportsComponent implements OnInit
   
   private pupilsPath;
   private uid;
-  private chosenTeam = '';
+  private chosenTeam;
   private teamKey;
   private chosenDate;
-
+  private chosenDateString: string;
   private pupilPresence: string;
+  private datePipe: DatePipe;
 
   // Arrays
   private teams;    // Contain the teams' of the user.
@@ -44,6 +45,11 @@ export class ReportsComponent implements OnInit
 
     this.started = false;
     this.teamSelected = this.dateSelected = false;
+
+    this.chosenTeam = 'בחר קבוצה';
+    this.chosenDateString = 'בחר תאריך';
+
+    this.datePipe = new DatePipe('en-us');
 
     this.uid = afService.getUid();
     this.getTeamsByUid();
@@ -80,6 +86,8 @@ export class ReportsComponent implements OnInit
     this.dateSelected = false;
     this.teamSelected = this.started = true;
 
+    this.chosenDateString = 'בחר תאריך';
+
     this.chosenTeam = teamId;
 
     // get teame's pupil from DB.
@@ -106,7 +114,9 @@ export class ReportsComponent implements OnInit
     // Reset teams represent
     this.started = this.dateSelected = true;
     this.chosenDate = dateId;
-
+    this.chosenDateString = this.datePipe.transform(dateId, 'dd/MM/yyyy');
+   
+   
     // Reset pupils' array
     this.pupils = [];
 

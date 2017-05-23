@@ -26,7 +26,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   
   private newMessage: string;
   private userEmail: string;
-
+  private chatRoomTitle: string;
+  
   private chatRooms: FirebaseListObservable<any>;
   private currentChat: FirebaseListObservable<any>;
 
@@ -99,8 +100,10 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   }
 
   //===================================================
+
   enterChatRoom(chatRoom)
-  {
+  { 
+    this.chatRoomTitle = chatRoom.name;
     this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
     this.noChatRoomSelected = false;
   }

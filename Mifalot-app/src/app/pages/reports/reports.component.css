@@ -37,6 +37,11 @@ th {
     overflow-y: scroll;
 }
 
+.panel-title
+{
+    text-align: center;
+}
+
 .dropdown-menu
 {
     text-align: right;
@@ -53,7 +58,7 @@ th {
 {
     .vertical-menu 
     {
-        height: 1100px;
+        height: 1050px;
     }
 }
 
@@ -61,7 +66,7 @@ th {
 {
     .vertical-menu 
     {
-        height: 750px;
+        height: 720px;
     }
 }
 

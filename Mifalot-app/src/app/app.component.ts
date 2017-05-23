@@ -47,9 +47,9 @@ export class AppComponent
               snapshots.forEach(snapshot => 
               {
                 if (snapshot.key == "permission")
-                 {
+                 { 
                     this.permission = snapshot.val();
-                    this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.displayName, auth.auth.email);
+                    this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.email, auth.auth.email);
 
                     // // Updating values
                      this.isLoggedIn = true;

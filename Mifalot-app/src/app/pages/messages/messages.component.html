@@ -1,5 +1,6 @@
 
 <!-- Error message -->
+
 <div *ngIf = "error" class = "alert alert-warning" role = "alert">
   <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
   <span class = "sr-only"> Error: </span>
@@ -12,6 +13,7 @@
 <div class = "container" >
 
 <!-- Selecting chat room or adding a new one -->
+
   <div *ngIf = "noChatRoomSelected && !createNewChatRoom" >
     <div class = "row" >
 
@@ -32,6 +34,7 @@
 </div>
 
 <!-- Create a new chat room -->
+
 <div *ngIf = "createNewChatRoom">
   <h4 class = "create-chat text-center"> אנא בחר את נושא הצ׳אט ולחץ על <br> ״יצירת צ׳אט״ </h4>
 
@@ -55,7 +58,9 @@
 </div>
 
 <!-- Chat messages -->
+
   <div *ngIf = "!noChatRoomSelected && !createNewChatRoom">
+    <span class = "chat-title"> {{ chatRoomTitle }} </span>
     <div #scrollMe class = "vertical-menu" >
       <div *ngFor = "let message of currentChat | async" > 
         <!--<div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')">
