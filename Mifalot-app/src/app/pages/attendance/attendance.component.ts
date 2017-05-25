@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireDatabase } from 'angularfire2/database';
+//import { AngularFireDatabase } from 'angularfire2/database';
 import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 
@@ -33,7 +33,7 @@ export class AttendanceComponent implements OnInit {
   private pupils = new Array;  //contain the pupils name of the chosen team.
   private teamKey;
   private pupilsPath;
-  private attnend = [];
+  //private attnend = [];
 
   //============================
   //============================
@@ -135,7 +135,7 @@ export class AttendanceComponent implements OnInit {
     this.noTeamSelected = true;
     this.started = false;
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
-    this.attnend = [];
+    //this.attnend = [];
     this.pupils = [];
     this.teams = [];
     this.getTeamsByUid();
