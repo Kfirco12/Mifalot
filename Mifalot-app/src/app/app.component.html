@@ -1,21 +1,18 @@
-<!--
-<div class = "app-content">
--->
+<div class="app-content">
+
     <!-- Nav bar -->
- <!--   <nav class ="navbar navbar-default navbar-default" role = "navigation">
-    <div class = "container-fluid" id = "navfluid">
-        <div *ngIf = "isLoggedIn" class = "navbar-header">
-            <a class = "navbar-brand fa fa-home" [routerLink] = "['']"> דף הבית </a>
-            <a class = "align-right navbar-brand fa fa-sign-out" (click) = "logout()"> התנתק </a>
+    <nav class="navbar navbar-default navbar-default" role="navigation">
+        <div class="container-fluid" id="navfluid">
+            <div *ngIf="isLoggedIn" class="navbar-header">
+                <a class="navbar-brand fa fa-home" [routerLink]="['']"> דף הבית </a>
+                <a class="align-right navbar-brand fa fa-sign-out" (click)="logout()"> התנתק </a>
+            </div>
         </div>
-    </div>
     </nav>
--->
 
-  <!-- Routing pages -->
- <!-- <router-outlet> </router-outlet>
 
-</div>-->
+    <!-- Routing pages -->
+    <router-outlet> </router-outlet>
+
+</div>
 <app-insert></app-insert>
-
-   
