@@ -2,13 +2,13 @@
 
     <!-- Nav bar -->
 
-    <nav *ngIf="isLoggedIn" class="navbar navbar-default navbar-default" role="navigation">
-        <div class="container-fluid" id="navfluid">
-            <div class="navbar-header">
-                <a class="navbar-brand fa fa-home" [routerLink]="['']"> דף הבית </a>
-                <a class="align-right navbar-brand fa fa-sign-out" (click)="logout()"> התנתק </a>
 
-            </div>
+    <nav *ngIf = "isLoggedIn" class ="navbar navbar-default navbar-default" role = "navigation">
+    <div class = "container-fluid" id = "navfluid">
+        <div class = "navbar-header">
+            <a class = "navbar-brand fa fa-home" [routerLink] = "['']"> דף הבית </a>
+            <a class = "align-right navbar-brand fa fa-sign-out" (click) = "logout()"> התנתק </a>
+
         </div>
     </nav>
 
@@ -17,4 +17,6 @@
     <router-outlet> </router-outlet>
 
 </div>
-<!--<app-insert></app-insert>-->
+
+<app-insert></app-insert>
+
