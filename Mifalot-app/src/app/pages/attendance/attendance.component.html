@@ -23,8 +23,8 @@
           <div class = "vertical-menu">
               <div *ngFor = "let pupils of pupils">
                 <div class = "checkbox">
-                 <label class = "pupil-name" for = "{{ pupils.name }}">  {{ pupils.name }}  
-                  <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.name " (change) = "updateChecked(option, $event)" id = "{{ pupils.name }}" unchecked/>
+                 <label class = "pupil-name" for = "{{ pupils.ID }}">  {{ pupils.name }} {{pupils.lastName}} - {{pupils.ID}}
+                  <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
                   <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
               </label>
               <hr>
