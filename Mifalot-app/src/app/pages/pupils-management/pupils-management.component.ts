@@ -210,6 +210,12 @@ export class PupilsManagementComponent implements OnInit
   {
     var length = this.pupilsToRemove.length;
     
+    if (length == 0)
+    {
+      alert("שים לב: לא נבחרו חניכים להסרה");
+      return;
+    }
+
     for (var i = 0; i < length; i++)
       this.pupilsList.remove(this.pupilsToRemove[i]);
 
