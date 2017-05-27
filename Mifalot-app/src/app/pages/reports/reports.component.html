@@ -54,13 +54,17 @@
 						<thead>
 							<tr>
 								<th> נכח באימון </th>
-								<th> שם החניך </th>
+								<th> ת.ז </th>
+								<th> שם משפחה </th>
+								<th> שם פרטי </th>
 								<th> # </th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr *ngFor = "let pupil of pupils; let i = index" [attr.data-index] = "i">
 								<td *ngIf = "isPupilPresence(pupil.presence)"> {{ pupilPresence }} </td>
+								<td> {{ pupil.ID }} </td>
+								<td> {{ pupil.lastName }} </td>
 								<td> {{ pupil.name }} </td>
 								<td> {{ i + 1 }} </td>
 							</tr>

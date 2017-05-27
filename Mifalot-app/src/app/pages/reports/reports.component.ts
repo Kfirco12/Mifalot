@@ -135,6 +135,8 @@ export class ReportsComponent implements OnInit
               var pupil = 
               {
                 name: snap.name,
+                lastName: snap.lastName,
+                ID: snap.ID,
                 presence: snap.presence
               }
               this.pupils.push(pupil);
