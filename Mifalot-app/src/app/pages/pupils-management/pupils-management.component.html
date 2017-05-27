@@ -1,0 +1,138 @@
+<app-page-header [item] = "header"> </app-page-header>
+
+<div class = "container">
+
+    <!-- Buttons -->
+
+        <!-- Select Team -->
+        <div class = "row">
+            <div *ngIf = "noTeamSelected && !addPupils">
+                <div class = "team-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4 class = "text-right"> :בחירת קבוצה </h4>
+                </div>
+
+                <div *ngFor = "let team of teams" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+                    <span class = "thumbnail" (click) = "getPupilsByTeam(team)"> 
+                        <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+                    </span>
+                </div>
+            </div>
+
+            <div *ngIf = "!noTeamSelected && !addPupils">
+                <h4 class = "text-center choosen-team"> הקבוצה שנבחרה היא: {{ choosenTeamText }} </h4>
+            </div>
+        </div>
+        <!-- /Select Team -->
+
+
+    <div *ngIf = "!noTeamSelected && !addPupils && !removePupils" class = "buttons">
+       
+       <h4 class = "text-center"> בחר את הפעולה אותה ברצונך לבצע </h4>
+
+        <div class = "buttons-center">
+            <button (click) = "showAddPupils()" class = "btn btn-md btn-success btn-block" type = "submit"> הוספת חניכים לקבוצה </button>
+            <button (click) = "showRemovePupils()" class = "btn btn-md btn-danger btn-block" type = "submit"> הסרת חניכים מהקבוצה </button>
+            <br>
+            <button (click) = "chooseTeam()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזרה לעמוד הקודם </button>
+        </div>
+    </div>
+
+    <!-- /Buttons -->
+
+    <!-- =========================================================================================================================== -->
+
+    <!-- Add Pupils -->
+
+    <div *ngIf = "!noTeamSelected && addPupils" class = "buttons">
+       
+         <h4 class = "text-center"> אנא מלא את הנתונים ולחץ על <br> ״הוספת חניך״ </h4>
+
+        <form class = "form-signin">
+
+            <label for = "name" class = "sr-only"> שם החניך </label>
+            <div class = "input-group">
+                <input #pupilName type = "text" [value] = "ValuePupilName" class = "form-control" placeholder = "שם פרטי" required>
+                <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
+            </div>
+                    
+            <br>
+
+            <div class = "input-group">
+                <input #pupilLastName type = "text" [value] = "ValuePupilLastName" class = "form-control" placeholder = "שם משפחה" required>
+                <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
+            </div>
+
+            <br>
+
+            <div class = "input-group">
+                <input #pupilID type = "number" [value] = "ValuePupilID" class = "form-control" placeholder = "תעודת זהות" required>
+                <span class = "input-group-addon"><i class = "fa fa-id-card"></i></span> 
+            </div>
+
+            <br>
+
+            <button (click) = "pupilName.value &&  pupilLastName.value && pupilID.value && saveNewPupil(pupilName.value, pupilLastName.value, pupilID.value)" class = "btn btn-md btn-block" type = "submit"> הוספת חניך </button>
+        </form>
+
+        <hr>
+
+        <div *ngIf = "thereIsNewPupil">
+            <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להוספה  </h5>
+        </div>
+        
+        <button (click) = "addNewPupilsToDB()" class = "btn btn-md btn-success btn-block" type = "submit"> אישור הוספת החניכים </button>
+        <button (click) = "chooseTeam()" class = "btn btn-md btn-primary btn-block" type = "submit"> בחירה מחדש </button>
+
+    
+
+    </div>
+
+    <!-- /Buttons -->
+
+<!-- =========================================================================================================================== -->
+
+<!-- Remove Pupils --> 
+
+    <div *ngIf = "removePupils && !noTeamSelected"> 
+       
+        <h4 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h4>
+
+        <div class = "vertical-menu">
+            <div *ngFor = "let pupil of pupilsList | async; let i = index" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
+                <span class = "list-group-item clearfix" [class.red] = "isChecked(pupil)">  
+                    {{ pupil.name }} {{ pupil.lastName }}, ת.ז: {{ pupil.ID }}
+                    <span class = "fa fa-user"></span>
+                    <span class = "pull-left">
+                        <span class = "glyphicon glyphicon-trash" (click) = "removePupil(pupil)"></span>
+                      
+                        <button *ngSwitchCase = "false" class = "fa fa-plus" (click) = "savePupilToRemove(pupil)"> </button>
+                        <button *ngSwitchCase = "true" class = "fa fa-minus" (click) = "savePupilToRemove(pupil)"> </button>
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div *ngIf = "!thereIsNewPupil">
+            <h5 class = "text-center"> לא נבחרו חניכים להסרה  </h5>
+        </div>
+
+        <div *ngIf = "thereIsNewPupil">
+            <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להסרה  </h5>
+        </div>
+
+
+
+        <button (click) = "removePupilsFromDB()" class = "btn btn-md btn-danger btn-block btn-remove" type = "submit"> הסר חניכים נבחרים </button>
+        <!--<button (click) = "showRemovePupils()" class = "btn btn-md btn-primary btn-block" type = "submit"> סיום </button>-->
+    </div>
+
+
+     
+    <!-- /Remove Pupils --> 
+
+</div>
+<!-- /Container -->
+
+

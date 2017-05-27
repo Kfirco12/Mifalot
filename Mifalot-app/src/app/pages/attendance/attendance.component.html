@@ -7,10 +7,10 @@
 
 <div *ngIf = "noTeamSelected" >
   <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
-        <div *ngFor = "let team of teams; let i = index" [attr.data-index]="i" class = "col-lg-6 col-md-6 col-xs-6 thumb">
-          <a class = "thumbnail" (click) = "getPupils(teams[i])"> 
-            <button type = "button" class = "btn btn-default btn-block btn-team" > <i class = "fa fa-soccer-ball-o fa-2x" > </i> <br/> {{ teams[i] }} </button>
-          </a>
+        <div *ngFor = "let team of teams; let i = index" [attr.data-index]="i" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+          <span class = "thumbnail" (click) = "getPupils(teams[i])"> 
+            <button type = "button" class = "btn btn-default btn-block btn-team" > {{ teams[i] }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+          </span>
         </div>
        
 </div>

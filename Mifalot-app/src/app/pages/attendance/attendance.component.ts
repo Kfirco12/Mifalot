@@ -11,7 +11,7 @@ import { AF } from "../../providers/af";
   styleUrls: ['./attendance.component.css']
 })
 export class AttendanceComponent implements OnInit {
-  private noTeamSelected: boolean;
+  
 
   header =
   {
@@ -35,6 +35,7 @@ export class AttendanceComponent implements OnInit {
   private pupilsPath;
   private attnend = [];
 
+  private noTeamSelected: boolean;
   //============================
   //============================
   //-------------METHODS-------------

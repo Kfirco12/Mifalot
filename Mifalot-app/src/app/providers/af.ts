@@ -3,6 +3,9 @@ import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 
+// For take() 
+import 'rxjs/Rx';
+
 @Injectable()
 
 export class AF 
@@ -16,12 +19,16 @@ export class AF
   private uid: string;
   private permission: number;
   
+  private userTeams = [];
+
   // ================================
 
   constructor(public af: AngularFire) 
   {
     //this.saveUserDetails();
     this.chatRooms = this.af.database.list('chatRooms');
+
+    //this.getUserTeamsFromDB();
   }
 
   // ================================
@@ -117,15 +124,15 @@ export class AF
       {
         this.uid = user.uid;
 
-        var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true });
+        var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true }).take(1);
         
        var usersSubscription = userInfo.subscribe(snapshot => 
         {
           this.permission = snapshot.val().permission;
         })
 
-      // Unsubscribe
-      usersSubscription.unsubscribe();
+      // // Unsubscribe
+      // usersSubscription.unsubscribe();
       })
 
 
@@ -187,11 +194,6 @@ setUserID(userID)
     return this.email;
   }
 
- getUserTeams() 
-  {
-    return this.permission;
-  }
-
   getUserType() 
   {
     return this.permission;
@@ -205,7 +207,32 @@ setUserID(userID)
     return this.uid;
   }
 
+  getUserTeams()
+  {
+    return this.userTeams;
+  }
+
   // ================================
+  //        Global Methods
+  // ================================
+
+ getUserTeamsFromDB() 
+  {
+    var allTeams = this.af.database.list('teams/', { preserveSnapshot: true }).take(1);
+  
+     allTeams.subscribe(snapshots => {
+        snapshots.forEach(snapshot => {
+          if (snapshot.val().coachID == this.uid) 
+            this.userTeams.push(snapshot.val());
+        })
+      })
+
+    }
+
+  // ================================
+
+
+
 
 }
 

@@ -7,14 +7,26 @@
 
 .thumbnail
 {
-    height: 90px;
+    height: auto;
     background-color: transparent;
+    border: none;
+    margin: 1%;
+}
+
+input[type = text]
+{
+  text-align: right;
+}
+
+input
+{
+  padding: 1%;
 }
 
 .chat-title
 {
   margin:0 auto;
-  width: 60%;
+  width: 100%;
   display: block;
   /*color: #355681;*/
   color:white;

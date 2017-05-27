@@ -73,7 +73,7 @@ footer{
 {
     white-space: normal;
     height: 100%;
-    font-size: 150%;
+    font-size: 120%;
     font-weight: bold;
 }
 
@@ -95,8 +95,13 @@ footer{
 
 .thumbnail
 {
-    height: 120px;
+    height: auto;
     background-color: transparent;
+    border: none;
+    margin: 1%;
+    -webkit-box-shadow: 10px 10px 24px -17px rgba(255,255,255,1);
+    -moz-box-shadow: 10px 10px 24px -17px rgba(255,255,255,1);
+    box-shadow: 10px 10px 24px -17px rgba(255,255,255,1);
 }
 
 .title

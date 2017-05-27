@@ -12,7 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { PersonalInfoComponent } from './pages/personal-info/personal-info.component';
+import { PupilsManagementComponent } from './pages/pupils-management/pupils-management.component';
 
 import { AngularFireModule } from 'angularfire2';
 
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'attendance', component: AttendanceComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'messages', component: MessagesComponent },
-  { path: 'personal-info', component: PersonalInfoComponent },
+  { path: 'pupils-management', component: PupilsManagementComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'users-confirm', component: UsersConfirmComponent },
   { path: 'loading', component: LoadingComponent }
@@ -60,7 +60,7 @@ const routes: Routes = [
     MessagesComponent,
     AttendanceComponent,
     ReportsComponent,
-    PersonalInfoComponent,
+    PupilsManagementComponent,
     RegistrationComponent,
     PageHeaderComponent,
     UsersConfirmComponent,

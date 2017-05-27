@@ -25,7 +25,6 @@ export class AppComponent
 
   constructor(private afService: AF, private router: Router) 
   {
-
     // This asynchronously checks if our user is logged it and will automatically
     // redirect them to the Login page when the status changes.
     this.afService.af.auth.subscribe(
@@ -40,7 +39,7 @@ export class AppComponent
         {
           console.log("Successfully Logged in.");
 
-          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true });
+          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true }).take(1);
            
            var userInfoSubs =  userInfo.subscribe(snapshots => 
             {
@@ -51,9 +50,12 @@ export class AppComponent
                     this.permission = snapshot.val();
                     this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.email, auth.auth.email);
 
-                    // // Updating values
-                     this.isLoggedIn = true;
-                     this.router.navigate(['loading']);
+                    // TO CHECK:
+                    this.afService.getUserTeamsFromDB();
+
+                    //  Updating values
+                    this.isLoggedIn = true;
+                    this.router.navigate(['loading']);
                  }
               })
             })
@@ -61,8 +63,6 @@ export class AppComponent
           
           // this.isLoggedIn = true; 
           // this.router.navigate(['']);
-
-         // userInfoSubs.unsubscribe();
         }
       }
     );
@@ -74,6 +74,8 @@ export class AppComponent
   {
     this.afService.logout();
   }
+
+  // ====================================
 
 }
 

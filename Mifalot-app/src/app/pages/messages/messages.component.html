@@ -22,11 +22,11 @@
     </div>
   
     <p>
-  
+      
     <div class = "vertical-menu" >
-      <div *ngFor = "let chatRoom of chatRooms | async" class = "col-lg-6 col-md-6 col-xs-6 thumb">
+      <div *ngFor = "let chatRoom of chatRooms | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
         <a class = "thumbnail" (click) = "enterChatRoom(chatRoom)"> 
-          <button type = "button" class = "btn-chat btn btn-default btn-block" > <i class = "fa fa-commenting-o" > </i> <br/> {{ chatRoom.name }} </button>
+          <button type = "button" class = "btn-chat btn btn-default btn-block" > {{ chatRoom.name }} </button>
         </a>
       </div>
     </div>

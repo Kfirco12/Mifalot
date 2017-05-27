@@ -4,7 +4,7 @@
   text-align: center;
   display: inline-block;
   color: white;
-  font-size: 90%;
+  font-size: 120%;
 }
 
 .page-header
@@ -39,9 +39,14 @@
 
 @media only screen and (max-height: 1366px)
 {
-  .page-header
+    .page-header
     {
-       margin-top: 0%;
+        margin-top: 0%;
+    }
+
+    .titlePage
+    {
+        font-size: 120%;
     }
 }
 
@@ -51,6 +56,11 @@
     {
        margin-top: 0%;    
     }
+
+    .titlePage
+    {
+        font-size: 120%;
+    }
 }
 
 @media only screen and (max-height: 736px)
@@ -58,6 +68,11 @@
     .page-header
     {
        margin-top: -8%;    
+    }
+
+    .titlePage
+    {
+        font-size: 80%;
     }
 }
 
@@ -67,6 +82,11 @@
     {
        margin-top: -8%;    
     }
+
+    .titlePage
+    {
+        font-size: 80%;
+    }
 }
 
 @media only screen and (max-height: 667px)
@@ -74,6 +94,11 @@
     .page-header
     {
        margin-top: -8%;    
+    }
+
+    .titlePage
+    {
+        font-size: 80%;
     }
 }
 
@@ -83,6 +108,11 @@
     {
        margin-top: -8%;    
     }
+
+    .titlePage
+    {
+        font-size: 70%;
+    }
 }
 
 @media only screen and (max-height: 568px)
@@ -90,5 +120,10 @@
     .page-header
     {
        margin-top: -8%;    
+    }
+
+    .titlePage
+    {
+        font-size: 60%;
     }
 }

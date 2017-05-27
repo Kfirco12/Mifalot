@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit
   private buttons = [
                       { id: "messages", txt: 'הודעות', icon: 'fa fa-comments fa-2x', color: 'btn-warning'  }, 
                       { id: "attendance", txt: 'רשימת נוכחות', icon: 'fa fa-pencil-square-o fa-2x', color: 'btn-success' }, 
-                      { id: "personal-info", txt: 'מידע אישי', icon: 'fa fa-info-circle fa-2x', color: 'btn-info' },
+                      { id: "pupils-management", txt: 'ניהול חניכים', icon: 'fa fa-user fa-2x', color: 'btn-info' },
                       { id: "reports", txt: 'דו"חות נוכחות', icon: 'fa fa-bar-chart fa-2x', color: 'btn-primary' }, 
                       { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x', color: 'btn-danger' }
                     ]

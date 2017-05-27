@@ -35,8 +35,6 @@ export class UsersConfirmComponent implements OnInit
     this.permission = this.afService.getUserPermission();
     this.users = this.afService.af.database.list('registeredUsers');
 
-    
-    //console.log(this.user.id)
   }
 
 // =====================
@@ -44,10 +42,9 @@ export class UsersConfirmComponent implements OnInit
 showUserDetails(user)
 {
   this.userSelected = true;
+
   this.userEmail = user.email;
   this.userName = user.name;
-  
-  console.log(user);
 }
 
 // =====================
