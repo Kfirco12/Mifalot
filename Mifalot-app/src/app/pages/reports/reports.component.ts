@@ -69,7 +69,7 @@ export class ReportsComponent implements OnInit
 
    info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        if (snapshot.val().coachId == this.uid) 
+        if (snapshot.val().coachID == this.uid) 
           this.teams.push(snapshot.val().name);
       })
     })

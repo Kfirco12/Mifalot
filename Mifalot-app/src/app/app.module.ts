@@ -22,6 +22,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
 import { LoadingComponent } from './pages/loading/loading.component';
+import { InsertComponent } from './helping/insert/insert.component';
 
 // ======================================================
 // Initialize Firebase 
@@ -65,6 +66,7 @@ const routes: Routes = [
     PageHeaderComponent,
     UsersConfirmComponent,
     LoadingComponent,
+    InsertComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 
@@ -33,7 +32,6 @@ export class AttendanceComponent implements OnInit {
   private pupils = new Array;  //contain the pupils name of the chosen team.
   private teamKey;
   private pupilsPath;
-  private attnend = [];
 
   private noTeamSelected: boolean;
   //============================
@@ -64,7 +62,7 @@ export class AttendanceComponent implements OnInit {
 
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        if (snapshot.val().coachId == this.uid) {
+        if (snapshot.val().coachID == this.uid) {
           this.teams.push(snapshot.val().name);
         }
       })
@@ -92,6 +90,8 @@ export class AttendanceComponent implements OnInit {
             snap2.forEach(snap => {
               var pupil = {
                 name: snap.name,
+                lastName: snap.lastName,
+                ID: snap.ID,
                 presence: false
               }
               this.pupils.push(pupil);
@@ -109,7 +109,7 @@ export class AttendanceComponent implements OnInit {
     //add check.
     if (event.target.checked) {
       for (var _i = 0; _i < this.pupils.length; _i++) {
-        if (event.target.value === this.pupils[_i].name) {
+        if (event.target.value === this.pupils[_i].ID) {
           this.pupils[_i].presence = true;
         }
       }
@@ -117,7 +117,7 @@ export class AttendanceComponent implements OnInit {
     //remove check.
     else {
       for (var _i = 0; _i < this.pupils.length; _i++) {
-        if (event.target.value === this.pupils[_i].name)
+        if (event.target.value === this.pupils[_i].ID)
           this.pupils[_i].presence = false;
       }
     }
@@ -136,7 +136,6 @@ export class AttendanceComponent implements OnInit {
     this.noTeamSelected = true;
     this.started = false;
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
-    this.attnend = [];
     this.pupils = [];
     this.teams = [];
     this.getTeamsByUid();
