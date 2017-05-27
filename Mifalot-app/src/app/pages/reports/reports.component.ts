@@ -52,28 +52,13 @@ export class ReportsComponent implements OnInit
     this.datePipe = new DatePipe('en-us');
 
     this.uid = afService.getUid();
-    this.getTeamsByUid();
+
+    this.teams = this.afService.getUserTeams().sort();
   }
 
   // ============================================================
 
-  ngOnInit() {
-  }
-
-  // ============================================================
-  // Connect to the DB and get the teams' names of the connected user.
-  
-  getTeamsByUid() 
-  {
-    var info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
-
-   info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if (snapshot.val().coachID == this.uid) 
-          this.teams.push(snapshot.val().name);
-      })
-    })
-  }
+  ngOnInit() {}
 
   // ============================================================
   //get the dates from the wanted team.
@@ -91,7 +76,7 @@ export class ReportsComponent implements OnInit
     this.chosenTeam = teamId;
 
     // get teame's pupil from DB.
-    var info = this.afService.af.database.list('teams/' + teamId + '/attendance', { preserveSnapshot: true });
+    var info = this.afService.af.database.list('teams/' + teamId + '/attendance', { preserveSnapshot: true }).take(1);
     
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
@@ -121,13 +106,13 @@ export class ReportsComponent implements OnInit
     this.pupils = [];
 
     // Get teame's pupil from DB.
-    var info = this.afService.af.database.list('teams/' + teamId + '/attendance',  { preserveSnapshot: true });
+    var info = this.afService.af.database.list('teams/' + teamId + '/attendance',  { preserveSnapshot: true }).take(1);
 
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if(snapshot.val().date == dateId)
         {
-          this.pupilsPath = this.afService.af.database.list('teams/' + teamId + '/attendance/' + snapshot.key + "/presence");
+          this.pupilsPath = this.afService.af.database.list('teams/' + teamId + '/attendance/' + snapshot.key + "/presence").take(1);
           this.teamKey = snapshot.key;
 
           this.pupilsPath.subscribe(snap2 => {

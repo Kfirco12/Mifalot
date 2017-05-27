@@ -13,8 +13,8 @@
 					<span> {{ chosenDateString }} </span>
 				</button>
 				<ul class = "dropdown-menu">
-					<li *ngFor = "let date of dates; let i = index" [attr.data-index] = "i">
-						<a (click) = "getPupils(dates[i].date, dates[i].team)"> {{ date.date | date:'dd/MM/yy'}} </a>
+					<li *ngFor = "let date of dates">
+						<a (click) = "getPupils(date.date, date.team)"> {{ date.date | date:'dd/MM/yy'}} </a>
 					</li>
 				</ul>
 			</div>
@@ -26,8 +26,8 @@
 					<span class = "caret"></span>
 				</button>
 				<ul class = "dropdown-menu">
-					<li *ngFor = "let team of teams; let i = index" [attr.data-index] = "i">
-						<a (click) = "getDates(teams[i])"> {{ team }} </a>
+					<li *ngFor = "let team of teams">
+						<a (click) = "getDates(team.name)"> {{ team.name }} </a>
 					</li>
 				</ul>
 			</div>
