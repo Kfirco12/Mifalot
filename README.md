@@ -21,7 +21,7 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Version Control System| git & github |
 | Recommended IDE | [VSCode](https://code.visualstudio.com) |
 | Group Chat | [![Join the chat at https://gitter.im/jce-il/Mifalot](https://badges.gitter.im/jce-il/jce-il/Mifalot.svg)](https://gitter.im/jce-il/Mifalot?utm_source=share-link&utm_medium=link&utm_campaign=share-link)|
-| Build Status (CI) |  [![Build Status](https://travis-ci.org/benhuri/Mifalot.svg?branch=master)](https://travis-ci.org/jce-il/project-template) |
+| Build Status (CI) |  [![Build Status](https://travis-ci.org/benhuri/Mifalot.svg?branch=master)](https://travis-ci.org/benhuri/Mifalot) |
 | Dependencies | [![David](https://img.shields.io/david/dev/idleberg/vscode-badges.svg?style=flat-square)](https://david-dm.org/jce-il/project-template?type=dev) |
 | License | [License File](https://github.com/benhuri/Mifalot/blob/master/LICENSE) |
 | Test Coverege | [![codecov.io](https://codecov.io/github/jce-il/project-template/coverage.svg?branch=master)](https://codecov.io/github/jce-il/project-template?branch=master) |
