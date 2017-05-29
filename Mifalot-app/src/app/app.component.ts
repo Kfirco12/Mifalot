@@ -39,9 +39,21 @@ export class AppComponent
         {
           console.log("Successfully Logged in.");
 
-          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true }).take(1);
-           
-           var userInfoSubs =  userInfo.subscribe(snapshots => 
+          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true }).take(1);   
+          this.saveUserDetails(auth, userInfo);
+
+          // this.isLoggedIn = true; 
+          // this.router.navigate(['']);
+        }
+      }
+    );
+  }
+
+  // ====================================
+  
+  saveUserDetails(auth, userInfoList)
+  {
+      var userInfoSubs =  userInfoList.subscribe(snapshots => 
             {
               snapshots.forEach(snapshot => 
               {
@@ -59,17 +71,10 @@ export class AppComponent
                  }
               })
             })
-
-          
-          // this.isLoggedIn = true; 
-          // this.router.navigate(['']);
-        }
-      }
-    );
   }
 
-  // ====================================
-  
+    // ====================================
+
   logout() 
   {
     this.afService.logout();

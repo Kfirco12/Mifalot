@@ -1,7 +1,8 @@
 
+<div *ngFor = "let user of user | async">
 
   <!-- Page Content -->
-  <div *ngIf = "permission != 4" class = "container" >
+  <div *ngIf = "user.$key == 'permission' && user.$value != 4" class = "container" >
 
       <div class = "row" >
 
@@ -20,7 +21,7 @@
           </div>
         
         <!-- Users-confirm button -->
-          <div *ngIf = "permission == 1" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+          <div *ngIf = "user.$key == 'permission' && user.$value == 1" class = "col-lg-12 col-md-12 col-xs-12 thumb">
             <a class = "thumbnail" (click) = "navigate(buttons[4].id)"> 
               <button type = "button" class = "btn {{ buttons[4].color }} btn-block" > <i class = "{{ buttons[4].icon }}" > </i> <br/>  {{ buttons[4].txt }}</button> 
             </a>
@@ -32,7 +33,7 @@
 
 
   <!-- User wait for admin to confirm him -->
-  <div *ngIf = "permission == 4" class = "container confirm" >
+  <div *ngIf = "user.$key == 'permission' && user.$value == 4" class = "container confirm" >
 
       <div class = "panel panel-warning text-right center">
         <div class = "panel-heading"> הינך ממתין לאישור מנהל </div>
@@ -41,5 +42,4 @@
 
   </div>
    
-<!--<span class="counter">22</span>-->
-
+</div>

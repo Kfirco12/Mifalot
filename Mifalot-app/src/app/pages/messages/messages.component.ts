@@ -134,18 +134,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
      return false;
   }
 
-
-// ==================================================
-/*
-  chatSend(theirMessage: string)
-  {
-    if (theirMessage == null || theirMessage == '')
-      return;
-
-    this.items.push({message: theirMessage, name: this.name, date: new Date().toLocaleString()});
-    this.msgVal = '';
-  }
-*/
   // ==================================================
 
   sendMessage()
@@ -161,6 +149,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     // this.scrollToBottom();
   }
 
+  // ==================================================
+
   scrollToBottom(): void 
   {
     try {
@@ -175,6 +165,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   {
 
   }
+
+  // ==================================================
 
 }
 

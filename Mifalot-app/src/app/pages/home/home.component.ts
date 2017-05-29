@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AF } from "../../providers/af";
+import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit 
 {
   private buttons = [
@@ -16,14 +18,15 @@ export class HomeComponent implements OnInit
                       { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x', color: 'btn-danger' }
                     ]
 
-   private permission: number;
+  private user: FirebaseListObservable<any[]>;
 
   // ======================
 
 
   constructor(private afService: AF, private router: Router) 
   { 
-      this.permission = this.afService.getUserPermission();
+      // Save an observable to user variables in DB
+      this.user = this.afService.af.database.list('registeredUsers/' + this.afService.getUid());
   }
 
   // ======================
