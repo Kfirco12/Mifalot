@@ -1,4 +1,6 @@
-<div *ngIf = "permission == 1" class = "container" >
+
+<!--<div *ngIf = "permission == 1" class = "container" >-->
+<div class = "container" >
 
   <app-page-header [item] = "header"> </app-page-header>
 
@@ -22,16 +24,69 @@
       <div class = "profile-head">
     <div class = "row" >
       <h4 class = "text-center">  :פרטי המשתמש אותו אתה עומד לאשר </h4>
-      <ul class = "text-right">
-        <li> <span> {{ userName }} :שם </span><span class = "fa fa-user-circle-o"></span></li>
-        <li> <span >{{ userEmail }} :דוא״ל </span><span class = "fa fa-envelope"></span></li>
-      </ul>
+
+  <div class = "container">
+      <div class = "row">
+        <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+          <div class = "panel panel-info">
+            <div class = "panel-heading">
+              <h3 class = "panel-title text-right"> {{ userName }} <span class = "fa fa-user-circle-o"></span> </h3>
+            </div>
+            <div class = "panel-body">
+              <div class = "row">
+                <div class = "col-md-3 col-lg-3 " align = "center"> 
+                  <!--<img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> -->
+                  </div>
+                
+                
+                <div class = "col-md-9 col-lg-9"> 
+                  <table class = "table table-user-information text-right">
+                    <tbody>
+            
+                      <tr>
+                        <td><a href = "{{ userEmail }}"> {{ userEmail }} </a></td>
+                        <td> דוא״ל </td>
+                      </tr>
+                      <tr>     
+                        <td> 123-4567-890(Landline) </td>
+                        <td> פלאפון </td>   
+                      </tr>
+                       <tr>     
+                        <td> 10.02.16 </td>
+                        <td> תאריך לידה  </td>   
+                      </tr>
+                       <tr>     
+                        <td> זכר </td>
+                        <td> מין </td>   
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+                 <div class = "panel-footer">
+                        <a data-original-title = "Broadcast Message" data-toggle = "tooltip" type = "button" class = "btn btn-sm btn-primary"><i class = "glyphicon glyphicon-envelope"></i></a>
+                        <span class = "pull-right">
+                            <a href = "edit.html" data-original-title = "Edit this user" data-toggle = "tooltip" type = "button" class = "btn btn-sm btn-warning"><i class = "glyphicon glyphicon-edit"></i></a>
+                            <a data-original-title="Remove this user" data-toggle = "tooltip" type = "button" class = "btn btn-sm btn-danger"><i class = "glyphicon glyphicon-remove"></i></a>
+                        </span>
+                    </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
       <h4 class = "text-center">  :בחר את סוג המשתמש </h4>
 
 
 
 
-<div class = "btn-group" data-toggle = "buttons">
+<!--<div class = "btn-group" data-toggle = "buttons">
 			
 			<label class = "btn btn-success active">
 				<input type="radio" name = "options" id = "option2" autocomplete = "off" chacked>
@@ -44,7 +99,7 @@
 			</label>
 
 
-    </div>
+    </div>-->
   </div>
     </div>
   </div>

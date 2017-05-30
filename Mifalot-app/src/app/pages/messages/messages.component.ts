@@ -3,19 +3,15 @@ import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../../providers/af";
 import { ChangeDetectorRef } from "@angular/core";
 
-
 @Component({
   //selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
 
-
 export class MessagesComponent implements OnInit, AfterViewChecked
 {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-  savedDate: string = '';
 
   private header = 
   { 
@@ -24,13 +20,17 @@ export class MessagesComponent implements OnInit, AfterViewChecked
      icon: "fa-comments" 
   }
   
+  // Strings
   private newMessage: string;
   private userEmail: string;
   private chatRoomTitle: string;
-  
+  private savedDate: string = '';
+
+  // DB Observables
   private chatRooms: FirebaseListObservable<any>;
   private currentChat: FirebaseListObservable<any>;
 
+  // Flags
   private noChatRoomSelected: boolean;
   private createNewChatRoom: boolean;
 
@@ -40,7 +40,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
-      this.chatRooms = this.afService.chatRooms;
+      this.chatRooms = this.afService.af.database.list('chatRooms');
       this.userEmail = this.afService.getUserEmail();
       this.noChatRoomSelected = true;
       this.createNewChatRoom = false;
@@ -50,33 +50,14 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   createsNewChatRoom(chatName)
   {
-    var newChat =
-      {
-        name: chatName
-      };
-
-    var chatRooms = this.afService.af.database.list('chatRooms/', { preserveSnapshot: true });
-/*   
-  chatRooms.subscribe(snapshots => {
-    snapshots.forEach(snapshot => {
-      if (chatName == snapshot.val().name)
-        this.error = "שם זה כבר קיים, בחר שם אחר";
-    })
-  })
-
-  if (this.error == "שם זה כבר קיים, בחר שם אחר")
-    return;
-*/
+    var newChat = { name: chatName };
 
     // Create a new chat room
-    chatRooms.push(newChat);
+    var newChatInDB = this.chatRooms.push(newChat);
+    this.currentChat = this.afService.af.database.list('chatRooms/' + newChatInDB.key + '/messages');
 
-    chatRooms.subscribe(snapshots => {
-    snapshots.forEach(snapshot => {
-      if (snapshot.val().name == chatName)
-        this.currentChat = this.afService.af.database.list('chatRooms/' + snapshot.key + '/messages');
-    });
-  })
+    // Updating chat's title
+    this.chatRoomTitle = chatName;
 
     // Updating flags
     this.noChatRoomSelected = false;

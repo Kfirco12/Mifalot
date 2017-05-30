@@ -19,14 +19,20 @@ export class AppComponent
   private uid: string;
   private permission: number;
 
-  items: FirebaseListObservable<any[]>;
-
   // ====================================
 
   constructor(private afService: AF, private router: Router) 
   {
-    // This asynchronously checks if our user is logged it and will automatically
-    // redirect them to the Login page when the status changes.
+    this.logout();   // When user refresh the app, he will need to log in again
+    this.subscribeToUserAuthStatus();
+  }
+
+  // ====================================
+  // This asynchronously checks if our user is logged it and will automatically
+  // redirect them to the Login page when the status changes.
+
+  subscribeToUserAuthStatus()
+  {
     this.afService.af.auth.subscribe(
       (auth) => {
         if (auth == null) 
@@ -38,39 +44,9 @@ export class AppComponent
         else 
         {
           console.log("Successfully Logged in.");
-
-          var userInfo = this.afService.af.database.list('registeredUsers/' + auth.uid, { preserveSnapshot: true }).take(1);   
-          this.saveUserDetails(auth, userInfo);
-
-          // this.isLoggedIn = true; 
-          // this.router.navigate(['']);
+          this.isLoggedIn = true; 
         }
-      }
-    );
-  }
-
-  // ====================================
-  
-  saveUserDetails(auth, userInfoList)
-  {
-      var userInfoSubs =  userInfoList.subscribe(snapshots => 
-            {
-              snapshots.forEach(snapshot => 
-              {
-                if (snapshot.key == "permission")
-                 { 
-                    this.permission = snapshot.val();
-                    this.afService.saveUserDetails(auth.uid, this.permission, auth.auth.email, auth.auth.email);
-
-                    // TO CHECK:
-                    this.afService.getUserTeamsFromDB();
-
-                    //  Updating values
-                    this.isLoggedIn = true;
-                    this.router.navigate(['loading']);
-                 }
-              })
-            })
+      })
   }
 
     // ====================================

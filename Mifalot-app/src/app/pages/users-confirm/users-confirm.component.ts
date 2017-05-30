@@ -12,29 +12,26 @@ import { AF } from "../.././providers/af";
 export class UsersConfirmComponent implements OnInit 
 {
 
-  header = 
+  private header = 
   { 
      title: "אישור משתמשים", 
      subTitle: "עבור על המשתמשים הממתינים לאישורך",
      icon: "fa-users" 
   }
 
-  private permission: number;
   private userSelected: boolean;
 
   private userName: string;
   private userEmail: string;
 
-  users: FirebaseListObservable<any[]>;
+  private users: FirebaseListObservable<any[]>;
 
 // =====================
 
   constructor(private afService: AF) 
   {
     this.userSelected = false;
-    this.permission = this.afService.getUserPermission();
     this.users = this.afService.af.database.list('registeredUsers');
-
   }
 
 // =====================

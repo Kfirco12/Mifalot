@@ -12,17 +12,19 @@ import { Router } from "@angular/router";
 
 export class LoginComponent 
 {
-  public error: any;
+  private error: any;
+
+  // ===================================
 
   constructor(public afService: AF, private router: Router) {}
   
-    // ===================================
+  // ===================================
 
   loginWithEmail(event, email, password)
   {
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => {
-      this.router.navigate(['loading']);
+      this.router.navigate(['']);
     })
       .catch((error: any) => {
         if (error) 

@@ -10,25 +10,20 @@ import 'rxjs/Rx';
 
 export class AF 
 {
-  public chatRooms: FirebaseListObservable<any>;
-  public users: FirebaseListObservable<any>;
-
   // User info
   private displayName: string;
   private email: string;
   private uid: string;
   private permission: number;
   
-  private userTeams = [];
+  // Array
+  private userTeams;
 
   // ================================
 
   constructor(public af: AngularFire) 
   {
-    //this.saveUserDetails();
-    this.chatRooms = this.af.database.list('chatRooms');
-
-    //this.getUserTeamsFromDB();
+    this.userTeams = [];
   }
 
   // ================================
@@ -122,46 +117,18 @@ export class AF
       method: AuthMethods.Password,
     }).then((user) => 
       {
-        this.uid = user.uid;
-
-        var userInfo = this.af.database.object('registeredUsers/' + user.uid, { preserveSnapshot: true }).take(1);
-        
-       var usersSubscription = userInfo.subscribe(snapshot => 
-        {
-          this.permission = snapshot.val().permission;
-        })
-
-      // // Unsubscribe
-      // usersSubscription.unsubscribe();
-      })
-
-
-
-/*   
-  chatRooms.subscribe(snapshots => {
-    snapshots.forEach(snapshot => {
-      if (chatName == snapshot.val().name)
-        this.error = "שם זה כבר קיים, בחר שם אחר";
-    })
-  })
-
-  if (this.error == "שם זה כבר קיים, בחר שם אחר")
-    return;
-*/
-
-    // Create a new chat room
-
-
-    
+        this.saveUserDetails(user);
+        this.getUserTeamsFromDB();
+      })    
   }
 
- 
-  saveUserDetails(uid, permission, name, email)
+   // ================================
+
+  saveUserDetails(user)
   {
-    this.uid = uid;
-    this.permission = permission;
-    this.displayName = name;
-    this.email = email;
+    this.uid = user.uid;
+    this.displayName = user.auth.email;
+    this.email = user.auth.email;
   }
 
   // ================================
@@ -174,38 +141,30 @@ export class AF
   //                    // this value to authenticate with your backend server, if
   //                    // you have one. Use User.getToken() instead.
 
-setUserID(userID)
-{
-  this.uid = userID;
-}
+  // ================================
+  //        Gets' Methods
+  // ================================
 
-  getUserPermission() 
-  {
-    return this.permission;
-  }
-
- getUserName() 
+  getUserName() 
   {
     return this.displayName;
   }
 
- getUserEmail() 
+  // ================================
+
+  getUserEmail() 
   {
     return this.email;
-  }
-
-  getUserType() 
-  {
-    return this.permission;
   }
 
   // ================================
 
   getUid()
   {
-    //console.log(this.uid);
     return this.uid;
   }
+
+  // ================================
 
   getUserTeams()
   {
@@ -218,6 +177,8 @@ setUserID(userID)
 
  getUserTeamsFromDB() 
   {
+    this.userTeams = [];
+    
     var allTeams = this.af.database.list('teams/', { preserveSnapshot: true }).take(1);
   
      allTeams.subscribe(snapshots => {

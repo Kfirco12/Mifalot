@@ -1,11 +1,16 @@
 
 <!-- Error message -->
 
-<div *ngIf = "error" class = "alert alert-warning" role = "alert">
-  <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
-  <span class = "sr-only"> Error: </span>
-  {{ error }}
+<div class = "container">
+  <div *ngIf = "error" class = "alert alert-warning" role = "alert">
+    <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
+    <span class = "sr-only"> Error: </span>
+    {{ error }}
+  </div>
 </div>
+
+<!-- /Error message -->
+
 
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
@@ -33,6 +38,9 @@
   </div>
 </div>
 
+<!-- /Selecting chat room or adding a new one -->
+
+
 <!-- Create a new chat room -->
 
 <div *ngIf = "createNewChatRoom">
@@ -52,12 +60,13 @@
       <button (click) = "name.value && createsNewChatRoom(name.value) " class = "btn btn-md btn-success btn-block" type = "submit"> יצירת צ׳אט </button>
       <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לעמוד הקודם </button>
 
-    </form>
-
-
+  </form>
 </div>
 
-<!-- Chat messages -->
+<!-- /Create a new chat room -->
+
+
+  <!-- Chat messages -->
 
   <div *ngIf = "!noChatRoomSelected && !createNewChatRoom">
     <span class = "chat-title"> {{ chatRoomTitle }} </span>
@@ -76,7 +85,9 @@
       </div>
     </div>
 
+    <!-- /Chat messages -->
 
+    <!-- Send message input -->
 
     <div class = "input-group">
       <span class = "input-group-btn"> 
@@ -84,5 +95,8 @@
       </span>  
       <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "sendMessage()" [(ngModel)] = "newMessage">
     </div>
+
+    <!-- /Send message input -->
+
   </div>     
 </div>
