@@ -1,2 +1,76 @@
+
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
+
+<div class = "container">
+
+    <!-- Select user -->
+    <div *ngIf = "!userSelected">
+        <div class = "row" >
+            <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
+                <div *ngSwitchCase = "5" class = "col-lg-6 col-md-6 col-xs-6 thumb">
+                    <a class = "thumbnail">
+                        <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name }} {{ user.lastName }} </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Select user -->
+
+
+    <div *ngIf = "userSelected && !userConfirmed">
+        <div class = "container">
+        <div class = "profile-head">
+            <div class = "row" >
+            <h4 class = "text-center">  :פרטי המשתמש החסום </h4>
+                <div class = "container">
+                <div class = "row">
+                    <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    <div class = "panel panel-danger">
+                        <div class = "panel-heading">
+                        <h3 class = "panel-title text-right"> {{ user.name }} {{ user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
+                        </div>
+                        <div class = "panel-body">
+                        <div class = "row">
+                            <div class = "col-md-9 col-lg-9"> 
+                                <table class = "table table-user-information text-right">
+                                    <tbody>
+                                    <tr>
+                                        <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
+                                        <td> דוא״ל </td>
+                                    </tr>
+                                    <tr>     
+                                        <td> {{ user.phoneNumber }} </td>
+                                        <td> פלאפון </td>   
+                                    </tr>
+                                    <tr>     
+                                        <td> {{ user.birthDate }} </td>
+                                        <td> תאריך לידה  </td>   
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                        <div class = "panel-footer">
+                        <a type = "button" class = "btn btn-sm btn-danger" (click) = "sendUserToConfirmation()"> בטל חסימה </a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
+
+    </div>
+
+
+
+
+
+
+</div>

@@ -84,22 +84,21 @@ showTeams(type)
 // =====================
 
 saveTeamToAssociate(team)
+{
+  var index = this.selectedTeams.indexOf(team);
+
+  // pupil doesnt exist in array
+  if (index == -1) 
   {
-    var index = this.selectedTeams.indexOf(team);
-
-    // pupil doesnt exist in array
-    if (index == -1) 
-    {
-      this.selectedTeams.push(team); 
-    }    
-    else
-    {
-      this.selectedTeams.splice(index, 1);
-    }
-
+    this.selectedTeams.push(team); 
+  }    
+  else
+  {
+    this.selectedTeams.splice(index, 1);
   }
+}
 
-  // ==============================
+// ==============================
 
 isChecked(team)
 {
