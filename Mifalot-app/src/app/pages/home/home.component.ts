@@ -14,8 +14,9 @@ export class HomeComponent implements OnInit
                       { id: "messages", txt: 'הודעות', icon: 'fa fa-comments fa-2x', color: 'btn-warning'  }, 
                       { id: "attendance", txt: 'רשימת נוכחות', icon: 'fa fa-pencil-square-o fa-2x', color: 'btn-success' }, 
                       { id: "pupils-management", txt: 'ניהול חניכים', icon: 'fa fa-user fa-2x', color: 'btn-info' },
-                      { id: "reports", txt: 'דו"חות נוכחות', icon: 'fa fa-bar-chart fa-2x', color: 'btn-primary' }, 
-                      { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x', color: 'btn-danger' }
+                      { id: "reports", txt: 'דו"חות נוכחות', icon: 'fa fa-bar-chart fa-2x', color: 'btn-primary' },
+                      { id: "blocked-users", txt: 'משתמשים חסומים', icon: 'fa fa-user-times fa-2x', color: 'btn-danger' },
+                      { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-users fa-2x', color: 'btn-info' }        
                     ]
 
   private user: FirebaseListObservable<any[]>;

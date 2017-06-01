@@ -66,7 +66,7 @@ const routes: Routes = [
     PageHeaderComponent,
     UsersConfirmComponent,
     LoadingComponent,
-    InsertComponent,
+    InsertComponent
   ],
   imports: [
     BrowserModule,

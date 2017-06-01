@@ -23,7 +23,7 @@
     color: white;
 }
 
-input[type = "email"], input[type = "password"], input[type = "text"]
+input
 {
 	text-align: right;
 }

@@ -85,11 +85,12 @@ export class AF
 
   // ================================
 
-  saveUserInfoFromForm(uid, name, email) 
+  saveUserInfoFromForm(uid, name,lastName, email) 
   {      
     return this.af.database.object('registeredUsers/' + uid).set(
     {
       name: name,
+      lastName: lastName,
       email: email,
       permission: 4
     });
@@ -191,9 +192,6 @@ export class AF
     }
 
   // ================================
-
-
-
 
 }
 

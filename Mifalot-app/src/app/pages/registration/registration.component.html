@@ -10,11 +10,27 @@
 
     <br>
 
-    <form class = "form-signin" (submit) = "register($event, name.value, email.value, password.value, passwordValidation.value)">
-      <label for = "name" class = "sr-only"> שם מלא </label>
+    <form class = "form-signin" (submit) = "register($event, name.value, lastName.value, email.value, password.value, passwordValidation.value)">
+      <label for = "name" class = "sr-only"> שם פרטי </label>
       <div class = "input-group">
-        <input #name type = "text" id = "name" class = "form-control" placeholder = "שם מלא" required = "">
+        <input #name type = "text" id = "name" class = "form-control" placeholder = "שם פרטי" required = "">
           <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
+      </div>
+
+      <br>
+
+         <label for = "name" class = "sr-only"> שם משפחה </label>
+      <div class = "input-group">
+        <input #lastName type = "text" id = "lastName" class = "form-control" placeholder = "שם משפחה" required = "">
+          <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
+      </div>
+
+      <br>
+
+     <label for = "name" class = "sr-only"> מס׳ טלפון </label>
+      <div class = "input-group">
+        <input #phoneNumber type = "number" id = "lastName" class = "form-control" placeholder = "מס׳ טלפון" required = "">
+          <span class = "input-group-addon"><i class = "fa fa-phone-square"></i></span> 
       </div>
 
       <br>
@@ -23,6 +39,14 @@
       <div class = "input-group">
         <input #email type = "email" id = "email" class = "form-control" placeholder = "כתובת דוא״ל" required = "" autofocus = "">
         <span class = "input-group-addon"><i class = "fa fa-envelope"></i></span> 
+      </div>
+
+      <br>
+
+      <label for = "name" class = "sr-only"> תאריך לידה </label>
+      <div class = "input-group">
+        <input #birthDate type = "date" id = "birthDate" class = "form-control" placeholder = "תאריך לידה" required = "">
+          <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
       </div>
 
       <br>
@@ -44,8 +68,11 @@
       <br>
 
       <button  class = "btn btn-md btn-primary btn-block" type = "submit"> הירשם </button>
+
     </form>
-  </div>
+    <br>
+          <button  class = "btn btn-md btn-primary btn-block"> חזור להתחברות </button>
+  </div>)
 </div>
 
 
