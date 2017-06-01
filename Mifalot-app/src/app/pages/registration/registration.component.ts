@@ -16,11 +16,11 @@ export class RegistrationComponent
   constructor(private afService: AF, private router: Router) { }
 
 	// registers the user and logs them in
-  register(event, name, lastName, email, password, passwordValidation) 
+  register(event, name, lastName, phoneNumber, email, birthDate, password, passwordValidation) 
   {
     event.preventDefault();
 
-    console.log(passwordValidation);
+    console.log(password);
     if (password != passwordValidation)
     {
       this.error = "אנא הזן את אותה הסיסמה בשני השדות"
@@ -28,7 +28,7 @@ export class RegistrationComponent
     }
 
     this.afService.registerUser(email, password).then((user) => {
-      this.afService.saveUserInfoFromForm(user.uid, name, lastName, email).then(() => {
+      this.afService.saveUserInfoFromForm(user.uid, name, lastName, phoneNumber, email, birthDate).then(() => {
         this.router.navigate(['loading']);
       })
         .catch((error) => {

@@ -85,13 +85,15 @@ export class AF
 
   // ================================
 
-  saveUserInfoFromForm(uid, name,lastName, email) 
+  saveUserInfoFromForm(uid, name, lastName, phoneNumber, email, birthDate) 
   {      
     return this.af.database.object('registeredUsers/' + uid).set(
     {
       name: name,
       lastName: lastName,
+      phoneNumber: phoneNumber,
       email: email,
+      birthDate: birthDate, 
       permission: 4
     }).then(() => 
       {
