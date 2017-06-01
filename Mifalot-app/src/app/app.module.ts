@@ -23,6 +23,7 @@ import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { InsertComponent } from './helping/insert/insert.component';
+import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
 
 // ======================================================
 // Initialize Firebase 
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'pupils-management', component: PupilsManagementComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'users-confirm', component: UsersConfirmComponent },
-  { path: 'loading', component: LoadingComponent }
+  { path: 'loading', component: LoadingComponent },
+  { path: 'blocked-users', component: BlockedUsersComponent }
 ];
 
 // ======================================================
@@ -66,7 +68,8 @@ const routes: Routes = [
     PageHeaderComponent,
     UsersConfirmComponent,
     LoadingComponent,
-    InsertComponent
+    InsertComponent,
+    BlockedUsersComponent
   ],
   imports: [
     BrowserModule,
