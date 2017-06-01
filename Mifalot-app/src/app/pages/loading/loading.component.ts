@@ -9,16 +9,13 @@ import { Router } from '@angular/router';
 
 export class LoadingComponent implements OnInit 
 {
-  constructor(private router: Router) 
-  {
-    
-   }
+  constructor(private router: Router) {}
 
   // ====================
 
   ngOnInit() 
   {
-     setTimeout(() => { this.router.navigate(['']); }, 3000);  //3s
+     setTimeout(() => { this.router.navigate(['']); }, 2000);  //2s
   }
 
   // ====================
