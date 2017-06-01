@@ -40,4 +40,13 @@ export class RegistrationComponent
         console.log(this.error);
       });
   }
+
+  // =====================
+
+  goToLogin()
+  {
+    this.router.navigate(['login']);
+  }
+
+  // =====================
 }
