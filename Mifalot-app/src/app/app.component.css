@@ -15,7 +15,7 @@
 	/*position:fixed;*/
 }
 
-#btn-logout
+#btn-logout, .fa-sign-out
 {
 	cursor: pointer;
 }
@@ -24,3 +24,4 @@
 {
 	float: right;
 }
+
