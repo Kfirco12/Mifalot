@@ -93,7 +93,13 @@ export class AF
       lastName: lastName,
       email: email,
       permission: 4
-    });
+    }).then(() => 
+      {
+        this.uid = uid;
+        this.displayName = name;
+        this.email = email;
+        this.getUserTeamsFromDB();
+      })
   }
 
   // ================================
