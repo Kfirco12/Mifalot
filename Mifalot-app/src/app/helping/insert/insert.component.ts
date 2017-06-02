@@ -29,9 +29,6 @@ private output = 'out:\n';
       
       var contents: any = file.target;
       this.text = contents.result;
-      //console.log(reader.result.substring(0, 1000));
-      //this.st = reader.result;
-      //console.log(this.st);
       var readInStrings = reader.result.split('\r\n');
        var pupils = { name: '', lastName:'',ID: Number, missed:0 };
       for(var i=0; i<readInStrings.length; i++){
@@ -51,19 +48,16 @@ private output = 'out:\n';
           this.output += readInStrings[i];
           this.output += '\t';
           this.students.push(pupils);
-         // this.afService.af.database.list('teams/'+this.team+'/pupils').push(pupils);
+          this.afService.af.database.list('teams/'+this.team+'/pupils').push(pupils);
           pupils = { name: '', lastName:'',ID: Number, missed:0 };
         }
       }
       
-     // this.afService.af.database.list('teams/').update(this.team,{name:this.team});
+      this.afService.af.database.list('teams/').update(this.team,{name:this.team});
 //var info = 
       console.log(this.students);
     };
     
-    
-   //console.log(reader.readAsText(fileName))b
-   //console.log(this.str);
 
 }
 
