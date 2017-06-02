@@ -14,8 +14,7 @@
 
       <!-- User buttons -->
       <div *ngIf = "user.$key == 'permission' && user.$value == 3">
-        <div *ngFor = "let button of buttons" class = "col-lg-6 col-md-6 col-xs-6 thumb">
-          
+        <div *ngFor = "let button of buttons" class = "col-lg-6 col-md-6 col-xs-6 thumb">    
           <a class = "thumbnail" (click) = "navigate(button.id)"> 
             <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/> {{ button.txt }} </button>
           </a>
@@ -25,7 +24,10 @@
         <!-- Admin buttons -->
           <div *ngIf = "user.$key == 'permission' && user.$value == 1">
             <div *ngFor = "let button of adminButtons" class = "col-lg-6 col-md-6 col-xs-6 thumb">
-              <a class = "thumbnail" (click) = "navigate(button.id)"> 
+              <a *ngIf = "button.id != 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
+                <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
+              </a>
+               <a *ngIf = "button.id == 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
                 <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
               </a>
           </div>

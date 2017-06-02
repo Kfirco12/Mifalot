@@ -24,6 +24,7 @@ import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.compo
 import { LoadingComponent } from './pages/loading/loading.component';
 import { InsertComponent } from './helping/insert/insert.component';
 import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
+import { UsersManagementComponent } from './pages/users-management/users-management.component';
 
 // ======================================================
 // Initialize Firebase 
@@ -50,7 +51,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'users-confirm', component: UsersConfirmComponent },
   { path: 'loading', component: LoadingComponent },
-  { path: 'blocked-users', component: BlockedUsersComponent }
+  { path: 'blocked-users', component: BlockedUsersComponent },
+  { path: 'users-management', component: UsersManagementComponent }
 ];
 
 // ======================================================
@@ -69,7 +71,8 @@ const routes: Routes = [
     UsersConfirmComponent,
     LoadingComponent,
     InsertComponent,
-    BlockedUsersComponent
+    BlockedUsersComponent,
+    UsersManagementComponent
   ],
   imports: [
     BrowserModule,

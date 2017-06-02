@@ -1,5 +1,4 @@
 
-<!--<div *ngIf = "permission == 1" class = "container" >-->
 <div class = "container" >
 
   <app-page-header [item] = "header"> </app-page-header>
@@ -11,30 +10,21 @@
           <a class = "thumbnail">
             <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name }} </button>
           </a>
-          <!--<a *ngSwitchDefault> אין כרגע משתמשים הממתינים לאישור </a>-->
         </div>
       </div>
     </div>
   </div>
 
   <div *ngIf = "userSelected && !userConfirmed">
-    <div class = "container">
       <div class = "profile-head">
         <div class = "row" >
           <h4 class = "text-center">  :פרטי המשתמש אותו אתה עומד לאשר </h4>
-            <div class = "container">
-              <div class = "row">
-                <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
                   <div class = "panel panel-info">
                     <div class = "panel-heading">
                        <h3 class = "panel-title text-right"> {{ user.name }} {{ user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
                     </div>
                     <div class = "panel-body">
-                      <div class = "row">
-                        <div class = "col-md-3 col-lg-3 " align = "center"> 
-        <!--<img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> -->
-                        </div>
-                        <div class = "col-md-9 col-lg-9"> 
                           <table class = "table table-user-information text-right">
                             <tbody>
                               <tr>
@@ -51,20 +41,16 @@
                               </tr>
                             </tbody>
                           </table>
-                        </div>
-                      </div>
                     </div>
                     <div class = "panel-footer">
                       <a type = "button" class = "btn btn-sm btn-success" (click) = "confirmUser()"> <i class = "glyphicon glyphicon-ok"></i> אשר </a>
                       <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
                     </div>
                   </div>
-                </div>
-              </div>
             </div>
         </div>
       </div>
-    </div>
+
 
     <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
 
@@ -73,14 +59,8 @@
   <div *ngIf = "userSelected && userConfirmed">
 
     <div class="alert alert-info text-right" role="alert">
-      <strong> אישור משתמש<br></strong> הנך עומד לאשר את {{ user.name }} {{ user.lastName }} אנא בחר את סוג המשתמש
+      <strong> אישור משתמש:</strong> הנך עומד לאשר את {{ user.name }} {{ user.lastName }}, אנא בחר את סוג המשתמש ושייך אליו את הקבוצות הרצויות
     </div>
-
-    <!--<div class = "panel panel-info text-right center">
-      <div class = "panel-heading"> אישור משתמש </div>
-      <div class = "panel-body"> הנך עומד לאשר את {{ user.name }} {{ user.lastName }} אנא בחר את סוג המשתמש </div>
-    </div>-->
-
     <div class = "row text-center" data-toggle = "buttons">
 
       <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -102,13 +82,11 @@
     <div *ngIf = "chooseTeams">
         <div class = "container">
           <div class = "row">
-              <div class = "col-md-12 text-center"> 
+              <div class = "col-lg-12 text-center"> 
                 <h5> סמן את הקבוצות אותן תרצה לשייך למשתמש זה </h5> 
               </div>
-              <div class = "col-sm-4 col-sm-offset-1">
-                  
+              <div class = "col-lg-4 col-lg-offset-1">
                   <div class = "vertical-menu">
-                    <!--<input type = "text" #txtTeamName>-->
                   <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
                     <a *ngIf = "team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
                   </div>

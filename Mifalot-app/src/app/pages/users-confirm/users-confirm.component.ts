@@ -53,7 +53,7 @@ showUserDetails(user)
 }
 
 // =====================
-// Changing user permission to 0
+// Changing user permission to 5
 // Next when user is loggin next time, he will be deleted
 
 blockUser()

@@ -1,0 +1,90 @@
+<!-- Page header -->
+<app-page-header [item] = "header"> </app-page-header>
+
+<div class = "container">
+
+    <!-- Show users -->
+    <div *ngIf = "!userSelected">
+  
+        <div class = "row">
+            <div class = "col-md-12 text-center"> 
+                <h5> לחץ על משתמש על מנת לערוך את הרשאותיו </h5>
+            </div>
+            <div class = "col-sm-4 col-sm-offset-2">
+                <div class = "list-group text-right" id = "list1">
+                    <a class = "list-group-item text-center active"> מנהלי אזור  </a>
+                    <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
+                        <a *ngSwitchCase = "'2'" class = "list-group-item" (click) = "showUserDetails(user)"> {{ user.name + " " + user.lastName }} </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "col-sm-4">
+                <div class = "list-group text-right" id = "list2">
+                    <a class = "list-group-item text-center active"> מאמנים </a>
+                    <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
+                        <a *ngSwitchCase = "'3'" class = "list-group-item" (click) = "showUserDetails(user)"> {{ user.name + " " + user.lastName }} </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Show users -->
+    
+    <!-- User details -->
+    <div *ngIf = "userSelected">
+
+        <!-- Note -->
+        <div class = "alert alert-warning text-right" role = "alert">
+        <strong> הערה:</strong> לאחר לחיצה על ״חסום״ המשתמש יחסם וכל הקבוצות שהיו רשומות תחתיו יתפנו
+        </div>
+        <!-- /Note -->
+        
+        <!-- User profile -->
+        <div class = "profile-head">
+            <div class = "row">
+                <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
+                    <div class = "panel panel-info">
+                        <div class = "panel-heading">
+                            <h3 class = "panel-title text-right"> {{ user.name + " " + user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
+                        </div>
+                        <div class = "panel-body">
+                            <div class = "col-md-12 col-lg-12"> 
+                                <table class = "table table-user-information text-right">
+                                    <tbody>
+                                        <tr>
+                                            <td *ngIf = "user.permission == 2"> מנהל אזור </td>
+                                            <td *ngIf = "user.permission == 3"> מאמן </td>
+                                            <td> סוג משתמש </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
+                                            <td> דוא״ל </td>
+                                        </tr>
+                                        <tr>     
+                                            <td> {{ user.phoneNumber }} </td>
+                                            <td> פלאפון </td>   
+                                        </tr>
+                                        <tr>     
+                                            <td> {{ user.birthDate }} </td>
+                                            <td> תאריך לידה  </td>   
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class = "panel-footer">
+                            <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /User profile -->
+
+    </div>
+    <!-- /User details -->
+
+</div>
+
+ 
