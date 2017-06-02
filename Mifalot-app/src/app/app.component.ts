@@ -16,8 +16,6 @@ export class AppComponent
 
   private displayName: string;
   private email: string;
-  private uid: string;
-  private permission: number;
 
   // ====================================
 

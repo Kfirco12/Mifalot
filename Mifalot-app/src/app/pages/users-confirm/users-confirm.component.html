@@ -1,8 +1,9 @@
+<!-- Page header -->
+<app-page-header [item] = "header"> </app-page-header>
 
 <div class = "container" >
 
-  <app-page-header [item] = "header"> </app-page-header>
-
+  <!-- Show users -->
   <div *ngIf = "!userSelected">
     <div class = "row" >
       <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
@@ -14,62 +15,64 @@
       </div>
     </div>
   </div>
+  <!-- /Show users -->
 
+  <!-- User details -->
   <div *ngIf = "userSelected && !userConfirmed">
-      <div class = "profile-head">
-        <div class = "row" >
-          <h4 class = "text-center">  :פרטי המשתמש אותו אתה עומד לאשר </h4>
-                <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
-                  <div class = "panel panel-info">
-                    <div class = "panel-heading">
-                       <h3 class = "panel-title text-right"> {{ user.name }} {{ user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
-                    </div>
-                    <div class = "panel-body">
-                          <table class = "table table-user-information text-right">
-                            <tbody>
-                              <tr>
-                                <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
-                                <td> דוא״ל </td>
-                              </tr>
-                              <tr>     
-                                <td> {{ user.phoneNumber }} </td>
-                                <td> פלאפון </td>   
-                              </tr>
-                              <tr>     
-                                <td> {{ user.birthDate }} </td>
-                                <td> תאריך לידה  </td>   
-                              </tr>
-                            </tbody>
-                          </table>
-                    </div>
-                    <div class = "panel-footer">
-                      <a type = "button" class = "btn btn-sm btn-success" (click) = "confirmUser()"> <i class = "glyphicon glyphicon-ok"></i> אשר </a>
-                      <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
-                    </div>
-                  </div>
+    <div class = "profile-head">
+      <div class = "row" >
+        <h4 class = "text-center">  :פרטי המשתמש אותו אתה עומד לאשר </h4>
+        <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
+          <div class = "panel panel-info">
+            <div class = "panel-heading">
+              <h3 class = "panel-title text-right"> {{ user.name }} {{ user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
             </div>
+          <div class = "panel-body">
+            <table class = "table table-user-information text-right">
+              <tbody>
+                <tr>
+                  <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
+                  <td> דוא״ל </td>
+                </tr>
+                <tr>     
+                  <td> {{ user.phoneNumber }} </td>
+                  <td> פלאפון </td>   
+                </tr>
+                <tr>     
+                  <td> {{ user.birthDate }} </td>
+                  <td> תאריך לידה  </td>   
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class = "panel-footer">
+            <a type = "button" class = "btn btn-sm btn-success" (click) = "confirmUser()"> <i class = "glyphicon glyphicon-ok"></i> אשר </a>
+            <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
+          </div>
         </div>
       </div>
-
-
-    <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
-
+    </div>
   </div>
+  <!-- 'Back' button -->
+  <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
+</div>
+<!-- /User details -->
 
+
+  <!-- User type & teams -->
   <div *ngIf = "userSelected && userConfirmed">
 
-    <div class="alert alert-info text-right" role="alert">
+    <!-- User type -->
+    <div class = "alert alert-info text-right" role = "alert">
       <strong> אישור משתמש:</strong> הנך עומד לאשר את {{ user.name }} {{ user.lastName }}, אנא בחר את סוג המשתמש ושייך אליו את הקבוצות הרצויות
     </div>
     <div class = "row text-center" data-toggle = "buttons">
-
       <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <label class = "btn btn-info btn-block" (click) = "showTeams('manager')">
           <input type = "radio" name = "options" id = "option2" autocomplete = "off">
           <span class = "glyphicon glyphicon-ok text-left"></span> <span class = "text-white"> מנהל אזור </span>
         </label>
       </div>
-  
       <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <label class = "btn btn-warning btn-block" (click) = "showTeams('coach')">
           <input type = "radio" name = "options" id = "option1" autocomplete = "off">
@@ -77,28 +80,35 @@
         </label>
       </div>
     </div>
+    <!-- /User type -->
+
 
     <!-- Show teams -->
     <div *ngIf = "chooseTeams">
-        <div class = "container">
-          <div class = "row">
-              <div class = "col-lg-12 text-center"> 
-                <h5> סמן את הקבוצות אותן תרצה לשייך למשתמש זה </h5> 
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-12 text-center"> 
+            <h5> סמן את הקבוצות אותן תרצה לשייך למשתמש זה </h5> 
+          </div>
+          <div class = "col-lg-4 col-lg-offset-1">
+            <div class = "vertical-menu">
+              <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
+                <a *ngIf = "team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
               </div>
-              <div class = "col-lg-4 col-lg-offset-1">
-                  <div class = "vertical-menu">
-                  <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
-                    <a *ngIf = "team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
-                  </div>
-              </div>
+            </div>
+            
+            <!-- Buttons -->
+            <button (click) = "associateTeamsToUser()" class = "btn btn-md btn-success btn-block" type = "submit"> שייך קבוצות נבחרות </button>
+            <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
 
-              <button (click) = "associateTeamsToUser()" class = "btn btn-md btn-success btn-block" type = "submit"> שייך קבוצות נבחרות </button>
-              <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
-     
+          </div>
         </div>
       </div>
-     </div>
     </div>
+    <!-- /Show teams -->
+
   </div>
+  <!-- /User type & teams -->
+
 </div>
 

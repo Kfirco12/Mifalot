@@ -18,15 +18,14 @@ export class HomeComponent implements OnInit
                     ]
 
   private adminButtons = [  
+                            { id: "users-management", txt: 'ניהול משתמשים פעילים', icon: 'fa fa-users fa-2x', color: 'btn-info' }, 
                             { id: "blocked-users", txt: 'משתמשים חסומים', icon: 'fa fa-user-times fa-2x', color: 'btn-danger' },
-                            { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-user-plus fa-2x', color: 'btn-success' },
-                            { id: "users-management", txt: 'ניהול משתמשים', icon: 'fa fa-users fa-2x', color: 'btn-info' }        
+                            { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-user-plus fa-2x', color: 'btn-success' }    
                           ]
 
   private user: FirebaseListObservable<any[]>;
 
   // ======================
-
 
   constructor(private afService: AF, private router: Router) 
   { 

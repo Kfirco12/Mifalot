@@ -11,21 +11,13 @@ export class UsersManagementComponent implements OnInit
 {
   private header = 
   { 
-     title: "ניהול משתמשים", 
+     title: "ניהול משתמשים פעילים", 
      subTitle: "שינוי וחסימת משתמשים פעילים",
      icon: "fa-users" 
   }
 
   // Flags
   private userSelected: boolean;
-  private userConfirmed: boolean;
-  private chooseTeams: boolean;
-
-  // String
-  private userType: string;
-
-  // Array
-  private selectedTeams;
 
   private user: any;
   private users: FirebaseListObservable<any[]>;
@@ -35,8 +27,7 @@ export class UsersManagementComponent implements OnInit
 
   constructor(private afService: AF) 
   {
-    this.userSelected = this.userConfirmed = this.chooseTeams = false;
-    this.selectedTeams = [];
+    this.userSelected = false;
     this.users = this.afService.af.database.list('registeredUsers');
     this.teams = this.afService.af.database.list('teams');
   }
