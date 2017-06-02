@@ -13,6 +13,7 @@ private text;
 private students = [];
 private str = '' ;
 private team = 'בית ספר אל תור - בנות';
+private output = 'out:\n';
 
   constructor(private afService: AF) { }
 
@@ -34,21 +35,28 @@ private team = 'בית ספר אל תור - בנות';
       var readInStrings = reader.result.split('\r\n');
        var pupils = { name: '', lastName:'',ID: Number, missed:0 };
       for(var i=0; i<readInStrings.length; i++){
-        if(i%3 == 0)
+        if(i%3 == 0){
           pupils.name = readInStrings[i];
+          this.output += readInStrings[i];
+          this.output += '\t';
+        }
   
-        else if(i%3 == 1)
+        else if(i%3 == 1){
           pupils.lastName = readInStrings[i];
-        
+          this.output += readInStrings[i];
+          this.output += '\t';
+      }
          else if(i%3 == 2){
           pupils.ID = readInStrings[i];
+          this.output += readInStrings[i];
+          this.output += '\t';
           this.students.push(pupils);
-          this.afService.af.database.list('teams/'+this.team+'/pupils').push(pupils);
+         // this.afService.af.database.list('teams/'+this.team+'/pupils').push(pupils);
           pupils = { name: '', lastName:'',ID: Number, missed:0 };
         }
       }
       
-      this.afService.af.database.list('teams/').update(this.team,{name:this.team});
+     // this.afService.af.database.list('teams/').update(this.team,{name:this.team});
 //var info = 
       console.log(this.students);
     };
