@@ -12,7 +12,7 @@ export class InsertComponent implements OnInit {
 private text;
 private students = [];
 private str = '' ;
-private team = 'בית ספר אל תור - בנות';
+private team = 'מתנ"ס סילואן - בנים 2';
 private output = 'out:\n';
 
   constructor(private afService: AF) { }
@@ -54,6 +54,8 @@ private output = 'out:\n';
       }
       
       this.afService.af.database.list('teams/').update(this.team,{name:this.team});
+      this.afService.af.database.list('teams/').update(this.team,{coachID:''});
+      this.afService.af.database.list('teams/').update(this.team,{managerID:''});
 //var info = 
       console.log(this.students);
     };
