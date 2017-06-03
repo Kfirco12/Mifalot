@@ -85,24 +85,10 @@
 
     <!-- Show teams -->
     <div *ngIf = "chooseTeams">
+      <!-- Calling 'associate-teams' component -->
+      <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
       <div class = "container">
-        <div class = "row">
-          <div class = "col-lg-12 text-center"> 
-            <h5> סמן את הקבוצות אותן תרצה לשייך למשתמש זה </h5> 
-          </div>
-          <div class = "col-lg-4 col-lg-offset-1">
-            <div class = "vertical-menu">
-              <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
-                <a *ngIf = "team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
-              </div>
-            </div>
-            
-            <!-- Buttons -->
-            <button (click) = "associateTeamsToUser()" class = "btn btn-md btn-success btn-block" type = "submit"> שייך קבוצות נבחרות </button>
-            <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
-
-          </div>
-        </div>
+        <button id = "btn-back" (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
       </div>
     </div>
     <!-- /Show teams -->

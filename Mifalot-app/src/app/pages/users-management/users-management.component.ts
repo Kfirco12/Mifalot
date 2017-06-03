@@ -18,8 +18,13 @@ export class UsersManagementComponent implements OnInit
 
   // Flags
   private userSelected: boolean;
+  private showUserTeams: boolean;
 
+  // Trasnfer user details to 'associate-teams' component
+  private userDetails: any;
   private user: any;
+
+  // Observers to DB
   private users: FirebaseListObservable<any[]>;
   private teams: FirebaseListObservable<any[]>;
 
@@ -27,7 +32,8 @@ export class UsersManagementComponent implements OnInit
 
   constructor(private afService: AF) 
   {
-    this.userSelected = false;
+    this.userDetails = [];
+    this.userSelected = this.showUserTeams = false;
     this.users = this.afService.af.database.list('registeredUsers');
     this.teams = this.afService.af.database.list('teams');
   }
@@ -46,13 +52,13 @@ export class UsersManagementComponent implements OnInit
 
   blockUser()
   {
-
     this.users.update(this.user.$key, { permission: 5 }).then(()  => 
     {
       this.teams.subscribe((snapshots) => 
       {
         snapshots.forEach((snapshot) => 
-        { // Coach
+        { 
+          // Coach
           if (this.user.permission == 3)
           {
             if (this.user.$key == snapshot.coachID)
@@ -69,6 +75,33 @@ export class UsersManagementComponent implements OnInit
       alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו")
       this.userSelected = false;
     });
+  }
+
+  // =====================
+
+  showTeams()
+  {
+    // Save user details
+    this.userDetails[0] = this.user;
+    this.userDetails[1] = 'users-management';
+    this.userDetails[2] = this.user.permission;
+
+    this.showUserTeams = true;
+  }
+
+  // =====================
+
+  backToUserInfo()
+  {
+    this.showUserTeams = false;
+  }
+    
+  // =====================
+
+  backToUsersList()
+  {
+    this.userDetails = [];
+    this.userSelected = this.showUserTeams = false;
   }
 
   // =====================

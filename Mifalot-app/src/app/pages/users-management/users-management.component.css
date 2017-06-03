@@ -7,3 +7,75 @@ strong
 {
     text-decoration: underline;
 }
+
+.btn-back
+{
+    margin-top: 1%;
+}
+
+#list-managers, #list-trainers
+{
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+/************************************************************/
+/********** list-managers & list-trainers Height  ***********/
+
+@media only screen and (max-height: 1366px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 1065px;
+    }
+}
+
+@media only screen and (max-height: 1024px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 735px;
+    }
+}
+
+@media only screen and (max-height: 736px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 230px;
+    }
+}
+
+@media only screen and (max-height: 732px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 470px;
+    }
+}
+
+@media only screen and (max-height: 667px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 405px;
+    }
+}
+
+@media only screen and (max-height: 640px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 380px;
+    }
+}
+
+@media only screen and (max-height: 568px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 305px;
+    }
+}

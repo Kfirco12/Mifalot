@@ -11,7 +11,6 @@ import { AF } from "../.././providers/af";
 
 export class UsersConfirmComponent implements OnInit 
 {
-
   private header = 
   { 
      title: "אישור משתמשים", 
@@ -27,141 +26,82 @@ export class UsersConfirmComponent implements OnInit
   // String
   private userType: string;
 
-  // Array
-  private selectedTeams;
-
+  // Trasnfer user details to 'associate-teams' component
+  private userDetails: any;
   private user: any;
+
+  // Observers to DB
   private users: FirebaseListObservable<any[]>;
   private teams: FirebaseListObservable<any[]>;
 
-// =====================
+  // =====================
 
   constructor(private afService: AF) 
   {
+    this.userDetails = [];
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
-    this.selectedTeams = [];
     this.users = this.afService.af.database.list('registeredUsers');
     this.teams = this.afService.af.database.list('teams');
   }
 
-// =====================
+  // =====================
 
-showUserDetails(user)
-{
-  this.user = user;
-  this.userSelected = true;
-}
-
-// =====================
-// Changing user permission to 5
-// Next when user is loggin next time, he will be deleted
-
-blockUser()
-{
-  this.users.update(this.user.$key, { permission: 5 }).then(()  => 
+  showUserDetails(user)
   {
-    alert("המשתמש נחסם")
-    this.userSelected = false;
-    this.user = null;
-  });
-}
-
-// =====================
-
-confirmUser()
-{
-  this.userConfirmed = true;
-}
-
-// =====================
-
-showTeams(type)
-{
-  this.userType = type;
-  this.chooseTeams = true;
-}
-
-// =====================
-
-saveTeamToAssociate(team)
-{
-  var index = this.selectedTeams.indexOf(team);
-
-  // pupil doesnt exist in array
-  if (index == -1) 
-  {
-    this.selectedTeams.push(team); 
-  }    
-  else
-  {
-    this.selectedTeams.splice(index, 1);
+    this.user = user;
+    this.userSelected = true;
   }
-}
 
-// ==============================
+  // =====================
+  // Changing user permission to 5
+  // Next when user is loggin next time, he will be deleted
 
-isChecked(team)
-{
-  var index = this.selectedTeams.indexOf(team);
+  blockUser()
+  {
+    this.users.update(this.user.$key, { permission: 5 }).then(()  => 
+    {
+      alert("המשתמש נחסם")
+      this.userSelected = false;
+      this.user = null;
+    });
+  }
 
-  // team doesnt exist in array
-  if (index == -1) 
-    return false;
-  
-  return true;
-}
-  
-// =====================
+  // =====================
 
-associateTeamsToUser()
-{
-  var length = this.selectedTeams.length;
+  confirmUser()
+  {
+    this.userConfirmed = true;
+  }
+
+  // =====================
+
+  showTeams(type)
+  {
+    this.userType = type;
+
+    this.userDetails[0] = this.user;
+    this.userDetails[1] = "users-confirm";
     
-  if (length == 0)
-  {
-    alert("אנא בחר לפחות קבוצה אחת");
-    return;
+    if (type == 'manager')
+      this.userDetails[2] = 2;
+    else if (type == 'coach')
+      this.userDetails[2] = 3;
+
+    this.chooseTeams = true;
   }
 
-  // field to update inside the choosen team
-  var field = this.userType + "ID";
+  // =====================
 
-  for (var i = 0; i < length; i++)
-    this.teams.update(this.selectedTeams[i].name, { coachID : this.user.$key });
+  resetAll()
+  {
+      this.userSelected =  this.userConfirmed = this.chooseTeams = false;
+      this.user = this.userType = null;
+  }
 
-  alert(length +  " קבוצות שויכו בהצלחה!");
+  // =====================
 
-  // Updating user permission acording to his type
-  this.updateUserPermission();
-}
+  ngOnInit() { }
 
-// =====================
-
-updateUserPermission()
-{
-  var newPermission;
-
-  if (this.userType == "coach")
-    newPermission = 3;
-  else
-    newPermission = 2;
-
-  this.users.update(this.user.$key, {permission: newPermission});
-}
-
-// =====================
-
-resetAll()
-{
-    this.userSelected =  this.userConfirmed = this.chooseTeams = false;
-    this.user = this.userType = null;
-    this.selectedTeams = [];
-}
-
-// =====================
-
-ngOnInit() { }
-
-// =====================
+  // =====================
 
 }

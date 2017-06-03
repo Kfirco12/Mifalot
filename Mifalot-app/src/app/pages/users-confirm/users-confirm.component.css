@@ -10,6 +10,7 @@ button
     height: 100%;
 }
 
+
 /*********************/
 /***** User info *****/
 /*********************/
@@ -50,75 +51,7 @@ input[type = "radio"]
     visibility: hidden;
 }
 
-.green 
+#btn-back
 {
-  background: #7acd47;
-  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.15, #ace44b),color-stop(1, #7acd47));
-  background-image: -webkit-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -moz-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -ms-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -o-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: linear-gradient(to bottom, #ace44b 15%, #7acd47 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#ace44b');
-}
-
-
-
-/****************************************/
-/********** Scrollbar Height  ***********/
-
-@media only screen and (max-height: 1366px)
-{
-    .vertical-menu 
-    {
-        height: 1065px;
-    }
-}
-
-@media only screen and (max-height: 1024px)
-{
-    .vertical-menu 
-    {
-        height: 735px;
-    }
-}
-
-@media only screen and (max-height: 736px)
-{
-    .vertical-menu 
-    {
-        height: 280px;
-    }
-}
-
-@media only screen and (max-height: 732px)
-{
-    .vertical-menu 
-    {
-        height: 470px;
-    }
-}
-
-@media only screen and (max-height: 667px)
-{
-    .vertical-menu 
-    {
-        height: 405px;
-    }
-}
-
-@media only screen and (max-height: 640px)
-{
-    .vertical-menu 
-    {
-        height: 380px;
-    }
-}
-
-@media only screen and (max-height: 568px)
-{
-    .vertical-menu 
-    {
-        height: 305px;
-    }
+    margin-top: 1%;
 }
