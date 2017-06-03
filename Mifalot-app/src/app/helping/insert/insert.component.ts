@@ -12,7 +12,8 @@ export class InsertComponent implements OnInit {
 private text;
 private students = [];
 private str = '' ;
-private team = 'בית ספר אל תור - בנות';
+private team = 'מתנ"ס סילואן - בנים 2';
+private output = 'out:\n';
 
   constructor(private afService: AF) { }
 
@@ -28,20 +29,24 @@ private team = 'בית ספר אל תור - בנות';
       
       var contents: any = file.target;
       this.text = contents.result;
-      //console.log(reader.result.substring(0, 1000));
-      //this.st = reader.result;
-      //console.log(this.st);
       var readInStrings = reader.result.split('\r\n');
        var pupils = { name: '', lastName:'',ID: Number, missed:0 };
       for(var i=0; i<readInStrings.length; i++){
-        if(i%3 == 0)
+        if(i%3 == 0){
           pupils.name = readInStrings[i];
+          this.output += readInStrings[i];
+          this.output += '\t';
+        }
   
-        else if(i%3 == 1)
+        else if(i%3 == 1){
           pupils.lastName = readInStrings[i];
-        
+          this.output += readInStrings[i];
+          this.output += '\t';
+      }
          else if(i%3 == 2){
           pupils.ID = readInStrings[i];
+          this.output += readInStrings[i];
+          this.output += '\t';
           this.students.push(pupils);
           this.afService.af.database.list('teams/'+this.team+'/pupils').push(pupils);
           pupils = { name: '', lastName:'',ID: Number, missed:0 };
@@ -49,13 +54,12 @@ private team = 'בית ספר אל תור - בנות';
       }
       
       this.afService.af.database.list('teams/').update(this.team,{name:this.team});
+      this.afService.af.database.list('teams/').update(this.team,{coachID:''});
+      this.afService.af.database.list('teams/').update(this.team,{managerID:''});
 //var info = 
       console.log(this.students);
     };
     
-    
-   //console.log(reader.readAsText(fileName))b
-   //console.log(this.str);
 
 }
 
