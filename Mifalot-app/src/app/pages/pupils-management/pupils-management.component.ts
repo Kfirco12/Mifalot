@@ -70,7 +70,7 @@ export class PupilsManagementComponent implements OnInit
 
   chooseTeam()
   {
-      this.initializeAddVariables();
+      this.noTeamSelected = true;
   }
   
   // ==============================
