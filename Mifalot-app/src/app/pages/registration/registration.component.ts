@@ -16,7 +16,7 @@ export class RegistrationComponent
   constructor(private afService: AF, private router: Router) { }
 
 	// registers the user and logs them in
-  register(event, name, lastName, phoneNumber, email, birthDate, password, passwordValidation) 
+  register(event, name, lastName, phoneNumber, email, ID, password, passwordValidation) 
   {
     event.preventDefault();
 
@@ -28,7 +28,7 @@ export class RegistrationComponent
     }
 
     this.afService.registerUser(email, password).then((user) => {
-      this.afService.saveUserInfoFromForm(user.uid, name, lastName, phoneNumber, email, birthDate).then(() => {
+      this.afService.saveUserInfoFromForm(user.uid, name, lastName, phoneNumber, email, ID).then(() => {
         this.router.navigate(['loading']);
       })
         .catch((error) => {

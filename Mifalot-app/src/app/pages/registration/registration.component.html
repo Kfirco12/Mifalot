@@ -10,7 +10,7 @@
 
     <br>
 
-    <form class = "form-signin" (submit) = "register($event, name.value, lastName.value, phoneNumber.value, email.value, birthDate.value, password.value, passwordValidation.value)">
+    <form class = "form-signin" (submit) = "register($event, name.value, lastName.value, phoneNumber.value, email.value, ID.value, password.value, passwordValidation.value)">
       <label for = "name" class = "sr-only"> שם פרטי </label>
       <div class = "input-group">
         <input #name type = "text" id = "name" class = "form-control" placeholder = "שם פרטי" required = "">
@@ -43,10 +43,10 @@
 
       <br>
 
-      <label for = "name" class = "sr-only"> תאריך לידה </label>
+      <label for = "name" class = "sr-only"> ת.ז </label>
       <div class = "input-group">
-        <input #birthDate type = "date" id = "birthDate" class = "form-control" placeholder = "תאריך לידה" required = "">
-          <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
+        <input #ID type = "number" pattern = ".{9,10}" id = "ID" class = "form-control" placeholder = "תעודת זהות" required = "">
+          <span class = "input-group-addon"><i class = "fa fa-id-card"></i></span> 
       </div>
 
       <br>

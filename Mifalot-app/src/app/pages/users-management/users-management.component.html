@@ -59,18 +59,18 @@
                                             <td *ngIf = "user.permission == 3"> מאמן </td>
                                             <td> סוג משתמש </td>
                                         </tr>
+                                        <tr>     
+                                            <td> {{ user.ID }} </td>
+                                            <td> תעודת זהות  </td>   
+                                        </tr>
                                         <tr>
                                             <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
                                             <td> דוא״ל </td>
-                                        </tr>
+                                        </tr>   
                                         <tr>     
                                             <td> {{ user.phoneNumber }} </td>
                                             <td> פלאפון </td>   
-                                        </tr>
-                                        <tr>     
-                                            <td> {{ user.birthDate }} </td>
-                                            <td> תאריך לידה  </td>   
-                                        </tr>
+                                        </tr>                    
                                     </tbody>
                                 </table>
                             </div>
