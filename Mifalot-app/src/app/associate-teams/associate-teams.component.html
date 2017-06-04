@@ -1,0 +1,19 @@
+ 
+ <div class = "container">
+    <div class = "row">
+      <div class = "col-lg-12 text-center"> 
+        <h5> סמן את הקבוצות אותן תרצה לשייך למשתמש זה </h5> 
+      </div>
+      <div class = "col-lg-4 col-lg-offset-1">
+        <div class = "vertical-menu" [class.vertical-menu-bigger] = "userDetails[1] == 'users-management'">
+          <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
+            <a *ngIf = "userDetails[2] == 3 && team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
+            <a *ngIf = "userDetails[2] == 2 && team.managerID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>
+          </div>
+        </div>
+        <br>
+        <!-- Buttons -->
+        <button (click) = "associateTeamsToUser()" class = "btn btn-md btn-success btn-block" type = "submit"> שייך קבוצות נבחרות </button>
+      </div>
+    </div>
+</div>

@@ -14,7 +14,6 @@ export class AF
   private displayName: string;
   private email: string;
   private uid: string;
-  private permission: number;
   
   // Array
   private userTeams;
@@ -85,7 +84,7 @@ export class AF
 
   // ================================
 
-  saveUserInfoFromForm(uid, name, lastName, phoneNumber, email, birthDate) 
+  saveUserInfoFromForm(uid, name, lastName, phoneNumber, email, ID) 
   {      
     return this.af.database.object('registeredUsers/' + uid).set(
     {
@@ -93,7 +92,7 @@ export class AF
       lastName: lastName,
       phoneNumber: phoneNumber,
       email: email,
-      birthDate: birthDate, 
+      ID: ID, 
       permission: 4
     }).then(() => 
       {

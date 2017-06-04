@@ -47,12 +47,12 @@ export class PupilsManagementComponent implements OnInit
 
   constructor(private afService: AF ) 
   {
+    this.noTeamSelected = true;
     this.initializeRemoveVariables();
     this.initializeAddVariables();
 
     this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = '';  
     this.teams = this.afService.getUserTeams().sort();
-
   }
 
   // ==============================
@@ -70,7 +70,7 @@ export class PupilsManagementComponent implements OnInit
 
   chooseTeam()
   {
-      this.initializeAddVariables();
+      this.noTeamSelected = true;
   }
   
   // ==============================
@@ -139,7 +139,7 @@ export class PupilsManagementComponent implements OnInit
 
   initializeAddVariables()
   {
-    this.noTeamSelected = true;
+    
     this.addPupils = this.thereIsNewPupil = false;
 
     this.newPupils = [];
@@ -222,8 +222,9 @@ export class PupilsManagementComponent implements OnInit
     alert(length +  " חניכים הוסרו בהצלחה!");
 
     // Reset values
+    this.noTeamSelected = true;
     this.initializeRemoveVariables();
-    this.initializeAddVariables();
+    // this.initializeAddVariables();
 
   }
 

@@ -4,14 +4,14 @@
 <div class = "container">
 
     <!-- Show users -->
-    <div *ngIf = "!userSelected">
+    <div *ngIf = "!userSelected && !showUserTeams">
   
         <div class = "row">
-            <div class = "col-md-12 text-center"> 
+            <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"> 
                 <h5> לחץ על משתמש על מנת לערוך את הרשאותיו </h5>
             </div>
-            <div class = "col-sm-4 col-sm-offset-2">
-                <div class = "list-group text-right" id = "list1">
+            <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class = "list-group text-right" id = "list-managers">
                     <a class = "list-group-item text-center active"> מנהלי אזור  </a>
                     <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
                         <a *ngSwitchCase = "'2'" class = "list-group-item" (click) = "showUserDetails(user)"> {{ user.name + " " + user.lastName }} </a>
@@ -19,8 +19,8 @@
                 </div>
             </div>
 
-            <div class = "col-sm-4">
-                <div class = "list-group text-right" id = "list2">
+            <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class = "list-group text-right" id = "list-trainers">
                     <a class = "list-group-item text-center active"> מאמנים </a>
                     <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
                         <a *ngSwitchCase = "'3'" class = "list-group-item" (click) = "showUserDetails(user)"> {{ user.name + " " + user.lastName }} </a>
@@ -31,8 +31,10 @@
     </div>
     <!-- /Show users -->
     
+    <!-- ================================================================================================================================================ -->
+
     <!-- User details -->
-    <div *ngIf = "userSelected">
+    <div *ngIf = "userSelected && !showUserTeams">
 
         <!-- Note -->
         <div class = "alert alert-warning text-right" role = "alert">
@@ -57,33 +59,53 @@
                                             <td *ngIf = "user.permission == 3"> מאמן </td>
                                             <td> סוג משתמש </td>
                                         </tr>
+                                        <tr>     
+                                            <td> {{ user.ID }} </td>
+                                            <td> תעודת זהות  </td>   
+                                        </tr>
                                         <tr>
                                             <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
                                             <td> דוא״ל </td>
-                                        </tr>
+                                        </tr>   
                                         <tr>     
                                             <td> {{ user.phoneNumber }} </td>
                                             <td> פלאפון </td>   
-                                        </tr>
-                                        <tr>     
-                                            <td> {{ user.birthDate }} </td>
-                                            <td> תאריך לידה  </td>   
-                                        </tr>
+                                        </tr>                    
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class = "panel-footer">
+                            <!-- Buttons -->
                             <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
+                            <a type = "button" class = "btn btn-sm btn-info" (click) = "showTeams()"> <i class = "glyphicon glyphicon-plus"></i> שיוך קבוצות </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUsersList()"> חזור לרשימת משתמשים </a>
         <!-- /User profile -->
 
     </div>
     <!-- /User details -->
+
+    <!-- ================================================================================================================================================ -->
+
+    <!-- Show teams -->
+    <div *ngIf = "showUserTeams">
+        <!-- Calling 'associate-teams' component -->
+        <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
+        <div class = "container">
+            <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUserInfo()"> חזור לפרטי משתמש </a>
+        </div>
+    </div>
+    
+    <!-- /Show teams -->
+    
+    <!-- ================================================================================================================================================ -->
+
 
 </div>
 
