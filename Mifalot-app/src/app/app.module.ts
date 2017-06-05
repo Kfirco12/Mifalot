@@ -26,6 +26,7 @@ import { InsertComponent } from './helping/insert/insert.component';
 import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
+import { PushComponent } from './helping/push/push.component';
 
 // ======================================================
 // Initialize Firebase 
@@ -74,7 +75,8 @@ const routes: Routes = [
     InsertComponent,
     BlockedUsersComponent,
     UsersManagementComponent,
-    AssociateTeamsComponent
+    AssociateTeamsComponent,
+    PushComponent
   ],
   imports: [
     BrowserModule,
