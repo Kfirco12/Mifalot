@@ -1,57 +1,65 @@
+
+<!-- Page Header -->
 <app-page-header [item] = "header"> </app-page-header>
 
- <!-- Page Content -->
-<div class = "container" >
+<!-- ================================================================================================================================================ -->
+<!-- Page Content -->
 
-    <div class = "row" >
+<div class = "container" > 
 
-<div *ngIf = "noTeamSelected" >
-  <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
-        <div *ngFor = "let team of teams; let i = index" [attr.data-index]="i" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-          <span class = "thumbnail" (click) = "getPupils(teams[i])"> 
-            <button type = "button" class = "btn btn-default btn-block btn-team" > {{ teams[i] }} <i class = "fa fa-soccer-ball-o" > </i> </button>
-          </span>
+  <!-- Choose team -->
+  <div *ngIf = "noTeamSelected" >
+    <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
+    <div *ngFor = "let team of teams; let i = index" [attr.data-index]="i" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+      <span class = "thumbnail" (click) = "getPupils(teams[i])"> 
+        <button type = "button" class = "btn btn-default btn-block btn-team" > {{ teams[i] }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+      </span>
+    </div>  
+  </div>
+
+<!-- ================================================================================================================================================ -->
+
+  <!-- After selected team -->
+  <div *ngIf = "!noTeamSelected" >
+
+  <!-- ======================== -->
+  <!--checklist-->
+
+    <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
+    <div class = "vertical-menu">
+      <div *ngFor = "let pupils of pupils">
+        <div class = "checkbox">
+          <label class = "pupil-name" for = "{{ pupils.ID }}">  {{ pupils.name }} {{pupils.lastName}} - {{pupils.ID}}
+            <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
+            <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
+          </label>
+          <hr>
         </div>
-       
-</div>
-    </div>
-
- <!--checklist-->
-
- <div *ngIf = "!noTeamSelected" >
-   <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
-          <div class = "vertical-menu">
-              <div *ngFor = "let pupils of pupils">
-                <div class = "checkbox">
-                 <label class = "pupil-name" for = "{{ pupils.ID }}">  {{ pupils.name }} {{pupils.lastName}} - {{pupils.ID}}
-                  <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
-                  <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
-              </label>
-              <hr>
-                </div>
-            </div>
+      </div>
    </div>
 
+  <!-- ======================== -->
+  <!-- buttons -->
 
+  <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+    <a class = "btn-bottom" (click) = "saveAttendance()"> 
+      <button type = "button" class = "btn btn-primary btn-block btn-confirm" > שליחת טופס </button>
+    </a>
+  </div>
 
-   <!-- buttons -->
- 
- <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
-          <a class = "btn-bottom" (click) = "saveAttendance()"> 
-            <button type = "button" class = "btn btn-primary btn-block btn-confirm" > שליחת טופס </button>
-          </a>
-        </div>
-
- <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
-          <a class = "btn-bottom" (click) = "startOver()"> 
-            <button type = "button" class = "btn btn-danger btn-block btn-confirm" > איפוס טופס </button>
-          </a>
-        </div>
-
+  <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+    <a class = "btn-bottom" (click) = "startOver()"> 
+      <button type = "button" class = "btn btn-danger btn-block btn-confirm" > איפוס טופס </button>
+    </a>
+  </div>
 
   </div>
-</div>
+  <!-- /After selected team -->
 
+<!-- ================================================================================================================================================ -->
+
+</div>
+<!-- /Page content -->
 
 
 
