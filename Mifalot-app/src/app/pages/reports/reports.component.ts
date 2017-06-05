@@ -139,11 +139,15 @@ export class ReportsComponent implements OnInit
   isPupilPresence(presence)
   {
     if (presence == true)
-      this.pupilPresence = "כן";
+    {
+        this.pupilPresence = "כן";
+        return true;
+    }
     else
-      this.pupilPresence = "לא";
-
-      return true;
+    {
+        this.pupilPresence = "לא";
+        return false;
+    }
   }
 
   // ============================================================
