@@ -21,6 +21,7 @@ input[type = text]
 input
 {
   padding: 1%;
+  direction: rtl;
 }
 
 .chat-title
