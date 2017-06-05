@@ -62,8 +62,8 @@
 						</thead>
 						<tbody>
 							<tr *ngFor = "let pupil of pupils; let i = index" [attr.data-index] = "i">
-								<td *ngIf = "isPupilPresence(pupil.presence)" bgcolor="#00FF00"> {{ pupilPresence }} </td>
-								<td *ngIf = "!isPupilPresence(pupil.presence)" bgcolor="#FF0000"> {{ pupilPresence }} </td>
+								<td *ngIf = "isPupilPresence(pupil.presence)"><font color="#2eb82e"> {{ pupilPresence }} </font></td>
+								<td *ngIf = "!isPupilPresence(pupil.presence)"><font color="#FF0000"> {{ pupilPresence }} </font></td>
 								<td> {{ pupil.ID }} </td>
 								<td> {{ pupil.lastName }} </td>
 								<td> {{ pupil.name }} </td>
