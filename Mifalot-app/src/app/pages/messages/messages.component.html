@@ -1,4 +1,5 @@
 
+<!-- ================================================================================================================================================ -->
 <!-- Error message -->
 
 <div class = "container">
@@ -10,11 +11,12 @@
 </div>
 
 <!-- /Error message -->
-
-
+<!-- ================================================================================================================================================ -->
 <!-- Page header -->
+
 <app-page-header [item] = "header"> </app-page-header>
 
+<!-- Page content -->
 <div class = "container" >
 
 <!-- Selecting chat room or adding a new one -->
@@ -39,8 +41,7 @@
 </div>
 
 <!-- /Selecting chat room or adding a new one -->
-
-
+<!-- ================================================================================================================================================ -->
 <!-- Create a new chat room -->
 
 <div *ngIf = "createNewChatRoom">
@@ -64,11 +65,11 @@
 </div>
 
 <!-- /Create a new chat room -->
-
-
-  <!-- Chat messages -->
+<!-- ================================================================================================================================================ -->
+<!-- Chat messages -->
 
   <div *ngIf = "!noChatRoomSelected && !createNewChatRoom">
+    
     <span class = "chat-title"> {{ chatRoomTitle }} </span>
     <div #scrollMe class = "vertical-menu" >
       <div *ngFor = "let message of currentChat | async" > 
@@ -86,6 +87,8 @@
     </div>
 
     <!-- /Chat messages -->
+
+    <!-- =================== -->
 
     <!-- Send message input -->
 

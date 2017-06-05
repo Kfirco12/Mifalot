@@ -1,9 +1,12 @@
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
 
+<!-- Page content -->
 <div class = "container" >
 
+  <!-- =========================================================================================================================== -->
   <!-- Show users -->
+
   <div *ngIf = "!userSelected">
     <div class = "row" >
       <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
@@ -15,9 +18,11 @@
       </div>
     </div>
   </div>
+  
   <!-- /Show users -->
-
+  <!-- =========================================================================================================================== -->
   <!-- User details -->
+
   <div *ngIf = "userSelected && !userConfirmed">
     <div class = "profile-head">
       <div class = "row" >
@@ -27,42 +32,45 @@
             <div class = "panel-heading">
               <h3 class = "panel-title text-right"> {{ user.name }} {{ user.lastName }} <span class = "fa fa-user-circle-o"></span> </h3>
             </div>
-          <div class = "panel-body">
-            <table class = "table table-user-information text-right">
-              <tbody>
-                <tr>
-                  <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
-                  <td> דוא״ל </td>
-                </tr>
-                <tr>     
-                  <td> {{ user.phoneNumber }} </td>
-                  <td> פלאפון </td>   
-                </tr>
-                <tr>     
-                  <td> {{ user.ID }} </td>
-                  <td> תעודת זהות  </td>   
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class = "panel-footer">
-            <a type = "button" class = "btn btn-sm btn-success" (click) = "confirmUser()"> <i class = "glyphicon glyphicon-ok"></i> אשר </a>
-            <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
+            <div class = "panel-body">
+              <table class = "table table-user-information text-right">
+                <tbody>
+                  <tr>
+                    <td><a href = "{{ userEmail }}"> {{ user.email }} </a></td>
+                    <td> דוא״ל </td>
+                  </tr>
+                  <tr>     
+                    <td> {{ user.phoneNumber }} </td>
+                    <td> פלאפון </td>   
+                  </tr>
+                  <tr>     
+                    <td> {{ user.ID }} </td>
+                    <td> תעודת זהות  </td>   
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class = "panel-footer">
+              <a type = "button" class = "btn btn-sm btn-success" (click) = "confirmUser()"> <i class = "glyphicon glyphicon-ok"></i> אשר </a>
+              <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- 'Back' button -->
+    <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
   </div>
-  <!-- 'Back' button -->
-  <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
-</div>
-<!-- /User details -->
 
-
+  <!-- /User details -->
+  <!-- =========================================================================================================================== -->
   <!-- User type & teams -->
+
   <div *ngIf = "userSelected && userConfirmed">
 
+    <!-- =================== -->
     <!-- User type -->
+
     <div class = "alert alert-info text-right" role = "alert">
       <strong> אישור משתמש:</strong> הנך עומד לאשר את {{ user.name }} {{ user.lastName }}, אנא בחר את סוג המשתמש ושייך אליו את הקבוצות הרצויות
     </div>
@@ -80,10 +88,11 @@
         </label>
       </div>
     </div>
+
     <!-- /User type -->
-
-
+    <!-- =================== -->
     <!-- Show teams -->
+
     <div *ngIf = "chooseTeams">
       <!-- Calling 'associate-teams' component -->
       <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
@@ -94,6 +103,7 @@
     <!-- /Show teams -->
 
   </div>
+  <!-- =========================================================================================================================== -->
   <!-- /User type & teams -->
 
 </div>

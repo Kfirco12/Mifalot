@@ -1,9 +1,16 @@
 
+<!-- Error message -->
+
 <div *ngIf = "error" class = "alert alert-warning" role = "alert">
   <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
   <span class = "sr-only"> Error: </span>
   {{ error }}
 </div>
+
+<!-- /Error message -->
+<!-- =========================================================================================================================== -->
+<!-- Register form -->
+
 <div class = "modal-dialog">
   <div class = "registermodal-container">
     <h1> הרשמה </h1>
@@ -11,6 +18,8 @@
     <br>
 
     <form class = "form-signin" (submit) = "register($event, name.value, lastName.value, phoneNumber.value, email.value, ID.value, password.value, passwordValidation.value)">
+      
+      <!-- Name -->
       <label for = "name" class = "sr-only"> שם פרטי </label>
       <div class = "input-group">
         <input #name type = "text" id = "name" class = "form-control" placeholder = "שם פרטי" required = "">
@@ -19,7 +28,8 @@
 
       <br>
 
-         <label for = "name" class = "sr-only"> שם משפחה </label>
+      <!-- Last name -->
+      <label for = "name" class = "sr-only"> שם משפחה </label>
       <div class = "input-group">
         <input #lastName type = "text" id = "lastName" class = "form-control" placeholder = "שם משפחה" required = "">
           <span class = "input-group-addon"><i class = "fa fa-user"></i></span> 
@@ -27,6 +37,7 @@
 
       <br>
 
+      <!-- Phone number -->
      <label for = "name" class = "sr-only"> מס׳ טלפון </label>
       <div class = "input-group">
         <input #phoneNumber type = "number" id = "lastName" class = "form-control" placeholder = "מס׳ טלפון" required = "">
@@ -35,6 +46,7 @@
 
       <br>
 
+      <!-- Email -->
       <label for = "email" class = "sr-only"> כתובת דוא״ל </label>
       <div class = "input-group">
         <input #email type = "email" id = "email" class = "form-control" placeholder = "כתובת דוא״ל" required = "" autofocus = "">
@@ -43,6 +55,7 @@
 
       <br>
 
+      <!-- ID -->
       <label for = "name" class = "sr-only"> ת.ז </label>
       <div class = "input-group">
         <input #ID type = "number" pattern = ".{9,10}" id = "ID" class = "form-control" placeholder = "תעודת זהות" required = "">
@@ -51,6 +64,7 @@
 
       <br>
 
+      <!-- Password -->
       <label for = "inputPassword" class = "sr-only"> סיסמה </label>
       <div class = "input-group">
         <input #password type = "password" id = "inputPassword" class = "form-control" placeholder = "סיסמה" required = "">
@@ -59,6 +73,7 @@
 
       <br>
 
+      <!-- Password validation -->
       <label for = "inputPassword" class = "sr-only"> סיסמה </label>
       <div class = "input-group">
         <input #passwordValidation type = "password" id = "inputPassword" class = "form-control" placeholder = "אימות סיסמה" required = "">
@@ -67,12 +82,16 @@
 
       <br>
 
+      <!-- Sign up button -->
       <button class = "btn btn-md btn-primary btn-block" type = "submit"> הירשם </button>
 
     </form>
+
     <br>
-          <button class = "btn btn-md btn-primary btn-block" (click) = "goToLogin()"> חזור להתחברות </button>
-  </div>)
+
+    <!-- Back button -->
+    <button class = "btn btn-md btn-primary btn-block" (click) = "goToLogin()"> חזור למסך התחברות </button>
+
+  </div>
 </div>
-
-
+<!-- /Register form -->

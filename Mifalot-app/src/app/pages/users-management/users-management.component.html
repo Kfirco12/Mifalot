@@ -1,9 +1,11 @@
+
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
 
-<div class = "container">
+<!-- ================================================================================================================================================ -->
+<!-- Show users -->
 
-    <!-- Show users -->
+<div class = "container">
     <div *ngIf = "!userSelected && !showUserTeams">
   
         <div class = "row">
@@ -29,16 +31,18 @@
             </div>
         </div>
     </div>
-    <!-- /Show users -->
-    
-    <!-- ================================================================================================================================================ -->
+</div>
 
-    <!-- User details -->
+<!-- /Show users -->
+<!-- ================================================================================================================================================ -->
+<!-- User details -->
+
+<div class = "container">
     <div *ngIf = "userSelected && !showUserTeams">
 
         <!-- Note -->
         <div class = "alert alert-warning text-right" role = "alert">
-        <strong> הערה:</strong> לאחר לחיצה על ״חסום״ המשתמש יחסם וכל הקבוצות שהיו רשומות תחתיו יתפנו
+            <strong> הערה:</strong> לאחר לחיצה על ״חסום״ המשתמש יחסם וכל הקבוצות שהיו רשומות תחתיו יתפנו
         </div>
         <!-- /Note -->
         
@@ -75,8 +79,8 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Buttons -->
                         <div class = "panel-footer">
-                            <!-- Buttons -->
                             <a type = "button" class = "btn btn-sm btn-danger" (click) = "blockUser()"> <i class = "glyphicon glyphicon-remove"></i> חסום </a>
                             <a type = "button" class = "btn btn-sm btn-info" (click) = "showTeams()"> <i class = "glyphicon glyphicon-plus"></i> שיוך קבוצות </a>
                         </div>
@@ -87,13 +91,14 @@
 
         <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUsersList()"> חזור לרשימת משתמשים </a>
         <!-- /User profile -->
-
     </div>
-    <!-- /User details -->
+</div>
 
-    <!-- ================================================================================================================================================ -->
+<!-- /User details -->
+<!-- ================================================================================================================================================ -->
+<!-- Show teams -->
 
-    <!-- Show teams -->
+<div class = "container">
     <div *ngIf = "showUserTeams">
         <!-- Calling 'associate-teams' component -->
         <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
@@ -101,12 +106,11 @@
             <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUserInfo()"> חזור לפרטי משתמש </a>
         </div>
     </div>
-    
-    <!-- /Show teams -->
-    
-    <!-- ================================================================================================================================================ -->
-
-
 </div>
+
+<!-- /Show teams -->    
+<!-- ================================================================================================================================================ -->
+
+
 
  

@@ -1,29 +1,36 @@
+
+<!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
+
+<!-- ================================================================================================================================================ -->
 
 <div class = "container">
 
     <!-- Buttons -->
 
-        <!-- Select Team -->
-        <div class = "row">
-            <div *ngIf = "noTeamSelected && !addPupils && !removePupils">
-                <div class = "team-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h4 class = "text-right"> :בחירת קבוצה </h4>
-                </div>
-
-                <div *ngFor = "let team of teams" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-                    <span class = "thumbnail" (click) = "getPupilsByTeam(team)"> 
-                        <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
-                    </span>
-                </div>
+    <!-- Select Team -->
+    <div class = "row">
+        <div *ngIf = "noTeamSelected && !addPupils && !removePupils">
+            <div class = "team-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4 class = "text-right"> :בחירת קבוצה </h4>
             </div>
 
-            <div *ngIf = "!noTeamSelected && !addPupils">
-                <h4 class = "text-center choosen-team"> הקבוצה שנבחרה היא: {{ choosenTeamText }} </h4>
+            <div *ngFor = "let team of teams" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+                <span class = "thumbnail" (click) = "getPupilsByTeam(team)"> 
+                    <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+                </span>
             </div>
         </div>
-        <!-- /Select Team -->
 
+        <div *ngIf = "!noTeamSelected && !addPupils">
+            <h4 class = "text-center choosen-team"> הקבוצה שנבחרה היא: {{ choosenTeamText }} </h4>
+        </div>
+    </div>
+    <!-- /Select Team -->
+
+    <!-- ======================== -->
+
+    <!-- Choose option -->
 
     <div *ngIf = "!noTeamSelected && !addPupils && !removePupils" class = "buttons">
        
@@ -80,18 +87,15 @@
             <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להוספה  </h5>
         </div>
         
+        <!-- Buttons -->
         <button (click) = "addNewPupilsToDB()" class = "btn btn-md btn-success btn-block" type = "submit"> אישור הוספת החניכים </button>
         <button (click) = "chooseTeam()" class = "btn btn-md btn-primary btn-block" type = "submit"> בחירה מחדש </button>
 
-    
-
     </div>
 
-    <!-- /Buttons -->
-
-<!-- =========================================================================================================================== -->
-
-<!-- Remove Pupils --> 
+    <!-- /Add pupils -->
+    <!-- =========================================================================================================================== -->
+    <!-- Remove Pupils --> 
 
     <div *ngIf = "removePupils && !noTeamSelected"> 
        
@@ -128,8 +132,7 @@
         <!--<button (click) = "showRemovePupils()" class = "btn btn-md btn-primary btn-block" type = "submit"> סיום </button>-->
     </div>
 
-
-     
+    <!-- =========================================================================================================================== -->
     <!-- /Remove Pupils --> 
 
 </div>
