@@ -27,7 +27,6 @@ import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.compo
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { PushComponent } from './helping/push/push.component';
-import { PushNotificationComponent } from 'ng2-notifications/ng2-notifications';
 
 // ======================================================
 // Initialize Firebase 
@@ -77,8 +76,7 @@ const routes: Routes = [
     BlockedUsersComponent,
     UsersManagementComponent,
     AssociateTeamsComponent,
-    PushComponent,
-    PushNotificationComponent
+    PushComponent
   ],
   imports: [
     BrowserModule,
