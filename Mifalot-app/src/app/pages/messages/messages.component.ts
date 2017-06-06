@@ -121,9 +121,10 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   {
     this.afService.sendMessage(this.newMessage, this.currentChat).then(x => 
     {
-      this.newMessage = '';
-     this.scrollToBottom();
+      this.scrollToBottom();
     });
+    
+    this.newMessage = '';
   }
 
   // ==================================================
