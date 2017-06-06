@@ -98,6 +98,7 @@ input::placeholder
 #msg-name, #msg-context
 {
   text-align: right;
+  direction: rtl;
 }
 
 #msg-name
