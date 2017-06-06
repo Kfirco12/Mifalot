@@ -100,7 +100,7 @@ export class AttendanceComponent implements OnInit {
         }
       })
     })
-    path_subscribe.unsubscribe();
+    //path_subscribe.unsubscribe();
   }
 
   //---------------------------
