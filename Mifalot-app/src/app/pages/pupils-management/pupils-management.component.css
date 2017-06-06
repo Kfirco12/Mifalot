@@ -64,6 +64,7 @@ h4, h5
 input
 {
   padding: 2%;
+  direction: rtl;
 }
 
 /**********************/
