@@ -28,10 +28,13 @@ export class PupilsManagementComponent implements OnInit
 
   // Arrays
   private teams;
+  private user;
   private pupilsList;
   private newPupils;
   private pupilsToRemove;
 
+  private uid;
+  private permission: number;
   // Strings
   private choosenTeamText: string;
 
@@ -48,11 +51,34 @@ export class PupilsManagementComponent implements OnInit
   constructor(private afService: AF ) 
   {
     this.noTeamSelected = true;
+    this.choosenTeamText = "רשימת קבוצות";
+
     this.initializeRemoveVariables();
     this.initializeAddVariables();
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = '';  
-    this.teams = this.afService.getUserTeams().sort();
+    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = '';
+
+    // TODO: remove this function from any component
+    // this.teams = this.afService.getUserTeams().sort();
+
+    this.uid = this.afService.getUid();
+    this.teams = this.afService.af.database.list('teams');
+
+    this.getUserPermissionFromDB();
+  }
+
+  // ==============================
+
+  getUserPermissionFromDB()
+  {
+    if (this.uid)
+    {
+      this.user = this.afService.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
+      this.user.subscribe(snapshot => 
+      {
+        this.permission = snapshot.val().permission;
+      });
+    }
   }
 
   // ==============================
@@ -65,12 +91,12 @@ export class PupilsManagementComponent implements OnInit
     this.noTeamSelected = false;
   }
  
-
   // ==============================
 
   chooseTeam()
   {
       this.noTeamSelected = true;
+      this.initializeAddVariables();
   }
   
   // ==============================
@@ -131,23 +157,20 @@ export class PupilsManagementComponent implements OnInit
 
       alert(this.newPupils.length + " חניכים נוספו לקבוצה! ");
       
-       // Clear all variables
+      // Clear all variables
       this.initializeAddVariables();
   }
 
   // ==============================
 
   initializeAddVariables()
-  {
-    
+  {  
     this.addPupils = this.thereIsNewPupil = false;
 
     this.newPupils = [];
     this.newPupilsCounter = 0;
 
     this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;    
-
-    this.choosenTeamText = "רשימת קבוצות";
   }
 
   // ===================================================================
@@ -173,6 +196,7 @@ export class PupilsManagementComponent implements OnInit
   removePupil(pupil)
   {
     this.pupilsList.remove(pupil.$key);
+    this.savePupilToRemove(pupil);
     alert(pupil.name + " " + pupil.lastName + " הוסר בהצלחה!");
   }
 
@@ -222,10 +246,7 @@ export class PupilsManagementComponent implements OnInit
     alert(length +  " חניכים הוסרו בהצלחה!");
 
     // Reset values
-    this.noTeamSelected = true;
-    this.initializeRemoveVariables();
-    // this.initializeAddVariables();
-
+    this.pupilsToRemove = [];
   }
 
   // ==============================

@@ -15,9 +15,9 @@
                 <h4 class = "text-right"> :בחירת קבוצה </h4>
             </div>
 
-            <div *ngFor = "let team of teams" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-                <span class = "thumbnail" (click) = "getPupilsByTeam(team)"> 
-                    <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+            <div *ngFor = "let team of teams | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+                <span *ngIf = "permission == 2 && team.managerID == uid" class = "thumbnail" (click) = "getPupilsByTeam(team)">
+                    <button  type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
                 </span>
             </div>
         </div>
@@ -102,7 +102,7 @@
         <h4 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h4>
 
         <div class = "vertical-menu">
-            <div *ngFor = "let pupil of pupilsList | async; let i = index" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
+            <div *ngFor = "let pupil of pupilsList | async" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
                 <span class = "list-group-item clearfix" [class.red] = "isChecked(pupil)">  
                     {{ pupil.name }} {{ pupil.lastName }}, ת.ז: {{ pupil.ID }}
                     <span class = "fa fa-user"></span>

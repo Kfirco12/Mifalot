@@ -21,13 +21,10 @@
         </div>
         </div>
 
-        <!-- Admin's' buttons -->
+        <!-- Admin's buttons -->
           <div *ngIf = "user.$key == 'permission' && user.$value == 1">
             <div *ngFor = "let button of adminButtons" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-              <a *ngIf = "button.id != 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
-                <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
-              </a>
-               <a *ngIf = "button.id == 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
+              <a class = "thumbnail" (click) = "navigate(button.id)"> 
                 <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
               </a>
           </div>
