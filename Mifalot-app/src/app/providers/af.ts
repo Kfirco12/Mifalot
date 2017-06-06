@@ -46,7 +46,7 @@ export class AF
    * @param text
    */
 
-  sendMessage(text, chatRoom) 
+  sendMessage(text, chatRoom: FirebaseListObservable<any>) 
   {
     var message =
       {
@@ -56,7 +56,7 @@ export class AF
         timestamp: Date.now()
       };
 
-    chatRoom.push(message);
+    return chatRoom.push(message);
   }
 
   // ================================
