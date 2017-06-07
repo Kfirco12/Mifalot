@@ -82,7 +82,8 @@
         </div>
       </div>
     </div>
-    <div #scrollMe class = "vertical-menu messages" >
+    
+    <div #scrollMe class = "vertical-menu messages">
       <div *ngFor = "let message of currentChat | async" > 
         <!--<div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')">
           <p class = "date-stamp"> {{ message.timestamp | date: "dd/MM/yy" }} </p> 
