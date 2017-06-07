@@ -1,3 +1,11 @@
+<!-- ================================================================================================================================================ -->
+<!-- User wait for admin to confirm him OR user was blocked by admin -->
+
+<app-user-status *ngIf = "user.permission == 4 || user.permission == 5" [permission] = "user.permission"></app-user-status>
+
+<!-- ================================================================================================================================================ -->
+
+<div *ngIf = "user.permission != 4 && user.permission != 5">
 
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
@@ -82,4 +90,6 @@
 
 	<!-- /Presence Table -->
 	
+</div>
+
 </div>

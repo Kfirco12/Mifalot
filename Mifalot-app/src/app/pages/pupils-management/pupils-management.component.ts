@@ -58,6 +58,7 @@ export class PupilsManagementComponent implements OnInit
     this.userObject = 
     { 
       uid: null,
+      email: null,
       name: null,
       lastName: null,
       ID: null,

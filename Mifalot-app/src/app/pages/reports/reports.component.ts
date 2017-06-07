@@ -61,6 +61,7 @@ export class ReportsComponent implements OnInit
     this.user = 
     { 
       uid: null,
+      email: null,
       name: null,
       lastName: null,
       ID: null,

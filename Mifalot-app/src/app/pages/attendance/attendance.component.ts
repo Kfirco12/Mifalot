@@ -34,6 +34,10 @@ export class AttendanceComponent implements OnInit {
   private pupilsPath;
 
   private noTeamSelected: boolean;
+
+  // User details
+  private user;
+
   //============================
   //============================
   //-------------METHODS-------------
@@ -49,6 +53,18 @@ export class AttendanceComponent implements OnInit {
     //get teams from DB.
     this.getTeamsByUid();
 
+    this.user = 
+    { 
+      uid: null,
+      email: null,
+      name: null,
+      lastName: null,
+      ID: null,
+      permission: null, 
+      phoneNumber: null
+    };
+
+    this.afService.getUserDetails(this.user);
   }
 
   //---------------------------

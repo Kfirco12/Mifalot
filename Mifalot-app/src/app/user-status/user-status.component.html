@@ -1,0 +1,23 @@
+<!-- ================================================================================================================================================ -->
+<!-- User wait for admin to confirm him -->
+
+  <div *ngIf = "permission == 4" class = "container confirm" >
+      <div class = "panel panel-warning text-right center">
+        <div class = "panel-heading"> הינך ממתין לאישור מנהל <i class = "fa fa-exclamation-triangle fa-2x pull-left" aria-hidden = "true"></i> </div>
+        <div class = "panel-body"> זמנית, אינך יכול להשתמש באפליקציה עד אישורך ע״י מנהל. אנא נסה שנית מאוחר יותר </div>
+      </div>
+
+  </div>
+
+<!-- ================================================================================================================================================ -->
+<!-- User was blocked by admin -->
+
+  <div *ngIf = "permission == 5" class = "container confirm" >
+      <div class = "panel panel-danger text-right center">
+        <div class = "panel-heading"> משתמש זה נחסם <i class = "fa fa-ban fa-2x pull-left" aria-hidden = "true"></i> </div>
+        <div class = "panel-body"> שים לב, משתמש זה נחסם ע״י מנהל מפעלות </div>
+      </div>
+
+  </div>
+
+<!-- ================================================================================================================================================ -->
