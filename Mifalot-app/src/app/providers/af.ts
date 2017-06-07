@@ -18,11 +18,15 @@ export class AF
   // Array
   private userTeams;
 
+  private user:any;
+
+  private subscribeArray;
+
   // ================================
 
   constructor(public af: AngularFire) 
   {
-    this.userTeams = [];
+    this.userTeams = this.subscribeArray = [];
   }
 
   // ================================
@@ -37,6 +41,7 @@ export class AF
    */
   logout() 
   {
+    this.unsubscribeAll();
     return this.af.auth.logout();
   }
 
@@ -141,6 +146,15 @@ export class AF
 
   // ================================
 
+  unsubscribeAll()
+  {
+    for (var i = 0; i < this.subscribeArray.length; i++)
+      if (this.subscribeArray[i])
+        this.subscribeArray[i].unsubscribe();
+  }
+
+  // ================================
+
   //  name = user.displayName;
   //  email = user.email;
   //  photoUrl = user.photoURL;
@@ -199,6 +213,37 @@ export class AF
     }
 
   // ================================
+
+  getUserDetails(user)
+  {
+    if (this.uid)
+    {
+      this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
+      this.subscribeArray.push(this.user.subscribe(snapshot => 
+      {
+        user.uid = this.uid;
+        user.name = snapshot.val().name;
+        user.lastName = snapshot.val().lastName;
+        user.ID = snapshot.val().ID;
+        user.permission = snapshot.val().permission;
+        user.phoneNumber = snapshot.val().phoneNumber;
+      }));
+    }
+  }
+
+  // ================================
+
+  getUserPermissionFromDB(user)
+  {
+    if (this.uid)
+    {
+      this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
+      this.subscribeArray.push(this.user.subscribe(snapshot => 
+      {
+       user.permission = snapshot.val().permission;
+      }));
+    }
+  }
 
 }
 

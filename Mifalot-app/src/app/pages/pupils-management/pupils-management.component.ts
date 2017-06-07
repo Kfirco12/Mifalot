@@ -11,7 +11,6 @@ import { AF } from "../../providers/af";
   styleUrls: ['./pupils-management.component.css']
 })
 
-
 export class PupilsManagementComponent implements OnInit 
 {
   header = 
@@ -29,7 +28,6 @@ export class PupilsManagementComponent implements OnInit
 
   // DB observables
   private teams: FirebaseListObservable<any>;
-  private user: FirebaseObjectObservable<any>;
 
   // Arrays
   private pupilsList;
@@ -37,13 +35,12 @@ export class PupilsManagementComponent implements OnInit
   private pupilsToRemove;
 
   // User details
-  private uid;
-  private permission: number;
+  private userObject;
 
   // Strings
   private choosenTeamText: string;
 
-  // Input strings
+  // Inputs ngModel
   private pupilName: string;
   private pupilLastName: string
   private pupilID: number;
@@ -58,30 +55,24 @@ export class PupilsManagementComponent implements OnInit
     this.noTeamSelected = true;
     this.choosenTeamText = "רשימת קבוצות";
 
+    this.userObject = 
+    { 
+      uid: null,
+      name: null,
+      lastName: null,
+      ID: null,
+      permission: null, 
+      phoneNumber: null
+    };
+
     this.initializeRemoveVariables();
     this.initializeAddVariables();
 
     this.pupilName = this.pupilLastName =  '';
     this.pupilID = null;
 
-    this.uid = this.afService.getUid();
     this.teams = this.afService.af.database.list('teams');
-
-    this.getUserPermissionFromDB();
-  }
-
-  // ==============================
-
-  getUserPermissionFromDB()
-  {
-    if (this.uid)
-    {
-      this.user = this.afService.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
-      this.user.subscribe(snapshot => 
-      {
-        this.permission = snapshot.val().permission;
-      });
-    }
+    this.afService.getUserDetails(this.userObject);
   }
 
   // ==============================
