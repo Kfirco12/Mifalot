@@ -33,7 +33,7 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/jce-il/project-template.svg)](https://github.com/jce-il/project-template/graphs/contributors)
 | Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
-| Documnetation | [![Inline docs](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation)]() |
+| Documnetation | [![Inline docs](http://inch-ci.org/github/benhuri/Mifalot.svg?branch=master)](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation) |
 | Project Course Status | ... |
 
 ## Please visit our [live application](https://application-d2061.firebaseapp.com/)
