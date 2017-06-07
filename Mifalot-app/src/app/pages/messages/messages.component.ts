@@ -36,14 +36,29 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   private error: any;
 
+  private user;
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
-      this.chatRooms = this.afService.af.database.list('chatRooms');
-      this.userEmail = this.afService.getUserEmail();
-      this.noChatRoomSelected = true;
-      this.createNewChatRoom = false;
+    this.chatRooms = this.afService.af.database.list('chatRooms');
+
+    this.user = 
+    { 
+      uid: null,
+      email: null,
+      name: null,
+      lastName: null,
+      ID: null,
+      permission: null, 
+      phoneNumber: null
+    };
+
+    this.afService.getUserDetails(this.user);
+
+    // Flags
+    this.noChatRoomSelected = true;
+    this.createNewChatRoom = false;
   }
 
   // ==================================================
@@ -93,7 +108,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   
   isMe(email) 
   {
-    if (email == this.userEmail)
+    if (this.user.email == email)
       return true;
     
     return false;
@@ -119,12 +134,11 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   sendMessage()
   {
-    this.afService.sendMessage(this.newMessage, this.currentChat).then(x => 
+    this.afService.sendMessage(this.newMessage, this.user.name, this.user.lastName, this.currentChat).then(x => 
     {
+      this.newMessage = '';
       this.scrollToBottom();
     });
-    
-    this.newMessage = '';
   }
 
   // ==================================================
@@ -142,7 +156,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }
   }
-
 
 // ==================================================
 

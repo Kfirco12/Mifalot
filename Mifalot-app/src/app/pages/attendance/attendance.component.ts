@@ -37,7 +37,8 @@ export class AttendanceComponent implements OnInit {
   //============================
   //============================
   //-------------METHODS-------------
-  constructor(private afService: AF,private router: Router) {
+  constructor(private afService: AF,private router: Router) 
+  {
 
     this.uid = afService.getUid();
 

@@ -1,6 +1,6 @@
 
 import { Injectable } from "@angular/core";
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 // For take() 
@@ -16,17 +16,16 @@ export class AF
   private uid: string;
   
   // Array
-  private userTeams;
+  private subscribeArray: Array<any>;
 
-  private user:any;
-
-  private subscribeArray;
+  // DB Observable
+  private user: FirebaseObjectObservable<any>;
 
   // ================================
 
   constructor(public af: AngularFire) 
   {
-    this.userTeams = this.subscribeArray = [];
+    this.subscribeArray = [];
   }
 
   // ================================
@@ -51,12 +50,13 @@ export class AF
    * @param text
    */
 
-  sendMessage(text, chatRoom: FirebaseListObservable<any>) 
+  sendMessage(text, name, lastName, chatRoom: FirebaseListObservable<any>) 
   {
     var message =
       {
         message: text,
-        displayName: this.displayName,
+        displayName: name,
+        lastName: lastName,
         email: this.email,
         timestamp: Date.now()
       };
@@ -104,7 +104,6 @@ export class AF
         this.uid = uid;
         this.displayName = name;
         this.email = email;
-        this.getUserTeamsFromDB();
       })
   }
 
@@ -131,7 +130,6 @@ export class AF
     }).then((user) => 
       {
         this.saveUserDetails(user);
-        this.getUserTeamsFromDB();
       })    
   }
 
@@ -167,53 +165,6 @@ export class AF
   //        Gets' Methods
   // ================================
 
-  getUserName() 
-  {
-    return this.displayName;
-  }
-
-  // ================================
-
-  getUserEmail() 
-  {
-    return this.email;
-  }
-
-  // ================================
-
-  getUid()
-  {
-    return this.uid;
-  }
-
-  // ================================
-
-  getUserTeams()
-  {
-    return this.userTeams;
-  }
-
-  // ================================
-  //        Global Methods
-  // ================================
-
- getUserTeamsFromDB() 
-  {
-    this.userTeams = [];
-    
-    var allTeams = this.af.database.list('teams/', { preserveSnapshot: true }).take(1);
-  
-     allTeams.subscribe(snapshots => {
-        snapshots.forEach(snapshot => {
-          if (snapshot.val().coachID == this.uid) 
-            this.userTeams.push(snapshot.val());
-        })
-      })
-
-    }
-
-  // ================================
-
   getUserDetails(user)
   {
     if (this.uid)
@@ -222,6 +173,7 @@ export class AF
       this.subscribeArray.push(this.user.subscribe(snapshot => 
       {
         user.uid = this.uid;
+        user.email = this.email;
         user.name = snapshot.val().name;
         user.lastName = snapshot.val().lastName;
         user.ID = snapshot.val().ID;
@@ -233,16 +185,9 @@ export class AF
 
   // ================================
 
-  getUserPermissionFromDB(user)
+  getUid()
   {
-    if (this.uid)
-    {
-      this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
-      this.subscribeArray.push(this.user.subscribe(snapshot => 
-      {
-       user.permission = snapshot.val().permission;
-      }));
-    }
+    return this.uid;
   }
 
 }
