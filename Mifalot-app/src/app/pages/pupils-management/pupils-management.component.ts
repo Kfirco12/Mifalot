@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { AF } from "../../providers/af";
 
 // For take() 
-import 'rxjs/Rx';
+// import 'rxjs/Rx';
 
 @Component({
   selector: 'app-pupils-management',
@@ -26,22 +27,26 @@ export class PupilsManagementComponent implements OnInit
   private removePupils: boolean;
   private thereIsNewPupil: boolean;
 
+  // DB observables
+  private teams: FirebaseListObservable<any>;
+  private user: FirebaseObjectObservable<any>;
+
   // Arrays
-  private teams;
-  private user;
   private pupilsList;
   private newPupils;
   private pupilsToRemove;
 
+  // User details
   private uid;
   private permission: number;
+
   // Strings
   private choosenTeamText: string;
 
   // Input strings
-  private ValuePupilName: string;
-  private ValuePupilLastName: string
-  private ValuePupilID: string;
+  private pupilName: string;
+  private pupilLastName: string
+  private pupilID: number;
 
   // Int
   private newPupilsCounter: number;
@@ -56,10 +61,8 @@ export class PupilsManagementComponent implements OnInit
     this.initializeRemoveVariables();
     this.initializeAddVariables();
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = '';
-
-    // TODO: remove this function from any component
-    // this.teams = this.afService.getUserTeams().sort();
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;
 
     this.uid = this.afService.getUid();
     this.teams = this.afService.af.database.list('teams');
@@ -95,8 +98,7 @@ export class PupilsManagementComponent implements OnInit
 
   chooseTeam()
   {
-      this.noTeamSelected = true;
-      this.initializeAddVariables();
+    this.noTeamSelected = true;
   }
   
   // ==============================
@@ -105,16 +107,24 @@ export class PupilsManagementComponent implements OnInit
   {
     this.addPupils = true;
   }
+  
+  // ==============================
+
+  backToAddOrRemove()
+  {
+    this.initializeAddVariables();
+    this.initializeRemoveVariables();
+  }
 
   // ==============================
 
-  saveNewPupil(name, lastName, ID)
+  saveNewPupil()
   {
     var newPupil = 
     {
-      name : name,
-      lastName : lastName,
-      ID : ID,
+      name : this.pupilName,
+      lastName : this.pupilLastName,
+      ID : this.pupilID,
       missed : 0
     }
 
@@ -122,20 +132,24 @@ export class PupilsManagementComponent implements OnInit
     var isExist = false;
 
     for (var i = 0; i < this.newPupils.length; i++)
-      if (this.newPupils[i].name == newPupil.name && this.newPupils[i].lastName == newPupil.lastName && this.newPupils[i].ID == newPupil.ID)
+      if (this.newPupils[i].ID == newPupil.ID)
         isExist = true;
 
     if (isExist)
     {
-        this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;
-        return;
+      alert('ההוספה אינה אפשרית! קיים כבר חניך עם תעודת זהות זו הממתין להוספה');
+      
+      return;
     }
 
     // Save new pupil to an array
     this.newPupils.push(newPupil);
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;    
+    // Clear input fields
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;  
 
+    // Updating variables
     this.newPupilsCounter++;
     this.thereIsNewPupil = true;
   }
@@ -153,7 +167,7 @@ export class PupilsManagementComponent implements OnInit
     var team = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils', { preserveSnapshot: true });
 
     for (var i = 0; i < this.newPupils.length; i++)
-      team.update(this.newPupils[i].ID ,{ name: this.newPupils[i].name, lastName: this.newPupils[i].lastName, ID: this.newPupils[i].ID, missed: 0 });
+      team.update('' + this.newPupils[i].ID ,{ name: this.newPupils[i].name, lastName: this.newPupils[i].lastName, ID: this.newPupils[i].ID, missed: 0 });
 
       alert(this.newPupils.length + " חניכים נוספו לקבוצה! ");
       
@@ -170,7 +184,9 @@ export class PupilsManagementComponent implements OnInit
     this.newPupils = [];
     this.newPupilsCounter = 0;
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;    
+    // Clear input fields
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;    
   }
 
   // ===================================================================

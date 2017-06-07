@@ -58,27 +58,27 @@
 
             <label for = "name" class = "sr-only"> שם החניך </label>
             <div class = "input-group">
-                <input #pupilName type = "text" [value] = "ValuePupilName" class = "form-control" placeholder = "שם פרטי" required>
+                <input [(ngModel)] = "pupilName" type = "text" name = "pupilName" class = "form-control" placeholder = "שם פרטי" required>
                 <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
             </div>
                     
             <br>
 
             <div class = "input-group">
-                <input #pupilLastName type = "text" [value] = "ValuePupilLastName" class = "form-control" placeholder = "שם משפחה" required>
+                <input [(ngModel)] = "pupilLastName" type = "text" name = "pupilLastName" class = "form-control" placeholder = "שם משפחה" required>
                 <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
             </div>
 
             <br>
 
             <div class = "input-group">
-                <input #pupilID type = "number" [value] = "ValuePupilID" class = "form-control" placeholder = "תעודת זהות" required>
+                <input [(ngModel)] = "pupilID" type = "number" name = "pupilID" class = "form-control" placeholder = "תעודת זהות" required>
                 <span class = "input-group-addon"><i class = "fa fa-id-card"></i></span> 
             </div>
 
             <br>
 
-            <button (click) = "pupilName.value &&  pupilLastName.value && pupilID.value && saveNewPupil(pupilName.value, pupilLastName.value, pupilID.value)" class = "btn btn-md btn-block" type = "submit"> הוספת חניך </button>
+            <button (click) = "pupilName &&  pupilLastName && pupilID && saveNewPupil()" class = "btn btn-md btn-block" type = "submit"> הוספת חניך </button>
         </form>
 
         <hr>
@@ -89,7 +89,7 @@
         
         <!-- Buttons -->
         <button (click) = "addNewPupilsToDB()" class = "btn btn-md btn-success btn-block" type = "submit"> אישור הוספת החניכים </button>
-        <button (click) = "chooseTeam()" class = "btn btn-md btn-primary btn-block" type = "submit"> בחירה מחדש </button>
+        <button (click) = "backToAddOrRemove()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור להוספת/הסרת חניכים </button>
 
     </div>
 
@@ -126,10 +126,8 @@
             <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להסרה  </h5>
         </div>
 
-
-
         <button (click) = "removePupilsFromDB()" class = "btn btn-md btn-danger btn-block btn-remove" type = "submit"> הסר חניכים נבחרים </button>
-        <!--<button (click) = "showRemovePupils()" class = "btn btn-md btn-primary btn-block" type = "submit"> סיום </button>-->
+        <button (click) = "backToAddOrRemove()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור להוספת/הסרת חניכים </button>
     </div>
 
     <!-- =========================================================================================================================== -->

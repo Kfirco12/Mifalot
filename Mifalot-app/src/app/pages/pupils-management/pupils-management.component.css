@@ -68,7 +68,6 @@ input
 }
 
 /**********************/
-
 /* Remove Pupils */
 
 .vertical-menu 
@@ -78,6 +77,11 @@ input
     width: 100%;
 
     overflow-y: scroll;
+}
+
+.list-group
+{
+     margin-bottom: 2%;
 }
 
 .red 
@@ -115,7 +119,7 @@ input
 {
     .vertical-menu 
     {
-        height: 360px;
+        height: 330px;
     }
 }
 
