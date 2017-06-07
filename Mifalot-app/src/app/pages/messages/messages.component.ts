@@ -24,7 +24,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private newMessage: string;
   private userEmail: string;
   private chatRoomTitle: string;
-  private savedDate: string = '';
+  private chatRoomAuthor: string;
+  private savedDate: string;
 
   // DB Observables
   private chatRooms: FirebaseListObservable<any>;
@@ -59,13 +60,16 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     // Flags
     this.noChatRoomSelected = true;
     this.createNewChatRoom = false;
+
+    this.savedDate = '';
   }
 
   // ==================================================
 
   createsNewChatRoom(chatName)
   {
-    var newChat = { name: chatName };
+    var authorName = this.user.name + " " + this.user.lastName;
+    var newChat = { name: chatName, authorName: authorName, authorID: this.user.uid };
 
     // Create a new chat room
     var newChatInDB = this.chatRooms.push(newChat);
@@ -100,6 +104,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   enterChatRoom(chatRoom)
   { 
     this.chatRoomTitle = chatRoom.name;
+    this.chatRoomAuthor = chatRoom.authorName;
+
     this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
     this.noChatRoomSelected = false;
   }
@@ -157,7 +163,15 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     } catch(err) { }
   }
 
-// ==================================================
+  // ==================================================
+
+  removeChatRoom(chatRoom)
+  {
+    console.log(chatRoom);
+    this.chatRooms.remove(chatRoom.$key);
+  }
+
+  // ==================================================
 
   ngOnInit() 
   {
