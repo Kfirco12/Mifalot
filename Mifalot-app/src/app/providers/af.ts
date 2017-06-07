@@ -1,6 +1,6 @@
 
 import { Injectable } from "@angular/core";
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 // For take() 
@@ -16,13 +16,16 @@ export class AF
   private uid: string;
   
   // Array
-  private userTeams;
+  private subscribeArray: Array<any>;
+
+  // DB Observable
+  private user: FirebaseObjectObservable<any>;
 
   // ================================
 
   constructor(public af: AngularFire) 
   {
-    this.userTeams = [];
+    this.subscribeArray = [];
   }
 
   // ================================
@@ -37,6 +40,7 @@ export class AF
    */
   logout() 
   {
+    this.unsubscribeAll();
     return this.af.auth.logout();
   }
 
@@ -46,17 +50,18 @@ export class AF
    * @param text
    */
 
-  sendMessage(text, chatRoom) 
+  sendMessage(text, name, lastName, chatRoom: FirebaseListObservable<any>) 
   {
     var message =
       {
         message: text,
-        displayName: this.displayName,
+        displayName: name,
+        lastName: lastName,
         email: this.email,
         timestamp: Date.now()
       };
 
-    chatRoom.push(message);
+    return chatRoom.push(message);
   }
 
   // ================================
@@ -99,7 +104,6 @@ export class AF
         this.uid = uid;
         this.displayName = name;
         this.email = email;
-        this.getUserTeamsFromDB();
       })
   }
 
@@ -126,7 +130,6 @@ export class AF
     }).then((user) => 
       {
         this.saveUserDetails(user);
-        this.getUserTeamsFromDB();
       })    
   }
 
@@ -137,6 +140,15 @@ export class AF
     this.uid = user.uid;
     this.displayName = user.auth.email;
     this.email = user.auth.email;
+  }
+
+  // ================================
+
+  unsubscribeAll()
+  {
+    for (var i = 0; i < this.subscribeArray.length; i++)
+      if (this.subscribeArray[i])
+        this.subscribeArray[i].unsubscribe();
   }
 
   // ================================
@@ -153,16 +165,22 @@ export class AF
   //        Gets' Methods
   // ================================
 
-  getUserName() 
+  getUserDetails(user)
   {
-    return this.displayName;
-  }
-
-  // ================================
-
-  getUserEmail() 
-  {
-    return this.email;
+    if (this.uid)
+    {
+      this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
+      this.subscribeArray.push(this.user.subscribe(snapshot => 
+      {
+        user.uid = this.uid;
+        user.email = this.email;
+        user.name = snapshot.val().name;
+        user.lastName = snapshot.val().lastName;
+        user.ID = snapshot.val().ID;
+        user.permission = snapshot.val().permission;
+        user.phoneNumber = snapshot.val().phoneNumber;
+      }));
+    }
   }
 
   // ================================
@@ -171,34 +189,6 @@ export class AF
   {
     return this.uid;
   }
-
-  // ================================
-
-  getUserTeams()
-  {
-    return this.userTeams;
-  }
-
-  // ================================
-  //        Global Methods
-  // ================================
-
- getUserTeamsFromDB() 
-  {
-    this.userTeams = [];
-    
-    var allTeams = this.af.database.list('teams/', { preserveSnapshot: true }).take(1);
-  
-     allTeams.subscribe(snapshots => {
-        snapshots.forEach(snapshot => {
-          if (snapshot.val().coachID == this.uid) 
-            this.userTeams.push(snapshot.val());
-        })
-      })
-
-    }
-
-  // ================================
 
 }
 

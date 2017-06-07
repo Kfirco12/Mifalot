@@ -98,11 +98,19 @@ input::placeholder
 #msg-name, #msg-context
 {
   text-align: right;
+  direction: rtl;
+  margin-bottom: 5%;
 }
 
 #msg-name
 {
   font-weight: bold;
+}
+
+#msg-time
+{
+  color: black;
+  text-shadow: 0.25px 0.1px 0 grey;
 }
 
 /**********************************************/
@@ -155,7 +163,7 @@ input::placeholder
   
   margin-bottom: 20px;
   margin-right: 3px;
-  padding: 6px 20px;
+  padding: 4px 20px;
   color: #000;
   text-shadow: 0 1px 1px rgba(255,255,255,0.8);
   word-wrap: break-word;
@@ -181,7 +189,7 @@ input::placeholder
 .bubble:after 
 {
   border: 8px solid transparent;
-  border-bottom-color: #bee2ff; /* arrow color */
+  border-bottom-color: #95c2fd; /* arrow color */
   bottom: 1px;
   left: -5px;
 }
@@ -258,7 +266,7 @@ input::placeholder
 
 .yellow:after 
 {
-  border-bottom-color: #fcf3c3;
+  border-bottom-color: #f4e371;
 }
 
 /* red bubble */
@@ -276,7 +284,7 @@ input::placeholder
 
 .red:after 
 {
-  border-bottom-color: #ea8378;
+  border-bottom-color: #e2675a;
 }
 
 /* pink bubble */

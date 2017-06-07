@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AF } from "../.././providers/af";
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-reports',
@@ -16,121 +17,90 @@ export class ReportsComponent implements OnInit
      title: 'דו"חות נוכחות', 
      subTitle: "צפייה בהיסטוריית נוכחות החניכים",
      icon: "fa-bar-chart" 
-  }
-  
-  private pupilsPath;
-  private uid;
-  private chosenTeam;
-  private teamKey;
-  private chosenDate;
+  };
+
+  // Strings
   private chosenDateString: string;
   private pupilPresence: string;
   private datePipe: DatePipe;
 
-  // Arrays
-  private teams;    // Contain the teams' of the user.
-  private dates;    // Contain the trainings' dates of the chosen team.
-  private pupils;   // Contain the pupils name of the chosen team.
-  
   // Flags
   private started: boolean;
   private teamSelected: boolean;
   private dateSelected: boolean;
 
+  // Objects
+  private user: Object;   // User details
+  private pupils: Object; // Contain the pupils name of the chosen team.
+  
+  private chosenTeam: Object;
+  private chosenDate: Object;
+
+  // DB observable
+  private teams: FirebaseListObservable<any>;         // Contain user's teams
+  private attendances: FirebaseListObservable<any>;   // Contain user's attendances
+  
   // ============================================================
 
   constructor(private afService: AF) 
   { 
-    this.pupils = this.dates = this.teams = [];
-
+    // Flags
     this.started = false;
     this.teamSelected = this.dateSelected = false;
 
+    // Strings
     this.chosenTeam = 'בחר קבוצה';
     this.chosenDateString = 'בחר תאריך';
 
+    // Date pipe
     this.datePipe = new DatePipe('en-us');
 
-    this.uid = afService.getUid();
+    // DB observable
+    this.teams = this.afService.af.database.list('teams');
 
-    this.teams = this.afService.getUserTeams().sort();
+    this.user = 
+    { 
+      uid: null,
+      name: null,
+      lastName: null,
+      ID: null,
+      permission: null, 
+      phoneNumber: null
+    };
+
+    this.afService.getUserDetails(this.user);
   }
-
-  // ============================================================
-
-  ngOnInit() {}
 
   // ============================================================
   //get the dates from the wanted team.
 
   getDates(teamId) 
   {
-    // Reset teams represent.
-    this.pupils = this.dates = [];
+    this.chosenDateString = 'בחר תאריך';
 
+    // Updating flags
     this.dateSelected = false;
     this.teamSelected = this.started = true;
 
-    this.chosenDateString = 'בחר תאריך';
-
+    // Save the chosen team
     this.chosenTeam = teamId;
 
     // get teame's pupil from DB.
-    var info = this.afService.af.database.list('teams/' + teamId + '/attendance', { preserveSnapshot: true }).take(1);
-    
-    info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        var dateDB = 
-        {
-          date: snapshot.val().date,
-          team: teamId
-        }
-
-        this.dates.push(dateDB);
-      })
-    })
+    this.attendances = this.afService.af.database.list('teams/' + teamId + '/attendance');
   }
   
   // ============================================================
   // Get the pupils name from the wanted team.
   
-  getPupils(dateId, teamId) 
-  {
+  getPupils(dateId, presence) 
+  { 
     // Reset teams represent
     this.started = this.dateSelected = true;
     this.chosenDate = dateId;
     this.chosenDateString = this.datePipe.transform(dateId, 'dd/MM/yyyy');
    
-   
-    // Reset pupils' array
-    this.pupils = [];
-
-    // Get teame's pupil from DB.
-    var info = this.afService.af.database.list('teams/' + teamId + '/attendance',  { preserveSnapshot: true }).take(1);
-
-    info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if(snapshot.val().date == dateId)
-        {
-          this.pupilsPath = this.afService.af.database.list('teams/' + teamId + '/attendance/' + snapshot.key + "/presence").take(1);
-          this.teamKey = snapshot.key;
-
-          this.pupilsPath.subscribe(snap2 => {
-            snap2.forEach(snap => {
-              var pupil = 
-              {
-                name: snap.name,
-                lastName: snap.lastName,
-                ID: snap.ID,
-                presence: snap.presence
-              }
-              this.pupils.push(pupil);
-            })
-          })
-        }
-
-      })
-    })
+    // Save presence list
+    this.pupils = presence;
   }
 
   // ============================================================
@@ -152,5 +122,8 @@ export class ReportsComponent implements OnInit
 
   // ============================================================
 
+  ngOnInit() {}
+
+  // ============================================================
 
 }

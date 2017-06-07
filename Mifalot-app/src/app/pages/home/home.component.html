@@ -1,8 +1,6 @@
 
-<div *ngFor = "let user of user | async">
-
   <!-- Page Content -->
-  <div *ngIf = "user.$key == 'permission' && user.$value != 4 && user.$value != 5" class = "container" >
+  <div *ngIf = "user.permission != 4 && user.permission != 5" class = "container" >
 
     <div class = "row" >
 
@@ -12,22 +10,28 @@
         </div>
       </div>
 
-      <!-- User's buttons -->
-      <div *ngIf = "user.$key == 'permission' && user.$value == 3">
-        <div *ngFor = "let button of buttons" class = "col-lg-6 col-md-6 col-xs-6 thumb">    
+      <!-- Coach's buttons -->
+      <div *ngIf = "user.permission == 3">
+        <div *ngFor = "let button of coachButtons" class = "col-lg-6 col-md-6 col-xs-6 thumb">    
           <a class = "thumbnail" (click) = "navigate(button.id)"> 
             <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/> {{ button.txt }} </button>
           </a>
         </div>
-        </div>
+      </div>
 
-        <!-- Admin's' buttons -->
-          <div *ngIf = "user.$key == 'permission' && user.$value == 1">
+         <!-- Manager's buttons -->
+      <div *ngIf = "user.permission == 2">
+        <div *ngFor = "let button of managerButtons" class = "col-lg-12 col-md-12 col-xs-12 thumb">    
+          <a class = "thumbnail" (click) = "navigate(button.id)"> 
+            <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/> {{ button.txt }} </button>
+          </a>
+        </div>
+      </div>
+
+        <!-- Admin's buttons -->
+          <div *ngIf = "user.permission == 1">
             <div *ngFor = "let button of adminButtons" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-              <a *ngIf = "button.id != 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
-                <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
-              </a>
-               <a *ngIf = "button.id == 'users-management'" class = "thumbnail" (click) = "navigate(button.id)"> 
+              <a class = "thumbnail" (click) = "navigate(button.id)"> 
                 <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
               </a>
           </div>
@@ -38,7 +42,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- User wait for admin to confirm him -->
 
-  <div *ngIf = "user.$key == 'permission' && user.$value == 4" class = "container confirm" >
+  <div *ngIf = "user.permission == 4" class = "container confirm" >
       <div class = "panel panel-warning text-right center">
         <div class = "panel-heading"> הינך ממתין לאישור מנהל <i class = "fa fa-exclamation-triangle fa-2x pull-left" aria-hidden = "true"></i> </div>
         <div class = "panel-body"> זמנית, אינך יכול להשתמש באפליקציה עד אישורך ע״י מנהל. אנא נסה שנית מאוחר יותר </div>
@@ -49,7 +53,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- User was blocked by admin -->
 
-  <div *ngIf = "user.$key == 'permission' && user.$value == 5" class = "container confirm" >
+  <div *ngIf = "user.permission == 5" class = "container confirm" >
       <div class = "panel panel-danger text-right center">
         <div class = "panel-heading"> משתמש זה נחסם <i class = "fa fa-ban fa-2x pull-left" aria-hidden = "true"></i> </div>
         <div class = "panel-body"> שים לב, משתמש זה נחסם ע״י מנהל מפעלות </div>
@@ -58,6 +62,3 @@
   </div>
 
 <!-- ================================================================================================================================================ -->
-
-</div>
-<!-- /ngFor -->

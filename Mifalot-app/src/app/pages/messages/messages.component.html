@@ -77,10 +77,10 @@
           <p class = "date-stamp"> {{ message.timestamp | date: "dd/MM/yy" }} </p> 
         </div> -->
         <div class = "bubble" [class.bubble-alt] = "isMe(message.email)"  [class.yellow] = "!isMe(message.email)">
-          <p id = "msg-name"> {{ message.displayName }}</p>
+          <p id = "msg-name"> {{ message.displayName + ' ' + message.lastName }}</p>
           <p id = "msg-context"> {{ message.message }} </p>
           <div class = "author">
-            <span> {{ message.timestamp | date: "hh:mm a" }} </span>
+            <span id = "msg-time"> {{ message.timestamp | date: "hh:mm a" }} </span>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
       <span class = "input-group-btn"> 
         <button class = "btn btn-primary" type = "submit" (click) = "sendMessage()"> <i class = "fa fa-arrow-up"></i> שלח </button>
       </span>  
-      <input type = "text" class = "form-control" id = "msg-input" placeholder = "..כתוב את הודעתך כאן" (keyup.enter) = "sendMessage()" [(ngModel)] = "newMessage">
+      <input type = "text" class = "form-control" id = "msg-input" placeholder = "כתוב את הודעתך כאן.." (keyup.enter) = "sendMessage()" [(ngModel)] = "newMessage">
     </div>
 
     <!-- /Send message input -->

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { AF } from "../../providers/af";
 
 // For take() 
-import 'rxjs/Rx';
+// import 'rxjs/Rx';
 
 @Component({
   selector: 'app-pupils-management',
   templateUrl: './pupils-management.component.html',
   styleUrls: ['./pupils-management.component.css']
 })
-
 
 export class PupilsManagementComponent implements OnInit 
 {
@@ -26,19 +26,24 @@ export class PupilsManagementComponent implements OnInit
   private removePupils: boolean;
   private thereIsNewPupil: boolean;
 
+  // DB observables
+  private teams: FirebaseListObservable<any>;
+
   // Arrays
-  private teams;
   private pupilsList;
   private newPupils;
   private pupilsToRemove;
 
+  // User details
+  private userObject;
+
   // Strings
   private choosenTeamText: string;
 
-  // Input strings
-  private ValuePupilName: string;
-  private ValuePupilLastName: string
-  private ValuePupilID: string;
+  // Inputs ngModel
+  private pupilName: string;
+  private pupilLastName: string
+  private pupilID: number;
 
   // Int
   private newPupilsCounter: number;
@@ -48,11 +53,26 @@ export class PupilsManagementComponent implements OnInit
   constructor(private afService: AF ) 
   {
     this.noTeamSelected = true;
+    this.choosenTeamText = "רשימת קבוצות";
+
+    this.userObject = 
+    { 
+      uid: null,
+      name: null,
+      lastName: null,
+      ID: null,
+      permission: null, 
+      phoneNumber: null
+    };
+
     this.initializeRemoveVariables();
     this.initializeAddVariables();
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = '';  
-    this.teams = this.afService.getUserTeams().sort();
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;
+
+    this.teams = this.afService.af.database.list('teams');
+    this.afService.getUserDetails(this.userObject);
   }
 
   // ==============================
@@ -65,12 +85,11 @@ export class PupilsManagementComponent implements OnInit
     this.noTeamSelected = false;
   }
  
-
   // ==============================
 
   chooseTeam()
   {
-      this.noTeamSelected = true;
+    this.noTeamSelected = true;
   }
   
   // ==============================
@@ -79,16 +98,24 @@ export class PupilsManagementComponent implements OnInit
   {
     this.addPupils = true;
   }
+  
+  // ==============================
+
+  backToAddOrRemove()
+  {
+    this.initializeAddVariables();
+    this.initializeRemoveVariables();
+  }
 
   // ==============================
 
-  saveNewPupil(name, lastName, ID)
+  saveNewPupil()
   {
     var newPupil = 
     {
-      name : name,
-      lastName : lastName,
-      ID : ID,
+      name : this.pupilName,
+      lastName : this.pupilLastName,
+      ID : this.pupilID,
       missed : 0
     }
 
@@ -96,20 +123,24 @@ export class PupilsManagementComponent implements OnInit
     var isExist = false;
 
     for (var i = 0; i < this.newPupils.length; i++)
-      if (this.newPupils[i].name == newPupil.name && this.newPupils[i].lastName == newPupil.lastName && this.newPupils[i].ID == newPupil.ID)
+      if (this.newPupils[i].ID == newPupil.ID)
         isExist = true;
 
     if (isExist)
     {
-        this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;
-        return;
+      alert('ההוספה אינה אפשרית! קיים כבר חניך עם תעודת זהות זו הממתין להוספה');
+      
+      return;
     }
 
     // Save new pupil to an array
     this.newPupils.push(newPupil);
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;    
+    // Clear input fields
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;  
 
+    // Updating variables
     this.newPupilsCounter++;
     this.thereIsNewPupil = true;
   }
@@ -127,27 +158,26 @@ export class PupilsManagementComponent implements OnInit
     var team = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils', { preserveSnapshot: true });
 
     for (var i = 0; i < this.newPupils.length; i++)
-      team.update(this.newPupils[i].ID ,{ name: this.newPupils[i].name, lastName: this.newPupils[i].lastName, ID: this.newPupils[i].ID, missed: 0 });
+      team.update('' + this.newPupils[i].ID ,{ name: this.newPupils[i].name, lastName: this.newPupils[i].lastName, ID: this.newPupils[i].ID, missed: 0 });
 
       alert(this.newPupils.length + " חניכים נוספו לקבוצה! ");
       
-       // Clear all variables
+      // Clear all variables
       this.initializeAddVariables();
   }
 
   // ==============================
 
   initializeAddVariables()
-  {
-    
+  {  
     this.addPupils = this.thereIsNewPupil = false;
 
     this.newPupils = [];
     this.newPupilsCounter = 0;
 
-    this.ValuePupilName = this.ValuePupilLastName = this.ValuePupilID = null;    
-
-    this.choosenTeamText = "רשימת קבוצות";
+    // Clear input fields
+    this.pupilName = this.pupilLastName =  '';
+    this.pupilID = null;    
   }
 
   // ===================================================================
@@ -173,6 +203,7 @@ export class PupilsManagementComponent implements OnInit
   removePupil(pupil)
   {
     this.pupilsList.remove(pupil.$key);
+    this.savePupilToRemove(pupil);
     alert(pupil.name + " " + pupil.lastName + " הוסר בהצלחה!");
   }
 
@@ -222,10 +253,7 @@ export class PupilsManagementComponent implements OnInit
     alert(length +  " חניכים הוסרו בהצלחה!");
 
     // Reset values
-    this.noTeamSelected = true;
-    this.initializeRemoveVariables();
-    // this.initializeAddVariables();
-
+    this.pupilsToRemove = [];
   }
 
   // ==============================
