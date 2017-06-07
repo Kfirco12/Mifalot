@@ -108,6 +108,11 @@ p
   color: #1c2b5a;
 }
 
+.direction-rtl
+{
+  direction: rtl;
+}
+
 .glyphicon-trash
 {
   color: darkred;

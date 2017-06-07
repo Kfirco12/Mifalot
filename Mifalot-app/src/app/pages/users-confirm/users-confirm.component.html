@@ -12,7 +12,7 @@
       <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
         <div *ngSwitchCase = "'4'" class = "col-lg-6 col-md-6 col-xs-6 thumb">
           <a class = "thumbnail">
-            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name }} </button>
+            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name  + " " + user.lastName}} </button>
           </a>
         </div>
       </div>
