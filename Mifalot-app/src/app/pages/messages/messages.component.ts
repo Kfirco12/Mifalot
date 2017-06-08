@@ -34,8 +34,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private noChatRoomSelected: boolean;
   private createNewChatRoom: boolean;
 
-  private error: any;
-
   private user;
   // ==================================================
 

@@ -1,17 +1,5 @@
 
 <!-- ================================================================================================================================================ -->
-<!-- Error message -->
-
-<div class = "container">
-  <div *ngIf = "error" class = "alert alert-warning" role = "alert">
-    <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
-    <span class = "sr-only"> Error: </span>
-    {{ error }}
-  </div>
-</div>
-
-<!-- /Error message -->
-<!-- ================================================================================================================================================ -->
 <!-- User wait for admin to confirm him OR user was blocked by admin -->
 
 <app-user-status *ngIf = "user.permission == 4 || user.permission == 5" [permission] = "user.permission"></app-user-status>

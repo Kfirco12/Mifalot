@@ -4,14 +4,6 @@
   height: 100%;
 }
 
-.thumbnail
-{
-  height: auto;
-  background-color: transparent;
-  border: none;
-  margin: 1%;
-}
-
 input[type = text]
 {
   text-align: right;
