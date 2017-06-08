@@ -4,7 +4,6 @@ import { AF } from "../.././providers/af";
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-  selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })

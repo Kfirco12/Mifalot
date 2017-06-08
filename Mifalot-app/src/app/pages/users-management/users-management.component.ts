@@ -6,7 +6,6 @@ import { AF } from "../.././providers/af";
 import 'rxjs/Rx';
 
 @Component({
-  selector: 'app-users-management',
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.css']
 })

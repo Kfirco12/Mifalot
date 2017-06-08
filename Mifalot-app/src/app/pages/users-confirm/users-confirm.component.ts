@@ -4,7 +4,6 @@ import { AF } from "../.././providers/af";
 
 
 @Component({
-  selector: 'app-users-confirm',
   templateUrl: './users-confirm.component.html',
   styleUrls: ['./users-confirm.component.css']
 })

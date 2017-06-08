@@ -6,7 +6,6 @@ import { AF } from "../../providers/af";
 // import 'rxjs/Rx';
 
 @Component({
-  selector: 'app-pupils-management',
   templateUrl: './pupils-management.component.html',
   styleUrls: ['./pupils-management.component.css']
 })

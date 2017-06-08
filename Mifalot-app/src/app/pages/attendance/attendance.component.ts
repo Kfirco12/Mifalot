@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 
 @Component({
-  selector: 'app-attendance',
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
