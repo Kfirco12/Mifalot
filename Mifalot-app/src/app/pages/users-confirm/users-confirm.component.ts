@@ -26,6 +26,9 @@ export class UsersConfirmComponent implements OnInit
   // String
   private userType: string;
 
+  // Int
+  private userNewPermission: number;
+
   // Trasnfer user details to 'associate-teams' component
   private userDetails: any;
   private user: any;
@@ -39,6 +42,8 @@ export class UsersConfirmComponent implements OnInit
   constructor(private afService: AF) 
   {
     this.userDetails = [];
+    this.userNewPermission = null;
+
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
     this.users = this.afService.af.database.list('registeredUsers');
     this.teams = this.afService.af.database.list('teams');
@@ -99,6 +104,11 @@ export class UsersConfirmComponent implements OnInit
   }
 
   // =====================
+
+  userAssociatedTeams(userNewPermission)
+  {
+    this.userNewPermission = userNewPermission;
+  }
 
   ngOnInit() { }
 

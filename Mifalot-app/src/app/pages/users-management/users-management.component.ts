@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../.././providers/af";
 
+// For take() 
+import 'rxjs/Rx';
+
 @Component({
   selector: 'app-users-management',
   templateUrl: './users-management.component.html',
@@ -54,7 +57,7 @@ export class UsersManagementComponent implements OnInit
   {
     this.users.update(this.user.$key, { permission: 5 }).then(()  => 
     {
-      this.teams.subscribe((snapshots) => 
+      this.teams.take(1).subscribe((snapshots) => 
       {
         snapshots.forEach((snapshot) => 
         { 
