@@ -112,7 +112,7 @@ export class PupilsManagementComponent implements OnInit
 
   saveNewPupil()
   {
-    var newPupil = 
+    let newPupil = 
     {
       name : this.pupilName,
       lastName : this.pupilLastName,
@@ -121,9 +121,9 @@ export class PupilsManagementComponent implements OnInit
     }
 
     // Check if user already exist in temp array
-    var isExist = false;
+    let isExist = false;
 
-    for (var i = 0; i < this.newPupils.length; i++)
+    for (let i = 0; i < this.newPupils.length; i++)
       if (this.newPupils[i].ID == newPupil.ID)
         isExist = true;
 
@@ -156,9 +156,9 @@ export class PupilsManagementComponent implements OnInit
       return;
     } 
 
-    var team = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils', { preserveSnapshot: true });
+    let team = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils', { preserveSnapshot: true });
 
-    for (var i = 0; i < this.newPupils.length; i++)
+    for (let i = 0; i < this.newPupils.length; i++)
       team.update('' + this.newPupils[i].ID ,{ name: this.newPupils[i].name, lastName: this.newPupils[i].lastName, ID: this.newPupils[i].ID, missed: 0 });
 
       alert(this.newPupils.length + " חניכים נוספו לקבוצה! ");
@@ -212,7 +212,7 @@ export class PupilsManagementComponent implements OnInit
 
   savePupilToRemove(pupil)
   {
-    var index = this.pupilsToRemove.indexOf(pupil.$key);
+    let index = this.pupilsToRemove.indexOf(pupil.$key);
 
     // pupil doesnt exist in array
     if (index == -1) 
@@ -240,7 +240,7 @@ export class PupilsManagementComponent implements OnInit
 
   removePupilsFromDB()
   {
-    var length = this.pupilsToRemove.length;
+    let length = this.pupilsToRemove.length;
     
     if (length == 0)
     {
@@ -248,7 +248,7 @@ export class PupilsManagementComponent implements OnInit
       return;
     }
 
-    for (var i = 0; i < length; i++)
+    for (let i = 0; i < length; i++)
       this.pupilsList.remove(this.pupilsToRemove[i]);
 
     alert(length +  " חניכים הוסרו בהצלחה!");
@@ -261,7 +261,7 @@ export class PupilsManagementComponent implements OnInit
 
   isChecked(pupil)
   {
-    var index = this.pupilsToRemove.indexOf(pupil.$key);
+    let index = this.pupilsToRemove.indexOf(pupil.$key);
 
     // pupil doesnt exist in array
     if (index == -1) 

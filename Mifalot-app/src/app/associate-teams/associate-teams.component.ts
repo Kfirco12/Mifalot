@@ -17,6 +17,7 @@ export class AssociateTeamsComponent implements OnInit
   // userDetails[2] = user permission
   @Input() userDetails;
 
+  // To alert father component
   @Output() onUserAssociateTeamsToUser: EventEmitter<any> = new EventEmitter();
 
   // Array

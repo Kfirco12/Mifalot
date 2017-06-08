@@ -9,9 +9,8 @@ import { AF } from "../../providers/af";
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
-export class AttendanceComponent implements OnInit {
-  
-
+export class AttendanceComponent implements OnInit 
+{
   header =
   {
     title: "רשימת נוכחות",
@@ -75,7 +74,7 @@ export class AttendanceComponent implements OnInit {
 
   //Connect to the DB and get the team names of the connected user.
   getTeamsByUid() {
-    var info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
+    let info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
 
     info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
@@ -96,16 +95,16 @@ export class AttendanceComponent implements OnInit {
     this.chosenTeam = teamId;
 
     //get teame's pupil from DB.
-    //var info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
-    var info = this.afService.af.database.list('teams', { preserveSnapshot: true });
-    var path_subscribe = info.subscribe(snapshots => {
+    //let info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
+    let info = this.afService.af.database.list('teams', { preserveSnapshot: true });
+    let path_subscribe = info.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if (snapshot.val().name == teamId) {
           this.pupilsPath = this.afService.af.database.list('teams/' + snapshot.key + '/pupils');
           this.teamKey = snapshot.key;
           this.pupilsPath.subscribe(snap2 => {
             snap2.forEach(snap => {
-              var pupil = {
+              let pupil = {
                 name: snap.name,
                 lastName: snap.lastName,
                 ID: snap.ID,
@@ -125,7 +124,7 @@ export class AttendanceComponent implements OnInit {
   updateChecked(option, event) {
     //add check.
     if (event.target.checked) {
-      for (var _i = 0; _i < this.pupils.length; _i++) {
+      for (let _i = 0; _i < this.pupils.length; _i++) {
         if (event.target.value === this.pupils[_i].ID) {
           this.pupils[_i].presence = true;
         }
@@ -133,7 +132,7 @@ export class AttendanceComponent implements OnInit {
     }
     //remove check.
     else {
-      for (var _i = 0; _i < this.pupils.length; _i++) {
+      for (let _i = 0; _i < this.pupils.length; _i++) {
         if (event.target.value === this.pupils[_i].ID)
           this.pupils[_i].presence = false;
       }
@@ -164,14 +163,14 @@ export class AttendanceComponent implements OnInit {
   //help method.
   printPupils(list, names) {
 
-    var str = "";
+    let str = "";
 
     if (names)
-      for (var _i = 0; _i < list.length; _i++) {
+      for (let _i = 0; _i < list.length; _i++) {
         str += list[_i].name + ",  ";
       }
     else
-      for (var _i = 0; _i < list.length; _i++) {
+      for (let _i = 0; _i < list.length; _i++) {
         str += list[_i].presence + ",  ";
       }
 
@@ -181,14 +180,14 @@ export class AttendanceComponent implements OnInit {
   //----------------------------
   //Missing from 2 or more trainings.
   missingUpdate(path) {
-    var datePipe = new DatePipe('en-us');
-    var setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
-    var changed = false;
-    var dates = 0;
-    var missed_twiced = [];
+    let datePipe = new DatePipe('en-us');
+    let setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
+    let changed = false;
+    let dates = 0;
+    let missed_twiced = [];
 
     //check if an attendance was checked at the same date of 'date'.
-    var path_subscribe = path.subscribe(snapshots => {
+    let path_subscribe = path.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy')) {
           dates++;
@@ -204,9 +203,9 @@ export class AttendanceComponent implements OnInit {
 
     //update if needed.
     path_subscribe = this.pupilsPath.subscribe(snapshots => {
-      var i = 0;
+      let i = 0;
       snapshots.forEach(snapshot => {
-        var missing = snapshot.missed;
+        let missing = snapshot.missed;
         if (this.pupils[i].presence == false && !changed) {
           missing++;
           this.pupilsPath.update(snapshot.$key, { missed: missing });
@@ -229,13 +228,13 @@ export class AttendanceComponent implements OnInit {
 missChecking(arr){
   if(arr.length == 0)
     return;
-  for(var i = 0; i<arr.length; i++)
+  for(let i = 0; i<arr.length; i++)
     alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
 }
 
   //helping method to reset the missings.
   resetMiss() {
-    var path_subscribe = this.pupilsPath.subscribe(snapshots => {
+    let path_subscribe = this.pupilsPath.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         this.pupilsPath.update(snapshot.$key, { missed: 0 });
       })
@@ -251,8 +250,8 @@ missChecking(arr){
       + "\n\nThe pupils of the team are: " + this.printPupils(this.pupils, true)
       + "\n\nthe presence list is: " + this.printPupils(this.pupils, false));
 
-    var info = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
-    var toPush = {
+    let info = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
+    let toPush = {
       date: this.date,
       presence: this.pupils
     };

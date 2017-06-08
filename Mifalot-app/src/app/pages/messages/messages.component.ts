@@ -68,11 +68,11 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   createsNewChatRoom(chatName)
   {
-    var authorName = this.user.name + " " + this.user.lastName;
-    var newChat = { name: chatName, authorName: authorName, authorID: this.user.uid };
+    let authorName = this.user.name + " " + this.user.lastName;
+    let newChat = { name: chatName, authorName: authorName, authorID: this.user.uid };
 
     // Create a new chat room
-    var newChatInDB = this.chatRooms.push(newChat);
+    let newChatInDB = this.chatRooms.push(newChat);
     this.currentChat = this.afService.af.database.list('chatRooms/' + newChatInDB.key + '/messages');
 
     // Updating chat's title
