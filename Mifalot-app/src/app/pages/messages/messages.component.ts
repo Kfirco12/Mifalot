@@ -74,6 +74,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
     // Updating chat's title
     this.chatRoomTitle = chatName;
+    this.chatRoomAuthor = authorName;
 
     // Updating flags
     this.noChatRoomSelected = false;
