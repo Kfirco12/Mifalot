@@ -26,3 +26,13 @@ button
     height: 120px;
     background-color: transparent;
 }
+
+.btn-primary
+{
+    background: #9669FE;
+}
+ 
+.btn-warning
+{
+    background: #FF8429;
+}
