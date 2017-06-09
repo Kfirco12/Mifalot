@@ -14,7 +14,7 @@ export class LoadingComponent implements OnInit
 
   ngOnInit() 
   {
-     setTimeout(() => { this.router.navigate(['']); }, 2000);  //2s
+     setTimeout(() => { this.router.navigate(['']); }, 1000);  // 1s
   }
 
   // ====================
