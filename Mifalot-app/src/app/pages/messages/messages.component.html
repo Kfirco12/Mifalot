@@ -27,6 +27,9 @@
       <p>
         
       <div class = "vertical-menu chat-rooms">
+          <div *ngIf = "(chatRooms | async)?.length == 0" class = "alert alert-warning text-center" role = "alert">
+            <strong> אין כרגע חדרי צ׳אט פתוחים </strong> <br> באפשרותך ליצור חדר צ׳אט חדש ולשתף חוויות 
+          </div>
           <div *ngFor = "let chatRoom of chatRooms | async" class = "list-group text-right">
               <span class = "list-group-item clearfix direction-rtl" (click) = "enterChatRoom(chatRoom)">  
                   <span class = "text-bold"> {{ chatRoom.name }} </span> <br> <span id = "author-name"> פותח: {{ chatRoom.authorName }} </span>

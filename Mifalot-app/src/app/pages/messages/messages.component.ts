@@ -165,16 +165,12 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   removeChatRoom(chatRoom)
   {
-    console.log(chatRoom);
     this.chatRooms.remove(chatRoom.$key);
   }
 
   // ==================================================
 
-  ngOnInit() 
-  {
-
-  }
+  ngOnInit() { }
 
   // ==================================================
 
