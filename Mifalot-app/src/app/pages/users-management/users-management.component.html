@@ -7,10 +7,11 @@
 
 <div class = "container">
     <div *ngIf = "!userSelected && !showUserTeams">
-  
         <div class = "row">
             <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"> 
-                <h5> לחץ על משתמש על מנת לערוך את הרשאותיו </h5>
+                <div class = "alert alert-warning text-center" role = "alert">
+                    <strong> מוצגים כאן המאמנים ומנהלי האזור </strong> <br> לחץ על משתמש על מנת לערוך את הרשאותיו
+                </div>
             </div>
             <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class = "list-group text-right" id = "list-managers">
@@ -41,8 +42,8 @@
     <div *ngIf = "userSelected && !showUserTeams">
 
         <!-- Note -->
-        <div class = "alert alert-warning text-right" role = "alert">
-            <strong> הערה:</strong> לאחר לחיצה על ״חסום״ המשתמש יחסם וכל הקבוצות שהיו רשומות תחתיו יתפנו
+        <div class = "alert alert-danger text-right" role = "alert">
+            <strong> שים לב:</strong> לאחר לחיצה על ״חסום״ המשתמש יחסם וכל הקבוצות שהיו רשומות תחתיו יתפנו
         </div>
         <!-- /Note -->
         
