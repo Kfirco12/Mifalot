@@ -26,6 +26,7 @@ import { InsertComponent } from './helping/insert/insert.component';
 import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
+import { UserStatusComponent } from './user-status/user-status.component';
 
 
 // ======================================================
@@ -75,7 +76,8 @@ const routes: Routes = [
     InsertComponent,
     BlockedUsersComponent,
     UsersManagementComponent,
-    AssociateTeamsComponent
+    AssociateTeamsComponent,
+    UserStatusComponent
   ],
   imports: [
     BrowserModule,

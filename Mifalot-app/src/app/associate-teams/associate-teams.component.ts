@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from ".././providers/af";
+import {Output}       from '@angular/core'
+import {EventEmitter} from '@angular/core'
 
 @Component({
   selector: 'app-associate-teams',
@@ -14,6 +16,9 @@ export class AssociateTeamsComponent implements OnInit
   // userDetails[1] = the name of the component who activated this selector
   // userDetails[2] = user permission
   @Input() userDetails;
+
+  // To alert father component
+  @Output() onUserAssociateTeamsToUser: EventEmitter<any> = new EventEmitter();
 
   // Array
   private selectedTeams;
@@ -33,7 +38,7 @@ export class AssociateTeamsComponent implements OnInit
 
   saveTeamToAssociate(team)
   {
-    var index = this.selectedTeams.indexOf(team);
+    let index = this.selectedTeams.indexOf(team);
 
     // Team doesnt exist in array
     if (index == -1) 
@@ -46,7 +51,7 @@ export class AssociateTeamsComponent implements OnInit
 
   isChecked(team)
   {
-    var index = this.selectedTeams.indexOf(team);
+    let index = this.selectedTeams.indexOf(team);
 
     // team doesnt exist in array
     if (index == -1) 
@@ -59,14 +64,13 @@ export class AssociateTeamsComponent implements OnInit
 
   associateTeamsToUser()
   {
-    var length = this.selectedTeams.length;
+    let length = this.selectedTeams.length;
       
     if (length == 0)
     {
       alert("אנא בחר לפחות קבוצה אחת");
       return;
     }
-
 
     // ---------------------------------------------------------
     // TO CHECK: how to pass variable field inside 'update' func
@@ -86,17 +90,20 @@ export class AssociateTeamsComponent implements OnInit
     // userDetails[2] is user permission
     if (this.userDetails[2] == 3)
     {
-      for (var i = 0; i < length; i++)
+      for (let i = 0; i < length; i++)
         this.teams.update(this.selectedTeams[i].name, { 'coachID' : this.userDetails[0].$key });
     }
     else if (this.userDetails[2] == 2)
     {
-      for (var i = 0; i < length; i++)
+      for (let i = 0; i < length; i++)
         this.teams.update(this.selectedTeams[i].name, { 'managerID' : this.userDetails[0].$key });
     }
 
     // Changing user permission if needed to
     this.updateUserPermission();
+
+    // Alert to father component
+    this.onUserAssociateTeamsToUser.emit(this.userDetails[2]);
 
     this.selectedTeams = [];
     alert(length +  " קבוצות שויכו בהצלחה!");
@@ -110,7 +117,7 @@ export class AssociateTeamsComponent implements OnInit
     // This component called from 'users-confirm' component
     if (this.userDetails[1] == 'users-confirm')
     {
-      var user = this.afService.af.database.object('registeredUsers/' + this.userDetails[0].$key);
+      let user = this.afService.af.database.object('registeredUsers/' + this.userDetails[0].$key);
       user.update({ 'permission' : this.userDetails[2] });
     }
   }

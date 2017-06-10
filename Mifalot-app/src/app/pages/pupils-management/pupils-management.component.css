@@ -46,11 +46,6 @@
     color: white;
 }
 
-.buttons h4
-{
-    text-decoration: underline;
-}
-
 input[type = "text"], input[type = "number"]
 {
 	text-align: right;

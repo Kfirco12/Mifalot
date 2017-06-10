@@ -4,7 +4,6 @@ import { AF } from "../../providers/af";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })

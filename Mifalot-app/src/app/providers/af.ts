@@ -52,7 +52,7 @@ export class AF
 
   sendMessage(text, name, lastName, chatRoom: FirebaseListObservable<any>) 
   {
-    var message =
+    let message =
       {
         message: text,
         displayName: name,
@@ -146,7 +146,7 @@ export class AF
 
   unsubscribeAll()
   {
-    for (var i = 0; i < this.subscribeArray.length; i++)
+    for (let i = 0; i < this.subscribeArray.length; i++)
       if (this.subscribeArray[i])
         this.subscribeArray[i].unsubscribe();
   }

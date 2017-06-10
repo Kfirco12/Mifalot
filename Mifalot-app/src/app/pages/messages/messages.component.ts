@@ -4,7 +4,6 @@ import { AF } from "../../providers/af";
 import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
-  //selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
@@ -24,7 +23,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private newMessage: string;
   private userEmail: string;
   private chatRoomTitle: string;
-  private savedDate: string = '';
+  private chatRoomAuthor: string;
+  private savedDate: string;
 
   // DB Observables
   private chatRooms: FirebaseListObservable<any>;
@@ -33,8 +33,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Flags
   private noChatRoomSelected: boolean;
   private createNewChatRoom: boolean;
-
-  private error: any;
 
   private user;
   // ==================================================
@@ -59,20 +57,24 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     // Flags
     this.noChatRoomSelected = true;
     this.createNewChatRoom = false;
+
+    this.savedDate = '';
   }
 
   // ==================================================
 
   createsNewChatRoom(chatName)
   {
-    var newChat = { name: chatName };
+    let authorName = this.user.name + " " + this.user.lastName;
+    let newChat = { name: chatName, authorName: authorName, authorID: this.user.uid };
 
     // Create a new chat room
-    var newChatInDB = this.chatRooms.push(newChat);
+    let newChatInDB = this.chatRooms.push(newChat);
     this.currentChat = this.afService.af.database.list('chatRooms/' + newChatInDB.key + '/messages');
 
     // Updating chat's title
     this.chatRoomTitle = chatName;
+    this.chatRoomAuthor = authorName;
 
     // Updating flags
     this.noChatRoomSelected = false;
@@ -100,6 +102,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   enterChatRoom(chatRoom)
   { 
     this.chatRoomTitle = chatRoom.name;
+    this.chatRoomAuthor = chatRoom.authorName;
+
     this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
     this.noChatRoomSelected = false;
   }
@@ -157,12 +161,16 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     } catch(err) { }
   }
 
-// ==================================================
+  // ==================================================
 
-  ngOnInit() 
+  removeChatRoom(chatRoom)
   {
-
+    this.chatRooms.remove(chatRoom.$key);
   }
+
+  // ==================================================
+
+  ngOnInit() { }
 
   // ==================================================
 

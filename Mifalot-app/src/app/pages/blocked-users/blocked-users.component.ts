@@ -3,7 +3,6 @@ import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../.././providers/af";
 
 @Component({
-  selector: 'app-blocked-users',
   templateUrl: './blocked-users.component.html',
   styleUrls: ['./blocked-users.component.css']
 })

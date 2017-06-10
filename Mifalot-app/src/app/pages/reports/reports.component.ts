@@ -4,7 +4,6 @@ import { AF } from "../.././providers/af";
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-  selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
@@ -61,6 +60,7 @@ export class ReportsComponent implements OnInit
     this.user = 
     { 
       uid: null,
+      email: null,
       name: null,
       lastName: null,
       ID: null,
@@ -118,6 +118,14 @@ export class ReportsComponent implements OnInit
         this.pupilPresence = "לא";
         return false;
     }
+  }
+
+  // ============================================================
+
+  pressedOnChooseDate()
+  {
+    if (!this.teamSelected)
+      alert("בחר קודם קבוצה להצגת תאריכי הנוכחות");
   }
 
   // ============================================================

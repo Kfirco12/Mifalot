@@ -12,7 +12,7 @@
       <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
         <div *ngSwitchCase = "'4'" class = "col-lg-6 col-md-6 col-xs-6 thumb">
           <a class = "thumbnail">
-            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name }} </button>
+            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name  + " " + user.lastName}} </button>
           </a>
         </div>
       </div>
@@ -75,13 +75,13 @@
       <strong> אישור משתמש:</strong> הנך עומד לאשר את {{ user.name }} {{ user.lastName }}, אנא בחר את סוג המשתמש ושייך אליו את הקבוצות הרצויות
     </div>
     <div class = "row text-center" data-toggle = "buttons">
-      <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div *ngIf = "!userNewPermission || userNewPermission == 2" class = "col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-left">
         <label class = "btn btn-info btn-block" (click) = "showTeams('manager')">
           <input type = "radio" name = "options" id = "option2" autocomplete = "off">
           <span class = "glyphicon glyphicon-ok text-left"></span> <span class = "text-white"> מנהל אזור </span>
         </label>
       </div>
-      <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div *ngIf = "!userNewPermission || userNewPermission == 3" class = "col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-right">
         <label class = "btn btn-warning btn-block" (click) = "showTeams('coach')">
           <input type = "radio" name = "options" id = "option1" autocomplete = "off">
           <span class = "glyphicon glyphicon-ok text-left"> </span> <span class = "text-white"> מאמן </span>
@@ -95,7 +95,7 @@
 
     <div *ngIf = "chooseTeams">
       <!-- Calling 'associate-teams' component -->
-      <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
+      <app-associate-teams (onUserAssociateTeamsToUser) = "userAssociatedTeams($event)" [userDetails] = "userDetails"></app-associate-teams>
       <div class = "container">
         <button id = "btn-back" (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
       </div>

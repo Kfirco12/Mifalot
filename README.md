@@ -23,19 +23,20 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Group Chat | [![Join the chat at https://gitter.im/jce-il/Mifalot](https://badges.gitter.im/jce-il/jce-il/Mifalot.svg)](https://gitter.im/jce-il/Mifalot?utm_source=share-link&utm_medium=link&utm_campaign=share-link)|
 | Build Status (CI) |  [![Build Status](https://travis-ci.org.svg?branch=master)](https://travis-ci.org/benhuri/Mifalot) |
 | Dependencies | [![David](https://img.shields.io/david/dev/idleberg/vscode-badges.svg?style=flat-square)](https://david-dm.org/jce-il/project-template?type=dev) |
-| License | [License File](https://github.com/benhuri/Mifalot/blob/master/LICENSE) |
+| License | [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/benhuri/Mifalot/blob/master/LICENSE) |
 | Test Coverege | [![codecov.io](https://codecov.io/github/jce-il/project-template/coverage.svg?branch=master)](https://codecov.io/github/jce-il/project-template?branch=master) |
-| Code Quality | [![Code Climate](https://codeclimate.com/github/Kfirco12/Mifalot.svg)](https://codeclimate.com/github/Kfirco12/Mifalot) |
+| Code Quality | [![Code Climate](https://codeclimate.com/github/benhuri/Mifalot.svg)](https://codeclimate.com/github/benhuri/Mifalot) |
 | Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/jce-il/project-template) |
 | Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v0.2) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/benhuri/Mifalot/issues) |
 | Project Management Board| [here](https://github.com/benhuri/Mifalot/projects/1) |
-| Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/jce-il/project-template.svg)](https://github.com/jce-il/project-template/graphs/contributors)
+| Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/benhuri/Mifalot.svg)](https://github.com/benhuri/Mifalot/graphs/contributors)
 | Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
+| Documnetation | [![Inline docs](http://inch-ci.org/github/benhuri/Mifalot.svg?branch=master)](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation) |
 | Project Course Status | ... |
 
-## Please visit our [live application](https://application-d2061.firebaseapp.com/)
+## Please visit our [live application Demo](https://application-d2061.firebaseapp.com/)
 
 
 ## Disclaimer
@@ -50,16 +51,14 @@ Please visit our wiki for furthur project info:
 ### [Team Page](https://github.com/benhuri/Mifalot/wiki/Team-page)
 
 ### Project Documents
-- [Project Idea](docs/idea.pdf) ([Presentation](docs/idea-slides.pdf))
 - [Project Inception](../../wiki/Project-inception)
-- [Software Requirements Specification](../../wiki/srs)
-- [Software Design Specification](../../wiki/sds)
+- [Software Requirements Specification(SRS)](../../wiki/srs)
+- [Software Design Specification(SDS)](../../wiki/sds)
 - [Organization Website](http://mifalot.co.il/)
-- [Organization Facebook Page](https://www.facebook.com/%D7%9E%D7%A4%D7%A2%D7%9C%D7%95%D7%AA-%D7%97%D7%99%D7%A0%D7%95%D7%9A-%D7%95%D7%97%D7%91%D7%A8%D7%94-Mifalot-Sport-for-Education-Development-and-Peace-108879682613861/?fref=ts)
 
 ### Iteration Pages
 - [Iteration 0 - ZFR](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR)
-- [Iteration 1 - MVP](https://github.com/benhuri/Mifalot/wiki/Iter1---MVP:-Checklist-&-Login-template)
+- [Iteration 1 - MVP - Checklist & Login template](https://github.com/benhuri/Mifalot/wiki/Iter1---MVP:-Checklist-&-Login-template)
 - [Iteration 2 - Report & Management](https://github.com/benhuri/Mifalot/wiki/Iter2:-Report-&-Management)
 - [Iteration 3 - Experiances](https://github.com/benhuri/Mifalot/wiki/Iter3:-Experiences)
 - [Iteration 4 - Testing & Login logic](https://github.com/benhuri/Mifalot/wiki/Iter4:-Testing-&-Login-logic)
