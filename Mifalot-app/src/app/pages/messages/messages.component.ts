@@ -5,8 +5,7 @@ import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css'],
-  template: '<simple-notifications [options]="options"></simple-notifications>'
+  styleUrls: ['./messages.component.css']
 })
 
 export class MessagesComponent implements OnInit, AfterViewChecked
@@ -38,7 +37,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private user;
   // ==================================================
 
-  constructor(private afService: AF, private ref: ChangeDetectorRef, ) 
+  constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
     this.chatRooms = this.afService.af.database.list('chatRooms');
 
