@@ -38,7 +38,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private user;
   // ==================================================
 
-  constructor(private afService: AF, private ref: ChangeDetectorRef, private _service: NotificationsService ) 
+  constructor(private afService: AF, private ref: ChangeDetectorRef, ) 
   {
     this.chatRooms = this.afService.af.database.list('chatRooms');
 
