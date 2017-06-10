@@ -30,7 +30,7 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v0.2) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/benhuri/Mifalot/issues) |
 | Project Management Board| [here](https://github.com/benhuri/Mifalot/projects/1) |
-| Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/benhuri/Mifalot.svg)](https://github.com/jce-il/project-template/graphs/contributors)
+| Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/benhuri/Mifalot.svg)](https://github.com/benhuri/Mifalot/graphs/contributors)
 | Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
 | Documnetation | [![Inline docs](http://inch-ci.org/github/benhuri/Mifalot.svg?branch=master)](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation) |
