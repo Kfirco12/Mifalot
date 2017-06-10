@@ -28,6 +28,8 @@ import { UsersManagementComponent } from './pages/users-management/users-managem
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 
+import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+
 
 // ======================================================
 // Initialize Firebase 
@@ -81,9 +83,11 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    SimpleNotificationsModule.forRoot(),
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    SimpleNotificationsModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [ AF ],
