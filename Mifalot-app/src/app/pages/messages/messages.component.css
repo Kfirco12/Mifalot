@@ -109,6 +109,12 @@ p
 {
   color: darkred;
 }
+
+.glyphicon-pencil
+{
+  color: darkslateblue;
+  margin-left: 10px;
+}
 input::placeholder
 {
   text-align: right;

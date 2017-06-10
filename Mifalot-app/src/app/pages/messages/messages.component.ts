@@ -33,8 +33,12 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Flags
   private noChatRoomSelected: boolean;
   private createNewChatRoom: boolean;
+  private editChatRoom: boolean;
 
+  // Object
+  private currentChatDetails;
   private user;
+
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
@@ -56,7 +60,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
     // Flags
     this.noChatRoomSelected = true;
-    this.createNewChatRoom = false;
+    this.createNewChatRoom = this.editChatRoom =false;
 
     this.savedDate = '';
   }
@@ -87,7 +91,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   chooseChatRoom()
   {
     this.noChatRoomSelected = true;
-    this.createNewChatRoom = false;
+    this.createNewChatRoom = this.editChatRoom = false;
   }
 
   // ==================================================
@@ -101,6 +105,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   enterChatRoom(chatRoom)
   { 
+    this.currentChatDetails = chatRoom;
+
     this.chatRoomTitle = chatRoom.name;
     this.chatRoomAuthor = chatRoom.authorName;
 
@@ -166,6 +172,28 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   removeChatRoom(chatRoom)
   {
     this.chatRooms.remove(chatRoom.$key);
+  }
+
+  // ==================================================
+
+  editChatRoomName(chatRoom)
+  {
+    this.currentChatDetails = chatRoom;
+    this.editChatRoom = true;
+  }
+
+  // ==================================================
+
+  updateChatRoomName(name)
+  {
+    let currentChat = this.afService.af.database.object('chatRooms/' + this.currentChatDetails.$key);
+    currentChat.update({name: name});
+    
+    // Updating chat's title
+    this.chatRoomTitle = name;
+
+    this.editChatRoom = false;
+    this.noChatRoomSelected = true;
   }
 
   // ==================================================
