@@ -79,6 +79,11 @@ input
      margin-bottom: 2%;
 }
 
+.margin-left
+{
+    margin-left: 10px;
+}
+
 .red 
 {
   background: #ea8378;

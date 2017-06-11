@@ -171,6 +171,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   removeChatRoom(chatRoom)
   {
+    if(confirm("האם למחוק הודעה זו?"))
     this.chatRooms.remove(chatRoom.$key);
   }
 

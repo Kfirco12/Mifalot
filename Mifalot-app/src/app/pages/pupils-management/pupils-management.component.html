@@ -24,7 +24,7 @@
                 </div>
 
                 <div *ngFor = "let team of teams | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
-                    <span *ngIf = "userObject.permission == 3 && userObject.uid == team.managerID" class = "thumbnail" (click) = "getPupilsByTeam(team)">
+                    <span *ngIf = "userObject.permission == 3 && userObject.uid == team.coachID" class = "thumbnail" (click) = "getPupilsByTeam(team)">
                         <button  type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
                     </span>
                 </div>
@@ -117,8 +117,8 @@
                         <span class = "pull-left">
                             <span class = "glyphicon glyphicon-trash" (click) = "removePupil(pupil)"></span>
                         
-                            <button *ngSwitchCase = "false" class = "fa fa-plus" (click) = "savePupilToRemove(pupil)"> </button>
-                            <button *ngSwitchCase = "true" class = "fa fa-minus" (click) = "savePupilToRemove(pupil)"> </button>
+                            <span *ngSwitchCase = "false" class = "fa fa-plus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
+                            <span *ngSwitchCase = "true" class = "fa fa-minus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
                         </span>
                     </span>
                 </div>

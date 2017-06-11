@@ -202,9 +202,12 @@ export class PupilsManagementComponent implements OnInit
 
   removePupil(pupil)
   {
-    this.pupilsList.remove(pupil.$key);
-    this.savePupilToRemove(pupil);
-    alert(pupil.name + " " + pupil.lastName + " הוסר בהצלחה!");
+    if (confirm("האם אתה בטוח שברצונך למחוק את " + pupil.name + " " + pupil.lastName + " ?"))
+    {
+      this.pupilsList.remove(pupil.$key);
+      this.savePupilToRemove(pupil);
+      alert(pupil.name + " " + pupil.lastName + " הוסר בהצלחה!");
+    }
   }
 
   // ==============================
@@ -247,13 +250,17 @@ export class PupilsManagementComponent implements OnInit
       return;
     }
 
-    for (let i = 0; i < length; i++)
-      this.pupilsList.remove(this.pupilsToRemove[i]);
+    if(confirm("האם אתה בטוח שברצונך להסיר חניכים אלו?"))
+    {
+      for (let i = 0; i < length; i++)
+       this.pupilsList.remove(this.pupilsToRemove[i]);
 
-    alert(length +  " חניכים הוסרו בהצלחה!");
+      alert(length +  " חניכים הוסרו בהצלחה!"); 
 
-    // Reset values
-    this.pupilsToRemove = [];
+      // Reset values
+      this.pupilsToRemove = [];
+      this.newPupilsCounter = 0;
+    }
   }
 
   // ==============================
