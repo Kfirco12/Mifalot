@@ -31,6 +31,7 @@ export class AF
   {
     this.subscribeArray = [];
     this.numOfChatRooms = 0;
+    this.logout();  // When user refresh the app, he will need to log in again
   }
 
   // ================================

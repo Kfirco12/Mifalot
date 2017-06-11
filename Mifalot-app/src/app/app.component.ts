@@ -22,7 +22,6 @@ export class AppComponent
 
   constructor(private afService: AF, private router: Router, private pushService: PushNotificationsService) 
   {
-    this.logout();   // When user refresh the app, he will need to log in again
     this.pushService.requestPermission();
     this.subscribeToUserAuthStatus();
   }
@@ -54,6 +53,7 @@ export class AppComponent
 
   logout() 
   {
+    if(confirm("האם ברצונך להתנתק?"))
     this.afService.logout();
   }
 
