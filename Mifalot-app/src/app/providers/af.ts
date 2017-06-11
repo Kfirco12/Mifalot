@@ -2,6 +2,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import { PushNotificationsService } from "angular2-notifications-lite";
 
 // For take() 
 import 'rxjs/Rx';
@@ -21,11 +22,15 @@ export class AF
   // DB Observable
   private user: FirebaseObjectObservable<any>;
 
+  // Int
+  private numOfChatRooms: number;
+
   // ================================
 
-  constructor(public af: AngularFire) 
+  constructor(public af: AngularFire, private pushService: PushNotificationsService) 
   {
     this.subscribeArray = [];
+    this.numOfChatRooms = 0;
   }
 
   // ================================
@@ -189,6 +194,59 @@ export class AF
   {
     return this.uid;
   }
+
+  // ================================
+  //        Push Notifications
+  // ================================
+
+  subscribeToChatRooms()
+  {
+    this.getNumOfChatRooms();
+    let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true });
+    let currentLength = 0;
+
+    this.subscribeArray.push(chatRooms.subscribe(snapshots => 
+    {
+      currentLength = 0;
+      snapshots.forEach(snapshot => 
+      { 
+        if (snapshot.val().authorID != this.uid)
+          currentLength++;
+      });
+      if (currentLength > this.numOfChatRooms)
+        this.pushNotification();
+      this.numOfChatRooms = currentLength;
+    }));
+
+  }
+  
+  // ================================
+
+  getNumOfChatRooms()
+  {
+    this.numOfChatRooms = 0;
+    let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true }).take(1);
+
+    chatRooms.subscribe(snapshots => {
+      snapshots.forEach(snapshot => 
+      {
+        this.numOfChatRooms++;
+      })
+      console.log(this.numOfChatRooms);
+    });
+  }
+
+  // ================================
+
+  pushNotification()
+  {
+    this.pushService.create('פורסמה חוויה חדשה', { body: 'כנס אל ״הודעות״ וצפה בהודעה', dir: 'rtl' }).subscribe(
+            res => console.log(res),
+            err => console.log(err)
+        )
+  }
+
+  // ================================
 
 }
 

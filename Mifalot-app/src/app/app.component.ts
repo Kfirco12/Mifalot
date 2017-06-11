@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Router } from "@angular/router";
 import { AF } from "./providers/af";
+import { PushNotificationsService, NotificationsService, SimpleNotificationsComponent } from "angular2-notifications-lite";
 
 
 @Component({
@@ -19,9 +20,10 @@ export class AppComponent
 
   // ====================================
 
-  constructor(private afService: AF, private router: Router) 
+  constructor(private afService: AF, private router: Router, private pushService: PushNotificationsService) 
   {
     this.logout();   // When user refresh the app, he will need to log in again
+    this.pushService.requestPermission();
     this.subscribeToUserAuthStatus();
   }
 
@@ -41,6 +43,7 @@ export class AppComponent
         }
         else 
         {
+          this.afService.subscribeToChatRooms();
           console.log("Successfully Logged in.");
           this.isLoggedIn = true; 
         }

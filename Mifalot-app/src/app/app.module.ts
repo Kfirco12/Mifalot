@@ -1,23 +1,20 @@
+
+// Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from "@angular/router";
+import { AngularFireModule } from 'angularfire2';
 
+// Components
 import { AppComponent } from './app.component';
-
-
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { PupilsManagementComponent } from './pages/pupils-management/pupils-management.component';
-
-import { AngularFireModule } from 'angularfire2';
-
-
-import { AF } from "./providers/af";
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
@@ -28,7 +25,9 @@ import { UsersManagementComponent } from './pages/users-management/users-managem
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 
-import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+// Services/Providers
+import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
+import { AF } from "./providers/af";
 
 
 // ======================================================
@@ -83,15 +82,16 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    SimpleNotificationsModule.forRoot(),
     FormsModule,
     HttpModule,
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(routes),
-    SimpleNotificationsModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ AF ],
+  providers: [ AF, PushNotificationsService ],
   bootstrap: [ AppComponent ]
 })
+
+// ======================================================
 
 export class AppModule { }

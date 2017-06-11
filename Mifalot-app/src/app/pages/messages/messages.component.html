@@ -77,7 +77,7 @@
 
     <br>
 
-    <form class = "form-signin">
+    <form class = "form-signin" (submit) = "createsNewChatRoom(name.value)">
         <label for = "name" class = "sr-only"> נושא הצ׳אט </label>
         <div class = "input-group">
           <input #name type = "text" id = "name" class = "form-control" placeholder = "נושא הצ׳אט" required>
@@ -86,8 +86,8 @@
 
         <br>
 
-        <button (click) = "name.value && createsNewChatRoom(name.value) " class = "btn btn-md btn-success btn-block" type = "submit"> יצירת צ׳אט </button>
-        <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לעמוד הקודם </button>
+        <button class = "btn btn-md btn-success btn-block" type = "submit"> יצירת צ׳אט </button>
+        <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "button"> חזור לעמוד הקודם </button>
 
     </form>
   </div>

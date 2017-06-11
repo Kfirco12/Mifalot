@@ -153,8 +153,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   // ==================================================
 
- ngAfterViewChecked() 
- {
+  ngAfterViewChecked() 
+  {
     // this.scrollToBottom();
   }
 
