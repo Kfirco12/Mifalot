@@ -54,29 +54,32 @@ export class UsersManagementComponent implements OnInit
 
   blockUser()
   {
-    this.users.update(this.user.$key, { permission: 5 }).then(()  => 
+    if (confirm("האם אתה בטוח שברצונך לחסום משתמש זה?"))
     {
-      this.teams.take(1).subscribe((snapshots) => 
+      this.users.update(this.user.$key, { permission: 5 }).then(()  => 
       {
-        snapshots.forEach((snapshot) => 
-        { 
-          // Coach
-          if (this.user.permission == 3)
-          {
-            if (this.user.$key == snapshot.coachID)
-              this.teams.update(snapshot.$key, {coachID: ''});
-          }
-          // Manager
-          else if (this.user.permission == 2)
-          {
-            if (this.user.$key == snapshot.managerID)
-              this.teams.update(snapshot.$key, {managerID: ''});
-          }
+        this.teams.take(1).subscribe((snapshots) => 
+        {
+          snapshots.forEach((snapshot) => 
+          { 
+            // Coach
+            if (this.user.permission == 3)
+            {
+              if (this.user.$key == snapshot.coachID)
+                this.teams.update(snapshot.$key, {coachID: ''});
+            }
+            // Manager
+            else if (this.user.permission == 2)
+            {
+              if (this.user.$key == snapshot.managerID)
+                this.teams.update(snapshot.$key, {managerID: ''});
+            }
+          })
         })
-      })
-      alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו")
-      this.userSelected = false;
-    });
+        alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו")
+        this.userSelected = false;
+      });
+    }
   }
 
   // =====================

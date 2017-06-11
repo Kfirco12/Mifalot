@@ -53,8 +53,8 @@ export class AppComponent
 
   logout() 
   {
-    if(confirm("האם ברצונך להתנתק?"))
-    this.afService.logout();
+    if (confirm("האם אתה בטוח שברצונך להתנתק?"))
+      this.afService.logout();
   }
 
   // ====================================

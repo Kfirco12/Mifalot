@@ -62,12 +62,15 @@ export class UsersConfirmComponent implements OnInit
 
   blockUser()
   {
-    this.users.update(this.user.$key, { permission: 5 }).then(()  => 
+    if (confirm("האם ברצונך לחסום משתמש זה?"))
     {
-      alert("המשתמש נחסם")
-      this.userSelected = false;
-      this.user = null;
-    });
+      this.users.update(this.user.$key, { permission: 5 }).then(()  => 
+      {
+        alert("המשתמש נחסם")
+        this.userSelected = false;
+        this.user = null;
+      });
+    }
   }
 
   // =====================

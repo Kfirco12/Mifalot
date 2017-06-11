@@ -41,11 +41,14 @@ export class BlockedUsersComponent implements OnInit
 
   sendUserToConfirmation()
   {
-    this.users.update(this.user.$key, {permission: 4}).then( () => 
+    if (confirm("האם ברצונך לבטל חסימה של משתמש זה?"))
     {
-      alert('שים לב: המשתמש' + ' ' + this.user.name + ' ' + this.user.lastName + ' ' + 'הועבר לרשימת הממתינים לאישור');
-      this.userSelected = false;
-    })
+      this.users.update(this.user.$key, {permission: 4}).then( () => 
+      {
+        alert('שים לב: המשתמש' + ' ' + this.user.name + ' ' + this.user.lastName + ' ' + 'הועבר לרשימת הממתינים לאישור');
+        this.userSelected = false;
+      })
+    }
   }
 
   // =====================
