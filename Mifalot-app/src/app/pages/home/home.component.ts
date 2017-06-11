@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AF } from "../../providers/af";
 import { FirebaseListObservable } from 'angularfire2';
-import { PushNotificationsService, NotificationsService, SimpleNotificationsComponent } from "angular2-notifications-lite";
 
 @Component({
   templateUrl: './home.component.html',
