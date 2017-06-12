@@ -39,6 +39,9 @@ export class ReportsComponent implements OnInit
   private teams: FirebaseListObservable<any>;         // Contain user's teams
   private attendances: FirebaseListObservable<any>;   // Contain user's attendances
   
+  // For navbar component
+  private button;
+
   // ============================================================
 
   constructor(private afService: AF) 
@@ -56,6 +59,9 @@ export class ReportsComponent implements OnInit
 
     // DB observable
     this.teams = this.afService.af.database.list('teams');
+
+    // Initialize button values
+    this.button = { name: "דף הבית" , icon: "fa-home" };
 
     this.user = 
     { 
@@ -126,6 +132,13 @@ export class ReportsComponent implements OnInit
   {
     if (!this.teamSelected)
       alert("בחר קודם קבוצה להצגת תאריכי הנוכחות");
+  }
+
+  // ============================================================
+
+  navigate()
+  {
+    this.afService.navigate('');
   }
 
   // ============================================================
