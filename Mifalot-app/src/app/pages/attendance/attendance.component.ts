@@ -25,7 +25,7 @@ export class AttendanceComponent implements OnInit
   private instructions: string; //injection hml variable.
   private started = false;
   private date = Date.now(); //date variable.
-  private teams = new Array;
+  private teams: FirebaseListObservable<any>;
   private chosenTeam = '';
   private pupils = new Array;  //contain the pupils name of the chosen team.
   private teamKey;
@@ -49,7 +49,7 @@ export class AttendanceComponent implements OnInit
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
 
     //get teams from DB.
-    this.getTeamsByUid();
+    this.teams = this.afService.af.database.list('teams/');
 
     this.user = 
     { 
@@ -72,17 +72,7 @@ export class AttendanceComponent implements OnInit
   //----------------------------
 
   //Connect to the DB and get the team names of the connected user.
-  getTeamsByUid() {
-    let info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
-
-    info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if (snapshot.val().coachID == this.uid) {
-          this.teams.push(snapshot.val().name);
-        }
-      })
-    })
-  }
+    let info = this.afService.af.database.list('teams/');
 
   //---------------------------
   //get the pupils name from the wanted team.
