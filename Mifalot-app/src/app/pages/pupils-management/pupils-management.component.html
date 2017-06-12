@@ -1,4 +1,9 @@
 <!-- ================================================================================================================================================ -->
+<!-- Navbar -->
+
+<app-nav-header></app-nav-header>
+
+<!-- ================================================================================================================================================ -->
 <!-- User wait for admin to confirm him OR user was blocked by admin -->
 
 <app-user-status *ngIf = "userObject.permission == 4 || userObject.permission == 5" [permission] = "userObject.permission"></app-user-status>
