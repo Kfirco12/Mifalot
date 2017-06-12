@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AF } from "../providers/af";
 
 @Component({
@@ -8,6 +8,14 @@ import { AF } from "../providers/af";
 })
 export class NavHeaderComponent implements OnInit 
 {
+  // Get info from father
+  @Input() button;
+
+  // To alert father component
+  @Output() onUserAssociateTeamsToUser: EventEmitter<any> = new EventEmitter();
+
+  // ====================================
+
   constructor(private afService: AF) { }
 
   // ====================================
