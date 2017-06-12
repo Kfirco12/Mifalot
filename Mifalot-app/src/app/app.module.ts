@@ -28,6 +28,7 @@ import { UserStatusComponent } from './user-status/user-status.component';
 // Services/Providers
 import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
+import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 
 // ======================================================
@@ -78,7 +79,8 @@ const routes: Routes = [
     BlockedUsersComponent,
     UsersManagementComponent,
     AssociateTeamsComponent,
-    UserStatusComponent
+    UserStatusComponent,
+    NavHeaderComponent
   ],
   imports: [
     BrowserModule,
