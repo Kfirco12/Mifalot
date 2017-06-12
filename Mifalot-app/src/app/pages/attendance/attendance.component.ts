@@ -25,9 +25,9 @@ export class AttendanceComponent implements OnInit
   private instructions: string; //injection hml variable.
   private started = false;
   private date = Date.now(); //date variable.
-  private teams = new Array;
+  private teams: FirebaseListObservable<any>;
+  private pupils: FirebaseListObservable<any>;
   private chosenTeam = '';
-  private pupils = new Array;  //contain the pupils name of the chosen team.
   private teamKey;
   private pupilsPath;
 
@@ -49,7 +49,7 @@ export class AttendanceComponent implements OnInit
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
 
     //get teams from DB.
-    this.getTeamsByUid();
+    this.teams = this.afService.af.database.list('teams/');
 
     this.user = 
     { 
@@ -69,73 +69,40 @@ export class AttendanceComponent implements OnInit
   ngOnInit() {
   }
 
-  //----------------------------
-
-  //Connect to the DB and get the team names of the connected user.
-  getTeamsByUid() {
-    let info = this.afService.af.database.list('teams/', { preserveSnapshot: true });
-
-    info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if (snapshot.val().coachID == this.uid) {
-          this.teams.push(snapshot.val().name);
-        }
-      })
-    })
-  }
 
   //---------------------------
   //get the pupils name from the wanted team.
-  getPupils(teamId) {
-    //reset teams represent.
+  getPupils(team) 
+  { 
+    this.instructions = "לבחירת קבוצה חדשה אפסו את הטופס";
+ 
+    console.log(team);
+    // Save presence list
+    this.pupils = this.afService.af.database.list('teams/' + team.$key + '/pupils');
+
+     //reset teams represent.
     this.noTeamSelected = false;
     this.started = true;
-    this.instructions = "לבחירת קבוצה חדשה אפסו את הטופס";
-    this.chosenTeam = teamId;
-
-    //get teame's pupil from DB.
-    //let info = this.db.database.list('teams/' + teamId + '/pupils', { preserveSnapshot: true });
-    let info = this.afService.af.database.list('teams', { preserveSnapshot: true });
-    let path_subscribe = info.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if (snapshot.val().name == teamId) {
-          this.pupilsPath = this.afService.af.database.list('teams/' + snapshot.key + '/pupils');
-          this.teamKey = snapshot.key;
-          this.pupilsPath.subscribe(snap2 => {
-            snap2.forEach(snap => {
-              let pupil = {
-                name: snap.name,
-                lastName: snap.lastName,
-                ID: snap.ID,
-                presence: false
-              }
-              this.pupils.push(pupil);
-            })
-          })
-        }
-      })
-    })
-    //path_subscribe.unsubscribe();
   }
 
   //---------------------------
   //update the checked buttons at run time.
   updateChecked(option, event) {
     //add check.
-    if (event.target.checked) {
-      for (let _i = 0; _i < this.pupils.length; _i++) {
-        if (event.target.value === this.pupils[_i].ID) {
-          this.pupils[_i].presence = true;
-        }
-      }
-    }
-    //remove check.
-    else {
-      for (let _i = 0; _i < this.pupils.length; _i++) {
-        if (event.target.value === this.pupils[_i].ID)
-          this.pupils[_i].presence = false;
-      }
-    }
+    // if (event.target.checked) {
+    //   for (let _i = 0; _i < this.pupils.length; _i++) {
+    //     if (event.target.value === this.pupils[_i].ID) {
+    //       this.pupils[_i].presence = true;
+    //     }
+    //   }
+    // }
+    // //remove check.
+    // else {
+    //   for (let _i = 0; _i < this.pupils.length; _i++) {
+    //     if (event.target.value === this.pupils[_i].ID)
+    //       this.pupils[_i].presence = false;
+    //   }
+    // }
   }
 
 
@@ -151,9 +118,6 @@ export class AttendanceComponent implements OnInit
     this.noTeamSelected = true;
     this.started = false;
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
-    this.pupils = [];
-    this.teams = [];
-    this.getTeamsByUid();
     this.chosenTeam = '';
 
   }
