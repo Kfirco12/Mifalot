@@ -23,8 +23,8 @@
   <!-- Choose team -->
   <div *ngIf = "noTeamSelected" >
     <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
-    <div *ngFor = "let team of teams | async"  class = "col-lg-12 col-md-12 col-xs-12 thumb">
-      <span *ngIf= "user.uid==team.coachID"  class = "thumbnail" (click) = "getPupils(team)"> 
+    <div *ngFor = "let team of teams | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+      <span *ngIf= "user.uid == team.coachID" class = "thumbnail" (click) = "getPupils(team)"> 
         <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
       </span>
     </div>  
@@ -40,10 +40,10 @@
 
     <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
     <div class = "vertical-menu">
-      <div *ngFor = "let pupils of pupils">
+      <div *ngFor = "let pupil of pupils | async">
         <div class = "checkbox">
-          <label class = "pupil-name" for = "{{ pupils.ID }}">  {{ pupils.name }} {{pupils.lastName}} - {{pupils.ID}}
-            <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupils.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
+          <label class = "pupil-name" for = "{{ pupil.ID }}">  {{ pupil.name }} {{ pupil.lastName }} - {{pupil.ID}}
+            <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupil.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
             <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
           </label>
           <hr>
