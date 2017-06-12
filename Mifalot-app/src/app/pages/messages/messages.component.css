@@ -345,7 +345,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 1055px;
+      height: 1040px;
+    }
+
+    .messages
+    {
+      height: 1100px;
     }
 }
 
@@ -353,7 +358,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 950px;
+      height: 1015px;
+    }
+
+    .messages 
+    {
+      height: 1030px;
     }
 }
 
@@ -361,7 +371,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 712px;
+      height: 750px;
+    }
+
+    .messages
+    {
+      height: 775px;
     }
 }
 
@@ -369,7 +384,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-        height: 640px;
+        height: 680px;
+    }
+
+    .messages 
+    {
+      height: 710px;
     }
 }
 
@@ -379,21 +399,58 @@ input::placeholder
     {
         height: 590px;
     }
+
+    .messages
+    {
+      height: 660px;
+    }
 }
 
 @media only screen and (max-height: 800px)
 {
     .vertical-menu 
     {
-        height: 490px;
+        height: 520px;
     }
+
+    .messages
+    {
+      height: 560px;
+    }
+    
 }
 
 @media only screen and (max-height: 736px)
 {
     .vertical-menu 
     {
-      height: 490px;
+      height: 500px;
+    }
+
+    .messages
+    {
+      height: 530px;
+    }
+}
+
+@media only screen and (max-height: 732px)
+{
+    .vertical-menu 
+    {
+      height: 500px;
+    }
+
+    .messages
+    {
+      height: 530px;
+    }
+}
+
+@media only screen and (max-height: 667px)
+{
+    .vertical-menu 
+    {
+      height: 430px;
     }
 
     .messages
@@ -402,32 +459,16 @@ input::placeholder
     }
 }
 
-@media only screen and (max-height: 732px)
-{
-    .vertical-menu 
-    {
-      height: 455px;
-    }
-}
-
-@media only screen and (max-height: 667px)
-{
-    .vertical-menu 
-    {
-      height: 395px;
-    }
-}
-
 @media only screen and (max-height: 640px)
 {
     .vertical-menu 
     {
-      height: 400px;
+      height: 430px;
     }
 
     .messages 
     {
-      height: 365px;
+      height: 435px;
     }
 }
 
@@ -435,7 +476,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 290px;
+      height: 350px;
+    }
+
+    .messages
+    {
+      height: 360px;
     }
 }
 
@@ -443,7 +489,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 250px;
+      height: 300px;
+    }
+
+    .messages 
+    {
+      height: 325px;
     }
 }
 
@@ -451,11 +502,24 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 250px;
+      height: 240px;
     }
 
     .messages
     {
-      height: 200px;
+      height: 275px;
+    }
+}
+
+@media only screen and (max-height: 360px)
+{
+    .vertical-menu 
+    {
+      height: 145px;
+    }
+
+    .messages
+    {
+      height: 180px;
     }
 }
