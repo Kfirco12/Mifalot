@@ -36,11 +36,13 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Object
   private currentChatDetails;
   private user;
+  private button;
 
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
   {
+    this.button = { name: "דף הבית" , icon: "fa-home" };
     this.chatRooms = this.afService.af.database.list('chatRooms');
 
     this.user = 
@@ -58,7 +60,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
     // Flags
     this.noChatRoomSelected = true;
-    this.createNewChatRoom = this.editChatRoom =false;
+    this.createNewChatRoom = this.editChatRoom = false;
 
     this.savedDate = '';
   }
@@ -84,7 +86,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.createNewChatRoom = false;
   }
 
-
   // ==================================================
   
   chooseChatRoom()
@@ -97,7 +98,9 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   newChatRoom()
   {
+    this.noChatRoomSelected = false;
     this.createNewChatRoom = true;
+    this.updateButton('חזור', 'fa-chevron-left');
   }
 
   //===================================================
@@ -112,6 +115,10 @@ export class MessagesComponent implements OnInit, AfterViewChecked
       this.updateHeader(chatRoom.name, "פותח הצ'אט: " + chatRoom.authorName);
 
       this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
+
+      // Updating nav button
+      this.updateButton('חזור', 'fa-chevron-left');
+
       this.noChatRoomSelected = false;
     }
   }
@@ -174,7 +181,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   removeChatRoom(chatRoom)
   {
     if(confirm("האם למחוק הודעה זו?"))
-    this.chatRooms.remove(chatRoom.$key);
+      this.chatRooms.remove(chatRoom.$key);
   }
 
   // ==================================================
@@ -182,7 +189,13 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   editChatRoomName(chatRoom)
   {
     this.currentChatDetails = chatRoom;
+
+    // Updating flags
+    this.noChatRoomSelected = false;
     this.editChatRoom = true;
+
+    // Updating nav button
+    this.updateButton('חזור', 'fa-chevron-left');
   }
 
   // ==================================================
@@ -192,9 +205,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     let currentChat = this.afService.af.database.object('chatRooms/' + this.currentChatDetails.$key);
     currentChat.update({name: name});
     
-    // // Updating chat's title
-    // this.updateHeader(name, null);
-
+    // Updating flags
     this.editChatRoom = false;
     this.noChatRoomSelected = true;
   }
@@ -210,14 +221,47 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   
   // ==================================================
 
-  updateHeader(title, subTitle)
+  updateHeader(title, subTitle, icon = '')
   {
      this.header.title = title;
 
      if (subTitle)
       this.header.subTitle = subTitle;
 
-     this.header.icon = "";
+     this.header.icon = icon;
+  }
+  
+  // ==================================================
+
+  navigate()
+  {
+    // Navigate to home page
+    if (this.noChatRoomSelected)
+      this.afService.navigate('');
+
+    // Back To messages
+    if (!this.noChatRoomSelected)
+    {
+      this.noChatRoomSelected = !this.noChatRoomSelected;
+      this.updateButton('דף הבית', 'fa-home');
+    } 
+
+    if (this.createNewChatRoom || this.editChatRoom)
+    {
+      this.chooseChatRoom();
+      this.updateButton('דף הבית', 'fa-home');
+    }
+
+    // Header reset
+    this.updateHeader("הודעות", "באפשרותך לשלוח הודעה לשאר המשתמשים", "fa-comments"); 
+  }
+
+  // ==================================================
+
+  updateButton(name, icon)
+  {
+    this.button.name = name;
+    this.button.icon = icon;
   }
   
   // ==================================================

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { AngularFire, AuthProviders, AuthMethods, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import { PushNotificationsService } from "angular2-notifications-lite";
+import { Router } from '@angular/router';
 
 // For take() 
 import 'rxjs/Rx';
@@ -27,7 +28,7 @@ export class AF
 
   // ================================
 
-  constructor(public af: AngularFire, private pushService: PushNotificationsService) 
+  constructor(public af: AngularFire, private pushService: PushNotificationsService, private router: Router) 
   {
     this.subscribeArray = [];
     this.numOfChatRooms = 0;
@@ -247,6 +248,14 @@ export class AF
         )
   }
 
+  // ================================
+  // Uses routes array in app.module.ts
+  
+  navigate(page: string)
+  {
+    this.router.navigate([page]);
+  }
+  
   // ================================
 
 }

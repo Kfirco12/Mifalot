@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit
   // User details object
   private user: Object;
 
+  private button: Object;
+
   // ======================
 
   constructor(private afService: AF, private router: Router) 
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit
     this.afService.getUserDetails(this.user);
 
     this.initializeButtons();
+    this.button = { name: "דף הבית" , icon: "fa-home" };
   }
 
   // ======================
