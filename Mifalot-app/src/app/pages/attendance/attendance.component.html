@@ -25,7 +25,7 @@
     <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
     <div *ngFor = "let team of teams | async"  class = "col-lg-12 col-md-12 col-xs-12 thumb">
       <span *ngIf= "user.uid==team.coachID"  class = "thumbnail" (click) = "getPupils(team)"> 
-        <button type = "button" class = "btn btn-default btn-block btn-team" > {{ teams[i] }} <i class = "fa fa-soccer-ball-o" > </i> </button>
+        <button type = "button" class = "btn btn-default btn-block btn-team" > {{ team.name }} <i class = "fa fa-soccer-ball-o" > </i> </button>
       </span>
     </div>  
   </div>

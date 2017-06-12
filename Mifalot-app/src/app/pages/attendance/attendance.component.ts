@@ -69,10 +69,6 @@ export class AttendanceComponent implements OnInit
   ngOnInit() {
   }
 
-  //----------------------------
-
-  //Connect to the DB and get the team names of the connected user.
-    let info = this.afService.af.database.list('teams/');
 
   //---------------------------
   //get the pupils name from the wanted team.
@@ -142,8 +138,6 @@ export class AttendanceComponent implements OnInit
     this.started = false;
     this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
     this.pupils = [];
-    this.teams = [];
-    this.getTeamsByUid();
     this.chosenTeam = '';
 
   }
