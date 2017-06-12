@@ -7,22 +7,32 @@
 	cursor: pointer;   
 }
 
-.panel-heading div {
+.panel-heading div 
+{
 	margin-top: -18px;
 	font-size: 15px;
 }
-.panel-heading div span{
+
+.panel-heading div span
+{
 	margin-left:5px;
 }
-.panel-body{
+
+.panel-body
+{
 	display: none;
 }
-h3 {
+
+h3 
+{
     text-align: right;
 }
-th {
+
+th 
+{
     text-align: right;
 }
+
 #dev-table
 {
     text-align: right;
@@ -55,6 +65,14 @@ th {
 /****************************************/
 /********** Scrollbar Height  ***********/
 
+@media only screen and (max-height: 2560px)
+{
+    .vertical-menu 
+    {
+        height: 2250px;
+    }
+}
+
 @media only screen and (max-height: 1366px)
 {
     .vertical-menu 
@@ -63,11 +81,51 @@ th {
     }
 }
 
+@media only screen and (max-height: 1280px)
+{
+    .vertical-menu 
+    {
+        height: 1000px;
+    }
+}
+
 @media only screen and (max-height: 1024px)
 {
     .vertical-menu 
     {
-        height: 720px;
+        height: 745px;
+    }
+}
+
+@media only screen and (max-height: 960px)
+{
+    .vertical-menu 
+    {
+        height: 675px;
+    }
+}
+
+@media only screen and (max-height: 950px)
+{
+    .vertical-menu 
+    {
+        height: 675px;
+    }
+}
+
+@media only screen and (max-height: 900px)
+{
+    .vertical-menu 
+    {
+        height: 629px;
+    }
+}
+
+@media only screen and (max-height: 800px)
+{
+    .vertical-menu 
+    {
+        height: 529px;
     }
 }
 
@@ -75,7 +133,7 @@ th {
 {
     .vertical-menu 
     {
-        height: 450px;
+        height: 478px;
     }
 }
 
@@ -83,7 +141,7 @@ th {
 {
     .vertical-menu 
     {
-        height: 446px;
+        height: 474px;
     }
 }
 
@@ -99,7 +157,7 @@ th {
 {
     .vertical-menu 
     {
-        height: 355px;
+        height: 365px;
     }
 }
 
@@ -108,5 +166,21 @@ th {
     .vertical-menu 
     {
         height: 285px;
+    }
+}
+
+@media only screen and (max-height: 533px)
+{
+    .vertical-menu 
+    {
+        height: 255px;
+    }
+}
+
+@media only screen and (max-height: 360px)
+{
+    .vertical-menu 
+    {
+        height: 101px;
     }
 }
