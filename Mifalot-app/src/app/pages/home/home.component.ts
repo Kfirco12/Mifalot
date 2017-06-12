@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit
     this.afService.getUserDetails(this.user);
 
     this.initializeButtons();
-    this.button = { name: "דף הבית" , icon: "fa-home" };
+    this.button = { name: '' , icon: '' };
   }
 
   // ======================

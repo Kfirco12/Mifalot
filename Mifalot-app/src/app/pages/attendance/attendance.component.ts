@@ -22,7 +22,6 @@ export class AttendanceComponent implements OnInit
   //-------------VARIABLES-------------
 
   private uid; //connected uid.
-  private instructions: string; //injection hml variable.
   private started = false;
   private date = Date.now(); //date variable.
   private teams: FirebaseListObservable<any>;
@@ -36,6 +35,9 @@ export class AttendanceComponent implements OnInit
   // User details
   private user;
 
+  // For navbar component
+  private button;
+
   //============================
   //============================
   //-------------METHODS-------------
@@ -44,9 +46,11 @@ export class AttendanceComponent implements OnInit
 
     this.uid = afService.getUid();
 
+    // Initialize button values
+    this.button = { name: "דף הבית" , icon: "fa-home" };
+
     //initialize page view.
     this.noTeamSelected = true;
-    this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
 
     //get teams from DB.
     this.teams = this.afService.af.database.list('teams/');
@@ -73,16 +77,15 @@ export class AttendanceComponent implements OnInit
   //---------------------------
   //get the pupils name from the wanted team.
   getPupils(team) 
-  { 
-    this.instructions = "לבחירת קבוצה חדשה אפסו את הטופס";
- 
-    console.log(team);
+  {  
     // Save presence list
     this.pupils = this.afService.af.database.list('teams/' + team.$key + '/pupils');
 
      //reset teams represent.
     this.noTeamSelected = false;
     this.started = true;
+
+    this.updateButton('חזור', 'fa-chevron-left');
   }
 
   //---------------------------
@@ -109,7 +112,8 @@ export class AttendanceComponent implements OnInit
 
   //---------------------------
   //reset the checked attendance and pick new team.
-  startOver() {
+  startOver() 
+  {
     if (this.started) {
       alert("שים לב, הנתונים שהזנת לא נשמרו!");
     }
@@ -117,7 +121,6 @@ export class AttendanceComponent implements OnInit
     // reset variables.
     this.noTeamSelected = true;
     this.started = false;
-    this.instructions = ":בחר את הקבוצה אותה אתה מאמן";
     this.chosenTeam = '';
 
   }
@@ -224,6 +227,28 @@ missChecking(arr){
     this.startOver();
 
   }
+
+  // ============================================================
+
+  navigate()
+  {
+    if (this.noTeamSelected)
+      this.afService.navigate('');
+
+    // reset variables.
+    this.noTeamSelected = true;
+    this.updateButton('דף הבית', 'fa-home');
+  }
+
+  // ============================================================
+
+  updateButton(name, icon)
+  {
+    this.button.name = name;
+    this.button.icon = icon;
+  }
+  
+  // ============================================================
 
 }
 
