@@ -12,11 +12,19 @@ export class NavHeaderComponent implements OnInit
   @Input() button;
 
   // To alert father component
-  @Output() onUserAssociateTeamsToUser: EventEmitter<any> = new EventEmitter();
+  @Output() onUserClicked: EventEmitter<any> = new EventEmitter();
 
   // ====================================
 
   constructor(private afService: AF) { }
+
+  // ====================================
+
+  backButtonClicked()
+  {
+    // Alert to father component
+    this.onUserClicked.emit();
+  }
 
   // ====================================
 

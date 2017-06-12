@@ -1,7 +1,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- Navbar -->
 
-<app-nav-header></app-nav-header>
+<app-nav-header [button] = "button" (onUserClicked) = "navigate()"></app-nav-header>
 
 <!-- ================================================================================================================================================ -->
 <!-- User wait for admin to confirm him OR user was blocked by admin -->
@@ -67,8 +67,6 @@
         <br>
 
         <button class = "btn btn-md btn-success btn-block" type = "submit"> שמור שינויים </button>
-        <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "button"> חזור לעמוד הקודם </button>
-
     </form>
   </div>
 
@@ -91,8 +89,6 @@
         <br>
 
         <button class = "btn btn-md btn-success btn-block" type = "submit"> יצירת צ׳אט </button>
-        <button (click) = "chooseChatRoom()" class = "btn btn-md btn-primary btn-block" type = "button"> חזור לעמוד הקודם </button>
-
     </form>
   </div>
 
