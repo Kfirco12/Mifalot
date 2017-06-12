@@ -333,11 +333,27 @@ input::placeholder
 /****************************************/
 /********** Scrollbar Height  ***********/
 
+@media only screen and (max-height: 2560px)
+{
+    .vertical-menu 
+    {
+      height: 2300px;
+    }
+}
+
 @media only screen and (max-height: 1366px)
 {
     .vertical-menu 
     {
-      height: 1065px;
+      height: 1055px;
+    }
+}
+
+@media only screen and (max-height: 1280px)
+{
+    .vertical-menu 
+    {
+      height: 950px;
     }
 }
 
@@ -345,7 +361,31 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 735px;
+      height: 712px;
+    }
+}
+
+@media only screen and (max-height: 960px)
+{
+    .vertical-menu 
+    {
+        height: 640px;
+    }
+}
+
+@media only screen and (max-height: 900px)
+{
+    .vertical-menu 
+    {
+        height: 590px;
+    }
+}
+
+@media only screen and (max-height: 800px)
+{
+    .vertical-menu 
+    {
+        height: 490px;
     }
 }
 
@@ -366,7 +406,7 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 470px;
+      height: 455px;
     }
 }
 
@@ -374,7 +414,7 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 405px;
+      height: 395px;
     }
 }
 
@@ -382,7 +422,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 380px;
+      height: 400px;
+    }
+
+    .messages 
+    {
+      height: 365px;
     }
 }
 
@@ -390,6 +435,27 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 305px;
+      height: 290px;
+    }
+}
+
+@media only screen and (max-height: 533px)
+{
+    .vertical-menu 
+    {
+      height: 250px;
+    }
+}
+
+@media only screen and (max-height: 480px)
+{
+    .vertical-menu 
+    {
+      height: 250px;
+    }
+
+    .messages
+    {
+      height: 200px;
     }
 }

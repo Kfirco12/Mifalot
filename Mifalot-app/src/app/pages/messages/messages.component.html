@@ -17,7 +17,7 @@
   <div class = "container">
 
     <!-- Selecting chat room or adding a new one -->
-    <div *ngIf = "noChatRoomSelected && !createNewChatRoom" >
+    <div *ngIf = "noChatRoomSelected && !createNewChatRoom && !editChatRoom" >
       <div class = "row" >
 
       <div class = "container">
@@ -56,7 +56,7 @@
     <form class = "form-signin" (submit) = "updateChatRoomName(name.value)">
         <label for = "name" class = "sr-only"> נושא הצ׳אט </label>
         <div class = "input-group">
-          <input #name type = "text" id = "name" class = "form-control" placeholder = "" [value] = "currentChatDetails.name" required>
+          <input #name maxlength = "35" type = "text" id = "name" class = "form-control" placeholder = "" [value] = "currentChatDetails.name" required>
             <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
         </div>
 
@@ -80,7 +80,7 @@
     <form class = "form-signin" (submit) = "createsNewChatRoom(name.value)">
         <label for = "name" class = "sr-only"> נושא הצ׳אט </label>
         <div class = "input-group">
-          <input #name type = "text" id = "name" class = "form-control" placeholder = "נושא הצ׳אט" required>
+          <input #name maxlength = "35" type = "text" id = "name" class = "form-control" placeholder = "נושא הצ׳אט" required>
             <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
         </div>
 
@@ -97,16 +97,6 @@
   <!-- Chat messages -->
 
     <div *ngIf = "!noChatRoomSelected && !createNewChatRoom && !editChatRoom">
-
-      <div class = "container">
-        <div class = "row">
-          <div class = "jumbotron text-center">
-            <h5 class = "direction-rtl blue text-bold"> {{ chatRoomTitle }} </h5>
-            <h6> {{ chatRoomAuthor }} </h6>
-          </div>
-        </div>
-      </div>
-      
       <div #scrollMe class = "vertical-menu messages">
         <div *ngFor = "let message of currentChat | async" > 
           <!--<div *ngIf = "needToPrint(message.timestamp | date: 'dd/MM/yy')">

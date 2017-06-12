@@ -22,8 +22,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Strings
   private newMessage: string;
   private userEmail: string;
-  private chatRoomTitle: string;
-  private chatRoomAuthor: string;
   private savedDate: string;
 
   // DB Observables
@@ -77,8 +75,9 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.currentChat = this.afService.af.database.list('chatRooms/' + newChatInDB.key + '/messages');
 
     // Updating chat's title
-    this.chatRoomTitle = chatName;
-    this.chatRoomAuthor = authorName;
+    this.header.title = chatName;
+    this.header.subTitle = "פותח הצ'אט: " + authorName;
+    this.header.icon = '';
 
     // Updating flags
     this.noChatRoomSelected = false;
@@ -105,13 +104,16 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   enterChatRoom(chatRoom)
   { 
-    this.currentChatDetails = chatRoom;
+    if (!this.editChatRoom)
+    {
+      this.currentChatDetails = chatRoom;
 
-    this.chatRoomTitle = chatRoom.name;
-    this.chatRoomAuthor = chatRoom.authorName;
+      // Updating chat's title
+      this.updateHeader(chatRoom.name, "פותח הצ'אט: " + chatRoom.authorName);
 
-    this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
-    this.noChatRoomSelected = false;
+      this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
+      this.noChatRoomSelected = false;
+    }
   }
 
   //===================================================
@@ -190,13 +192,34 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     let currentChat = this.afService.af.database.object('chatRooms/' + this.currentChatDetails.$key);
     currentChat.update({name: name});
     
-    // Updating chat's title
-    this.chatRoomTitle = name;
+    // // Updating chat's title
+    // this.updateHeader(name, null);
 
     this.editChatRoom = false;
     this.noChatRoomSelected = true;
   }
 
+  // ==================================================
+
+  initializeHeader()
+  {
+     this.header.title = "הודעות";
+     this.header.subTitle = "באפשרותך לשלוח הודעה לשאר המשתמשים";
+     this.header.icon = "fa-comments";
+  }
+  
+  // ==================================================
+
+  updateHeader(title, subTitle)
+  {
+     this.header.title = title;
+
+     if (subTitle)
+      this.header.subTitle = subTitle;
+
+     this.header.icon = "";
+  }
+  
   // ==================================================
 
   ngOnInit() { }
