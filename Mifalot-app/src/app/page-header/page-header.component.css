@@ -38,6 +38,19 @@
 /******************************************/
 /******** page-header Margin-top  *********/
 
+@media only screen and (max-height: 2560px)
+{
+    .page-header
+    {
+        margin-top: 0;
+    }
+
+    .titlePage
+    {
+        font-size: 120%;
+    }
+}
+
 @media only screen and (max-height: 1366px)
 {
     .page-header
@@ -51,11 +64,50 @@
     }
 }
 
+@media only screen and (max-height: 1280px)
+{
+    .page-header
+    {
+       margin-top: -3%;    
+    }
+
+    .titlePage
+    {
+        font-size: 120%;
+    }
+}
+
 @media only screen and (max-height: 1024px)
 {
     .page-header
     {
-       margin-top: 0;    
+       margin-top: -3%;    
+    }
+
+    .titlePage
+    {
+        font-size: 120%;
+    }
+}
+
+@media only screen and (max-height: 950px)
+{
+    .page-header
+    {
+       margin-top: -2%;    
+    }
+
+    .titlePage
+    {
+        font-size: 120%;
+    }
+}
+
+@media only screen and (max-height: 900px)
+{
+    .page-header
+    {
+       margin-top: -2%;    
     }
 
     .titlePage
@@ -126,5 +178,18 @@
     .titlePage
     {
         font-size: 60%;
+    }
+}
+
+@media only screen and (max-height: 360px)
+{
+    .page-header
+    {
+       margin-top: -5%;    
+    }
+
+    .titlePage
+    {
+        font-size: 80%;
     }
 }
