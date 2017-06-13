@@ -47,10 +47,15 @@ export class PupilsManagementComponent implements OnInit
   // Int
   private newPupilsCounter: number;
 
+  // For nav component
+  private button;
+
   // ==============================
 
   constructor(private afService: AF ) 
   {
+    this.button = { name: "דף הבית" , icon: "fa-home" };
+
     this.noTeamSelected = true;
     this.choosenTeamText = "רשימת קבוצות";
 
@@ -83,6 +88,7 @@ export class PupilsManagementComponent implements OnInit
     this.choosenTeamText = team.name;
 
     this.noTeamSelected = false;
+    this.updateButton('חזור', 'fa-chevron-left');
   }
  
   // ==============================
@@ -90,6 +96,7 @@ export class PupilsManagementComponent implements OnInit
   chooseTeam()
   {
     this.noTeamSelected = true;
+    this.updateButton('דף הבית', 'fa-home');
   }
   
   // ==============================
@@ -250,7 +257,7 @@ export class PupilsManagementComponent implements OnInit
       return;
     }
 
-    if(confirm("האם אתה בטוח שברצונך להסיר חניכים אלו?"))
+    if (confirm("האם אתה בטוח שברצונך להסיר חניכים אלו?"))
     {
       for (let i = 0; i < length; i++)
        this.pupilsList.remove(this.pupilsToRemove[i]);
@@ -276,6 +283,31 @@ export class PupilsManagementComponent implements OnInit
     return true;
   }
 
+  // ==============================
+
+  navigate()
+  {
+    // Navigate to home page
+    if (this.noTeamSelected)
+      this.afService.navigate('');
+
+    // Back to select team
+    if (!this.noTeamSelected && !this.addPupils && !this.removePupils)
+      this.chooseTeam();
+
+    // Back to add or remove
+    if (this.addPupils || this.removePupils)
+      this.backToAddOrRemove();
+  }
+
+  // ==============================
+
+  updateButton(name, icon)
+  {
+    this.button.name = name;
+    this.button.icon = icon;
+  }
+  
   // ==============================
 
   ngOnInit() { }
