@@ -90,7 +90,9 @@ export class AttendanceComponent implements OnInit
 
   //---------------------------
   //update the checked buttons at run time.
-  updateChecked(option, event) {
+  updateChecked(pupil) 
+  {
+    console.log(pupil);
     //add check.
     // if (event.target.checked) {
     //   for (let _i = 0; _i < this.pupils.length; _i++) {

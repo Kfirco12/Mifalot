@@ -37,7 +37,20 @@
 
   <!-- ======================== -->
   <!--checklist-->
+  
+  <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
+ 
+  <div class = "vertical-menu">
+    <div *ngFor = "let pupil of pupils | async">
+      <div class = "toggle-button toggle-button--vesi">
+          <input id = "{{ pupil.ID }}" type = "checkbox">
+          <label (click) = "updateChecked(pupil)" for = "{{ pupil.ID }}"> {{ pupil.name }} {{ pupil.lastName }} - {{pupil.ID}}</label>
+          <div class = "toggle-button__icon"></div>
+      </div>
+    </div>
+  </div>
 
+<!--
     <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
     <div class = "vertical-menu">
       <div *ngFor = "let pupil of pupils | async">
@@ -49,20 +62,20 @@
           <hr>
         </div>
       </div>
-   </div>
+   </div>-->
 
   <!-- ======================== -->
   <!-- buttons -->
 
   <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
     <a class = "btn-bottom" (click) = "saveAttendance()"> 
-      <button type = "button" class = "btn btn-primary btn-block btn-confirm" > שליחת טופס </button>
+      <button type = "button" class = "btn btn-primary btn-block" > שליחת טופס </button>
     </a>
   </div>
 
   <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
     <a class = "btn-bottom" (click) = "startOver()"> 
-      <button type = "button" class = "btn btn-danger btn-block btn-confirm" > איפוס טופס </button>
+      <button type = "button" class = "btn btn-danger btn-block" > איפוס טופס </button>
     </a>
   </div>
 
