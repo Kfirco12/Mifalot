@@ -1,7 +1,20 @@
+
 .thumbnail
 {
-    height: 120px;
+    height: auto;
     background-color: transparent;
+    border: none;
+    margin: 1%;
+}
+
+.btn-team
+{
+    white-space: normal;
+    height: 100%;
+    font-size: 120%;
+    font-weight: bold;
+    border-radius: 50px;
+     border: 4px solid gray;
 }
 
 button
@@ -22,12 +35,22 @@ button
     padding: 0;
 }
 
-.profile-head ul li { display:block; color:#ffffff;padding:5px;font-weight: 400;font-size: 120%;}
+.profile-head ul li 
+{ 
+    display:block;
+     color:#ffffff;
+     padding:5px;
+     font-weight: 400;
+     font-size: 120%;
+}
 /*.profile-head ul li span { color:#ffffff;padding-right: 10px;}*/
 
-
-@media all and (max-width:430px){
-.profile-head ul li {font-size: 1.2em !important;}
+@media all and (max-width:430px)
+{
+    .profile-head ul li 
+    {
+        font-size: 1.2em !important;
+    }
 }
 
 h4, h5, .text-white
@@ -41,6 +64,7 @@ h4, h5, .text-white
 {    			
 	opacity: 0;				
 }
+
 .btn.active span.glyphicon 
 {				
 	opacity: 1;				

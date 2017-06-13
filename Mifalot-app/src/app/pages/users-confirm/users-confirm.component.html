@@ -17,9 +17,9 @@
   <div *ngIf = "!userSelected">
     <div class = "row" >
       <div *ngFor = "let user of users | async" [ngSwitch] = "user.permission"> 
-        <div *ngSwitchCase = "'4'" class = "col-lg-6 col-md-6 col-xs-6 thumb">
+        <div *ngSwitchCase = "'4'" class = "col-lg-12 col-md-12 col-xs-12 thumb">
           <a class = "thumbnail">
-            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block" > <i class = "fa fa-user-plus" > </i> <br/>   {{ user.name  + " " + user.lastName}} </button>
+            <button (click) = "showUserDetails(user)" type = "button" class = "btn btn-default btn-block btn-team" > <i class = "fa fa-user-plus" > </i> {{ user.name  + " " + user.lastName}} </button>
           </a>
         </div>
       </div>
