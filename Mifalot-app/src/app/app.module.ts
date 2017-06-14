@@ -23,12 +23,11 @@ import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.compo
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
+import { NavHeaderComponent } from './nav-header/nav-header.component';
 
 // Services/Providers
 import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
-import { NavHeaderComponent } from './nav-header/nav-header.component';
-
 
 // ======================================================
 // Initialize Firebase 

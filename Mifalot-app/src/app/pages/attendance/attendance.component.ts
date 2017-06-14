@@ -8,6 +8,7 @@ import { AF } from "../../providers/af";
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
+
 export class AttendanceComponent implements OnInit 
 {
   header =
@@ -17,20 +18,21 @@ export class AttendanceComponent implements OnInit
     icon: "fa-pencil-square-o"
   }
 
-  //============================
-  //============================
-  //-------------VARIABLES-------------
-
-  private uid; //connected uid.
-  private started = false;
-  private date = Date.now(); //date variable.
-  private teams: FirebaseListObservable<any>;
-  private pupils: FirebaseListObservable<any>;
-  private chosenTeam = '';
-  private teamKey;
-  private pupilsPath;
-
+  // Boolean
   private noTeamSelected: boolean;
+
+  // Date
+  private date: number;
+
+  // Array
+  private pupils: Array<any>;
+
+  // String
+  private teamKey: string;
+
+  // DB observables
+  private teams: FirebaseListObservable<any>;
+  private pupilsPath: any;
 
   // User details
   private user;
@@ -38,18 +40,17 @@ export class AttendanceComponent implements OnInit
   // For navbar component
   private button;
 
-  //============================
-  //============================
-  //-------------METHODS-------------
+  // ============================================================
+
   constructor(private afService: AF,private router: Router) 
   {
-
-    this.uid = afService.getUid();
+    this.pupils = [];
+    this.date = Date.now();
 
     // Initialize button values
     this.button = { name: "דף הבית" , icon: "fa-home" };
 
-    //initialize page view.
+    // Initialize page view
     this.noTeamSelected = true;
 
     //get teams from DB.
@@ -69,165 +70,155 @@ export class AttendanceComponent implements OnInit
     this.afService.getUserDetails(this.user);
   }
 
-  //---------------------------
-  ngOnInit() {
-  }
+  // ============================================================
+  // Get the pupils name from the wanted team
 
-
-  //---------------------------
-  //get the pupils name from the wanted team.
   getPupils(team) 
   {  
     // Save presence list
-    this.pupils = this.afService.af.database.list('teams/' + team.$key + '/pupils');
+    //this.pupils = this.afService.af.database.list('teams/' + team.$key + '/pupils');
 
-     //reset teams represent.
+     // Reset teams represent.
     this.noTeamSelected = false;
-    this.started = true;
 
     this.updateButton('חזור', 'fa-chevron-left');
+
+    // Save presence list
+    this.pupilsPath = this.afService.af.database.list('teams/' + team.$key + '/pupils').take(1);
+    this.teamKey = team.$key;	
+
+    this.pupilsPath.subscribe(snapshots => 
+    {		
+      snapshots.forEach(snapshot => 
+      {		
+        let pupil = 
+        {		
+          name: snapshot.name,		
+          lastName: snapshot.lastName,		
+          ID: snapshot.ID,		
+          presence: false		
+        }
+
+        // Adding pupil to pupils array
+        this.pupils.push(pupil);
+      })		
+    })
   }
 
-  //---------------------------
-  //update the checked buttons at run time.
-  updateChecked(pupil) 
+  // ============================================================
+  // Update the checked buttons at run time
+
+  updateChecked(pupil, event) 
   {
-    console.log(pupil);
-    //add check.
-    // if (event.target.checked) {
-    //   for (let _i = 0; _i < this.pupils.length; _i++) {
-    //     if (event.target.value === this.pupils[_i].ID) {
-    //       this.pupils[_i].presence = true;
-    //     }
-    //   }
-    // }
-    // //remove check.
-    // else {
-    //   for (let _i = 0; _i < this.pupils.length; _i++) {
-    //     if (event.target.value === this.pupils[_i].ID)
-    //       this.pupils[_i].presence = false;
-    //   }
-    // }
+    let index = this.pupils.indexOf(pupil);
+
+    // Add check
+    if (event.target.checked) 
+      this.pupils[index].presence = true;
+    // Remove check.
+    else
+      this.pupils[index].presence = false;
   }
 
+  // ============================================================
+  // Reset the checked attendance
 
-
-  //---------------------------
-  //reset the checked attendance and pick new team.
   startOver() 
   {
-    if (this.started) {
-      alert("שים לב, הנתונים שהזנת לא נשמרו!");
+    if (confirm("לאפס דף זה? הנתונים שהזנת לא ישמרו!"))
+    {
+      this.pupils.forEach((item) => {
+        item.presence = false;
+      })
     }
-
-    // reset variables.
-    this.noTeamSelected = true;
-    this.started = false;
-    this.chosenTeam = '';
-
   }
 
-  //----------------------------
-  //help method.
-  printPupils(list, names) {
+  // ============================================================
+  // Missing from 2 or more trainings
 
-    let str = "";
-
-    if (names)
-      for (let _i = 0; _i < list.length; _i++) {
-        str += list[_i].name + ",  ";
-      }
-    else
-      for (let _i = 0; _i < list.length; _i++) {
-        str += list[_i].presence + ",  ";
-      }
-
-    return str;
-  }
-
-  //----------------------------
-  //Missing from 2 or more trainings.
-  missingUpdate(path) {
+  missingUpdate(attendance) 
+  {
     let datePipe = new DatePipe('en-us');
     let setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
     let changed = false;
     let dates = 0;
     let missed_twiced = [];
 
-    //check if an attendance was checked at the same date of 'date'.
-    let path_subscribe = path.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy')) {
+    let path = attendance.take(1);
+
+    // Check if an attendance was checked at the same date of 'date'.
+    path.subscribe(snapshots => 
+    {
+      snapshots.forEach(snapshot => 
+      {
+        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy'))
           dates++;
-        }
       })
     })
-    path_subscribe.unsubscribe();
 
-    //check if there is more than one today's date.
-    if (dates > 1) {
+    // Check if there is more than one today's date.
+    if (dates > 1)
       changed = true;
-    }
 
-    //update if needed.
-    path_subscribe = this.pupilsPath.subscribe(snapshots => {
+    // Update if needed.
+    this.pupilsPath.subscribe(snapshots => 
+    {
       let i = 0;
-      snapshots.forEach(snapshot => {
+      snapshots.forEach(snapshot => 
+      {
         let missing = snapshot.missed;
-        if (this.pupils[i].presence == false && !changed) {
+
+        if (this.pupils[i].presence == false && !changed) 
+        {
           missing++;
           this.pupilsPath.update(snapshot.$key, { missed: missing });
-          if(missing >=2)
+
+          if (missing >= 2)
            missed_twiced.push(this.pupils[i].name);
         }
-        else if(this.pupils[i].presence == true)
+        else if (this.pupils[i].presence == true)
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
         
         i++;
       })
     })
-    path_subscribe.unsubscribe();
+
     this.missChecking(missed_twiced);
-    this.router.navigate(['']);
   }
 
+  // ============================================================
+  // Check if a pupil missed more than two trainings and alert if needed
 
-//check if a pupil missed more than two trainings and alert if needed.
-missChecking(arr){
-  if(arr.length == 0)
-    return;
-  for(let i = 0; i<arr.length; i++)
-    alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
-}
-
-  //helping method to reset the missings.
-  resetMiss() {
-    let path_subscribe = this.pupilsPath.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
-        this.pupilsPath.update(snapshot.$key, { missed: 0 });
-      })
-    })
-    path_subscribe.unsubscribe();
+  missChecking(arr)
+  {
+    for (let i = 0; i < arr.length; i++)
+      alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
   }
 
-  //---------------------------
-  //save the checked attendance and the written note.
-  saveAttendance() {
+  // ============================================================
+  // Save the checked attendance and the written note
 
-    alert("The chosen team is: " + this.chosenTeam
-      + "\n\nThe pupils of the team are: " + this.printPupils(this.pupils, true)
-      + "\n\nthe presence list is: " + this.printPupils(this.pupils, false));
+  saveAttendance() 
+  {
+    // DB observable
+    let attendance = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
 
-    let info = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
-    let toPush = {
+    let attendanceInfo = 
+    {
       date: this.date,
       presence: this.pupils
     };
-    info.push(toPush);
-    this.missingUpdate(info);
-    this.started = false;
-    this.startOver();
 
+    // Push attendace info to DB
+    attendance.push(attendanceInfo).then(() => 
+    {
+      alert('רשימת הנוכחות נשמרה בהצלחה!');
+      this.missingUpdate(attendance);
+
+      // Reset variables.
+      this.noTeamSelected = true;
+      this.pupils = [];
+    });
   }
 
   // ============================================================
@@ -250,6 +241,10 @@ missChecking(arr){
     this.button.icon = icon;
   }
   
+  // ============================================================
+
+  ngOnInit() { }
+
   // ============================================================
 
 }

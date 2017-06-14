@@ -35,49 +35,35 @@
   <!-- After selected team -->
   <div *ngIf = "!noTeamSelected" >
 
-  <!-- ======================== -->
-  <!--checklist-->
-  
-  <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
- 
-  <div class = "vertical-menu">
-    <div *ngFor = "let pupil of pupils | async">
-      <div class = "toggle-button toggle-button--vesi">
-          <input id = "{{ pupil.ID }}" type = "checkbox">
-          <label (click) = "updateChecked(pupil)" for = "{{ pupil.ID }}"> {{ pupil.name }} {{ pupil.lastName }} - {{pupil.ID}}</label>
-          <div class = "toggle-button__icon"></div>
-      </div>
-    </div>
-  </div>
-
-<!--
+    <!-- ======================== -->
+    <!--checklist-->
+    
     <h4 class = "title text-center"> :לחץ על שמות החניכים הנוכחים באימון </h4>
+  
     <div class = "vertical-menu">
-      <div *ngFor = "let pupil of pupils | async">
-        <div class = "checkbox">
-          <label class = "pupil-name" for = "{{ pupil.ID }}">  {{ pupil.name }} {{ pupil.lastName }} - {{pupil.ID}}
-            <input type = "checkbox" value = ""  name = "checkbox" [value] = " pupil.ID " (change) = "updateChecked(option, $event)" id = "{{ pupils.ID }}" unchecked/>
-            <span class = "cr"><i class = "cr-icon fa fa-check"></i></span>
-          </label>
-          <hr>
+      <div *ngFor = "let pupil of pupils">
+        <div class = "toggle-button toggle-button--vesi">
+            <input id = "{{ pupil.ID }}" type = "checkbox" (click) = "updateChecked(pupil, $event)" [checked] = "pupil.presence">
+            <label for = "{{ pupil.ID }}"> {{ pupil.name }} {{ pupil.lastName }} - {{pupil.ID}}</label>
+            <div class = "toggle-button__icon"></div>
         </div>
       </div>
-   </div>-->
+    </div>
 
-  <!-- ======================== -->
-  <!-- buttons -->
+    <!-- ======================== -->
+    <!-- buttons -->
 
-  <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
-    <a class = "btn-bottom" (click) = "saveAttendance()"> 
-      <button type = "button" class = "btn btn-primary btn-block" > שליחת טופס </button>
-    </a>
-  </div>
+    <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+      <span class = "btn-bottom" (click) = "saveAttendance()"> 
+        <button type = "button" class = "btn btn-primary btn-block" > שליחת טופס </button>
+      </span>
+    </div>
 
-  <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
-    <a class = "btn-bottom" (click) = "startOver()"> 
-      <button type = "button" class = "btn btn-danger btn-block" > איפוס טופס </button>
-    </a>
-  </div>
+    <div class = "col-lg-6 col-md-6 col-xs-6 thumb">
+      <span class = "btn-bottom" (click) = "startOver()"> 
+        <button type = "button" class = "btn btn-danger btn-block" > איפוס טופס </button>
+      </span>
+    </div>
 
   </div>
   <!-- /After selected team -->
