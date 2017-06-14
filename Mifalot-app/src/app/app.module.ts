@@ -25,6 +25,7 @@ import { AssociateTeamsComponent } from './associate-teams/associate-teams.compo
 import { UserStatusComponent } from './user-status/user-status.component';
 
 // Services/Providers
+import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 
@@ -83,10 +84,11 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ AF, ],
+  providers: [ AF, PushNotificationsService ],
   bootstrap: [ AppComponent ]
 })
 
