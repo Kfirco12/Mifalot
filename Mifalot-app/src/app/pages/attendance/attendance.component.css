@@ -236,7 +236,7 @@ hr
     height: 35px;
     line-height: 35px;
     transition: all 0.2s;
-    border-radius: 2rem; 
+    border-radius: 1rem; 
 }
 
 .toggle-button--vesi label:before, .toggle-button--vesi label:after 
@@ -248,7 +248,8 @@ hr
 .toggle-button--vesi input[type=checkbox] + label 
 {
     width: 100%;
-    background: #2966B8; 
+    /*background: #2966B8; */
+    background: transparent;
 }
 
 .toggle-button--vesi input[type=checkbox] + label:before 
@@ -311,13 +312,13 @@ hr
 .toggle-button--vesi .toggle-button__icon:before 
 {
     width: 25px;
-    transform: rotate(45deg); 
+    /*transform: rotate(45deg); */
 }
 
 .toggle-button--vesi .toggle-button__icon:after 
 {
     width: 25px;
-    transform: rotate(-45deg); 
+    /*transform: rotate(-45deg); */
 
 }
 
