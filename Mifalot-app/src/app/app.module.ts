@@ -19,14 +19,12 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
 import { LoadingComponent } from './pages/loading/loading.component';
-import { InsertComponent } from './helping/insert/insert.component';
 import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 
 // Services/Providers
-import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 
@@ -75,7 +73,6 @@ const routes: Routes = [
     PageHeaderComponent,
     UsersConfirmComponent,
     LoadingComponent,
-    InsertComponent,
     BlockedUsersComponent,
     UsersManagementComponent,
     AssociateTeamsComponent,
@@ -86,11 +83,10 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ AF, PushNotificationsService ],
+  providers: [ AF, ],
   bootstrap: [ AppComponent ]
 })
 
