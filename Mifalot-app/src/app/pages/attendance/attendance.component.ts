@@ -126,11 +126,7 @@ export class AttendanceComponent implements OnInit
   startOver() 
   {
     if (confirm("לאפס דף זה? הנתונים שהזנת לא ישמרו!"))
-    {
-      this.pupils.forEach((item) => {
-        item.presence = false;
-      })
-    }
+      this.resetAllChecked();
   }
 
   // ============================================================
@@ -217,8 +213,17 @@ export class AttendanceComponent implements OnInit
 
       // Reset variables.
       this.noTeamSelected = true;
-      this.pupils = [];
+      this.resetAllChecked();
     });
+  }
+
+  // ============================================================
+
+  resetAllChecked()
+  {
+   this.pupils.forEach((item) => {
+        item.presence = false;
+      })
   }
 
   // ============================================================
