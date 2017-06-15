@@ -112,7 +112,6 @@ export class AssociateTeamsComponent implements OnInit
 
     this.selectedTeams = [];
     alert(length +  " קבוצות שויכו בהצלחה!");
-
   }
 
   // =====================

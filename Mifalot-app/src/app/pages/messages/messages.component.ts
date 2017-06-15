@@ -38,6 +38,9 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private user;
   private button;
 
+  // Search
+  private chatName: string;
+
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef) 
