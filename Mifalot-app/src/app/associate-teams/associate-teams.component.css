@@ -1,13 +1,13 @@
 .green 
 {
-  background: #7acd47;
-  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.15, #ace44b),color-stop(1, #7acd47));
-  background-image: -webkit-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -moz-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -ms-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: -o-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
-  background-image: linear-gradient(to bottom, #ace44b 15%, #7acd47 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#ace44b');
+    background: #7acd47;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.15, #ace44b),color-stop(1, #7acd47));
+    background-image: -webkit-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
+    background-image: -moz-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
+    background-image: -ms-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
+    background-image: -o-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
+    background-image: linear-gradient(to bottom, #ace44b 15%, #7acd47 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#ace44b');
 }
 
 h5
@@ -25,7 +25,17 @@ h5
 
 .list-group
 {
-  margin-bottom: 2%;
+    margin-bottom: 2%;
+}
+
+.form-control
+{
+    direction: rtl;
+    border-radius: 15px;
+    border: 2px solid white;
+    background: #faebd7;
+    color: black;
+    margin-bottom: 6px;
 }
 
 /****************************************/

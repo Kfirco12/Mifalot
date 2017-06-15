@@ -26,11 +26,16 @@ export class AssociateTeamsComponent implements OnInit
   // Observer to teams in DB 
   private teams: FirebaseListObservable<any[]>;
 
+  // Search
+  private searchPressed: boolean;
+  private teamName: string;
+
   // ===================
 
   constructor(private afService: AF) 
   {
     this.selectedTeams = [];
+    this.searchPressed = false;
     this.teams = this.afService.af.database.list('teams');
   }
 
