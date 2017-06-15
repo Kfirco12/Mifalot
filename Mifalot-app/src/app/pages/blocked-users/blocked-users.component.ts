@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../.././providers/af";
+import { ShareService } from "../../providers/share-service";
 
 @Component({
   templateUrl: './blocked-users.component.html',
@@ -21,9 +22,12 @@ export class BlockedUsersComponent implements OnInit
   private user: any;
   private users: FirebaseListObservable<any[]>;
 
+  // For nav component
+  private backButton;
+
   // =====================
 
-  constructor(private afService: AF) 
+  constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userSelected = false;
     this.users = this.afService.af.database.list('registeredUsers');
@@ -35,6 +39,7 @@ export class BlockedUsersComponent implements OnInit
   {
     this.user = user;
     this.userSelected = true;
+    this.shareService.updateBackButton('back');
   }
 
   // =====================
@@ -57,10 +62,30 @@ export class BlockedUsersComponent implements OnInit
   {
     this.user = null;
     this.userSelected = false;
+    this.shareService.updateBackButton('home');
   }
 
   // =====================
 
-  ngOnInit() { }
+   navigate()
+  {
+    // Home page
+    if (!this.userSelected)
+      this.shareService.navigate('');
+
+    if (this.userSelected)
+      this.resetAll();
+  }
+
+  // =====================
+
+  ngOnInit() 
+  {
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
+  }
+
+  // =====================
 
 }

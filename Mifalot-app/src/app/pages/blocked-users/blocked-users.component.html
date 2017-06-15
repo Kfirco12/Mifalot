@@ -1,7 +1,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- Navbar -->
 
-<app-nav-header></app-nav-header>
+<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()"></app-nav-header>
 <!-- ================================================================================================================================================ -->
 
 <!-- Page header -->
@@ -66,9 +66,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Button -->
-        <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
     </div>
 </div>
 

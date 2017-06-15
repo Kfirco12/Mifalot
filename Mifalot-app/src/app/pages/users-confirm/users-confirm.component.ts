@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../.././providers/af";
+import { ShareService } from "../../providers/share-service";
 
 
 @Component({
@@ -36,9 +37,12 @@ export class UsersConfirmComponent implements OnInit
   private users: FirebaseListObservable<any[]>;
   private teams: FirebaseListObservable<any[]>;
 
+  // For nav component
+  private backButton;
+
   // =====================
 
-  constructor(private afService: AF) 
+  constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userDetails = [];
     this.userNewPermission = null;
@@ -54,6 +58,7 @@ export class UsersConfirmComponent implements OnInit
   {
     this.user = user;
     this.userSelected = true;
+    this.shareService.updateBackButton('back');
   }
 
   // =====================
@@ -78,6 +83,7 @@ export class UsersConfirmComponent implements OnInit
   confirmUser()
   {
     this.userConfirmed = true;
+    this.shareService.updateBackButton('back');
   }
 
   // =====================
@@ -95,14 +101,23 @@ export class UsersConfirmComponent implements OnInit
       this.userDetails[2] = 3;
 
     this.chooseTeams = true;
+    this.shareService.updateBackButton('back');
+  }
+
+  // =====================
+
+  backToUserInfo()
+  {
+    this.userConfirmed = this.chooseTeams = false;
   }
 
   // =====================
 
   resetAll()
   {
-      this.userSelected =  this.userConfirmed = this.chooseTeams = false;
-      this.user = this.userType = null;
+    this.userSelected =  this.userConfirmed = this.chooseTeams = false;
+    this.user = this.userType = null;
+    this.shareService.updateBackButton('home');
   }
 
   // =====================
@@ -112,7 +127,28 @@ export class UsersConfirmComponent implements OnInit
     this.userNewPermission = userNewPermission;
   }
 
-  ngOnInit() { }
+  // =====================
+
+   navigate()
+  {
+    // Home page
+    if (!this.userSelected)
+      this.shareService.navigate('');
+
+    if (this.userConfirmed)
+      this.backToUserInfo();
+    else if (this.userSelected)
+      this.resetAll();
+  }
+
+  // =====================
+
+  ngOnInit() 
+  {
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
+  }
 
   // =====================
 

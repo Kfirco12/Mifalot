@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../.././providers/af";
+import { ShareService } from "../../providers/share-service";
 
 // For take() 
 import 'rxjs/Rx';
@@ -30,9 +31,12 @@ export class UsersManagementComponent implements OnInit
   private users: FirebaseListObservable<any[]>;
   private teams: FirebaseListObservable<any[]>;
 
+  // For nav component
+  private backButton;
+
   // =====================
 
-  constructor(private afService: AF) 
+  constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userDetails = [];
     this.userSelected = this.showUserTeams = false;
@@ -46,6 +50,8 @@ export class UsersManagementComponent implements OnInit
   {
     this.user = user;
     this.userSelected = true;
+
+    this.shareService.updateBackButton('back');
   }
 
   // =====================
@@ -76,8 +82,10 @@ export class UsersManagementComponent implements OnInit
             }
           })
         })
-        alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו")
+        alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו");
+
         this.userSelected = false;
+        this.shareService.updateBackButton('home');
       });
     }
   }
@@ -107,10 +115,31 @@ export class UsersManagementComponent implements OnInit
   {
     this.userDetails = [];
     this.userSelected = this.showUserTeams = false;
+    this.shareService.updateBackButton('home');
   }
 
   // =====================
 
-  ngOnInit() { }
+   navigate()
+  {
+    // Home page
+    if (!this.userSelected)
+      this.shareService.navigate('');
+
+    if (this.userSelected && !this.showUserTeams)
+      this.backToUsersList();
+
+    if (this.showUserTeams)
+      this.backToUserInfo();
+  }
+
+  // =====================
+
+  ngOnInit() 
+  {
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
+  }
 
 }

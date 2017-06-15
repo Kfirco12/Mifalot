@@ -1,7 +1,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- Navbar -->
 
-<app-nav-header></app-nav-header>
+<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()"></app-nav-header>
 
 <!-- ================================================================================================================================================ -->
 
@@ -95,8 +95,6 @@
                 </div>
             </div>
         </div>
-
-        <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUsersList()"> חזור לרשימת משתמשים </a>
         <!-- /User profile -->
     </div>
 </div>
@@ -109,9 +107,6 @@
     <div *ngIf = "showUserTeams">
         <!-- Calling 'associate-teams' component -->
         <app-associate-teams [userDetails] = "userDetails"></app-associate-teams>
-        <div class = "container">
-            <a type = "button" class = "btn btn-primary btn-block btn-back" (click) = "backToUserInfo()"> חזור לפרטי משתמש </a>
-        </div>
     </div>
 </div>
 

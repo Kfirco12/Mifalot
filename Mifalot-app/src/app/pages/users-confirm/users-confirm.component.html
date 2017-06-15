@@ -1,7 +1,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- Navbar -->
 
-<app-nav-header></app-nav-header>
+<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()"></app-nav-header>
 
 <!-- ================================================================================================================================================ -->
 
@@ -65,8 +65,6 @@
         </div>
       </div>
     </div>
-    <!-- 'Back' button -->
-    <button (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
   </div>
 
   <!-- /User details -->
@@ -103,9 +101,6 @@
     <div *ngIf = "chooseTeams">
       <!-- Calling 'associate-teams' component -->
       <app-associate-teams (onUserAssociateTeamsToUser) = "userAssociatedTeams($event)" [userDetails] = "userDetails"></app-associate-teams>
-      <div class = "container">
-        <button id = "btn-back" (click) = "resetAll()" class = "btn btn-md btn-primary btn-block" type = "submit"> חזור לדף קודם </button>
-      </div>
     </div>
     <!-- /Show teams -->
 
