@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
+import { ShareService } from "../../providers/share-service";
+
 
 @Component({
   templateUrl: './attendance.component.html',
@@ -38,17 +40,18 @@ export class AttendanceComponent implements OnInit
   private user;
 
   // For navbar component
-  private button;
+  private backButton;
 
   // ============================================================
 
-  constructor(private afService: AF,private router: Router) 
+  constructor(private afService: AF, private router: Router, private shareService: ShareService) 
   {
     this.pupils = [];
     this.date = Date.now();
 
     // Initialize button values
-    this.button = { name: "דף הבית" , icon: "fa-home" };
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
 
     // Initialize page view
     this.noTeamSelected = true;
@@ -80,8 +83,7 @@ export class AttendanceComponent implements OnInit
 
      // Reset teams represent.
     this.noTeamSelected = false;
-
-    this.updateButton('חזור', 'fa-chevron-left');
+    this.shareService.updateBackButton('back');
 
     // Save presence list
     this.pupilsPath = this.afService.af.database.list('teams/' + team.$key + '/pupils').take(1);
@@ -231,21 +233,13 @@ export class AttendanceComponent implements OnInit
   navigate()
   {
     if (this.noTeamSelected)
-      this.afService.navigate('');
+      this.shareService.navigate('');
 
     // reset variables.
     this.noTeamSelected = true;
-    this.updateButton('דף הבית', 'fa-home');
+    this.shareService.updateBackButton('home');
   }
 
-  // ============================================================
-
-  updateButton(name, icon)
-  {
-    this.button.name = name;
-    this.button.icon = icon;
-  }
-  
   // ============================================================
 
   ngOnInit() { }

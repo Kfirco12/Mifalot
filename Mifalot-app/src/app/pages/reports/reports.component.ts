@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AF } from "../.././providers/af";
+import { ShareService } from "../.././providers/share-service";
+
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -10,7 +12,6 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 export class ReportsComponent implements OnInit 
 {
- 
   header = 
   { 
      title: 'דו"חות נוכחות', 
@@ -40,11 +41,11 @@ export class ReportsComponent implements OnInit
   private attendances: FirebaseListObservable<any>;   // Contain user's attendances
   
   // For navbar component
-  private button;
+  private backButton;
 
   // ============================================================
 
-  constructor(private afService: AF) 
+  constructor(private afService: AF, private shareService: ShareService) 
   { 
     // Flags
     this.started = false;
@@ -61,8 +62,9 @@ export class ReportsComponent implements OnInit
     this.teams = this.afService.af.database.list('teams');
 
     // Initialize button values
-    this.button = { name: "דף הבית" , icon: "fa-home" };
-
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
+    
     this.user = 
     { 
       uid: null,
@@ -138,7 +140,7 @@ export class ReportsComponent implements OnInit
 
   navigate()
   {
-    this.afService.navigate('');
+    this.shareService.navigate('');
   }
 
   // ===========================================================

@@ -9,7 +9,7 @@ import { AF } from "../providers/af";
 export class NavHeaderComponent implements OnInit 
 {
   // Get info from father
-  @Input() button;
+  @Input() backButton;
 
   // To alert father component
   @Output() onUserClicked: EventEmitter<any> = new EventEmitter();

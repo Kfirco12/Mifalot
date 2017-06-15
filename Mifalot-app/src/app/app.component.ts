@@ -42,7 +42,7 @@ export class AppComponent
         }
         else 
         {
-          this.afService.subscribeToChatRooms();
+          //this.afService.subscribeToChatRooms();
           console.log("Successfully Logged in.");
           this.isLoggedIn = true; 
         }

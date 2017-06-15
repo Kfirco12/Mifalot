@@ -1,6 +1,7 @@
 import { AfterViewChecked, ElementRef, ViewChild, Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { AF } from "../../providers/af";
+import { ShareService } from "../../providers/share-service";
 import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
@@ -36,18 +37,20 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Object
   private currentChatDetails;
   private user;
-  private button;
+  private backButton;
 
   // Search
   private chatName: string;
 
   // ==================================================
 
-  constructor(private afService: AF, private ref: ChangeDetectorRef) 
+  constructor(private afService: AF, private ref: ChangeDetectorRef, private shareService: ShareService) 
   {
-    this.button = { name: "דף הבית" , icon: "fa-home" };
-    this.chatRooms = this.afService.af.database.list('chatRooms');
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
 
+    this.chatRooms = this.afService.af.database.list('chatRooms');
     this.user = 
     { 
       uid: null,
@@ -103,7 +106,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   {
     this.noChatRoomSelected = false;
     this.createNewChatRoom = true;
-    this.updateButton('חזור', 'fa-chevron-left');
+    this.shareService.updateBackButton('back');
   }
 
   //===================================================
@@ -120,7 +123,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
       this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
 
       // Updating nav button
-      this.updateButton('חזור', 'fa-chevron-left');
+      this.shareService.updateBackButton('back');
 
       this.noChatRoomSelected = false;
     }
@@ -198,7 +201,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.editChatRoom = true;
 
     // Updating nav button
-    this.updateButton('חזור', 'fa-chevron-left');
+    this.shareService.updateBackButton('back');
   }
 
   // ==================================================
@@ -240,33 +243,25 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   {
     // Navigate to home page
     if (this.noChatRoomSelected)
-      this.afService.navigate('');
+      this.shareService.navigate('');
 
     // Back To messages
     if (!this.noChatRoomSelected)
     {
       this.noChatRoomSelected = !this.noChatRoomSelected;
-      this.updateButton('דף הבית', 'fa-home');
+      this.shareService.updateBackButton('home');
     } 
 
     if (this.createNewChatRoom || this.editChatRoom)
     {
       this.chooseChatRoom();
-      this.updateButton('דף הבית', 'fa-home');
+      this.shareService.updateBackButton('home');
     }
 
     // Header reset
     this.updateHeader("הודעות", "באפשרותך לשלוח הודעה לשאר המשתמשים", "fa-comments"); 
   }
 
-  // ==================================================
-
-  updateButton(name, icon)
-  {
-    this.button.name = name;
-    this.button.icon = icon;
-  }
-  
   // ==================================================
 
   ngOnInit() { }

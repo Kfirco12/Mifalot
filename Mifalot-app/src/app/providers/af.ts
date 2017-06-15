@@ -192,69 +192,69 @@ export class AF
 
   // ================================
 
-  getUid()
-  {
-    return this.uid;
-  }
+  // getUid()
+  // {
+  //   return this.uid;
+  // }
 
-  // ================================
-  //        Push Notifications
-  // ================================
+  // // ================================
+  // //        Push Notifications
+  // // ================================
 
-  subscribeToChatRooms()
-  {
-    this.getNumOfChatRooms();
-    let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true });
-    let currentLength = 0;
+  // subscribeToChatRooms()
+  // {
+  //   this.getNumOfChatRooms();
+  //   let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true });
+  //   let currentLength = 0;
 
-    this.subscribeArray.push(chatRooms.subscribe(snapshots => 
-    {
-      currentLength = 0;
-      snapshots.forEach(snapshot => 
-      { 
-        if (snapshot.val().authorID != this.uid)
-          currentLength++;
-      });
-      if (currentLength > this.numOfChatRooms)
-        this.pushNotification();
-      this.numOfChatRooms = currentLength;
-    }));
+  //   this.subscribeArray.push(chatRooms.subscribe(snapshots => 
+  //   {
+  //     currentLength = 0;
+  //     snapshots.forEach(snapshot => 
+  //     { 
+  //       if (snapshot.val().authorID != this.uid)
+  //         currentLength++;
+  //     });
+  //     if (currentLength > this.numOfChatRooms)
+  //       this.pushNotification();
+  //     this.numOfChatRooms = currentLength;
+  //   }));
 
-  }
+  // }
   
-  // ================================
+  // // ================================
 
-  getNumOfChatRooms()
-  {
-    this.numOfChatRooms = 0;
-    let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true }).take(1);
+  // getNumOfChatRooms()
+  // {
+  //   this.numOfChatRooms = 0;
+  //   let chatRooms = this.af.database.list('chatRooms', { preserveSnapshot: true }).take(1);
 
-    chatRooms.subscribe(snapshots => {
-      snapshots.forEach(snapshot => 
-      {
-        this.numOfChatRooms++;
-      })
-      console.log(this.numOfChatRooms);
-    });
-  }
+  //   chatRooms.subscribe(snapshots => {
+  //     snapshots.forEach(snapshot => 
+  //     {
+  //       this.numOfChatRooms++;
+  //     })
+  //     console.log(this.numOfChatRooms);
+  //   });
+  // }
 
-  // ================================
+  // // ================================
 
-  pushNotification()
-  {
-    this.pushService.create('פורסמה חוויה חדשה', { body: 'כנס אל ״הודעות״ וצפה בהודעה', dir: 'rtl' }).subscribe(
-            res => console.log(res),
-            err => console.log(err)
-        )
-  }
+  // pushNotification()
+  // {
+  //   this.pushService.create('פורסמה חוויה חדשה', { body: 'כנס אל ״הודעות״ וצפה בהודעה', dir: 'rtl' }).subscribe(
+  //           res => console.log(res),
+  //           err => console.log(err)
+  //       )
+  // }
 
-  // ================================
-  // Uses routes array in app.module.ts
+  // // ================================
+  // // Uses routes array in app.module.ts
   
-  navigate(page: string)
-  {
-    this.router.navigate([page]);
-  }
+  // navigate(page: string)
+  // {
+  //   this.router.navigate([page]);
+  // }
   
   // ================================
 

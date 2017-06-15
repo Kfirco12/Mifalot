@@ -28,6 +28,8 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 // Services/Providers
 import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
+import { ShareService } from "./providers/share-service";
+
 
 // ======================================================
 // Initialize Firebase 
@@ -87,7 +89,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [ AF, PushNotificationsService ],
+  providers: [ AF, ShareService, PushNotificationsService ],
   bootstrap: [ AppComponent ]
 })
 

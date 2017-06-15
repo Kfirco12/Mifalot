@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AF } from "../../providers/af";
+import { ShareService } from "../../providers/share-service";
 import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
@@ -18,11 +19,11 @@ export class HomeComponent implements OnInit
   // User details object
   private user: Object;
 
-  private button: Object;
+  private backButton;
 
   // ======================
 
-  constructor(private afService: AF, private router: Router) 
+  constructor(private afService: AF, private router: Router, private shareService: ShareService) 
   { 
     this.user = 
     { 
@@ -37,7 +38,10 @@ export class HomeComponent implements OnInit
     this.afService.getUserDetails(this.user);
 
     this.initializeButtons();
-    this.button = { name: '' , icon: '' };
+
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('');
   }
 
   // ======================

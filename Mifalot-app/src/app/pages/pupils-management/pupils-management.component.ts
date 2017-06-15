@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { AF } from "../../providers/af";
+import { ShareService } from "../../providers/share-service";
 
 // For take() 
 // import 'rxjs/Rx';
@@ -48,14 +49,12 @@ export class PupilsManagementComponent implements OnInit
   private newPupilsCounter: number;
 
   // For nav component
-  private button;
+  private backButton;
 
   // ==============================
 
-  constructor(private afService: AF ) 
+  constructor(private afService: AF, private shareService: ShareService) 
   {
-    this.button = { name: "דף הבית" , icon: "fa-home" };
-
     this.noTeamSelected = true;
     this.choosenTeamText = "רשימת קבוצות";
 
@@ -88,7 +87,7 @@ export class PupilsManagementComponent implements OnInit
     this.choosenTeamText = team.name;
 
     this.noTeamSelected = false;
-    this.updateButton('חזור', 'fa-chevron-left');
+    this.shareService.updateBackButton('back');
   }
  
   // ==============================
@@ -96,7 +95,7 @@ export class PupilsManagementComponent implements OnInit
   chooseTeam()
   {
     this.noTeamSelected = true;
-    this.updateButton('דף הבית', 'fa-home');
+    this.shareService.updateBackButton('home');
   }
   
   // ==============================
@@ -287,9 +286,9 @@ export class PupilsManagementComponent implements OnInit
 
   navigate()
   {
-    // Navigate to home page
+    // // Navigate to home page
     if (this.noTeamSelected)
-      this.afService.navigate('');
+      this.shareService.navigate('');
 
     // Back to select team
     if (!this.noTeamSelected && !this.addPupils && !this.removePupils)
@@ -302,15 +301,12 @@ export class PupilsManagementComponent implements OnInit
 
   // ==============================
 
-  updateButton(name, icon)
+  ngOnInit() 
   {
-    this.button.name = name;
-    this.button.icon = icon;
-  }
-  
-  // ==============================
-
-  ngOnInit() { }
+    // Initialize button values
+    this.backButton = this.shareService.getButton();
+    this.shareService.updateBackButton('home');
+   }
 
   // ==============================
 
