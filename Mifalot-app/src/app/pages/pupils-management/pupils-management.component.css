@@ -91,7 +91,7 @@ input
   background-image: -ms-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
   background-image: -o-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
   background-image: linear-gradient(to bottom, #ea8378 15%, #e2675a 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e2675a', endColorstr='#ea8378');
+  /*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e2675a', endColorstr='#ea8378');*/
 }
 
 /****************************************/

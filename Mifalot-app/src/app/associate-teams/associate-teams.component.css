@@ -7,7 +7,7 @@
     background-image: -ms-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
     background-image: -o-linear-gradient(bottom, #ace44b 15%, #7acd47 100%);
     background-image: linear-gradient(to bottom, #ace44b 15%, #7acd47 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#ace44b');
+    /*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#7acd47', endColorstr='#ace44b');*/
 }
 
 h5
