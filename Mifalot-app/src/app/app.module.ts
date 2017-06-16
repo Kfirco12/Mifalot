@@ -18,18 +18,20 @@ import { PupilsManagementComponent } from './pages/pupils-management/pupils-mana
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
-import { LoadingComponent } from './pages/loading/loading.component';
 import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 
+// Animations
+import { LoadingComponent } from './_animations/loading/loading.component';
+import { SpinnerComponent } from './_animations/spinner/spinner.component';
+
 // Services/Providers
 import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
 import { ShareService } from "./providers/share-service";
-import { SpinnerComponent } from './spinner/spinner.component';
 
 
 // ======================================================
