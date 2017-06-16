@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AF } from "../../providers/af";
 import { ShareService } from "../../providers/share-service";
-import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
   templateUrl: './home.component.html',
@@ -19,11 +17,12 @@ export class HomeComponent implements OnInit
   // User details object
   private user: Object;
 
+  // For navbar
   private backButton;
 
   // ======================
 
-  constructor(private afService: AF, private router: Router, private shareService: ShareService) 
+  constructor(private afService: AF, private shareService: ShareService) 
   { 
     this.user = this.afService.getUserDetails();
 
@@ -39,7 +38,7 @@ export class HomeComponent implements OnInit
   
   navigate(page: string)
   {
-    this.router.navigate([page]);
+    this.shareService.navigate(page);
   }
 
   // ======================

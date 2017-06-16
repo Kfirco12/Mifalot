@@ -28,7 +28,6 @@ export class LoginComponent
     this.showSpinner = true;
     event.preventDefault();
     this.afService.loginWithEmail(email, password).then(() => {
-      // this.showSpinner = false;
       this.router.navigate(['']);
     })
       .catch((error: any) => {
