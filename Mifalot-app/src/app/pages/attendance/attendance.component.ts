@@ -68,9 +68,6 @@ export class AttendanceComponent implements OnInit
 
   getPupils(team) 
   {  
-    // Save presence list
-    //this.pupils = this.afService.af.database.list('teams/' + team.$key + '/pupils');
-
      // Reset teams represent.
     this.noTeamSelected = false;
     this.shareService.updateBackButton('back');
@@ -79,6 +76,8 @@ export class AttendanceComponent implements OnInit
     this.pupilsPath = this.afService.af.database.list('teams/' + team.$key + '/pupils').take(1);
     this.teamKey = team.$key;	
 
+    this.pupils = [];
+    
     this.pupilsPath.subscribe(snapshots => 
     {		
       snapshots.forEach(snapshot => 
@@ -227,6 +226,7 @@ export class AttendanceComponent implements OnInit
 
     // reset variables.
     this.noTeamSelected = true;
+    this.resetAllChecked();
     this.shareService.updateBackButton('home');
   }
 
