@@ -59,6 +59,11 @@ p
 
 /**********************************************/
 
+.alert
+{
+  margin-top: 10px;
+}
+
 .vertical-menu 
 {
   padding: 2%;
@@ -168,7 +173,6 @@ input::placeholder
 
 
 /**********************************************/
-
 
 /** ios1-ios6 bubbles **/
 .bubble 

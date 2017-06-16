@@ -27,7 +27,7 @@
           <button (click) = "newChatRoom()" type = "button" class = "btn btn-success btn-block" > <i class = "fa fa-plus" > </i> יצירת חדר צ׳אט חדש </button>
             
             <!-- Search team -->
-          <input type = "text" class = "search text-right col-xs-8 col-xs-offset-2" placeholder = "חיפוש צ'אט" [(ngModel)] = "chatName" />
+          <input *ngIf = "(chatRooms | async)?.length != 0" type = "text" class = "search text-right col-xs-8 col-xs-offset-2" placeholder = "חיפוש צ'אט" [(ngModel)] = "chatName" />
         </div>
 
       <div class = "vertical-menu chat-rooms">
