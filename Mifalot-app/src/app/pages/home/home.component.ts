@@ -25,17 +25,7 @@ export class HomeComponent implements OnInit
 
   constructor(private afService: AF, private router: Router, private shareService: ShareService) 
   { 
-    this.user = 
-    { 
-      uid: null,
-      name: null,
-      lastName: null,
-      ID: null,
-      permission: null, 
-      phoneNumber: null
-    };
-
-    this.afService.getUserDetails(this.user);
+    this.user = this.afService.getUserDetails();
 
     this.initializeButtons();
 

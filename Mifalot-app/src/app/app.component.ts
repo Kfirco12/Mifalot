@@ -44,7 +44,9 @@ export class AppComponent
         {
           //this.afService.subscribeToChatRooms();
           console.log("Successfully Logged in.");
-          this.isLoggedIn = true; 
+          this.isLoggedIn = true;
+          this.afService.saveUserDetails(auth);
+          this.afService.getUserDetailsFromDB();
         }
       })
   }

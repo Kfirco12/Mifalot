@@ -59,18 +59,8 @@ export class AttendanceComponent implements OnInit
     //get teams from DB.
     this.teams = this.afService.af.database.list('teams/');
 
-    this.user = 
-    { 
-      uid: null,
-      email: null,
-      name: null,
-      lastName: null,
-      ID: null,
-      permission: null, 
-      phoneNumber: null
-    };
-
-    this.afService.getUserDetails(this.user);
+    // Get user details from AngularFire service
+    this.user = this.afService.getUserDetails();  
   }
 
   // ============================================================

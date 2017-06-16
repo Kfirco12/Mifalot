@@ -50,19 +50,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.backButton = this.shareService.getButton();
     this.shareService.updateBackButton('home');
 
+    this.user = this.afService.getUserDetails();
     this.chatRooms = this.afService.af.database.list('chatRooms');
-    this.user = 
-    { 
-      uid: null,
-      email: null,
-      name: null,
-      lastName: null,
-      ID: null,
-      permission: null, 
-      phoneNumber: null
-    };
-
-    this.afService.getUserDetails(this.user);
 
     // Flags
     this.noChatRoomSelected = true;

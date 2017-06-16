@@ -35,7 +35,7 @@ export class PupilsManagementComponent implements OnInit
   private pupilsToRemove;
 
   // User details
-  private userObject;
+  private user: Object;
 
   // Strings
   private choosenTeamText: string;
@@ -55,19 +55,10 @@ export class PupilsManagementComponent implements OnInit
 
   constructor(private afService: AF, private shareService: ShareService) 
   {
+    this.user = this.afService.getUserDetails();
+
     this.noTeamSelected = true;
     this.choosenTeamText = "רשימת קבוצות";
-
-    this.userObject = 
-    { 
-      uid: null,
-      email: null,
-      name: null,
-      lastName: null,
-      ID: null,
-      permission: null, 
-      phoneNumber: null
-    };
 
     this.initializeRemoveVariables();
     this.initializeAddVariables();
@@ -76,7 +67,6 @@ export class PupilsManagementComponent implements OnInit
     this.pupilID = null;
 
     this.teams = this.afService.af.database.list('teams');
-    this.afService.getUserDetails(this.userObject);
   }
 
   // ==============================

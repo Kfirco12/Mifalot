@@ -64,19 +64,9 @@ export class ReportsComponent implements OnInit
     // Initialize button values
     this.backButton = this.shareService.getButton();
     this.shareService.updateBackButton('home');
-    
-    this.user = 
-    { 
-      uid: null,
-      email: null,
-      name: null,
-      lastName: null,
-      ID: null,
-      permission: null, 
-      phoneNumber: null
-    };
 
-    this.afService.getUserDetails(this.user);
+    // Get user details from AngularFire service
+    this.user = this.afService.getUserDetails();
   }
 
   // ============================================================
