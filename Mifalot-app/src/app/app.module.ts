@@ -29,6 +29,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { SimpleNotificationsModule, PushNotificationsService } from 'angular2-notifications-lite';
 import { AF } from "./providers/af";
 import { ShareService } from "./providers/share-service";
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 // ======================================================
@@ -79,7 +80,8 @@ const routes: Routes = [
     UsersManagementComponent,
     AssociateTeamsComponent,
     UserStatusComponent,
-    NavHeaderComponent
+    NavHeaderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

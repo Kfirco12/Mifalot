@@ -1,25 +1,17 @@
+#loader 
+{
+    bottom: 0;
+    height: 175px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 175px;
+}
 
-#loader {
-    bottom: 0;
-    height: 175px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 175px;
-}
-#loader {
-    bottom: 0;
-    height: 175px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 175px;
-}
-#loader .dot {
+#loader .dot 
+{
     bottom: 0;
     height: 100%;
     left: 0;
@@ -29,7 +21,9 @@
     top: 0;
     width: 87.5px;
 }
-#loader .dot::before {
+
+#loader .dot::before 
+{
     border-radius: 100%;
     content: "";
     height: 87.5px;
@@ -40,6 +34,7 @@
     transform: scale(0);
     width: 87.5px;
 }
+
 #loader .dot:nth-child(7n+1) {
     transform: rotate(45deg);
 }
