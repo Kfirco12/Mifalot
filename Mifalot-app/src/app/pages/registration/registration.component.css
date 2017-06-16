@@ -15,7 +15,7 @@
     transform: translate(-50%, -50%);
 }
 
-.registermodal-container h1 
+.registermodal-container > h1 
 {
     text-align: center;
     font-size: 1.8em;
