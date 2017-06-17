@@ -149,8 +149,10 @@ export class AttendanceComponent implements OnInit
     {
       snapshots.forEach(snapshot => 
       {
-        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy'))
+        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy')){
           dates++;
+          alert("ok- "+ datePipe.transform(snapshot.date, 'dd/MM/yyyy'));
+      }
       })
     })
 
@@ -165,7 +167,6 @@ export class AttendanceComponent implements OnInit
       snapshots.forEach(snapshot => 
       {
         let missing = snapshot.missed;
-
         if (this.pupils[i].presence == false && !changed) 
         {
           missing++;
@@ -176,8 +177,6 @@ export class AttendanceComponent implements OnInit
         }
         else if (this.pupils[i].presence == true)
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
-      
-        
         i++;
       })
     })
@@ -205,7 +204,6 @@ export class AttendanceComponent implements OnInit
     attendance.push(attendanceInfo).then(() => 
     {
       alert('רשימת הנוכחות נשמרה בהצלחה!');
-
 
       // Reset variables.
       this.noTeamSelected = true;
