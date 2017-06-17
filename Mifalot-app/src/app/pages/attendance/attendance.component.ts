@@ -11,8 +11,7 @@ import { ShareService } from "../../providers/share-service";
   styleUrls: ['./attendance.component.css']
 })
 
-export class AttendanceComponent implements OnInit 
-{
+export class AttendanceComponent implements OnInit {
   header =
   {
     title: "רשימת נוכחות",
@@ -41,12 +40,11 @@ export class AttendanceComponent implements OnInit
 
   // For navbar component
   private backButton;
-  
+
 
   // ============================================================
 
-  constructor(private afService: AF, private router: Router, private shareService: ShareService) 
-  {
+  constructor(private afService: AF, private router: Router, private shareService: ShareService) {
     this.pupils = [];
     this.date = Date.now();
 
@@ -61,53 +59,49 @@ export class AttendanceComponent implements OnInit
     this.teams = this.afService.af.database.list('teams/');
 
     // Get user details from AngularFire service
-    this.user = this.afService.getUserDetails();  
+    this.user = this.afService.getUserDetails();
   }
 
   // ============================================================
   // Get the pupils name from the wanted team
 
-  getPupils(team) 
-  {  
-     // Reset teams represent.
+  getPupils(team) {
+    // Reset teams represent.
     this.noTeamSelected = false;
     this.shareService.updateBackButton('back');
 
     // Save presence list
     this.pupilsPath = this.afService.af.database.list('teams/' + team.$key + '/pupils').take(1);
-    this.teamKey = team.$key;	
+    this.teamKey = team.$key;
 
     this.pupils = [];
-    
-    this.pupilsPath.subscribe(snapshots => 
-    {		
-      snapshots.forEach(snapshot => 
-      {		
-        let pupil = 
-        {		
-          name: snapshot.name,		
-          lastName: snapshot.lastName,		
-          ID: snapshot.ID,		
-          presence: false		
-        }
+
+    this.pupilsPath.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        let pupil =
+          {
+            name: snapshot.name,
+            lastName: snapshot.lastName,
+            ID: snapshot.ID,
+            presence: false
+          }
 
         // Adding pupil to pupils array
         this.pupils.push(pupil);
-      })		
+      })
     })
   }
 
   // ============================================================
   // Update the checked buttons at run time
 
-  updateChecked(pupil, event) 
-  {
+  updateChecked(pupil, event) {
     let index = this.pupils.indexOf(pupil);
 
     // Add check
     if (event.target.checked)
       this.pupils[index].presence = true;
-  
+
     // Remove check.
     else
       this.pupils[index].presence = false;
@@ -116,17 +110,15 @@ export class AttendanceComponent implements OnInit
   // ============================================================
   // Reset the checked attendance
 
-  startOver() 
-  {
+  startOver() {
     if (confirm("לאפס דף זה? הנתונים שהזנת לא ישמרו!"))
       this.resetAllChecked();
   }
 
-    // ============================================================
+  // ============================================================
   // Check if a pupil missed more than two trainings and alert if needed
 
-  missChecking(arr)
-  {
+  missChecking(arr) {
     for (let i = 0; i < arr.length; i++)
       alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
   }
@@ -134,25 +126,20 @@ export class AttendanceComponent implements OnInit
   // ============================================================
   // Missing from 2 or more trainings
 
-  missingUpdate(attendance) 
-  {
+  missingUpdate(attendance) {
     let datePipe = new DatePipe('en-us');
     let setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
-    let changed = false;
+
     let dates = 0;
     let missed_twiced = [];
-
+    let changed = false;
     let path = attendance.take(1);
 
     // Check if an attendance was checked at the same date of 'date'.
-    path.subscribe(snapshots => 
-    {
-      snapshots.forEach(snapshot => 
-      {
-        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy')){
+    path.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy'))
           dates++;
-          alert("ok- "+ datePipe.transform(snapshot.date, 'dd/MM/yyyy'));
-      }
       })
     })
 
@@ -161,26 +148,23 @@ export class AttendanceComponent implements OnInit
       changed = true;
 
     // Update if needed.
-    this.pupilsPath.subscribe(snapshots => 
-    {
+    this.pupilsPath.subscribe(snapshots => {
       let i = 0;
-      snapshots.forEach(snapshot => 
-      {
+      snapshots.forEach(snapshot => {
         let missing = snapshot.missed;
-        if (this.pupils[i].presence == false && !changed) 
-        {
+        if (this.pupils[i].presence == false && !changed) {
           missing++;
           this.pupilsPath.update(snapshot.$key, { missed: missing });
 
           if (missing >= 2)
-           missed_twiced.push(this.pupils[i].name);
+            missed_twiced.push(this.pupils[i].name);
         }
         else if (this.pupils[i].presence == true)
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
         i++;
       })
     })
-    
+
     this.missChecking(missed_twiced);
   }
 
@@ -188,21 +172,19 @@ export class AttendanceComponent implements OnInit
   // ============================================================
   // Save the checked attendance and the written note
 
-  saveAttendance() 
-  {
+  saveAttendance() {
     // DB observable
     let attendance = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
 
-    let attendanceInfo = 
-    {
-      date: this.date,
-      presence: this.pupils
-    };
+    let attendanceInfo =
+      {
+        date: this.date,
+        presence: this.pupils
+      };
 
     this.missingUpdate(attendance);
     // Push attendace info to DB
-    attendance.push(attendanceInfo).then(() => 
-    {
+    attendance.push(attendanceInfo).then(() => {
       alert('רשימת הנוכחות נשמרה בהצלחה!');
 
       // Reset variables.
@@ -213,17 +195,15 @@ export class AttendanceComponent implements OnInit
 
   // ============================================================
 
-  resetAllChecked()
-  {
-   this.pupils.forEach((item) => {
-        item.presence = false;
-      })
+  resetAllChecked() {
+    this.pupils.forEach((item) => {
+      item.presence = false;
+    })
   }
 
   // ============================================================
 
-  navigate()
-  {
+  navigate() {
     if (this.noTeamSelected)
       this.shareService.navigate('');
 
