@@ -5,13 +5,13 @@ import { Router } from "@angular/router";
 import { AF } from "../../providers/af";
 import { ShareService } from "../../providers/share-service";
 
-
 @Component({
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
 
-export class AttendanceComponent implements OnInit {
+export class AttendanceComponent implements OnInit 
+{
   header =
   {
     title: "רשימת נוכחות",
@@ -41,10 +41,10 @@ export class AttendanceComponent implements OnInit {
   // For navbar component
   private backButton;
 
-
   // ============================================================
 
-  constructor(private afService: AF, private router: Router, private shareService: ShareService) {
+  constructor(private afService: AF, private router: Router, private shareService: ShareService) 
+  {
     this.pupils = [];
     this.date = Date.now();
 
@@ -65,7 +65,8 @@ export class AttendanceComponent implements OnInit {
   // ============================================================
   // Get the pupils name from the wanted team
 
-  getPupils(team) {
+  getPupils(team) 
+  {
     // Reset teams represent.
     this.noTeamSelected = false;
     this.shareService.updateBackButton('back');
@@ -95,7 +96,8 @@ export class AttendanceComponent implements OnInit {
   // ============================================================
   // Update the checked buttons at run time
 
-  updateChecked(pupil, event) {
+  updateChecked(pupil, event) 
+  {
     let index = this.pupils.indexOf(pupil);
 
     // Add check
@@ -110,7 +112,8 @@ export class AttendanceComponent implements OnInit {
   // ============================================================
   // Reset the checked attendance
 
-  startOver() {
+  startOver() 
+  {
     if (confirm("לאפס דף זה? הנתונים שהזנת לא ישמרו!"))
       this.resetAllChecked();
   }
@@ -118,7 +121,8 @@ export class AttendanceComponent implements OnInit {
   // ============================================================
   // Check if a pupil missed more than two trainings and alert if needed
 
-  missChecking(arr) {
+  missChecking(arr) 
+  {
     for (let i = 0; i < arr.length; i++)
       alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
   }
@@ -126,41 +130,48 @@ export class AttendanceComponent implements OnInit {
   // ============================================================
   // Missing from 2 or more trainings
 
-  missingUpdate(attendance) {
+  missingUpdate(attendance) 
+  {
     let datePipe = new DatePipe('en-us');
     let setDob = datePipe.transform(this.date, 'dd/MM/yyyy');
-    let dates = 0;
+    let dates = 1;
     let missed_twiced = [];
     let changed = false;
+    let currentAttendaceKey;
     let path = attendance.take(1);
 
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
     // Check if an attendance was checked at the same date of 'date'.
-    path.subscribe(snapshots => {
-      snapshots.forEach(snapshot => {
+    path.subscribe(snapshots => 
+    {
+      snapshots.forEach(snapshot => 
+      {
         if (setDob == datePipe.transform(snapshot.date, 'dd/MM/yyyy'))
+        {
           dates++;
+          currentAttendaceKey = snapshot.$key;
+        }
       })
-    })
+       // Check if there is more than one today's date.
+      if (dates > 1)
+        changed = true;
 
-    // Check if there is more than one today's date.
-    if (dates > 1)
-      changed = true;
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
-//***********************************************************************************************/
-    // Update if needed.
-    this.pupilsPath.subscribe(snapshots => {
+      this.attendanceUpdate(attendance, changed, missed_twiced, currentAttendaceKey);
+    })
+  }
+
+  // ============================================================
+  // Update if needed
+
+  attendanceUpdate(attendance, changed, missed_twiced, currentAttendaceKey)
+  {
+    this.pupilsPath.subscribe(snapshots => 
+    {
       let i = 0;
-      snapshots.forEach(snapshot => {
+      snapshots.forEach(snapshot => 
+      {
         let missing = snapshot.missed;
-        if (this.pupils[i].presence == false && !changed) {
+        if (this.pupils[i].presence == false && !changed) 
+        {
           missing++;
           this.pupilsPath.update(snapshot.$key, { missed: missing });
 
@@ -169,30 +180,57 @@ export class AttendanceComponent implements OnInit {
         }
         else if (this.pupils[i].presence == true)
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
+
         i++;
       })
+
+      if (!changed)
+        this.pushAttendaceToDB(attendance);
+      else
+        this.updateExistAttendance(currentAttendaceKey);
+
+      this.missChecking(missed_twiced);
     })
-
-    this.missChecking(missed_twiced);
   }
-
-
   // ============================================================
   // Save the checked attendance and the written note
 
-  saveAttendance() {
-    // DB observable
-    let attendance = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
+  updateExistAttendance(currentAttendaceKey)
+  {
+    let presence = this.afService.af.database.list('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence');
 
-    let attendanceInfo =
+    presence.subscribe(snapshots => 
+    {
+      let i = 0;
+      snapshots.forEach(snapshot => 
       {
-        date: this.date,
-        presence: this.pupils
-      };
+        if (snapshot.presence == false && this.pupils[i].presence == true)
+          this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
+          
+        i++;
+      })
+      
+      alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!');
 
-    this.missingUpdate(attendance);
-    // Push attendace info to DB
-    attendance.push(attendanceInfo).then(() => {
+      // Reset variables.
+      this.noTeamSelected = true;
+      this.resetAllChecked();
+    });
+  }
+
+  // ============================================================
+  // Push attendace info to DB
+
+  pushAttendaceToDB(attendance)
+  {
+    let attendanceInfo =
+    {
+      date: this.date,
+      presence: this.pupils
+    };
+
+    attendance.push(attendanceInfo).then(() => 
+    {
       alert('רשימת הנוכחות נשמרה בהצלחה!');
 
       // Reset variables.
@@ -202,16 +240,26 @@ export class AttendanceComponent implements OnInit {
   }
 
   // ============================================================
+  // Save the checked attendance and the written note
 
-  resetAllChecked() {
-    this.pupils.forEach((item) => {
-      item.presence = false;
-    })
+  saveAttendance() 
+  {
+    // DB observable
+    let attendance = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
+    this.missingUpdate(attendance);
   }
 
   // ============================================================
 
-  navigate() {
+  resetAllChecked() 
+  {
+    this.pupils.forEach((item) => { item.presence = false; });
+  }
+
+  // ============================================================
+
+  navigate() 
+  {
     if (this.noTeamSelected)
       this.shareService.navigate('');
 
