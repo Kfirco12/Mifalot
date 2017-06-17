@@ -13,7 +13,12 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-
+  private header = 
+  { 
+     title: "הודעות", 
+     subTitle: "באפשרותך לשלוח הודעה לשאר המשתמשים",
+     icon: "fa-comments" 
+  }
   
   // Strings
   private newMessage: string;
