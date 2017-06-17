@@ -41,6 +41,7 @@ export class AttendanceComponent implements OnInit
 
   // For navbar component
   private backButton;
+  
 
   // ============================================================
 
@@ -120,6 +121,15 @@ export class AttendanceComponent implements OnInit
       this.resetAllChecked();
   }
 
+    // ============================================================
+  // Check if a pupil missed more than two trainings and alert if needed
+
+  missChecking(arr)
+  {
+    for (let i = 0; i < arr.length; i++)
+      alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
+  }
+
   // ============================================================
   // Missing from 2 or more trainings
 
@@ -161,6 +171,7 @@ export class AttendanceComponent implements OnInit
           this.pupilsPath.update(snapshot.$key, { missed: missing });
 
           if (missing >= 2)
+          alert("name: "+snapshot.name);
            missed_twiced.push(this.pupils[i].name);
         }
         else if (this.pupils[i].presence == true)
@@ -169,18 +180,10 @@ export class AttendanceComponent implements OnInit
         i++;
       })
     })
-
+    
     this.missChecking(missed_twiced);
   }
 
-  // ============================================================
-  // Check if a pupil missed more than two trainings and alert if needed
-
-  missChecking(arr)
-  {
-    for (let i = 0; i < arr.length; i++)
-      alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
-  }
 
   // ============================================================
   // Save the checked attendance and the written note
