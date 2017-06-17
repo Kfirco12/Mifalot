@@ -105,8 +105,9 @@ export class AttendanceComponent implements OnInit
     let index = this.pupils.indexOf(pupil);
 
     // Add check
-    if (event.target.checked) 
+    if (event.target.checked)
       this.pupils[index].presence = true;
+  
     // Remove check.
     else
       this.pupils[index].presence = false;
@@ -171,11 +172,13 @@ export class AttendanceComponent implements OnInit
           this.pupilsPath.update(snapshot.$key, { missed: missing });
 
           if (missing >= 2)
-          alert("name: "+snapshot.name);
+          //alert("name: "+snapshot.name);
            missed_twiced.push(this.pupils[i].name);
         }
-        else if (this.pupils[i].presence == true)
+        else if (this.pupils[i].presence == true){
+          alert("ok");
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
+      }
         
         i++;
       })
@@ -199,11 +202,12 @@ export class AttendanceComponent implements OnInit
       presence: this.pupils
     };
 
+    this.missingUpdate(attendance);
     // Push attendace info to DB
     attendance.push(attendanceInfo).then(() => 
     {
       alert('רשימת הנוכחות נשמרה בהצלחה!');
-      this.missingUpdate(attendance);
+
 
       // Reset variables.
       this.noTeamSelected = true;
