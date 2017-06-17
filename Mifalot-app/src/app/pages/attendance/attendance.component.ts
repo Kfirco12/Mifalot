@@ -172,13 +172,11 @@ export class AttendanceComponent implements OnInit
           this.pupilsPath.update(snapshot.$key, { missed: missing });
 
           if (missing >= 2)
-          //alert("name: "+snapshot.name);
            missed_twiced.push(this.pupils[i].name);
         }
-        else if (this.pupils[i].presence == true){
-          alert("ok");
+        else if (this.pupils[i].presence == true)
           this.pupilsPath.update(snapshot.$key, { missed: 0 });
-      }
+      
         
         i++;
       })
