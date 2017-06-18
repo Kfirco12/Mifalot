@@ -25,25 +25,25 @@
 
 	<div class = "row"> 
 		<div class = "col-xs-4">
-			<div class = "dropdown">
-				<button (click) = "pressedOnChooseDate()" class = "btn btn-primary btn-block dropdown-toggle" type = "button" data-toggle = "dropdown">
+			<div class = "dropdown font-size">
+				<button (click) = "pressedOnChooseDate()" class = "btn btn-primary btn-block dropdown-toggle font-size" type = "button" data-toggle = "dropdown">
 					<span class = "caret"></span>
 					<span> {{ chosenDateString }} </span>
 				</button>
-				<ul *ngIf = "teamSelected" class = "dropdown-menu">
-					<li *ngFor = "let attendance of attendances | async">
+				<ul *ngIf = "teamSelected" class = "dropdown-menu font-size">
+					<li class = "text-center" *ngFor = "let attendance of attendances | async">
 						<a (click) = "getPupils(attendance.date, attendance.presence)"> {{ attendance.date | date:'dd/MM/yy'}} </a>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class = "col-xs-8">
-			<div class = "dropdown">
-				<button class = "btn btn-primary btn-block dropdown-toggle" type = "button" data-toggle = "dropdown">
+			<div class = "dropdown font-size">
+				<button class = "btn btn-primary btn-block dropdown-toggle font-size" type = "button" data-toggle = "dropdown">
 					<span> {{ chosenTeam }} </span>
 					<span class = "caret"></span>
 				</button>
-				<ul class = "dropdown-menu">
+				<ul class = "dropdown-menu font-size">
 					<li *ngFor = "let team of teams | async">
 						<a *ngIf = "user.permission == 2 && user.uid == team.managerID || user.permission == 3 && user.uid == team.coachID" (click) = "getDates(team.name)"> {{ team.name }} </a>
 					</li>
@@ -67,7 +67,7 @@
 				<div class = "panel-body">
 					<input type = "text" class = "form-control" id = "dev-table-filter" data-action = "filter" data-filters = "#dev-table" placeholder = "Filter Developers" />
 				</div>
-				<div class= "vertical-menu"> 
+				<div class = "vertical-menu"> 
 					<table class = "table table-hover" id = "dev-table">
 						<thead>
 							<tr>

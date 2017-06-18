@@ -24,16 +24,6 @@
 	display: none;
 }
 
-h3 
-{
-    text-align: right;
-}
-
-th 
-{
-    text-align: right;
-}
-
 #dev-table
 {
     text-align: right;
@@ -53,15 +43,29 @@ th
     text-align: center;
 }
 
+tr, th
+{
+    text-align: center;
+}
+
+tr
+{
+    font-size: 96%;
+}
 
 .dropdown-menu
 {
     text-align: right;
-    min-height: 60px;
+    min-height: 33px;
     max-height: 190px;
     min-width: 100%;
     max-width: 100%;
     overflow-y: scroll;
+}
+
+.font-size
+{
+    font-size: 90%;
 }
 
 /****************************************/

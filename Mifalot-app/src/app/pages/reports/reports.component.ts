@@ -53,7 +53,7 @@ export class ReportsComponent implements OnInit
 
     // Strings
     this.chosenTeam = 'בחר קבוצה';
-    this.chosenDateString = 'בחר תאריך';
+    this.chosenDateString = 'תאריך';
 
     // Date pipe
     this.datePipe = new DatePipe('en-us');
@@ -74,7 +74,7 @@ export class ReportsComponent implements OnInit
 
   getDates(teamId) 
   {
-    this.chosenDateString = 'בחר תאריך';
+    this.chosenDateString = 'תאריך';
 
     // Updating flags
     this.dateSelected = false;
