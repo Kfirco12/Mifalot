@@ -198,23 +198,29 @@ export class AttendanceComponent implements OnInit
   updateExistAttendance(currentAttendaceKey)
   {
     let presence = this.afService.af.database.list('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence');
+    let firstTime = true;
 
     presence.subscribe(snapshots => 
     {
-      let i = 0;
-      snapshots.forEach(snapshot => 
+      if (firstTime)
       {
-        if (snapshot.presence == false && this.pupils[i].presence == true)
-          this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
-          
-        i++;
-      })
-      
-      alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!');
+        let i = 0;
+        firstTime = false;
+        
+        snapshots.forEach(snapshot => 
+        {
+          if (snapshot.presence == false && this.pupils[i].presence == true)
+            this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
+            
+          i++;
+        })
+        
+        alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!');
 
-      // Reset variables.
-      this.noTeamSelected = true;
-      this.resetAllChecked();
+        // Reset variables.
+        this.noTeamSelected = true;
+        this.resetAllChecked();
+      }
     });
   }
 
