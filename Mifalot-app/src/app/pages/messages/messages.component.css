@@ -18,13 +18,31 @@ input
 .search
 {
     direction: rtl;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 2px solid white;
     background: #faebd7;
     color: black;
-    margin-top: 8px;
     margin-bottom: 8px;
-    padding-right: 15px;
+    padding-right: 10px;
+    height: 33.5px;
+}
+
+.search::placeholder
+{
+    text-align: center;
+    padding-left: 10px;
+}
+
+.fa-search
+{
+  color: white;
+  margin-top: 7px;
+  font-size: 130%;
+}
+
+.margin-bottom
+{
+  margin-bottom: 7px;
 }
 
 /********************************************/

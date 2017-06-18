@@ -23,30 +23,32 @@
     <div *ngIf = "noChatRoomSelected && !createNewChatRoom && !editChatRoom" >
       <div class = "row" >
 
-        <div class = "container">
-          <button (click) = "newChatRoom()" type = "button" class = "btn btn-success btn-block" > <i class = "fa fa-plus" > </i> יצירת חדר צ׳אט חדש </button>
-            
-            <!-- Search team -->
-          <input *ngIf = "(chatRooms | async)?.length != 0" type = "text" class = "search text-right col-xs-8 col-xs-offset-2" placeholder = "חיפוש צ'אט" [(ngModel)] = "chatName" />
+        <div class = "container margin-bottom">
+          <!-- Search team -->
+          <input type = "text" class = "search text-right col-xs-4" placeholder = "חיפוש צ'אט" [(ngModel)] = "chatName" />
+          <!--New chat room-->
+          <div class = "col-xs-8">
+            <button (click) = "newChatRoom()" type = "button" class = "btn btn-success btn-block" > <i class = "fa fa-plus" > </i> יצירת חדר צ׳אט חדש </button>
+          </div> 
         </div>
 
-      <div class = "vertical-menu chat-rooms">
+        <div class = "vertical-menu chat-rooms">
           <div *ngIf = "(chatRooms | async)?.length == 0" class = "alert alert-warning text-center" role = "alert">
             <strong> אין כרגע חדרי צ׳אט פתוחים </strong> <br> באפשרותך ליצור חדר צ׳אט חדש ולשתף חוויות 
           </div>
           <div *ngFor = "let chatRoom of chatRooms | async" class = "list-group text-right">
-              <span *ngIf = "(chatRoom.name).search(chatName) != -1" class = "list-group-item clearfix direction-rtl" (click) = "enterChatRoom(chatRoom)">  
-                  <span class = "text-bold"> {{ chatRoom.name }} </span> <br> <span id = "author-name"> פותח: {{ chatRoom.authorName }} </span>
-                  <span class = "fa fa-message"></span>
-                  <span *ngIf = "user.uid == chatRoom.authorID" class = "pull-left">
-                    <span class = "glyphicon glyphicon-pencil" (click) = "editChatRoomName(chatRoom)"></span>
-                    <span class = "glyphicon glyphicon-trash" (click) = "removeChatRoom(chatRoom)"></span>
-                  </span>
+            <span *ngIf = "(chatRoom.name).search(chatName) != -1" class = "list-group-item clearfix direction-rtl" (click) = "enterChatRoom(chatRoom)">  
+              <span class = "text-bold"> {{ chatRoom.name }} </span> <br> <span id = "author-name"> פותח: {{ chatRoom.authorName }} </span>
+              <span class = "fa fa-message"></span>
+              <span *ngIf = "user.uid == chatRoom.authorID" class = "pull-left">
+                <span class = "glyphicon glyphicon-pencil" (click) = "editChatRoomName(chatRoom)"></span>
+                <span class = "glyphicon glyphicon-trash" (click) = "removeChatRoom(chatRoom)"></span>
               </span>
+            </span>
           </div>
+        </div>
       </div>
     </div>
-  </div>
 
   <!-- /Selecting chat room or adding a new one -->
   <!-- ================================================================================================================================================ -->
