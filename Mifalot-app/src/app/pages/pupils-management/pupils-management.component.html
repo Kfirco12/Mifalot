@@ -25,7 +25,7 @@
         <div class = "row">
             <div *ngIf = "noTeamSelected && !addPupils && !removePupils">
                 <div class = "team-title col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h4 class = "text-right"> :בחירת קבוצה </h4>
+                    <h4 class = "text-center"> אנא בחר את קבוצתך </h4>
                 </div>
 
                 <div *ngFor = "let team of teams | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
@@ -35,8 +35,9 @@
                 </div>
             </div>
 
-            <div *ngIf = "!noTeamSelected && !addPupils">
-                <h4 class = "text-center choosen-team"> הקבוצה שנבחרה היא: {{ choosenTeamText }} </h4>
+            <div *ngIf = "!noTeamSelected && !addPupils && !removePupils">
+                <h5 class = "text-center choosen-team"> :הקבוצה שנבחרה היא </h5>
+                <h4 class = "text-center"> {{ choosenTeamText }} </h4>
             </div>
         </div>
         <!-- /Select Team -->
@@ -47,8 +48,6 @@
 
         <div *ngIf = "!noTeamSelected && !addPupils && !removePupils" class = "buttons">
         
-        <h4 class = "text-center"> בחר את הפעולה אותה ברצונך לבצע </h4>
-
             <div class = "buttons-center">
                 <button (click) = "showAddPupils()" class = "btn btn-md btn-success btn-block" type = "submit"> הוספת חניכים לקבוצה </button>
                 <button (click) = "showRemovePupils()" class = "btn btn-md btn-danger btn-block" type = "submit"> הסרת חניכים מהקבוצה </button>
@@ -63,7 +62,7 @@
 
         <div *ngIf = "!noTeamSelected && addPupils" class = "buttons">
         
-            <h4 class = "text-center"> אנא מלא את הנתונים ולחץ על <br> ״הוספת חניך״ </h4>
+            <h5 class = "text-center"> אנא מלא את הנתונים ולחץ על <br> ״הוספת חניך״ </h5>
 
             <form class = "form-signin">
 
@@ -89,7 +88,7 @@
 
                 <br>
 
-                <button (click) = "pupilName &&  pupilLastName && pupilID && saveNewPupil()" class = "btn btn-md btn-block" type = "submit"> הוספת חניך </button>
+                <button (click) = "pupilName &&  pupilLastName && pupilID && saveNewPupil()" class = "btn btn-primary btn-block" type = "submit"> הוספת חניך </button>
             </form>
 
             <hr>
@@ -108,7 +107,7 @@
 
         <div *ngIf = "removePupils && !noTeamSelected"> 
         
-            <h4 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h4>
+            <h5 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h5>
 
             <div class = "vertical-menu">
                 <div *ngFor = "let pupil of pupilsList | async" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
