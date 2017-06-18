@@ -6,6 +6,11 @@ html, body
     width: 100%;
 }
 
+button, input
+{
+    cursor: pointer;
+}
+
 button:focus, input:focus
 {
     outline: none;
