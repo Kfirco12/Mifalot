@@ -11,8 +11,14 @@ import { Router } from "@angular/router";
 export class RegistrationComponent 
 {
   public error: any;
+  private showSpinner: boolean;
+  
+  // =====================
 
-  constructor(private afService: AF, private router: Router) { }
+  constructor(private afService: AF, private router: Router) 
+  {
+    this.showSpinner = false;
+  }
 
 	// registers the user and logs them in
   register(event, name, lastName, phoneNumber, email, ID, password, passwordValidation) 
@@ -26,8 +32,10 @@ export class RegistrationComponent
       return;
     }
 
+    this.showSpinner = true;
     this.afService.registerUser(email, password).then((user) => {
       this.afService.saveUserInfoFromForm(user.uid, name, lastName, phoneNumber, email, ID).then(() => {
+        this.showSpinner = false;
         this.router.navigate(['']);
       })
         .catch((error) => {

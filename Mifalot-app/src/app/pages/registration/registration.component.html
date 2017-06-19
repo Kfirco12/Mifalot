@@ -11,7 +11,9 @@
 <!-- =========================================================================================================================== -->
 <!-- Register form -->
 
-<div class = "modal-dialog">
+<app-loading *ngIf = "showSpinner"> </app-loading>
+
+<div *ngIf = "!showSpinner" class = "modal-dialog">
   <div class = "registermodal-container">
     <h1> הרשמה </h1>
 

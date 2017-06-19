@@ -59,7 +59,6 @@ const routes: Routes = [
   { path: 'pupils-management', component: PupilsManagementComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'users-confirm', component: UsersConfirmComponent },
-  { path: 'loading', component: LoadingComponent },
   { path: 'blocked-users', component: BlockedUsersComponent },
   { path: 'users-management', component: UsersManagementComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent }
