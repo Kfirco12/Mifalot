@@ -201,7 +201,10 @@ export class PupilsManagementComponent implements OnInit
     if (confirm("האם אתה בטוח שברצונך למחוק את " + pupil.name + " " + pupil.lastName + " ?"))
     {
       this.pupilsList.remove(pupil.$key);
-      this.savePupilToRemove(pupil);
+
+      if (this.pupilsToRemove.indexOf(pupil.$key) != -1)
+        this.savePupilToRemove(pupil);
+
       alert(pupil.name + " " + pupil.lastName + " הוסר בהצלחה!");
     }
   }
