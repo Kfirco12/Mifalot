@@ -47,7 +47,7 @@ input[type = "email"], input[type = "password"]
 	width: 100%;
 }
 
-.btn-register
+.btn-register, .btn-password
 {
   cursor: pointer;
 }

@@ -23,6 +23,7 @@ import { UsersManagementComponent } from './pages/users-management/users-managem
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 // Animations
 import { LoadingComponent } from './_animations/loading/loading.component';
@@ -60,7 +61,9 @@ const routes: Routes = [
   { path: 'users-confirm', component: UsersConfirmComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'blocked-users', component: BlockedUsersComponent },
-  { path: 'users-management', component: UsersManagementComponent }
+  { path: 'users-management', component: UsersManagementComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent }
+ 
 ];
 
 // ======================================================
@@ -83,7 +86,8 @@ const routes: Routes = [
     AssociateTeamsComponent,
     UserStatusComponent,
     NavHeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
