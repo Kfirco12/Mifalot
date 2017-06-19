@@ -187,6 +187,7 @@ export class AF
       user.delete().then(() => 
       {
         // User deleted.
+        alert("משתמש זה נמחק ע״י מנהל מפעלות");    
       }, (error) => {
         // An error happened.
       });
