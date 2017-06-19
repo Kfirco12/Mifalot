@@ -33,6 +33,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   private noChatRoomSelected: boolean;
   private createNewChatRoom: boolean;
   private editChatRoom: boolean;
+  private clickOnTrash: boolean;
 
   // Object
   private currentChatDetails;
@@ -56,6 +57,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     // Flags
     this.noChatRoomSelected = true;
     this.createNewChatRoom = this.editChatRoom = false;
+    this.clickOnTrash = false;
 
     this.savedDate = '';
   }
@@ -102,7 +104,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   enterChatRoom(chatRoom)
   { 
-    if (!this.editChatRoom)
+    if (!this.editChatRoom && !this.clickOnTrash)
     {
       this.currentChatDetails = chatRoom;
 
@@ -115,6 +117,12 @@ export class MessagesComponent implements OnInit, AfterViewChecked
       this.shareService.updateBackButton('back');
 
       this.noChatRoomSelected = false;
+    }
+
+    if (this.clickOnTrash)
+    {
+      this.clickOnTrash = false;
+      this.noChatRoomSelected = true;
     }
   }
 
@@ -177,6 +185,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   {
     if(confirm("האם למחוק הודעה זו?"))
       this.chatRooms.remove(chatRoom.$key);
+
+      this.clickOnTrash = true;
   }
 
   // ==================================================
@@ -186,7 +196,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.currentChatDetails = chatRoom;
 
     // Updating flags
-    this.noChatRoomSelected = false;
+    this.noChatRoomSelected = true;
     this.editChatRoom = true;
 
     // Updating nav button
