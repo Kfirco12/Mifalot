@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { ShareService } from "../../providers/share-service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,11 +9,15 @@ import * as firebase from 'firebase/app';
 })
 export class ForgotPasswordComponent implements OnInit 
 {
-  private error: any;
+  public error: any;
+  private showMessage: boolean;
 
   // ============================================================
 
-  constructor() { }
+  constructor(private shareService: ShareService) 
+  { 
+    this.showMessage = false;
+  }
 
   // ============================================================
 
@@ -24,14 +29,25 @@ export class ForgotPasswordComponent implements OnInit
 
     var auth = firebase.auth();
 
-    auth.sendPasswordResetEmail(emailAddress).then(function() 
-    {
-    // Email sent.
-    }, function(error) 
+    auth.sendPasswordResetEmail(emailAddress).then(() =>  
+    {   
+      // Email sent.
+      this.showMessage = true;
+      setTimeout(() =>  { this.showMessageAndNavigateToLogin(); } ,10000);
+
+    },(error) => 
     {
      // An error happened.
      this.error = error;
     });
+  }
+
+  // ============================================================
+
+  showMessageAndNavigateToLogin()
+  {
+    this.showMessage = false;
+    this.shareService.navigate('login');
   }
 
   // ============================================================
