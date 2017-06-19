@@ -28,7 +28,7 @@ export class RegistrationComponent
 
     this.afService.registerUser(email, password).then((user) => {
       this.afService.saveUserInfoFromForm(user.uid, name, lastName, phoneNumber, email, ID).then(() => {
-        this.router.navigate(['loading']);
+        this.router.navigate(['']);
       })
         .catch((error) => {
           this.error = error;

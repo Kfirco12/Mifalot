@@ -4,6 +4,7 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseObjectObservable, Fire
 import { Observable } from 'rxjs/Observable';
 import { PushNotificationsService } from "angular2-notifications-lite";
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
 
 // For take() 
 import 'rxjs/Rx';
@@ -37,13 +38,13 @@ export class AF
   // Int
   private numOfChatRooms: number;
 
-  private details: User;
+  private userDetails: User;
 
   // ================================
 
   constructor(public af: AngularFire, private pushService: PushNotificationsService, private router: Router) 
   {
-    this.details = { uid: null, email: null, name: null, lastName: null, ID: null, permission: null, phoneNumber: null };
+    this.userDetails = { uid: null, email: null, name: null, lastName: null, ID: null, permission: null, phoneNumber: null };
     this.subscribeArray = [];
     this.numOfChatRooms = 0;
   }
@@ -176,7 +177,23 @@ export class AF
   }
 
   // ================================
-
+ 
+  deleteUser()
+  {
+    this.unsubscribeAll();
+    this.user.remove().then(() => 
+    {
+      let user = firebase.auth().currentUser;
+      user.delete().then(() => 
+      {
+        // User deleted.
+      }, (error) => {
+        // An error happened.
+      });
+    });
+  }
+  
+  // ================================
   //  name = user.displayName;
   //  email = user.email;
   //  photoUrl = user.photoURL;
@@ -191,7 +208,7 @@ export class AF
 
   getUserDetails()
   {
-    return this.details;
+    return this.userDetails;
   }
 
   // ================================
@@ -203,18 +220,22 @@ export class AF
       this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
       this.subscribeArray.push(this.user.subscribe(snapshot => 
       {
-        this.details.uid = this.uid;
-        this.details.email = this.email;
-        this.details.name = snapshot.val().name;
-        this.details.lastName = snapshot.val().lastName;
-        this.details.ID = snapshot.val().ID;
-        this.details.permission = snapshot.val().permission;
-        this.details.phoneNumber = snapshot.val().phoneNumber;
+        if (snapshot.val().permission == 6)
+          this.deleteUser();
+
+        this.userDetails.uid = this.uid;
+        this.userDetails.email = this.email;
+        this.userDetails.name = snapshot.val().name;
+        this.userDetails.lastName = snapshot.val().lastName;
+        this.userDetails.ID = snapshot.val().ID;
+        this.userDetails.permission = snapshot.val().permission;
+        this.userDetails.phoneNumber = snapshot.val().phoneNumber;
       }));
     }
   }
 
   // ================================
+
   // getUid()
   // {
   //   return this.uid;
