@@ -11,12 +11,15 @@ export class ForgotPasswordComponent implements OnInit
 {
   public error: any;
   private showMessage: boolean;
+  private interval;
+  private countDown: number;
 
   // ============================================================
 
   constructor(private shareService: ShareService) 
   { 
     this.showMessage = false;
+    this.countDown = 10; // 10s
   }
 
   // ============================================================
@@ -25,16 +28,22 @@ export class ForgotPasswordComponent implements OnInit
   {
     event.preventDefault();
 
-    console.log(emailAddress);
-
-    var auth = firebase.auth();
+    let auth = firebase.auth();
 
     auth.sendPasswordResetEmail(emailAddress).then(() =>  
     {   
       // Email sent.
       this.showMessage = true;
-      setTimeout(() =>  { this.showMessageAndNavigateToLogin(); } ,10000);
-
+      this.interval = setInterval( () => 
+      {
+        if (this.countDown-- == 1) 
+        {
+          clearInterval(this.interval);
+          this.showMessage = false;
+          this.shareService.navigate('login');
+          }
+      }
+        , 1000);
     },(error) => 
     {
      // An error happened.
@@ -44,13 +53,8 @@ export class ForgotPasswordComponent implements OnInit
 
   // ============================================================
 
-  showMessageAndNavigateToLogin()
-  {
-    this.showMessage = false;
-    this.shareService.navigate('login');
-  }
+  ngOnInit() { }
 
   // ============================================================
 
-  ngOnInit() { }
 }
