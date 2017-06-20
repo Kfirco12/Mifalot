@@ -23,12 +23,7 @@ interface User
 @Injectable()
 
 export class AF 
-{
-  // User info
-  private displayName: string;
-  private email: string;
-  private uid: string;
-  
+{ 
   // Array
   private subscribeArray: Array<any>;
 
@@ -38,6 +33,7 @@ export class AF
   // Int
   private numOfChatRooms: number;
 
+  // User info
   private userDetails: User;
 
   // ================================
@@ -63,6 +59,7 @@ export class AF
   {
     this.unsubscribeAll();
     this.subscribeArray = [];
+    this.userDetails.uid = null;
 
     return this.af.auth.logout();
   }
@@ -80,7 +77,7 @@ export class AF
         message: text,
         displayName: name,
         lastName: lastName,
-        email: this.email,
+        email: this.userDetails.email,
         timestamp: Date.now()
       };
 
@@ -124,9 +121,9 @@ export class AF
       permission: 4
     }).then(() => 
       {
-        this.uid = uid;
-        this.displayName = name;
-        this.email = email;
+        this.userDetails.uid = uid;
+        this.userDetails.name = name;
+        this.userDetails.email = email;
         this.getUserDetailsFromDB();
       })
   }
@@ -162,9 +159,9 @@ export class AF
 
   saveUserDetails(user)
   {
-    this.uid = user.uid;
-    this.displayName = user.auth.email;
-    this.email = user.auth.email;
+    this.userDetails.uid = user.uid;
+    this.userDetails.name = user.auth.email;
+    this.userDetails.email = user.auth.email;
   }
 
   // ================================
@@ -216,16 +213,16 @@ export class AF
 
   getUserDetailsFromDB()
   {
-    if (this.uid && this.subscribeArray.length == 0)
+    if (this.userDetails.uid && this.subscribeArray.length == 0)
     {
-      this.user = this.af.database.object('registeredUsers/' + this.uid, { preserveSnapshot: true });
+      this.user = this.af.database.object('registeredUsers/' + this.userDetails.uid, { preserveSnapshot: true });
       this.subscribeArray.push(this.user.subscribe(snapshot => 
       {
         if (snapshot.val().permission == 6)
           this.deleteUser();
 
-        this.userDetails.uid = this.uid;
-        this.userDetails.email = this.email;
+        this.userDetails.uid = this.userDetails.uid;
+        this.userDetails.email = this.userDetails.email;
         this.userDetails.name = snapshot.val().name;
         this.userDetails.lastName = snapshot.val().lastName;
         this.userDetails.ID = snapshot.val().ID;
