@@ -4,15 +4,15 @@ import { AF } from "../.././providers/af";
 import { ShareService } from "../../providers/share-service";
 
 @Component({
-  templateUrl: './blocked-users.component.html',
-  styleUrls: ['./blocked-users.component.css']
+  templateUrl: './deleted-users.component.html',
+  styleUrls: ['./deleted-users.component.css']
 })
-export class BlockedUsersComponent implements OnInit 
+export class DeletedUsersComponent implements OnInit 
 {
   private header = 
   { 
-     title: "משתמשים חסומים", 
-     subTitle: "צפייה ועריכת המשתמשים החסומים",
+     title: "משתמשים העומדים להסרה", 
+     subTitle: "מוצגים משתמשים העומדים להמחק מן המערכת",
      icon: "fa-user-times" 
   }
 
@@ -46,9 +46,9 @@ export class BlockedUsersComponent implements OnInit
 
   sendUserToConfirmation()
   {
-    if (confirm("האם ברצונך לבטל חסימה של משתמש זה?"))
+    if (confirm("האם ברצונך לבטל את הסרתו של משתמש זה?"))
     {
-      this.users.update(this.user.$key, {permission: 4}).then( () => 
+      this.users.update(this.user.$key, { permission: 4 }).then( () => 
       {
         alert('שים לב: המשתמש' + ' ' + this.user.name + ' ' + this.user.lastName + ' ' + 'הועבר לרשימת הממתינים לאישור');
         this.userSelected = false;

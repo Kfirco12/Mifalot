@@ -184,6 +184,9 @@ export class AF
       user.delete().then(() => 
       {
         // User deleted.
+        this.subscribeArray = [];
+        this.userDetails.uid = null;
+        
         alert("משתמש זה נמחק ע״י מנהל מפעלות");    
       }, (error) => {
         // An error happened.
@@ -218,11 +221,11 @@ export class AF
       this.user = this.af.database.object('registeredUsers/' + this.userDetails.uid, { preserveSnapshot: true });
       this.subscribeArray.push(this.user.subscribe(snapshot => 
       {
-        if (snapshot.val().permission == 6)
+        if (snapshot.val().permission == 5)
           this.deleteUser();
 
-        this.userDetails.uid = this.userDetails.uid;
-        this.userDetails.email = this.userDetails.email;
+        // this.userDetails.uid = this.userDetails.uid;
+        // this.userDetails.email = this.userDetails.email;
         this.userDetails.name = snapshot.val().name;
         this.userDetails.lastName = snapshot.val().lastName;
         this.userDetails.ID = snapshot.val().ID;

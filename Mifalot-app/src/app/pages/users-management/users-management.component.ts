@@ -58,9 +58,9 @@ export class UsersManagementComponent implements OnInit
   // Changing user permission to 5 to block him 
   // Release all teams that he had owned
 
-  blockUser()
+  deleteUser()
   {
-    if (confirm("האם אתה בטוח שברצונך לחסום משתמש זה?"))
+    if (confirm("האם אתה בטוח שברצונך להסיר משתמש זה?"))
     {
       this.users.update(this.user.$key, { permission: 5 }).then(()  => 
       {
@@ -82,7 +82,7 @@ export class UsersManagementComponent implements OnInit
             }
           })
         })
-        alert("המשתמש נחסם וכל הקבוצות שהיו תחתיו התפנו");
+        alert("הסרת המשתמש הצליחה! המשתמש יוסר בפעם הבאה שיתחבר למערכת..");
 
         this.userSelected = false;
         this.shareService.updateBackButton('home');

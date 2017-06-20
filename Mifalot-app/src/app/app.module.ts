@@ -18,7 +18,7 @@ import { PupilsManagementComponent } from './pages/pupils-management/pupils-mana
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { UsersConfirmComponent } from './pages/users-confirm/users-confirm.component';
-import { BlockedUsersComponent } from './pages/blocked-users/blocked-users.component';
+import { DeletedUsersComponent } from './pages/deleted-users/deleted-users.component';
 import { UsersManagementComponent } from './pages/users-management/users-management.component';
 import { AssociateTeamsComponent } from './associate-teams/associate-teams.component';
 import { UserStatusComponent } from './user-status/user-status.component';
@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: 'pupils-management', component: PupilsManagementComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'users-confirm', component: UsersConfirmComponent },
-  { path: 'blocked-users', component: BlockedUsersComponent },
+  { path: 'deleted-users', component: DeletedUsersComponent },
   { path: 'users-management', component: UsersManagementComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent }
  
@@ -80,7 +80,7 @@ const routes: Routes = [
     PageHeaderComponent,
     UsersConfirmComponent,
     LoadingComponent,
-    BlockedUsersComponent,
+    DeletedUsersComponent,
     UsersManagementComponent,
     AssociateTeamsComponent,
     UserStatusComponent,
