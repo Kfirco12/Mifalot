@@ -65,13 +65,13 @@ export class UsersConfirmComponent implements OnInit
   // Changing user permission to 5
   // Next when user is loggin next time, he will be deleted
 
-  blockUser()
+  deleteUser()
   {
-    if (confirm("האם ברצונך לחסום משתמש זה?"))
+    if (confirm("האם ברצונך להסיר משתמש זה?"))
     {
       this.users.update(this.user.$key, { permission: 5 }).then(()  => 
       {
-        alert("המשתמש נחסם")
+        alert("המשתמש הוסר")
         this.userSelected = false;
         this.user = null;
       });
