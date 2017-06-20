@@ -204,15 +204,16 @@ export class AttendanceComponent implements OnInit
     {
       if (firstTime)
       {
-        let i = 0;
         firstTime = false;
         
         snapshots.forEach(snapshot => 
         {
-          if (snapshot.presence == false && this.pupils[i].presence == true)
-            this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
-            
-          i++;
+          let i = this.findPupil(snapshot.ID);
+
+          // Pupil exist in pupils arr
+          if (i != -1)
+            if (snapshot.presence == false && this.pupils[i].presence == true)
+              this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
         })
         
         alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!');
@@ -222,6 +223,18 @@ export class AttendanceComponent implements OnInit
         this.resetAllChecked();
       }
     });
+  }
+
+  // ============================================================
+  // Return index of pupil or -1 if not found 
+  
+  findPupil(pupilID)
+  {
+    for(let i = 0; i < this.pupils.length; i++)
+      if(this.pupils[i].ID == pupilID)
+        return i;
+
+    return -1;
   }
 
   // ============================================================
