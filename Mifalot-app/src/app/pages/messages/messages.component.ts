@@ -87,6 +87,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
     this.currentChat.subscribe(snapshots => {
       this.isLoading = false;
+      this.scrollToBottom();
     })
   }
 
@@ -139,12 +140,11 @@ export class MessagesComponent implements OnInit, AfterViewChecked
       // Updating chat's title
       this.updateHeader(chatRoom.name, "פותח הצ'אט: " + chatRoom.authorName);
 
-      this.getChatRoom(chatRoom.$key);
-
       // Updating nav button
       this.shareService.updateBackButton('back');
 
       this.noChatRoomSelected = false;
+      this.getChatRoom(chatRoom.$key);
     }
 
     if (this.clickOnTrash)
