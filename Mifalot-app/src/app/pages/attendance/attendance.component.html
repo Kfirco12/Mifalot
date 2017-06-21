@@ -20,8 +20,10 @@
 
 <div class = "container" > 
 
+  <app-spinner [isLoading] = "isLoading"></app-spinner>
+  
   <!-- Choose team -->
-  <div *ngIf = "noTeamSelected" >
+  <div *ngIf = "noTeamSelected && !isLoading" >
     <h4 class = "title text-center"> :בחר את הקבוצה אותה אתה מאמן </h4>
     <div *ngFor = "let team of teams | async" class = "col-lg-12 col-md-12 col-xs-12 thumb">
       <span *ngIf= "user.uid == team.coachID" class = "thumbnail" (click) = "getPupils(team)"> 

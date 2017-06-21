@@ -29,6 +29,7 @@ export class AF
 
   // DB Observable
   private user: FirebaseObjectObservable<any>;
+  private userSubscribe;
 
   // Int
   private numOfChatRooms: number;
@@ -42,6 +43,7 @@ export class AF
   {
     this.userDetails = { uid: null, email: null, name: null, lastName: null, ID: null, permission: null, phoneNumber: null };
     this.subscribeArray = [];
+    this.userSubscribe = null;
     this.numOfChatRooms = 0;
   }
 
@@ -59,7 +61,7 @@ export class AF
   {
     this.unsubscribeAll();
     this.subscribeArray = [];
-    this.userDetails.uid = null;
+    this.userDetails.uid = this.userSubscribe = this.userDetails.permission = null;
 
     return this.af.auth.logout();
   }
@@ -168,6 +170,8 @@ export class AF
 
   unsubscribeAll()
   {
+    this.userSubscribe.unsubscribe();
+
     for (let i = 0; i < this.subscribeArray.length; i++)
       if (this.subscribeArray[i])
         this.subscribeArray[i].unsubscribe();
@@ -203,6 +207,13 @@ export class AF
   //                    // this value to authenticate with your backend server, if
   //                    // you have one. Use User.getToken() instead.
 
+  addSubscribeToArr(subs)
+  {
+    console.log(this.subscribeArray.indexOf(subs));
+    if (this.subscribeArray.indexOf(subs) == -1)
+      this.subscribeArray.push(subs);
+  }
+
   // ================================
   //        Gets' Methods
   // ================================
@@ -216,10 +227,10 @@ export class AF
 
   getUserDetailsFromDB()
   {
-    if (this.userDetails.uid && this.subscribeArray.length == 0)
+    if (this.userDetails.uid && !this.userSubscribe)
     {
       this.user = this.af.database.object('registeredUsers/' + this.userDetails.uid, { preserveSnapshot: true });
-      this.subscribeArray.push(this.user.subscribe(snapshot => 
+      this.userSubscribe = this.user.subscribe(snapshot => 
       {
         if (snapshot.val().permission == 5)
           this.deleteUser();
@@ -231,7 +242,7 @@ export class AF
         this.userDetails.ID = snapshot.val().ID;
         this.userDetails.permission = snapshot.val().permission;
         this.userDetails.phoneNumber = snapshot.val().phoneNumber;
-      }));
+      });
     }
   }
 

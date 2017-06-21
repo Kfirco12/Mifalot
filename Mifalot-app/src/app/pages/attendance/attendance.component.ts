@@ -21,7 +21,8 @@ export class AttendanceComponent implements OnInit
 
   // Boolean
   private noTeamSelected: boolean;
-
+  private isLoading: boolean;
+  
   // Date
   private date: number;
 
@@ -32,7 +33,7 @@ export class AttendanceComponent implements OnInit
   private teamKey: string;
 
   // DB observables
-  private teams: FirebaseListObservable<any>;
+  private teams;
   private pupilsPath: any;
 
   // User details
@@ -41,10 +42,18 @@ export class AttendanceComponent implements OnInit
   // For navbar component
   private backButton;
 
+  // Pointer to subscribe of teams
+  private teamsSubscribe;
+  
   // ============================================================
 
   constructor(private afService: AF, private router: Router, private shareService: ShareService) 
   {
+    this.isLoading = true;
+    this.teamsSubscribe = null;
+    
+    this.getTeams();
+
     this.pupils = [];
     this.date = Date.now();
 
@@ -55,11 +64,23 @@ export class AttendanceComponent implements OnInit
     // Initialize page view
     this.noTeamSelected = true;
 
-    //get teams from DB.
-    this.teams = this.afService.af.database.list('teams/');
-
     // Get user details from AngularFire service
     this.user = this.afService.getUserDetails();
+  }
+  // ============================================================
+  // Get teams from DB
+
+  getTeams()
+  {
+    this.isLoading = true;
+
+    if (this.teamsSubscribe)
+      this.teamsSubscribe.unsubscribe();
+
+    this.teams = this.afService.af.database.list('teams/');
+    this.teams.subscribe(snapshots => {
+      this.isLoading = false;
+    });
   }
 
   // ============================================================
@@ -199,8 +220,9 @@ export class AttendanceComponent implements OnInit
   {
     let presence = this.afService.af.database.list('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence');
     let firstTime = true;
+    this.isLoading = false;
 
-    presence.subscribe(snapshots => 
+    let presenceSubscribe = presence.subscribe(snapshots => 
     {
       if (firstTime)
       {
@@ -216,13 +238,18 @@ export class AttendanceComponent implements OnInit
               this.afService.af.database.object('teams/' + this.teamKey + '/attendance/' + currentAttendaceKey + '/presence/' + snapshot.$key).update( { presence: true });
         })
         
-        alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!');
+        presenceSubscribe.unsubscribe();
+
+        alert('מאחר וכבר בוצע רישום נוכחות ליום זה, הרשימה עודכנה!')
 
         // Reset variables.
         this.noTeamSelected = true;
         this.resetAllChecked();
+        
+        this.getTeams();   
       }
     });
+    
   }
 
   // ============================================================
@@ -263,6 +290,8 @@ export class AttendanceComponent implements OnInit
 
   saveAttendance() 
   {
+    this.isLoading = true;
+    
     // DB observable
     let attendance = this.afService.af.database.list('teams/' + this.teamKey + '/attendance');
     this.missingUpdate(attendance);
@@ -283,7 +312,7 @@ export class AttendanceComponent implements OnInit
       this.shareService.navigate('');
 
     // reset variables.
-    this.noTeamSelected = true;
+    this.noTeamSelected = this.isLoading = true;
     this.resetAllChecked();
     this.shareService.updateBackButton('home');
   }
