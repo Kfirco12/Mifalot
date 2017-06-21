@@ -18,7 +18,7 @@
       <!-- Show teams -->
 
       <div class = "col-lg-4 col-lg-offset-1">
-        <div class = "vertical-menu" [class.vertical-menu-bigger] = "userDetails[1] == 'users-management'">
+        <div class = "vertical-menu" [class.vertical-menu-users-management] = "userDetails[1] == 'users-management'" [class.vertical-menu-users-confirm] = "userDetails[1] == 'users-confirm'">
           <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team)">
             <div *ngIf = "(team.name).search(teamName) != -1">
              <a *ngIf = "userDetails[2] == 3 && team.coachID == ''" class = "list-group-item" [class.green] = "isChecked(team)" (click) = "saveTeamToAssociate(team)"> {{ team.name }} </a>

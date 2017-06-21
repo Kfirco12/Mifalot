@@ -74,9 +74,14 @@ h5
         height: 280px;
     }
 
-     .vertical-menu-bigger 
+    .vertical-menu-users-management
     {
-        height: 420px;
+        height: 460px;
+    }
+
+    .vertical-menu-users-confirm
+    {
+        height: 340px;
     }
 }
 
