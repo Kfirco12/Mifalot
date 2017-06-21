@@ -18,6 +18,7 @@ export class DeletedUsersComponent implements OnInit
 
   // Flags
   private userSelected: boolean;
+  private isLoading: boolean;
 
   private user: any;
   private users: FirebaseListObservable<any[]>;
@@ -30,7 +31,20 @@ export class DeletedUsersComponent implements OnInit
   constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userSelected = false;
-    this.users = this.afService.af.database.list('registeredUsers');
+    this.getUsers();
+  }
+
+  // =====================
+  // Get users from DB
+
+  getUsers()
+  {
+    this.isLoading = true;
+
+     this.users = this.afService.af.database.list('registeredUsers');
+     this.users.subscribe(() => {
+       this.isLoading = false;
+     })
   }
 
   // =====================
@@ -51,7 +65,7 @@ export class DeletedUsersComponent implements OnInit
       this.users.update(this.user.$key, { permission: 4 }).then( () => 
       {
         alert('שים לב: המשתמש' + ' ' + this.user.name + ' ' + this.user.lastName + ' ' + 'הועבר לרשימת הממתינים לאישור');
-        this.userSelected = false;
+        this.resetAll();
       })
     }
   }
@@ -60,6 +74,7 @@ export class DeletedUsersComponent implements OnInit
 
   resetAll()
   {
+    this.getUsers();
     this.user = null;
     this.userSelected = false;
     this.shareService.updateBackButton('home');

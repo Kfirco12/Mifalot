@@ -22,6 +22,7 @@ export class UsersConfirmComponent implements OnInit
   private userSelected: boolean;
   private userConfirmed: boolean;
   private chooseTeams: boolean;
+  private isLoading: boolean;
 
   // String
   private userType: string;
@@ -48,8 +49,35 @@ export class UsersConfirmComponent implements OnInit
     this.userNewPermission = null;
 
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
-    this.users = this.afService.af.database.list('registeredUsers');
+
+    // Get users from DB
+    this.getUsers();
+  }
+
+  // =====================
+  // Get teams list from DB.
+
+  getTeams()
+  {
+    this.isLoading = true;
+    
     this.teams = this.afService.af.database.list('teams');
+    this.teams.subscribe(snapshots => {
+      this.isLoading = false;
+    })
+  }
+
+  // =====================
+  // Get users from DB
+
+  getUsers()
+  {
+    this.isLoading = true;
+
+     this.users = this.afService.af.database.list('registeredUsers');
+     this.users.subscribe(() => {
+       this.isLoading = false;
+     })
   }
 
   // =====================
@@ -90,6 +118,8 @@ export class UsersConfirmComponent implements OnInit
 
   showTeams(type)
   {
+    this.getTeams();
+
     this.userType = type;
 
     this.userDetails[0] = this.user;
@@ -117,6 +147,7 @@ export class UsersConfirmComponent implements OnInit
   {
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
     this.user = this.userType = null;
+    this.getUsers();
     this.shareService.updateBackButton('home');
   }
 

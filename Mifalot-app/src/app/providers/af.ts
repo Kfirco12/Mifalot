@@ -189,7 +189,7 @@ export class AF
       {
         // User deleted.
         this.subscribeArray = [];
-        this.userDetails.uid = null;
+        this.userDetails.uid = this.userSubscribe = null;
         
         alert("משתמש זה נמחק ע״י מנהל מפעלות");    
       }, (error) => {
@@ -234,14 +234,14 @@ export class AF
       {
         if (snapshot.val().permission == 5)
           this.deleteUser();
-
-        // this.userDetails.uid = this.userDetails.uid;
-        // this.userDetails.email = this.userDetails.email;
-        this.userDetails.name = snapshot.val().name;
-        this.userDetails.lastName = snapshot.val().lastName;
-        this.userDetails.ID = snapshot.val().ID;
-        this.userDetails.permission = snapshot.val().permission;
-        this.userDetails.phoneNumber = snapshot.val().phoneNumber;
+        else
+        {
+          this.userDetails.name = snapshot.val().name;
+          this.userDetails.lastName = snapshot.val().lastName;
+          this.userDetails.ID = snapshot.val().ID;
+          this.userDetails.permission = snapshot.val().permission;
+          this.userDetails.phoneNumber = snapshot.val().phoneNumber;
+        }
       });
     }
   }

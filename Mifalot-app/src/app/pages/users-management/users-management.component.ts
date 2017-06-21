@@ -10,6 +10,7 @@ import 'rxjs/Rx';
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.css']
 })
+
 export class UsersManagementComponent implements OnInit 
 {
   private header = 
@@ -22,6 +23,7 @@ export class UsersManagementComponent implements OnInit
   // Flags
   private userSelected: boolean;
   private showUserTeams: boolean;
+  private isLoading: boolean;
 
   // Trasnfer user details to 'associate-teams' component
   private userDetails: any;
@@ -40,8 +42,34 @@ export class UsersManagementComponent implements OnInit
   {
     this.userDetails = [];
     this.userSelected = this.showUserTeams = false;
-    this.users = this.afService.af.database.list('registeredUsers');
+
+    this.getUsers();
+  }
+
+  // =====================
+  // Get teams list from DB.
+
+  getTeams()
+  {
+    this.isLoading = true;
+    
     this.teams = this.afService.af.database.list('teams');
+    this.teams.subscribe(snapshots => {
+      this.isLoading = false;
+    })
+  }
+
+  // =====================
+  // Get users from DB
+
+  getUsers()
+  {
+    this.isLoading = true;
+
+     this.users = this.afService.af.database.list('registeredUsers');
+     this.users.subscribe(() => {
+       this.isLoading = false;
+     })
   }
 
   // =====================
@@ -100,6 +128,7 @@ export class UsersManagementComponent implements OnInit
     this.userDetails[2] = this.user.permission;
 
     this.showUserTeams = true;
+    this.getTeams();
   }
 
   // =====================
@@ -115,6 +144,7 @@ export class UsersManagementComponent implements OnInit
   {
     this.userDetails = [];
     this.userSelected = this.showUserTeams = false;
+    this.getUsers();
     this.shareService.updateBackButton('home');
   }
 
