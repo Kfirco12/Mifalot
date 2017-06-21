@@ -85,7 +85,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.isLoading = true;
     this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoomKey + '/messages');
 
-    console.log(chatRoomKey);
     this.currentChat.subscribe(snapshots => {
       this.isLoading = false;
     })

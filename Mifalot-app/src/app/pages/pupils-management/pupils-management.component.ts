@@ -25,6 +25,7 @@ export class PupilsManagementComponent implements OnInit
   private addPupils: boolean;
   private removePupils: boolean;
   private thereIsNewPupil: boolean;
+  private isLoading: boolean;
 
   // DB observables
   private teams: FirebaseListObservable<any>;
@@ -66,7 +67,21 @@ export class PupilsManagementComponent implements OnInit
     this.pupilName = this.pupilLastName =  '';
     this.pupilID = null;
 
+    // Get teams from DB
+    this.getTeams();
+  }
+
+  // ==============================
+  // Get teams list from DB.
+
+  getTeams()
+  {
+    this.isLoading = true;
+    
     this.teams = this.afService.af.database.list('teams');
+    this.teams.subscribe(snapshots => {
+      this.isLoading = false;
+    })
   }
 
   // ==============================
@@ -85,6 +100,8 @@ export class PupilsManagementComponent implements OnInit
   chooseTeam()
   {
     this.noTeamSelected = true;
+    this.getTeams();
+
     this.shareService.updateBackButton('home');
   }
   
@@ -190,7 +207,13 @@ export class PupilsManagementComponent implements OnInit
 
   showRemovePupils()
   {
+    this.isLoading = true;
+
     this.pupilsList = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils');
+    this.pupilsList.subscribe(snpashots => {
+      this.isLoading = false;
+    })
+
     this.removePupils = true;
   }
 
@@ -200,7 +223,9 @@ export class PupilsManagementComponent implements OnInit
   {
     if (confirm("האם אתה בטוח שברצונך למחוק את " + pupil.name + " " + pupil.lastName + " ?"))
     {
+      this.isLoading = true;
       this.pupilsList.remove(pupil.$key);
+      this.isLoading = false;
 
       if (this.pupilsToRemove.indexOf(pupil.$key) != -1)
         this.savePupilToRemove(pupil);
@@ -251,9 +276,12 @@ export class PupilsManagementComponent implements OnInit
 
     if (confirm("האם אתה בטוח שברצונך להסיר חניכים אלו?"))
     {
+      this.isLoading = true;
+
       for (let i = 0; i < length; i++)
        this.pupilsList.remove(this.pupilsToRemove[i]);
 
+      this.isLoading = false;
       alert(length +  " חניכים הוסרו בהצלחה!"); 
 
       // Reset values
@@ -286,7 +314,7 @@ export class PupilsManagementComponent implements OnInit
     // Back to select team
     if (!this.noTeamSelected && !this.addPupils && !this.removePupils)
       this.chooseTeam();
-
+      
     // Back to add or remove
     if (this.addPupils || this.removePupils)
       this.backToAddOrRemove();

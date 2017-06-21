@@ -59,7 +59,7 @@ export class ReportsComponent implements OnInit
     // Date pipe
     this.datePipe = new DatePipe('en-us');
 
-    // DB observable
+    // Get teams from DB
     this.getTeams();
 
     // Initialize button values
