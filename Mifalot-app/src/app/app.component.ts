@@ -20,9 +20,8 @@ export class AppComponent
 
   // ====================================
 
-  constructor(private afService: AF, private router: Router, private pushService: PushNotificationsService) 
+  constructor(private afService: AF, private router: Router) 
   {
-    this.pushService.requestPermission();
     this.subscribeToUserAuthStatus();
   }
 
