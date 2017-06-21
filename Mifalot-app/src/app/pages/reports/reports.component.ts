@@ -28,6 +28,7 @@ export class ReportsComponent implements OnInit
   private started: boolean;
   private teamSelected: boolean;
   private dateSelected: boolean;
+  private isLoading: boolean;
 
   // Objects
   private user: Object;   // User details
@@ -59,7 +60,7 @@ export class ReportsComponent implements OnInit
     this.datePipe = new DatePipe('en-us');
 
     // DB observable
-    this.teams = this.afService.af.database.list('teams');
+    this.getTeams();
 
     // Initialize button values
     this.backButton = this.shareService.getButton();
@@ -70,7 +71,20 @@ export class ReportsComponent implements OnInit
   }
 
   // ============================================================
-  //get the dates from the wanted team.
+  // Get teams list from DB.
+
+  getTeams()
+  {
+    this.isLoading = true;
+    
+    this.teams = this.afService.af.database.list('teams');
+    this.teams.subscribe(snapshots => {
+      this.isLoading = false;
+    })
+  }
+
+  // ============================================================
+  // Get the dates from the wanted team.
 
   getDates(teamId) 
   {

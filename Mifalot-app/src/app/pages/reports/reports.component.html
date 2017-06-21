@@ -18,8 +18,10 @@
 
 <!-- =========================================================================================================================== -->
 
+<app-spinner [isLoading] = "isLoading"></app-spinner>
+
 <!-- Page content -->
-<div class = "container">
+<div *ngIf = "!isLoading" class = "container">
 
 	<!-- Choose Team & Date buttons -->
 
