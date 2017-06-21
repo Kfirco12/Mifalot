@@ -314,7 +314,10 @@ export class AttendanceComponent implements OnInit
     // reset variables.
     this.noTeamSelected = this.isLoading = true;
     this.resetAllChecked();
+
     this.shareService.updateBackButton('home');
+
+    this.getTeams();
   }
 
   // ============================================================
