@@ -46,6 +46,10 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Boolean
   private isLoading: boolean;
 
+  // Pointers to subscribes
+  private chatRoomsListSubsPtr;
+  private chatRoomSubsPtr;
+
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef, private shareService: ShareService) 
@@ -56,7 +60,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
     this.user = this.afService.getUserDetails();
     this.getChatRoomsList();
-    // this.chatRooms = this.afService.af.database.list('chatRooms');
 
     // Flags
     this.noChatRoomSelected = true;
@@ -73,7 +76,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.isLoading = true;
     this.chatRooms = this.afService.af.database.list('chatRooms');
 
-    this.chatRooms.subscribe(snapshots =>{
+    this.chatRoomsListSubsPtr = this.chatRooms.subscribe(snapshots =>{
       this.isLoading = false;
     });
   }
@@ -85,7 +88,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.isLoading = true;
     this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoomKey + '/messages');
 
-    this.currentChat.subscribe(snapshots => {
+    this.chatRoomSubsPtr = this.currentChat.subscribe(snapshots => {
       this.isLoading = false;
       this.scrollToBottom();
     })
@@ -270,11 +273,25 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   
   // ==================================================
 
+  unsubscribeAll()
+  {
+    if (this.chatRoomSubsPtr)
+      this.chatRoomSubsPtr.unsubscribe();
+      
+    if (this.chatRoomsListSubsPtr)
+      this.chatRoomsListSubsPtr.unsubscribe();
+  }
+
+  // ==================================================
+
   navigate()
   {
     // Navigate to home page
     if (this.noChatRoomSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
+    }
 
     // Back To messages
     if (!this.noChatRoomSelected)

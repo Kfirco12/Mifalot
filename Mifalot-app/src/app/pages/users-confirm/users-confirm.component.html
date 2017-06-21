@@ -1,7 +1,7 @@
 <!-- ================================================================================================================================================ -->
 <!-- Navbar -->
 
-<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()"></app-nav-header>
+<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()" (onUserLogout) = "unsubscribeAll()"></app-nav-header>
 
 <!-- ================================================================================================================================================ -->
 

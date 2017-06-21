@@ -36,6 +36,10 @@ export class UsersManagementComponent implements OnInit
   // For nav component
   private backButton;
 
+  // Pointer to subscribes
+  private teamsSubsPtr;
+  private usersSubsPtr;
+
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -54,7 +58,7 @@ export class UsersManagementComponent implements OnInit
     this.isLoading = true;
     
     this.teams = this.afService.af.database.list('teams');
-    this.teams.subscribe(snapshots => {
+    this.teamsSubsPtr = this.teams.subscribe(snapshots => {
       this.isLoading = false;
     })
   }
@@ -67,7 +71,7 @@ export class UsersManagementComponent implements OnInit
     this.isLoading = true;
 
      this.users = this.afService.af.database.list('registeredUsers');
-     this.users.subscribe(() => {
+     this.usersSubsPtr = this.users.subscribe(() => {
        this.isLoading = false;
      })
   }
@@ -150,11 +154,25 @@ export class UsersManagementComponent implements OnInit
 
   // =====================
 
+  unsubscribeAll()
+  {
+    if (this.teamsSubsPtr)
+      this.teamsSubsPtr.unsubscribe();
+
+    if (this.usersSubsPtr)
+      this.usersSubsPtr.unsubscribe();
+  }
+
+  // =====================
+
    navigate()
   {
     // Home page
     if (!this.userSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
+    }
 
     if (this.userSelected && !this.showUserTeams)
       this.backToUsersList();

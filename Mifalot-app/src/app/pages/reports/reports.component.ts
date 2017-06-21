@@ -44,6 +44,9 @@ export class ReportsComponent implements OnInit
   // For navbar component
   private backButton;
 
+  // Pointer to subscribe
+  private teamSubsPtr;
+
   // ============================================================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -78,7 +81,7 @@ export class ReportsComponent implements OnInit
     this.isLoading = true;
     
     this.teams = this.afService.af.database.list('teams');
-    this.teams.subscribe(snapshots => {
+    this.teamSubsPtr = this.teams.subscribe(snapshots => {
       this.isLoading = false;
     })
   }
@@ -142,8 +145,17 @@ export class ReportsComponent implements OnInit
 
   // ============================================================
 
+  unsubscribeAll()
+  {
+    if (this.teamSubsPtr)
+      this.teamSubsPtr.unsubscribe();
+  }
+
+  // ============================================================
+
   navigate()
   {
+    this.unsubscribeAll();
     this.shareService.navigate('');
   }
 

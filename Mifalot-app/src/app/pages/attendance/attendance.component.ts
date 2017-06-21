@@ -43,14 +43,14 @@ export class AttendanceComponent implements OnInit
   private backButton;
 
   // Pointer to subscribe of teams
-  private teamsSubscribe;
+  private teamsSubsPtr;
   
   // ============================================================
 
   constructor(private afService: AF, private router: Router, private shareService: ShareService) 
   {
     this.isLoading = true;
-    this.teamsSubscribe = null;
+    this.teamsSubsPtr = null;
     
     this.getTeams();
 
@@ -74,11 +74,8 @@ export class AttendanceComponent implements OnInit
   {
     this.isLoading = true;
 
-    if (this.teamsSubscribe)
-      this.teamsSubscribe.unsubscribe();
-
     this.teams = this.afService.af.database.list('teams/');
-    this.teams.subscribe(snapshots => {
+    this.teamsSubsPtr = this.teams.subscribe(snapshots => {
       this.isLoading = false;
     });
   }
@@ -306,18 +303,31 @@ export class AttendanceComponent implements OnInit
 
   // ============================================================
 
+  unsubscribeAll()
+  {
+    if (this.teamsSubsPtr)
+      this.teamsSubsPtr.unsubscribe();
+  }
+
+  // ============================================================
+
   navigate() 
   {
     if (this.noTeamSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
+    }
+    else
+    {
+      // reset variables.
+      this.noTeamSelected = this.isLoading = true;
+      this.resetAllChecked();
 
-    // reset variables.
-    this.noTeamSelected = this.isLoading = true;
-    this.resetAllChecked();
+      this.shareService.updateBackButton('home');
 
-    this.shareService.updateBackButton('home');
-
-    this.getTeams();
+      this.getTeams();
+    }
   }
 
   // ============================================================

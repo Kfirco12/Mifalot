@@ -14,6 +14,8 @@ export class NavHeaderComponent implements OnInit
   // To alert father component
   @Output() onUserClicked: EventEmitter<any> = new EventEmitter();
 
+  @Output() onUserLogout: EventEmitter<any> = new EventEmitter();
+
   // ====================================
 
   constructor(private afService: AF) { }
@@ -31,7 +33,10 @@ export class NavHeaderComponent implements OnInit
   logout() 
   {
     if (confirm("האם אתה בטוח שברצונך להתנתק?"))
+    {
+      this.onUserLogout.emit();
       this.afService.logout();
+    }
   }
 
   // ====================================

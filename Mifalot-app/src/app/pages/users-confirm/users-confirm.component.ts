@@ -41,6 +41,10 @@ export class UsersConfirmComponent implements OnInit
   // For nav component
   private backButton;
 
+  // Pointer to subscribes
+  private teamsSubsPtr;
+  private usersSubsPtr;
+
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -62,7 +66,7 @@ export class UsersConfirmComponent implements OnInit
     this.isLoading = true;
     
     this.teams = this.afService.af.database.list('teams');
-    this.teams.subscribe(snapshots => {
+    this.teamsSubsPtr = this.teams.subscribe(snapshots => {
       this.isLoading = false;
     })
   }
@@ -75,7 +79,7 @@ export class UsersConfirmComponent implements OnInit
     this.isLoading = true;
 
      this.users = this.afService.af.database.list('registeredUsers');
-     this.users.subscribe(() => {
+     this.usersSubsPtr = this.users.subscribe(() => {
        this.isLoading = false;
      })
   }
@@ -126,9 +130,9 @@ export class UsersConfirmComponent implements OnInit
     this.userDetails[1] = "users-confirm";
     
     if (type == 'manager')
-      this.userDetails[2] = 2;
+      this.userDetails[2] = this.userNewPermission = 2;
     else if (type == 'coach')
-      this.userDetails[2] = 3;
+      this.userDetails[2] = this.userNewPermission = 3;
 
     this.chooseTeams = true;
     this.shareService.updateBackButton('back');
@@ -160,12 +164,26 @@ export class UsersConfirmComponent implements OnInit
 
   // =====================
 
+  unsubscribeAll()
+  {
+    if (this.teamsSubsPtr)
+      this.teamsSubsPtr.unsubscribe();
+
+    if (this.usersSubsPtr)
+      this.usersSubsPtr.unsubscribe();
+  }
+
+  // =====================
+
    navigate()
   {
     // Home page
     if (!this.userSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
-
+    }
+    
     if (this.userConfirmed)
       this.backToUserInfo();
     else if (this.userSelected)

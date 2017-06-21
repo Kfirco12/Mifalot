@@ -26,6 +26,9 @@ export class DeletedUsersComponent implements OnInit
   // For nav component
   private backButton;
 
+  // Pointer to subscribe
+  private usersSubsPtr;
+
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -42,7 +45,7 @@ export class DeletedUsersComponent implements OnInit
     this.isLoading = true;
 
      this.users = this.afService.af.database.list('registeredUsers');
-     this.users.subscribe(() => {
+     this.usersSubsPtr = this.users.subscribe(() => {
        this.isLoading = false;
      })
   }
@@ -81,13 +84,23 @@ export class DeletedUsersComponent implements OnInit
   }
 
   // =====================
+  
+  unsubscribeAll()
+  {
+    if (this.usersSubsPtr)
+      this.usersSubsPtr.unsubscribe();
+  }
 
+  // =====================
    navigate()
   {
     // Home page
     if (!this.userSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
-
+    }
+    
     if (this.userSelected)
       this.resetAll();
   }

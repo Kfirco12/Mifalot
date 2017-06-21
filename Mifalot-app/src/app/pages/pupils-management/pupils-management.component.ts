@@ -52,6 +52,10 @@ export class PupilsManagementComponent implements OnInit
   // For nav component
   private backButton;
 
+  // Pointer to subscribes
+  private teamsSubsPtr;
+  private pupilsListSubsPtr;
+
   // ==============================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -79,7 +83,7 @@ export class PupilsManagementComponent implements OnInit
     this.isLoading = true;
     
     this.teams = this.afService.af.database.list('teams');
-    this.teams.subscribe(snapshots => {
+    this.teamsSubsPtr = this.teams.subscribe(snapshots => {
       this.isLoading = false;
     })
   }
@@ -210,7 +214,7 @@ export class PupilsManagementComponent implements OnInit
     this.isLoading = true;
 
     this.pupilsList = this.afService.af.database.list('teams/' + this.choosenTeamText + '/pupils');
-    this.pupilsList.subscribe(snpashots => {
+    this.pupilsListSubsPtr = this.pupilsList.subscribe(snpashots => {
       this.isLoading = false;
     })
 
@@ -305,12 +309,29 @@ export class PupilsManagementComponent implements OnInit
 
   // ==============================
 
+  unsubscribeAll()
+  {
+    if (this.teamsSubsPtr)
+      this.teamsSubsPtr.unsubscribe();
+
+    if (this.pupilsListSubsPtr)
+      this.pupilsListSubsPtr.unsubscribe();
+
+    if (this.teamsSubsPtr)
+      this.teamsSubsPtr.unsubscribe();
+  }
+
+  // ==============================
+
   navigate()
   {
     // // Navigate to home page
     if (this.noTeamSelected)
+    {
+      this.unsubscribeAll();
       this.shareService.navigate('');
-
+    }
+    
     // Back to select team
     if (!this.noTeamSelected && !this.addPupils && !this.removePupils)
       this.chooseTeam();
