@@ -11,6 +11,8 @@
 <!-- ================================================================================================================================================ -->
 <!-- If user is a coach or manager -->
 
+<app-spinner [isLoading] = "isLoading"></app-spinner>
+
 <div *ngIf = "user.permission != 4 && user.permission !=5">
 
   <!-- Page header -->

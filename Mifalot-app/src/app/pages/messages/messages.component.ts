@@ -43,6 +43,9 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   // Search
   private chatName: string;
 
+  // Boolean
+  private isLoading: boolean;
+
   // ==================================================
 
   constructor(private afService: AF, private ref: ChangeDetectorRef, private shareService: ShareService) 
@@ -52,7 +55,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.shareService.updateBackButton('home');
 
     this.user = this.afService.getUserDetails();
-    this.chatRooms = this.afService.af.database.list('chatRooms');
+    this.getChatRoomsList();
+    // this.chatRooms = this.afService.af.database.list('chatRooms');
 
     // Flags
     this.noChatRoomSelected = true;
@@ -60,6 +64,31 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     this.clickOnTrash = false;
 
     this.savedDate = '';
+  }
+
+  // ==================================================
+
+  getChatRoomsList()
+  {
+    this.isLoading = true;
+    this.chatRooms = this.afService.af.database.list('chatRooms');
+
+    this.chatRooms.subscribe(snapshots =>{
+      this.isLoading = false;
+    });
+  }
+
+  // ==================================================
+
+  getChatRoom(chatRoomKey)
+  {
+    this.isLoading = true;
+    this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoomKey + '/messages');
+
+    console.log(chatRoomKey);
+    this.currentChat.subscribe(snapshots => {
+      this.isLoading = false;
+    })
   }
 
   // ==================================================
@@ -111,7 +140,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
       // Updating chat's title
       this.updateHeader(chatRoom.name, "פותח הצ'אט: " + chatRoom.authorName);
 
-      this.currentChat = this.afService.af.database.list('chatRooms/' + chatRoom.$key + '/messages');
+      this.getChatRoom(chatRoom.$key);
 
       // Updating nav button
       this.shareService.updateBackButton('back');
@@ -156,6 +185,10 @@ export class MessagesComponent implements OnInit, AfterViewChecked
 
   sendMessage()
   {
+    // An empty message
+    if (!this.newMessage)
+      return;
+
     this.afService.sendMessage(this.newMessage, this.user.name, this.user.lastName, this.currentChat).then(x => 
     {
       this.newMessage = '';
@@ -248,6 +281,8 @@ export class MessagesComponent implements OnInit, AfterViewChecked
     if (!this.noChatRoomSelected)
     {
       this.noChatRoomSelected = !this.noChatRoomSelected;
+      this.getChatRoomsList();
+
       this.shareService.updateBackButton('home');
     } 
 
