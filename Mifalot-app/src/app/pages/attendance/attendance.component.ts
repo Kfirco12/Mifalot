@@ -141,8 +141,16 @@ export class AttendanceComponent implements OnInit
 
   missChecking(arr) 
   {
+    let str = 'החניכים הבאים לא הגיעו לאימון יותר מפעמיים ברציפות:';
+    str += '\n';
+
     for (let i = 0; i < arr.length; i++)
-      alert(arr[i] + " לא הגיע לאימון יותר מפעמיים!! שים לב וטפל בנושא בהקדם ");
+      str += arr[i] + ' ';
+
+    str += '\n\n';
+    str += 'שים לב וטפל בנושא בהקדם!!';
+
+    alert(str);
   }
 
   // ============================================================
@@ -266,6 +274,8 @@ export class AttendanceComponent implements OnInit
 
   pushAttendaceToDB(attendance)
   {
+    this.isLoading = true;
+
     let attendanceInfo =
     {
       date: this.date,
@@ -274,11 +284,13 @@ export class AttendanceComponent implements OnInit
 
     attendance.push(attendanceInfo).then(() => 
     {
+      this.isLoading = false;
       alert('רשימת הנוכחות נשמרה בהצלחה!');
 
       // Reset variables.
       this.noTeamSelected = true;
       this.resetAllChecked();
+      this.getTeams();
     });
   }
 
