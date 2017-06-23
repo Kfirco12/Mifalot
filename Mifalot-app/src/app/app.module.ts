@@ -24,6 +24,7 @@ import { AssociateTeamsComponent } from './associate-teams/associate-teams.compo
 import { UserStatusComponent } from './user-status/user-status.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { TeamsManagementComponent } from './pages/teams-management/teams-management.component';
 
 // Animations
 import { LoadingComponent } from './_animations/loading/loading.component';
@@ -61,7 +62,8 @@ const routes: Routes = [
   { path: 'users-confirm', component: UsersConfirmComponent },
   { path: 'deleted-users', component: DeletedUsersComponent },
   { path: 'users-management', component: UsersManagementComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'teams-management', component: TeamsManagementComponent }
  
 ];
 
@@ -86,7 +88,8 @@ const routes: Routes = [
     UserStatusComponent,
     NavHeaderComponent,
     SpinnerComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    TeamsManagementComponent
   ],
   imports: [
     BrowserModule,

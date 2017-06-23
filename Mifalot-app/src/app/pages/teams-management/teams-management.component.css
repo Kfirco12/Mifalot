@@ -1,0 +1,159 @@
+.choose-team, h5, h4
+{
+    color: white;
+}
+
+input
+{
+    direction: rtl;
+}
+
+
+/**********************/
+/* Remove Teams */
+
+.vertical-menu 
+{
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.list-group
+{
+     margin-bottom: 2%;
+}
+
+.margin-left
+{
+    margin-left: 10px;
+}
+
+.red 
+{
+  background: #ea8378;
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.15, #ea8378),color-stop(1, #e2675a));
+  background-image: -webkit-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
+  background-image: -moz-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
+  background-image: -ms-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
+  background-image: -o-linear-gradient(bottom, #ea8378 15%, #e2675a 100%);
+  background-image: linear-gradient(to bottom, #ea8378 15%, #e2675a 100%);
+  /*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e2675a', endColorstr='#ea8378');*/
+}
+
+/****************************************/
+/********** Scrollbar Height  ***********/
+
+@media only screen and (max-height: 2560px)
+{
+    .vertical-menu 
+    {
+        height: 2150px;
+    }
+}
+
+@media only screen and (max-height: 1366px)
+{
+    .vertical-menu 
+    {
+        height: 960px;
+    }
+}
+
+@media only screen and (max-height: 1280px)
+{
+    .vertical-menu 
+    {
+        height: 900px;
+    }
+}
+
+@media only screen and (max-height: 1024px)
+{
+    .vertical-menu 
+    {
+        height: 650px;
+    }
+}
+
+@media only screen and (max-height: 960px)
+{
+    .vertical-menu 
+    {
+        height: 585px;
+    }
+}
+
+@media only screen and (max-height: 950px)
+{
+    .vertical-menu 
+    {
+        height: 580px;
+    }
+}
+
+@media only screen and (max-height: 900px)
+{
+    .vertical-menu 
+    {
+        height: 535px;
+    }
+}
+
+@media only screen and (max-height: 800px)
+{
+    .vertical-menu 
+    {
+        height: 430px;
+    }
+}
+
+@media only screen and (max-height: 736px)
+{
+    .vertical-menu 
+    {
+        height: 385px;
+    }
+}
+
+@media only screen and (max-height: 732px)
+{
+    .vertical-menu 
+    {
+        height: 380px;
+    }
+}
+
+@media only screen and (max-height: 667px)
+{
+    .vertical-menu 
+    {
+        height: 330px;
+    }
+}
+
+@media only screen and (max-height: 640px)
+{
+    .vertical-menu 
+    {
+        height: 280px;
+    }
+}
+
+@media only screen and (max-height: 568px)
+{
+    .vertical-menu 
+    {
+        height: 220px;
+        font-size: 80%;
+    }
+}
+
+@media only screen and (max-height: 533px)
+{
+    .vertical-menu 
+    {
+        height: 155px;
+    }
+}

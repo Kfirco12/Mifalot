@@ -9,9 +9,10 @@
 <app-user-status *ngIf = "user.permission == 4 || user.permission == 5" [permission] = "user.permission"></app-user-status>
 
 <!-- ================================================================================================================================================ -->
+<app-spinner *ngIf = "!user.permission"></app-spinner>
 
 <!-- Page Content -->
-<div *ngIf = "user.permission != 4 && user.permission != 5" class = "container" >
+<div *ngIf = "user.permission && user.permission != 4 && user.permission != 5" class = "container" >
 
   <div class = "row" >
 
@@ -41,7 +42,7 @@
 
       <!-- Admin's buttons -->
         <div *ngIf = "user.permission == 1">
-          <div *ngFor = "let button of adminButtons" class = "col-lg-12 col-md-12 col-xs-12 thumb">
+          <div *ngFor = "let button of adminButtons" class = "col-lg-6 col-md-6 col-xs-6 thumb">
             <a class = "thumbnail" (click) = "navigate(button.id)"> 
               <button type = "button" class = "btn {{ button.color }} btn-block" > <i class = "{{ button.icon }}" > </i> <br/>  {{ button.txt }}</button> 
             </a>

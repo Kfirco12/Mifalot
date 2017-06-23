@@ -1,0 +1,106 @@
+<!-- ================================================================================================================================================ -->
+<!-- Navbar -->
+
+<app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()" (onUserLogout) = "unsubscribeAll()"></app-nav-header>
+
+<!-- ================================================================================================================================================ -->
+<!-- User wait for admin to confirm him OR user was blocked by admin -->
+
+<app-user-status *ngIf = "user.permission == 4 || user.permission == 5" [permission] = "user.permission"></app-user-status>
+
+<!-- ================================================================================================================================================ -->
+
+<app-spinner [isLoading] = "isLoading"></app-spinner>
+
+<div *ngIf = "user.permission != 4 && user.permission != 5">
+
+    <!-- Page header -->
+    <app-page-header [item] = "header"> </app-page-header>
+
+<!-- ================================================================================================================================================ -->
+
+    <div class = "container">
+
+      <!-- Choose option -->
+
+        <div *ngIf = "!addTeams && !removeTeams" class = "buttons">
+
+            <!-- Note -->
+            <div class = "alert alert-warning text-right" role = "alert">
+                 באפשרותך להוסיף קבוצות חדשות ו/או להסיר קבוצות קיימות
+            </div>
+            <!-- /Note -->
+
+            <h4 class = "text-center choose-team"> :בחר את הפעולה הרצויה</h4>
+
+            <div class = "buttons-center">
+                <button (click) = "showAddTeams()" class = "btn btn-md btn-success btn-block" type = "submit"> הוספת קבוצה </button>
+                <button (click) = "showRemoveTeams()" class = "btn btn-md btn-danger btn-block" type = "submit"> הסרת קבוצה </button>
+            </div>
+        </div>
+
+        <!-- /Buttons -->
+        <!-- =========================================================================================================================== -->
+        <!-- Add Teams -->
+
+        <div *ngIf = "addTeams" class = "buttons">
+        
+            <h5 class = "text-center"> אנא הזן את שם הקבוצה ולחץ על <br> ״הוספת קבוצה״ </h5>
+
+            <form class = "form-signin" (submit) = "saveNewTeam()">
+
+                <label for = "name" class = "sr-only"> שם הקבוצה </label>
+                <div class = "input-group">
+                    <input [(ngModel)] = "teamName" type = "text" name = "teamName" class = "form-control" placeholder = "שם הקבוצה" required>
+                    <span class = "input-group-addon"><i class = "fa fa-pencil"></i></span> 
+                </div>
+                        
+                <br>
+
+                <button class = "btn btn-primary btn-block" type = "submit"> הוספת קבוצה </button>
+            </form>
+
+            <hr>
+
+            <h5 class = "text-center"> {{ teamsToAdd.length }} :מס׳ הקבוצות הממתינות להוספה  </h5>
+
+            
+            <!-- Buttons -->
+            <button (click) = "addNewTeamsToDB()" class = "btn btn-md btn-success btn-block" type = "button"> אישור הוספת הקבוצות </button>
+        </div>
+
+        <!-- /Add teams -->
+        <!-- =========================================================================================================================== -->
+        <!-- Remove Teams --> 
+
+        <div *ngIf = "removeTeams"> 
+        
+            <h5 class = "text-center"> הסר קבוצה או לחילופין, בחר כמה ולחץ על <br> ״הסרת קבוצות״ </h5>
+
+            <div class = "vertical-menu">
+                <div *ngFor = "let team of teams | async" class = "list-group text-right" [ngSwitch] = "isChecked(team.$key)">
+                    <span class = "list-group-item clearfix" [class.red] = "isChecked(team.$key)">  
+                        {{ team.$key }}
+                        <span class = "fa fa-user"></span>
+                        <span class = "pull-left">
+                            <span class = "glyphicon glyphicon-trash" (click) = "removeTeam(team)"></span>
+                        
+                            <span *ngSwitchCase = "false" class = "fa fa-plus margin-left" (click) = "saveTeamToRemove(team.$key)"> </span>
+                            <span *ngSwitchCase = "true" class = "fa fa-minus margin-left" (click) = "saveTeamToRemove(team.$key)"> </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <br>
+            
+            <h5 class = "text-center"> {{ teamsToRemove.length }} :מס׳ הקבוצות הממתינות להסרה  </h5>
+
+            <button (click) = "removeTeamsFromDB()" class = "btn btn-md btn-danger btn-block btn-remove" type = "submit"> הסרת קבוצות </button>
+        </div>
+
+        <!-- =========================================================================================================================== -->
+        <!-- /Remove Teams --> 
+
+    </div>
+</div>

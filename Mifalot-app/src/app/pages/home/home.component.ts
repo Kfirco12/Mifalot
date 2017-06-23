@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit
 
     this.adminButtons = [  
                           { id: "users-management", txt: 'ניהול משתמשים פעילים', icon: 'fa fa-users fa-2x', color: 'btn-info' }, 
+                          { id: "teams-management", txt: 'ניהול קבוצות', icon: 'fa  fa-server fa-2x', color: 'btn-primary' },
                           { id: "deleted-users", txt: 'משתמשים העומדים להסרה', icon: 'fa fa-user-times fa-2x', color: 'btn-danger' },
                           { id: "users-confirm", txt: 'משתמשים הממתינים לאישור', icon: 'fa fa-user-plus fa-2x', color: 'btn-success' }    
                         ]
