@@ -75,7 +75,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 2250px;
+        height: 2200px;
     }
 }
 
@@ -91,7 +91,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 1000px;
+        height: 990px;
     }
 }
 
@@ -123,7 +123,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 629px;
+        height: 625px;
     }
 }
 
@@ -155,7 +155,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 380px;
+        height: 410px;
     }
 }
 
@@ -163,7 +163,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 365px;
+        height: 380px;
     }
 }
 
@@ -171,7 +171,7 @@ tr
 {
     .vertical-menu 
     {
-        height: 285px;
+        height: 305px;
     }
 }
 
@@ -179,7 +179,15 @@ tr
 {
     .vertical-menu 
     {
-        height: 255px;
+        height: 270px;
+    }
+}
+
+@media only screen and (max-height: 480px)
+{
+    .vertical-menu 
+    {
+        height: 217px;
     }
 }
 
@@ -187,6 +195,11 @@ tr
 {
     .vertical-menu 
     {
-        height: 101px;
+        height: 105px;
+    }
+
+    .dropdown-menu
+    {
+        height: 100px;
     }
 }
