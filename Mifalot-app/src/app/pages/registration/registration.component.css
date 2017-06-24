@@ -33,3 +33,38 @@ input
 {
     margin: 0;
 }
+
+/****************************************/
+/********** Scrollbar Height  ***********/
+
+@media only screen and (max-height: 533px)
+{
+    .registermodal-container
+    {
+        height: 590px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-height: 480px)
+{
+    .registermodal-container
+    {
+        height: 560px;
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-height: 360px)
+{
+    .registermodal-container
+    {
+        height: 460px;
+        font-size: 2px;
+    }
+
+    h1
+    {
+        font-size: 20px;
+    }
+}
