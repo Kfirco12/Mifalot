@@ -216,6 +216,12 @@ input
     {
         height: 170px;
     }
+
+    hr
+    {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 @media only screen and (max-height: 360px)

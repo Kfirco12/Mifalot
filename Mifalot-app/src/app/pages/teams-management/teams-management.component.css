@@ -49,7 +49,7 @@ input
 {
     .vertical-menu 
     {
-        height: 2150px;
+        height: 2180px;
     }
 }
 
@@ -57,7 +57,7 @@ input
 {
     .vertical-menu 
     {
-        height: 960px;
+        height: 1000px;
     }
 }
 
@@ -65,7 +65,7 @@ input
 {
     .vertical-menu 
     {
-        height: 900px;
+        height: 950px;
     }
 }
 
@@ -73,7 +73,7 @@ input
 {
     .vertical-menu 
     {
-        height: 650px;
+        height: 690px;
     }
 }
 
@@ -81,7 +81,7 @@ input
 {
     .vertical-menu 
     {
-        height: 585px;
+        height: 625px;
     }
 }
 
@@ -89,7 +89,7 @@ input
 {
     .vertical-menu 
     {
-        height: 580px;
+        height: 620px;
     }
 }
 
@@ -97,7 +97,7 @@ input
 {
     .vertical-menu 
     {
-        height: 535px;
+        height: 570px;
     }
 }
 
@@ -105,7 +105,7 @@ input
 {
     .vertical-menu 
     {
-        height: 430px;
+        height: 470px;
     }
 }
 
@@ -113,7 +113,7 @@ input
 {
     .vertical-menu 
     {
-        height: 385px;
+        height: 420px;
     }
 }
 
@@ -121,7 +121,7 @@ input
 {
     .vertical-menu 
     {
-        height: 380px;
+        height: 420px;
     }
 }
 
@@ -129,7 +129,7 @@ input
 {
     .vertical-menu 
     {
-        height: 330px;
+        height: 350px;
     }
 }
 
@@ -137,7 +137,7 @@ input
 {
     .vertical-menu 
     {
-        height: 280px;
+        height: 325px;
     }
 }
 
@@ -145,7 +145,7 @@ input
 {
     .vertical-menu 
     {
-        height: 220px;
+        height: 250px;
         font-size: 80%;
     }
 }
@@ -154,6 +154,22 @@ input
 {
     .vertical-menu 
     {
-        height: 155px;
+        height: 214px;
+    }
+}
+
+@media only screen and (max-height: 480px)
+{
+    .vertical-menu 
+    {
+        height: 170px;
+    }
+}
+
+@media only screen and (max-height: 360px)
+{
+    .vertical-menu 
+    {
+        height: 55px;
     }
 }
