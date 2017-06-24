@@ -23,18 +23,18 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Group Chat | [![Join the chat at https://gitter.im/jce-il/Mifalot](https://badges.gitter.im/jce-il/jce-il/Mifalot.svg)](https://gitter.im/jce-il/Mifalot?utm_source=share-link&utm_medium=link&utm_campaign=share-link)|
 | Build Status (CI) |  [![Build Status](https://travis-ci.org.svg?branch=master)](https://travis-ci.org/benhuri/Mifalot) |
 | Dependencies | [![David](https://img.shields.io/david/dev/idleberg/vscode-badges.svg?style=flat-square)](https://david-dm.org/jce-il/project-template?type=dev) |
-| License | [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/benhuri/Mifalot/blob/master/LICENSE) |
+| License | [![License: MIT](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/benhuri/Mifalot/blob/master/LICENSE) |
 | Test Coverege | [![codecov.io](https://codecov.io/github/jce-il/project-template/coverage.svg?branch=master)](https://codecov.io/github/jce-il/project-template?branch=master) |
 | Code Quality | [![Code Climate](https://codeclimate.com/github/benhuri/Mifalot.svg)](https://codeclimate.com/github/benhuri/Mifalot) |
 | Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/jce-il/project-template) |
-| Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v0.3) |
+| Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v1.0) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/benhuri/Mifalot/issues) |
 | Project Management Board| [here](https://github.com/benhuri/Mifalot/projects/1) |
 | Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/benhuri/Mifalot.svg)](https://github.com/benhuri/Mifalot/graphs/contributors)
 | Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
 | Documnetation | [![Inline docs](http://inch-ci.org/github/benhuri/Mifalot.svg?branch=master)](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation) |
-| Project Course Status | ... |
+| Project Course Status | Done |
 
 ## Please visit our [live application Demo](https://application-d2061.firebaseapp.com/)
 
