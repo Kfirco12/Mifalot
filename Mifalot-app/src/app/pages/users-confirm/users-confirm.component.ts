@@ -146,6 +146,7 @@ export class UsersConfirmComponent implements OnInit
   backToUserInfo()
   {
     this.userConfirmed = this.chooseTeams = false;
+    this.userNewPermission = null;
   }
 
   // =====================
@@ -153,7 +154,7 @@ export class UsersConfirmComponent implements OnInit
   resetAll()
   {
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
-    this.user = this.userType = null;
+    this.user = this.userType = this.userNewPermission = null;
     this.getUsers();
     this.shareService.updateBackButton('home');
   }
