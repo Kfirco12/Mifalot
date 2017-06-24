@@ -36,3 +36,19 @@ button
 {
     background: #FF8429;
 }
+
+/****************************************/
+/********** Scrollbar Height  ***********/
+
+@media only screen and (max-height: 360px)
+{
+    .thumbnail 
+    {
+      height: 70px;
+    }
+
+    .logo img
+    {
+        height: 65px;
+    }
+}
