@@ -34,7 +34,7 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Deployment | [Firebase](https://application-d2061.firebaseapp.com/) |
 | Security | [![Known Vulnerabilities](https://snyk.io/test/github/jce-il/project-template/badge.svg)](https://snyk.io/test/github/jce-il/project-template) |
 | Documnetation | [![Inline docs](http://inch-ci.org/github/benhuri/Mifalot.svg?branch=master)](https://github.com/benhuri/Mifalot/wiki/Iter0:-ZFR#documentation) |
-| Project Course Status | ... |
+| Project Course Status | Done |
 
 ## Please visit our [live application Demo](https://application-d2061.firebaseapp.com/)
 
