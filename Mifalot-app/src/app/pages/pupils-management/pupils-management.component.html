@@ -114,36 +114,41 @@
 
         <div *ngIf = "removePupils && !noTeamSelected"> 
         
-            <h5 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h5>
+            <div *ngIf = "(pupilsList | async)?.length == 0" class = "alert alert-warning text-center" role = "alert">
+                <strong> אין כרגע חניכים בקבוצה </strong> <br> אין חניכים אותם ניתן להסיר 
+            </div>
 
-            <div class = "vertical-menu">
-                <div *ngFor = "let pupil of pupilsList | async" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
-                    <span class = "list-group-item clearfix" [class.red] = "isChecked(pupil)">  
-                        {{ pupil.name }} {{ pupil.lastName }}, ת.ז: {{ pupil.ID }}
-                        <span class = "fa fa-user"></span>
-                        <span class = "pull-left">
-                            <span class = "glyphicon glyphicon-trash" (click) = "removePupil(pupil)"></span>
-                        
-                            <span *ngSwitchCase = "false" class = "fa fa-plus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
-                            <span *ngSwitchCase = "true" class = "fa fa-minus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
+            <div *ngIf = "(pupilsList | async)?.length > 0">
+                <h5 class = "text-center"> מחק חניך או לחילופין, בחר כמה ולחץ על <br> ״מחיקת חניכים״ </h5>
+
+                <div class = "vertical-menu">
+                    <div *ngFor = "let pupil of pupilsList | async" class = "list-group text-right" [ngSwitch] = "isChecked(pupil)">
+                        <span class = "list-group-item clearfix" [class.red] = "isChecked(pupil)">  
+                            {{ pupil.name }} {{ pupil.lastName }}, ת.ז: {{ pupil.ID }}
+                            <span class = "fa fa-user"></span>
+                            <span class = "pull-left">
+                                <span class = "glyphicon glyphicon-trash" (click) = "removePupil(pupil)"></span>
+                            
+                                <span *ngSwitchCase = "false" class = "fa fa-plus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
+                                <span *ngSwitchCase = "true" class = "fa fa-minus margin-left" (click) = "savePupilToRemove(pupil)"> </span>
+                            </span>
                         </span>
-                    </span>
+                    </div>
                 </div>
-            </div>
-            
-            <br>
-            
-            <div *ngIf = "!thereIsNewPupil">
-                <h5 class = "text-center"> לא נבחרו חניכים להסרה  </h5>
-            </div>
+                
+                <br>
+                
+                <div *ngIf = "!thereIsNewPupil">
+                    <h5 class = "text-center"> לא נבחרו חניכים להסרה  </h5>
+                </div>
 
-            <div *ngIf = "thereIsNewPupil">
-                <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להסרה  </h5>
-            </div>
+                <div *ngIf = "thereIsNewPupil">
+                    <h5 class = "text-center"> {{ newPupilsCounter }} :מס׳ החניכים הממתינים להסרה  </h5>
+                </div>
 
-            <button (click) = "removePupilsFromDB()" class = "btn btn-md btn-danger btn-block btn-remove" type = "submit"> הסר חניכים נבחרים </button>
+                <button (click) = "removePupilsFromDB()" class = "btn btn-md btn-danger btn-block btn-remove" type = "submit"> הסר חניכים נבחרים </button>
+            </div>
         </div>
-
         <!-- =========================================================================================================================== -->
         <!-- /Remove Pupils --> 
 
