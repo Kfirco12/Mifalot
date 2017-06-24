@@ -352,7 +352,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 2300px;
+      height: 2230px;
+    }
+
+    .messages
+    {
+      height: 2280px;
     }
 }
 
@@ -373,7 +378,7 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 1015px;
+      height: 970px;
     }
 
     .messages 
@@ -386,12 +391,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 750px;
+      height: 735px;
     }
 
     .messages
     {
-      height: 775px;
+      height: 785px;
     }
 }
 
@@ -399,7 +404,20 @@ input::placeholder
 {
     .vertical-menu 
     {
-        height: 680px;
+        height: 670px;
+    }
+
+    .messages 
+    {
+      height: 715px;
+    }
+}
+
+@media only screen and (max-height: 950px)
+{
+    .vertical-menu 
+    {
+        height: 650px;
     }
 
     .messages 
@@ -425,7 +443,7 @@ input::placeholder
 {
     .vertical-menu 
     {
-        height: 520px;
+        height: 510px;
     }
 
     .messages
@@ -444,7 +462,7 @@ input::placeholder
 
     .messages
     {
-      height: 530px;
+      height: 520px;
     }
 }
 
@@ -452,12 +470,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 500px;
+      height: 470px;
     }
 
     .messages
     {
-      height: 530px;
+      height: 515px;
     }
 }
 
@@ -465,12 +483,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 430px;
+      height: 400px;
     }
 
     .messages
     {
-      height: 460px;
+      height: 445px;
     }
 }
 
@@ -478,12 +496,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 430px;
+      height: 380px;
     }
 
     .messages 
     {
-      height: 435px;
+      height: 425px;
     }
 }
 
@@ -491,12 +509,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 350px;
+      height: 305px;
     }
 
     .messages
     {
-      height: 360px;
+      height: 350px;
     }
 }
 
@@ -504,12 +522,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 300px;
+      height: 265px;
     }
 
     .messages 
     {
-      height: 325px;
+      height: 310px;
     }
 }
 
@@ -517,12 +535,12 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 240px;
+      height: 215px;
     }
 
     .messages
     {
-      height: 275px;
+      height: 260px;
     }
 }
 
@@ -530,11 +548,11 @@ input::placeholder
 {
     .vertical-menu 
     {
-      height: 145px;
+      height: 100px;
     }
 
     .messages
     {
-      height: 180px;
+      height: 150px;
     }
 }
