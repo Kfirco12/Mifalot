@@ -45,6 +45,7 @@ export class UsersConfirmComponent implements OnInit
   private teamsSubsPtr;
   private usersSubsPtr;
 
+  private currentUser;
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
@@ -54,6 +55,8 @@ export class UsersConfirmComponent implements OnInit
 
     this.userSelected =  this.userConfirmed = this.chooseTeams = false;
 
+    this.currentUser = this.afService.getUserDetails();
+    
     // Get users from DB
     this.getUsers();
   }

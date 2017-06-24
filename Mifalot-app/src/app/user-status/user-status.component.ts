@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ShareService } from "../providers/share-service";
 
 @Component({
   selector: 'app-user-status',
@@ -9,9 +10,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UserStatusComponent implements OnInit 
 {
   @Input() permission;
+  @Output() onNavigate: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private shareService: ShareService) { }
 
-  ngOnInit() { }
+  ngOnInit() 
+  {
+    // User try to access to a page without permission
+    if (this.permission == 0)
+    {
+      this.onNavigate.emit();
+      this.shareService.navigate("");
+    }
+   }
 
 }

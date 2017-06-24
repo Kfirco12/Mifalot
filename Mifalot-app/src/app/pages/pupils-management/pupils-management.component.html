@@ -9,6 +9,11 @@
 <app-user-status *ngIf = "user.permission == 4 || user.permission == 5" [permission] = "user.permission"></app-user-status>
 
 <!-- ================================================================================================================================================ -->
+<!-- User is not allow to access to this page, permission: 0 - navigate to home -->
+
+<app-user-status *ngIf = "user.permission != 4 && user.permission != 5 && user.permission != 3" [permission] = "0" (onNavigate) = "unsubscribeAll()"></app-user-status>
+
+<!-- ================================================================================================================================================ -->
 
 <app-spinner [isLoading] = "isLoading"></app-spinner>
 
