@@ -4,6 +4,18 @@
 <app-nav-header [backButton] = "backButton" (onUserClicked) = "navigate()" (onUserLogout) = "unsubscribeAll()"></app-nav-header>
 
 <!-- ================================================================================================================================================ -->
+<!-- User wait for admin to confirm him OR user was blocked by admin -->
+
+<app-user-status *ngIf = "currentUser.permission == 4 || currentUser.permission == 5" [permission] = "currentUser.permission"></app-user-status>
+
+<!-- ================================================================================================================================================ -->
+<!-- User is not allow to access to this page, permission: 0 - navigate to home -->
+
+<app-user-status *ngIf = "currentUser.permission != 4 && currentUser.permission != 5 && currentUser.permission != 1" [permission] = "0" (onNavigate) = "unsubscribeAll()"></app-user-status>
+
+<!-- ================================================================================================================================================ -->
+
+<div *ngIf = "currentUser.permission == 1">
 
 <!-- Page header -->
 <app-page-header [item] = "header"> </app-page-header>
@@ -15,6 +27,7 @@
 
 <!-- ================================================================================================================================================ -->
 <!-- Show users -->
+
 
 <div class = "container">
     <div *ngIf = "!userSelected && !showUserTeams">
@@ -115,6 +128,7 @@
     </div>
 </div>
 
+</div>
 <!-- /Show teams -->    
 <!-- ================================================================================================================================================ -->
 

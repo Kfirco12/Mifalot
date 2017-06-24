@@ -29,11 +29,14 @@ export class DeletedUsersComponent implements OnInit
   // Pointer to subscribe
   private usersSubsPtr;
 
+  private currentUser;
+
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userSelected = false;
+    this.currentUser = this.afService.getUserDetails();
     this.getUsers();
   }
 

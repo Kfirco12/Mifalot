@@ -28,7 +28,7 @@ export class UsersManagementComponent implements OnInit
   // Trasnfer user details to 'associate-teams' component
   private userDetails: any;
   private user: any;
-
+  
   // Observers to DB
   private users: FirebaseListObservable<any[]>;
   private teams: FirebaseListObservable<any[]>;
@@ -40,13 +40,15 @@ export class UsersManagementComponent implements OnInit
   private teamsSubsPtr;
   private usersSubsPtr;
 
+  private currentUser;
+
   // =====================
 
   constructor(private afService: AF, private shareService: ShareService) 
   {
     this.userDetails = [];
     this.userSelected = this.showUserTeams = false;
-
+    this.currentUser = this.afService.getUserDetails();
     this.getUsers();
   }
 
