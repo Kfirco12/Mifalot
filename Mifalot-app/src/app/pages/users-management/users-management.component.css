@@ -35,6 +35,30 @@ h5
     }
 }
 
+@media only screen and (max-height: 950px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 650px;
+    }
+}
+
+@media only screen and (max-height: 900px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 600px;
+    }
+}
+
+@media only screen and (max-height: 800px)
+{
+    #list-managers, #list-trainers
+    {
+        height: 500px;
+    }
+}
+
 @media only screen and (max-height: 736px)
 {
     #list-managers, #list-trainers

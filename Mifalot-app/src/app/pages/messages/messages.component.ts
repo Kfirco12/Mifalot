@@ -188,7 +188,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked
   sendMessage()
   {
     // An empty message
-    if (!this.newMessage)
+    if (!this.newMessage || this.newMessage.replace(/\s/g, '') == "")
       return;
 
     this.afService.sendMessage(this.newMessage, this.user.name, this.user.lastName, this.currentChat).then(x => 
