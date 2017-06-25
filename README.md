@@ -27,7 +27,7 @@ We are trying to use the best tools and practices in order to produce a quality 
 | Test Coverege | [![codecov.io](https://codecov.io/github/jce-il/project-template/coverage.svg?branch=master)](https://codecov.io/github/jce-il/project-template?branch=master) |
 | Code Quality | [![Code Climate](https://codeclimate.com/github/benhuri/Mifalot.svg)](https://codeclimate.com/github/benhuri/Mifalot) |
 | Code Style | [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/jce-il/project-template) |
-| Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v1.0) |
+| Current Release | [![Current Version](https://img.shields.io/github/release/benhuri/Mifalot.svg?style=flat)](https://github.com/benhuri/Mifalot/releases/tag/v1.1) |
 | Github Issues | [![GitHub issues](https://img.shields.io/github/issues/jce-il/project-template.svg?style=flat)](https://github.com/benhuri/Mifalot/issues) |
 | Project Management Board| [here](https://github.com/benhuri/Mifalot/projects/1) |
 | Contributors | [![GitHub contributors](https://img.shields.io/github/contributors/benhuri/Mifalot.svg)](https://github.com/benhuri/Mifalot/graphs/contributors)
