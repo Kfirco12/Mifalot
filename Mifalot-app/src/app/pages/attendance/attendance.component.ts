@@ -141,16 +141,19 @@ export class AttendanceComponent implements OnInit
 
   missChecking(arr) 
   {
-    let str = 'החניכים הבאים לא הגיעו לאימון יותר מפעמיים ברציפות:';
-    str += '\n';
+    if (arr.length > 0)
+    {
+      let str = 'החניכים הבאים לא הגיעו לאימון יותר מפעמיים ברציפות:';
+      str += '\n';
 
-    for (let i = 0; i < arr.length; i++)
-      str += arr[i] + ' ';
+      for (let i = 0; i < arr.length; i++)
+        str += arr[i] + ' ';
 
-    str += '\n\n';
-    str += 'שים לב וטפל בנושא בהקדם!!';
+      str += '\n\n';
+      str += 'שים לב וטפל בנושא בהקדם!!';
 
-    alert(str);
+      alert(str);
+    }
   }
 
   // ============================================================
@@ -274,8 +277,6 @@ export class AttendanceComponent implements OnInit
 
   pushAttendaceToDB(attendance)
   {
-    this.isLoading = true;
-
     let attendanceInfo =
     {
       date: this.date,
